@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 15:56:34 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/18 20:12:32 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/18 20:46:04 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,27 @@ int		ft_verif_map(char **str)
 			return (FALSE);
 	
 	return(TRUE);
+}
+
+char	*ft_recup_code(char *str)
+{
+	int		i;
+	char	*code;
+	int		lenstr;
+
+	if (!(code = (char *)malloc(sizeof(char) * 4)))
+		return (NULL);
+	lenstr = ft_strlen(str);
+	if (lenstr > 4)
+	{
+		code[3] = '\0';
+		code[2] = str[lenstr - 1];
+		code[1] = str[lenstr - 2];
+		code[0] = str[lenstr - 3];
+	}
+	else
+	{
+		return (NULL);
+	}
+	return (code);
 }

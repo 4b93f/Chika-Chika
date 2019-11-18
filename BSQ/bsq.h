@@ -36,6 +36,7 @@ int		ft_strcmp(char *s1, char *s2);
 void	ft_putstr(char *str);
 void	ft_putchar(char c);
 int		ft_verif_map(char **str);
+int		ft_atoi(char *str)
 
 
 
