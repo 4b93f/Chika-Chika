@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 15:56:34 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/18 20:46:04 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/18 20:50:08 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int		ft_verif_map(char **str)
 	while(str[++i])
 		if (ft_strlen(str[i]) != len)
 			return (FALSE);
-	
 	return(TRUE);
 }
 
@@ -49,4 +48,18 @@ char	*ft_recup_code(char *str)
 		return (NULL);
 	}
 	return (code);
+}
+
+int		ft_verif_cara(char **strs, char *cara)
+{
+	int i;
+
+	i = 1;
+	while (strs[i])
+	{
+		if (!(strs[i] == cara[0] || strs[i] == cara[1]))
+			return (FALSE);
+		i++;
+	}
+	return(TRUE);
 }
