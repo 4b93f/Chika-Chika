@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 15:56:34 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/18 20:50:08 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/18 21:32:06 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ int		ft_verif_map(char **str)
 	return(TRUE);
 }
 
-char	*ft_recup_code(char *str)
+char	*ft_recup_code(char *str, char **chaine)
 {
 	int		i;
 	char	*code;
 	int		lenstr;
-
 	if (!(code = (char *)malloc(sizeof(char) * 4)))
 		return (NULL);
 	lenstr = ft_strlen(str);
@@ -44,9 +43,9 @@ char	*ft_recup_code(char *str)
 		code[0] = str[lenstr - 3];
 	}
 	else
-	{
 		return (NULL);
-	}
+	if ((ft_verif_cara(chaine, code)) != 1)
+		return(0);
 	return (code);
 }
 
@@ -61,7 +60,7 @@ int		ft_verif_cara(char **strs, char *cara)
 		j = 0;
 		while (strs[i][j])
 		{
-			if (!(strs[i][j] == cara[0] || strs[i][j] == cara[1]))
+			if ((strs[i][j] != cara[0] && strs[i][j] != cara[1]))
 				return (FALSE);
 			j++;
 		}
