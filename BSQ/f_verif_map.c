@@ -24,7 +24,8 @@ int		ft_verif_map(char **str)
 	len = ft_atoi(str[0]);
 	i = 0;
 	while(str[++i])
-		if (ft_strlen[i] != len)
+		if (ft_strlen(str[i]) != len)
 			return (FALSE);
+	
 	return(TRUE);
 }
