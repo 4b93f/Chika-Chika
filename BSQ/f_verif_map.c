@@ -53,12 +53,18 @@ char	*ft_recup_code(char *str)
 int		ft_verif_cara(char **strs, char *cara)
 {
 	int i;
+	int	j;
 
 	i = 1;
 	while (strs[i])
 	{
-		if (!(strs[i] == cara[0] || strs[i] == cara[1]))
-			return (FALSE);
+		j = 0;
+		while (strs[i][j])
+		{
+			if (!(strs[i][j] == cara[0] || strs[i][j] == cara[1]))
+				return (FALSE);
+			j++;
+		}
 		i++;
 	}
 	return(TRUE);
