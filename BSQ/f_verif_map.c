@@ -12,20 +12,19 @@
 
 #include "bsq.h"
 
+
+
 int		ft_verif_map(char **str)
 {
 	int		i;
+	int		len;
 	int 	j;
 	int 	y;
 	
+	len = ft_atoi(str[0]);
 	i = 0;
-	y = ft_strlen(str[i + 1]);
-	while(str[i + 1])
-	{
-		j = ft_strlen(str[i + 1]);
-		if (y - j != 0)
-			return(FALSE);
-		i++;
-	}
+	while(str[++i])
+		if (ft_strlen[i] != len)
+			return (FALSE);
 	return(TRUE);
 }
