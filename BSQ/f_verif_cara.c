@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_verif_map.c                                      :+:      :+:    :+:   */
+/*   f_verif_cara.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/18 15:56:34 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/18 20:12:32 by chly-huc         ###   ########.fr       */
+/*   Created: 2019/11/18 20:17:44 by chly-huc          #+#    #+#             */
+/*   Updated: 2019/11/18 20:44:47 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bsq.h"
-
-int		ft_verif_map(char **str)
+int		ft_verif_cara(char **strs, char *empty, char *obs, char *full)
 {
-	int		i;
-	int		len;
-	int 	j;
-	int 	y;
-	
-	len = ft_atoi(str[0]);
+	int i;
+
 	i = 0;
-	while(str[++i])
-		if (ft_strlen(str[i]) != len)
-			return (FALSE);
+	while (strs[i])
 	
-	return(TRUE);
 }
