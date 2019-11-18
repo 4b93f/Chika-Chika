@@ -13,7 +13,7 @@
 #include "bsq.h"
 
 
-
+// verif que le contenu soit bien uniquement des vides/obstacles 
 int		ft_verif_map(char **str)
 {
 	int		i;
@@ -28,4 +28,27 @@ int		ft_verif_map(char **str)
 			return (FALSE);
 	
 	return(TRUE);
+}
+
+char	*ft_recup_code(char *str)
+{
+	int		i;
+	char	*code;
+	int		lenstr;
+
+	if (!(code = (char *)malloc(sizeof(char) * 4)))
+		return (NULL);
+	lenstr = ft_strlen(str);
+	if (lenstr > 4)
+	{
+		code[3] = '\0';
+		code[2] = str[lenstr - 1];
+		code[1] = str[lenstr - 2];
+		code[0] = str[lenstr - 3];
+	}
+	else
+	{
+		return (NULL);
+	}
+	return (code);
 }
