@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:07:51 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/18 16:07:54 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/18 19:25:42 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int		ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
 void	ft_putstr(char *str);
 void	ft_putchar(char c);
+int		ft_verif_map(char **str);
 
 
 

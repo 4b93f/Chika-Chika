@@ -6,11 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/16 17:24:24 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/18 15:57:45 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/18 19:22:16 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "bsq.h"
 
 int		is_charset(char c, char *charset)
 {

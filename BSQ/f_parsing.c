@@ -6,15 +6,20 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 15:56:15 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/18 16:08:11 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/18 19:22:08 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#
+#include "bsq.h"
+
 void	parsing(char **str)
 {
 	int i;
+	int y;
+	int j;
+
 
 	i = 0;
+
 }
 

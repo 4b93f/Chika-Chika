@@ -6,11 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 01:04:08 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/18 16:06:11 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/18 19:22:23 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "bsq.h"
 
 int		ft_strlen(char *str)
 {

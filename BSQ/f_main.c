@@ -6,11 +6,12 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 04:34:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/18 16:08:01 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/18 19:28:10 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
+
 #define BUF_SIZE 4096
 
 char	*read_and_write()
@@ -44,7 +45,16 @@ int main(int argc, char **argv)
     int i;
 
     i = 0;
-    char **dictionnary;
-    dictionnary = ft_split(read_and_write(), "\n");	
+    char **map;
+	char *pre_map;
+	pre_map = read_and_write();
+	map = ft_split(pre_map, "\n");
+	while(map[i])
+	{
+		printf("%s\n", map[i]);
+		i++;
+	}
+	if(ft_verif_map(map) == 0)
+		write(1, "!", 1);
     return(0);
 }
