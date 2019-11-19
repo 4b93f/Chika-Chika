@@ -11,6 +11,7 @@ t_square	*test_bigger(int **map, int line, int col, t_square *bigsquare)
 		return (NULL);
 	algo = map[line][col] + map[line + tsize][col + tsize];
 	algo = algo - (map[line][col + tsize] + map[line + tsize][col]);
+	printf("%d\n", algo);
 	if (algo > 0)
 		return (NULL);
 	return (bigsquare);
@@ -20,7 +21,7 @@ t_square	*ft_is_it_bigger(int **map, int line, int col, t_square *bigsquare)
 {
 	if (col + bigsquare->size >= map[0][0] || line + bigsquare->size >= map[0][1])
 		return (bigsquare);
-	if (map[1][0] == 1)
+	if (map[1][0] == 1 && line == 1 && col == 0)
 		return(bigsquare);
 	if (col > 0)
 		if (map[line][col - 1] < map[line][col])
@@ -33,6 +34,7 @@ t_square	*ft_is_it_bigger(int **map, int line, int col, t_square *bigsquare)
 		bigsquare->colpos = col;
 		bigsquare->lignepos = line;
 		bigsquare->size = bigsquare->size + 1;
+		printf("Taille = %d\nColonne = %d\nLigne = %d\n", bigsquare->size, bigsquare->colpos, bigsquare->lignepos);
 	}	
 	return (bigsquare);
 }
