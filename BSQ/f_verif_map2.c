@@ -5,25 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/19 14:23:37 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/19 14:24:36 by chly-huc         ###   ########.fr       */
+/*   Created: 2019/11/19 14:33:55 by chly-huc          #+#    #+#             */
+/*   Updated: 2019/11/19 14:33:56 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 
-int		ft_verif_is_only_obs(char **strs, char *cara)
+int		ft_verif_is_only_obs(char **map, char *cara)
 {
 	int i;
 	int	j;
 
 	i = 1;
-	while (strs[i])
+	while (map[i])
 	{
 		j = 0;
-		while (strs[i][j])
+		while (map[i][j])
 		{
-			if (strs[i][j] == cara[0])
+			if (map[i][j] == cara[0])
 				return (FALSE);
 			j++;
 		}
@@ -32,18 +32,18 @@ int		ft_verif_is_only_obs(char **strs, char *cara)
 	return(TRUE);
 }
 
-int		ft_verif_if_only_vide(char **strs, char *cara)
+int		ft_verif_if_only_vide(char **map, char *cara)
 {
 	int i;
 	int	j;
 
 	i = 1;
-	while (strs[i])
+	while (map[i])
 	{
 		j = 0;
-		while (strs[i][j])
+		while (map[i][j])
 		{
-			if (strs[i][j] != cara[1])
+			if (map[i][j] != cara[1])
 				return (FALSE);
 			j++;
 		}
