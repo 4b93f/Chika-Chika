@@ -54,6 +54,7 @@ int main(int argc, char **argv)
 	code = ft_check_error(map);
 	if((ft_check_error(map) == NULL))
 		return(0);
+	printf("test\n");
 	map_converted = ft_map_setup_main(map, code);
 
 	//while(map_converted[i])

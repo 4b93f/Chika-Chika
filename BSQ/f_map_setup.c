@@ -99,12 +99,22 @@ int		**ft_map_setup_main(char **map, char *code)
 
 	i = 0;
 	write(1, "!", 1);
+	printf("test\n");
 	if((map = ft_basic_setup(map, code)) == NULL)
 		return (0);
 	write(1, "\n", 1);
 	if ((mapvalue = ft_map_in_int(map)) == NULL)
 		return (0);
 	// TO DO FREE **MAP NO MORE USE
+	int line = 0;
+	int col;
+	while (++line <= mapvalue[0][0])
+	{
+		col = -1;
+		while (++col < mapvalue[0][0])
+			printf("%d", mapvalue[line][col]);
+		write(1, "\n", 1);
+	}
 	mapvalue = ft_first_colnline(mapvalue);
 	mapvalue = ft_map_setup(mapvalue);
 	return (mapvalue);

@@ -17,10 +17,10 @@ t_square	square_finder(int **map)
 	t_square	bigsquare;
 
 	line = 0;
-	while (map[++line])
+	while (++line <= map[0][0])
 	{
 		col = -1;
-		while (map[line][++col])
+		while (++col < map[0][0])
 			bigsquare = ft_is_it_bigger(map, line, col, bigsquare);
 	}
 	return (bigsquare);
