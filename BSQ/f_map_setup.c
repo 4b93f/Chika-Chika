@@ -42,7 +42,7 @@ int		**ft_first_colnline(int **map)
 	int		col;
 
 	line = 1;
-	while (++line <= map[0][0])
+	while (++line < map[0][1])
 		map[line][0] = map[line - 1][0] + map[line][0];
 	col = 0;
 	while (++col < map[0][0])
@@ -56,7 +56,7 @@ int		**ft_map_setup(int **map)
 	int		col;
 
 	line = 1;
-	while (++line <= map[0][0])
+	while (++line < map[0][1])
 	{
 		col = 0;
 		while (++col < map[0][0])
@@ -75,15 +75,19 @@ int		**ft_map_in_int(char **map)
 	len = ft_strlen(map[1]);
 	if (!(mapvalue = (int **)malloc(sizeof(int *) * len + 1)))
 		return (NULL);
-	if (!(mapvalue[0] = (int *)malloc(sizeof(int) * 1)))
+	if (!(mapvalue[0] = (int *)malloc(sizeof(int) * 2)))
 		return (NULL);
-	mapvalue[0][0] = len;
 	i = 0;
-	while (++i <= len)
+	while (map[i])
+		i++;
+	mapvalue[0][0] = len;
+	mapvalue[0][1] = i;
+	i = 0;
+	while (++i < mapvalue[0][1])
 		if (!(mapvalue[i] = (int *)malloc(sizeof(int) * len)))
 			return (NULL);
 	i = 0;
-	while (++i <= len)
+	while (++i < mapvalue[0][1])
 	{
 		j = -1;
 		while (++j < len)
@@ -109,7 +113,7 @@ int		**ft_map_setup_main(char **map, char *code)
 	int col;
 	mapvalue = ft_first_colnline(mapvalue);
 	mapvalue = ft_map_setup(mapvalue);
-	while (++line <= mapvalue[0][0])
+	while (++line < mapvalue[0][1])
 	{
 		col = -1;
 		while (++col < mapvalue[0][0])
