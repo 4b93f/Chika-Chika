@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:07:51 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/19 14:24:36 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/19 15:33:35 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@ int		ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
 void	ft_putstr(char *str);
 void	ft_putchar(char c);
-int		ft_verif_map(char **str);
+int		ft_verif_map(char **map);
 int		ft_atoi(char *str);
-char	*ft_recup_code(char *str, char **chaine);
-int		ft_verif_cara(char **strs, char *cara);
-int		ft_verif_is_only_obs(char **strs, char *cara);
-int		ft_verif_if_only_vide(char **strs, char *cara);
-int		ft_verif_if_same(char *cara);
+char	*ft_recup_code(char **map);
+int		ft_verif_cara(char **map, char *code);
+int		ft_verif_is_only_obs(char **map, char *code);
+int		ft_verif_if_only_vide(char **map, char *code);
+int		ft_verif_if_same(char *code);
+char	*ft_check_error(char **map);
+char	**ft_map_setup_main(char **map, char *code);
 
 #endif

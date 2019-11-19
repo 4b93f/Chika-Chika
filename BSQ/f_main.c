@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 04:34:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/18 21:37:13 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/19 16:07:31 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,23 @@ int main(int argc, char **argv)
 {
     int i;
 
-    i = 0;
     char **map;
 	char *pre_map;
+	char *code;
+	char **map_converted;
+	
 	pre_map = read_and_write();
 	map = ft_split(pre_map, "\n");
-	if ((ft_recup_code(map[0], map)) == 0)
+	code = ft_check_error(map);
+	if((ft_check_error(map) == NULL))
 		return(0);
-	if (ft_verif_map(map) == 0)
-		return(0);
+	map_converted = ft_map_setup_main(map, code);
+
+	//while(map_converted[i])
+	//{
+		//printf("%s\n", map_converted[i]);
+		//i++;	
+	//}
 	while(map[i])
 	{
 		free(map[i]);

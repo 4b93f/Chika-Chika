@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 14:33:55 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/19 14:33:56 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/19 15:51:25 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 
-int		ft_verif_is_only_obs(char **map, char *cara)
+int		ft_verif_is_only_obs(char **map, char *code)
 {
 	int i;
 	int	j;
@@ -23,16 +23,16 @@ int		ft_verif_is_only_obs(char **map, char *cara)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == cara[0])
-				return (FALSE);
+			if (map[i][j] == code[0])
+				return (TRUE);
 			j++;
 		}
 		i++;
 	}
-	return(TRUE);
+	return(FALSE);
 }
 
-int		ft_verif_if_only_vide(char **map, char *cara)
+int		ft_verif_if_only_vide(char **map, char *code)
 {
 	int i;
 	int	j;
@@ -43,22 +43,22 @@ int		ft_verif_if_only_vide(char **map, char *cara)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] != cara[1])
-				return (FALSE);
+			if (map[i][j] != code[1])
+				return (TRUE);
 			j++;
 		}
 		i++;
 	}
-	return(TRUE);
+	return(FALSE);
 }
 
-int		ft_verif_if_same(char *cara)
+int		ft_verif_if_same(char *code)
 {
-	if(cara[0] == cara[1])
+	if(code[0] == code[1])
 		return(FALSE);
-	if(cara[0] == cara[2])
+	if(code[0] == code[2])
 		return(FALSE);
-	if(cara[1] == cara[2])
+	if(code[1] == code[2])
 		return(FALSE);
 	return(TRUE);
 }
