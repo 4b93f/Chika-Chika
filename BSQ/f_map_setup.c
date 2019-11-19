@@ -42,10 +42,10 @@ int		**ft_first_colnline(int **map)
 	int		col;
 
 	line = 1;
-	while (map[++line])
+	while (++line <= map[0][0])
 		map[line][0] = map[line - 1][0] + map[line][0];
 	col = 0;
-	while (map[1][++col])
+	while (++col < map[0][0])
 		map[1][col] = map[1][col - 1] + map[1][col];
 	return (map);
 }
@@ -56,10 +56,10 @@ int		**ft_map_setup(int **map)
 	int		col;
 
 	line = 1;
-	while (map[++line])
+	while (++line <= map[0][0])
 	{
 		col = 0;
-		while (map[line][++col])
+		while (++col < map[0][0])
 			map[line][col] = map[line][col] + map[line][col - 1] + map[line - 1][col] - map[line - 1][col - 1];
 	}
 	return (map);
@@ -77,7 +77,7 @@ int		**ft_map_in_int(char **map)
 		return (NULL);
 	if (!(mapvalue[0] = (int *)malloc(sizeof(int) * 1)))
 		return (NULL);
-	mapvalue[0] = len;
+	mapvalue[0][0] = len;
 	i = 0;
 	while (++i <= len)
 		if (!(mapvalue[i] = (int *)malloc(sizeof(int) * len)))
@@ -85,9 +85,9 @@ int		**ft_map_in_int(char **map)
 	i = 0;
 	while (++i <= len)
 	{
-		j = 0;
-		while (j < len)
-			mapvalue[i][j] = map[i][j++] - 48;
+		j = -1;
+		while (++j < len)
+			mapvalue[i][j] = map[i][j] - 48;
 	}
 	return (mapvalue);
 }

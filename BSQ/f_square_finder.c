@@ -1,16 +1,16 @@
 #include "bsq.h"
 
-t_square	test_bigger(char **map, int line, int col, t_square bigsquare)
+t_square	test_bigger(int **map, int line, int col, t_square bigsquare)
 {
 
 }
 
-t_square	ft_is_it_bigger(char **map, int line, int col, t_square bigsquare)
+t_square	ft_is_it_bigger(int **map, int line, int col, t_square bigsquare)
 {
-	
+
 }
 
-t_square	square_finder(char **map)
+t_square	square_finder(int **map)
 {
 	int			line;
 	int			col;
