@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 14:53:21 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/19 16:03:39 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/19 17:12:26 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int		**ft_map_setup_main(char **map, char *code)
 	int	**mapvalue;
 
 	i = 0;
-	write(1, "!", 1);
 	printf("test\n");
 	if((map = ft_basic_setup(map, code)) == NULL)
 		return (0);
@@ -108,14 +107,14 @@ int		**ft_map_setup_main(char **map, char *code)
 	// TO DO FREE **MAP NO MORE USE
 	int line = 0;
 	int col;
+	mapvalue = ft_first_colnline(mapvalue);
+	mapvalue = ft_map_setup(mapvalue);
 	while (++line <= mapvalue[0][0])
 	{
 		col = -1;
 		while (++col < mapvalue[0][0])
-			printf("%d", mapvalue[line][col]);
-		write(1, "\n", 1);
+			printf("%d ", mapvalue[line][col]);
+		printf("\n");
 	}
-	mapvalue = ft_first_colnline(mapvalue);
-	mapvalue = ft_map_setup(mapvalue);
 	return (mapvalue);
 }
