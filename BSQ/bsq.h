@@ -25,10 +25,12 @@ typedef enum 	e_bool
 	FALSE = 0
 }				t_bool;
 
-typedef struct 	s_struct
+typedef struct 	s_square
 {
-	
-}				t_struct;
+	int		size;
+	int		colpos;
+	int		lignepos;
+}				t_square;
 
 char	**ft_split(char *str, char *charset);
 int		ft_strlen(char *str);
