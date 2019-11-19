@@ -21,3 +21,17 @@ char	**ft_basic_setup(char **map, char *code)
 	}
 	return (map);
 }
+
+char	**ft_first_colnline(char **map)
+{
+	int		line;
+	int		col;
+
+	line = 0;
+	while (map[++line])
+		map[line][0] = map[line - 1][0] + map[line][0];
+	col = 0;
+	while (map[0][++col])
+		map[0][col] = map[0][col - 1] + map[0][col];
+	return (map);
+}
