@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:07:51 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/18 21:21:19 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/19 14:24:36 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,8 @@ int		ft_verif_map(char **str);
 int		ft_atoi(char *str);
 char	*ft_recup_code(char *str, char **chaine);
 int		ft_verif_cara(char **strs, char *cara);
+int		ft_verif_is_only_obs(char **strs, char *cara);
+int		ft_verif_if_only_vide(char **strs, char *cara);
+int		ft_verif_if_same(char *cara);
 
 #endif
