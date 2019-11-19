@@ -27,7 +27,7 @@ char	**ft_first_colnline(char **map)
 	int		line;
 	int		col;
 
-	line = 0;
+	line = 1;
 	while (map[++line])
 		map[line][0] = map[line - 1][0] + map[line][0];
 	col = 0;
@@ -38,7 +38,17 @@ char	**ft_first_colnline(char **map)
 
 char	**ft_map_setup(char **map)
 {
+	int		line;
+	int		col;
 
+	line = 1;
+	while (map[++line])
+	{
+		col = 0;
+		while (map[line][++col])
+			map[line][col] = map[line][col] + map[line][col - 1] + map[line - 1][col] - map[line - 1][col - 1] - 144;
+	}
+	return (map);
 }
 
 char	**ft_map_setup_main(char **map, char *code)
