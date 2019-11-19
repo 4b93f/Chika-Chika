@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 15:56:34 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/19 15:16:08 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/19 19:24:54 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_recup_code(char **map)
 	if (!(code = (char *)malloc(sizeof(char) * 4)))
 		return (NULL);
 	lenstr = ft_strlen(map[0]);
-	if (lenstr > 4)
+	if (lenstr > 3)
 	{
 		code[3] = '\0';
 		code[2] = map[0][lenstr - 1];

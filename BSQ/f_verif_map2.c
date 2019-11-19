@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 14:33:55 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/19 15:51:25 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/19 19:29:32 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,19 @@ int		ft_verif_if_same(char *code)
 	if(code[1] == code[2])
 		return(FALSE);
 	return(TRUE);
+}
+
+int ft_verif_is_toolong(char **map)
+{
+	int len;
+	int i;
+	int j;
+
+	i = 0;
+	len = ft_atoi(map[0]);
+	while (map[i])
+		i++;
+	if(i - 1 > len)
+		return (FALSE);
+	return (TRUE);
 }

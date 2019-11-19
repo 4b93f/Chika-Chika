@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:07:51 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/19 16:54:45 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/19 19:16:37 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-typedef enum 	e_bool
+typedef enum	e_bool
 {
 	TRUE = 1,
 	FALSE = 0
 }				t_bool;
 
-typedef struct 	s_square
+typedef struct	s_square
 {
 	int		size;
 	int		colpos;
@@ -46,5 +46,6 @@ int		ft_verif_if_only_vide(char **map, char *code);
 int		ft_verif_if_same(char *code);
 char	*ft_check_error(char **map);
 int		**ft_map_setup_main(char **map, char *code);
+int 	ft_verif_is_toolong(char **map);
 
 #endif
