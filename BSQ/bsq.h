@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:07:51 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/19 19:16:37 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/19 19:46:38 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ int		ft_verif_if_same(char *code);
 char	*ft_check_error(char **map);
 int		**ft_map_setup_main(char **map, char *code);
 int 	ft_verif_is_toolong(char **map);
+t_square	*square_finder(int **map);
 
 #endif

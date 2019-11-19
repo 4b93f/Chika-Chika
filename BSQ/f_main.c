@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 04:34:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/19 19:26:02 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/19 20:07:25 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 		return(0);
 	printf("test\n");
 	map_converted = ft_map_setup_main(map, code);
-	bigsquare = square_finder(map);
+	bigsquare = square_finder(map_converted);
 	printf("Taille = %d\nColonne = %d\nLigne = %d\n", bigsquare->size, bigsquare->colpos, bigsquare->lignepos);
 	//while(map_converted[i])
 	//{

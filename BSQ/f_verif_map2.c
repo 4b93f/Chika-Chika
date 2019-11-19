@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 14:33:55 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/19 19:29:32 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/19 20:05:35 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,25 @@ int ft_verif_is_toolong(char **map)
 	int j;
 
 	i = 0;
+	j = 0;
 	len = ft_atoi(map[0]);
 	while (map[i])
 		i++;
 	if(i - 1 > len)
+	{
 		return (FALSE);
-	return (TRUE);
+	}
+	i = 0;
+	while(map[0][i])
+	{
+		while (map[0][i] >= '0' && map[0][i] <= '9')
+			i++;
+		while (map[0][i])
+			i++;
+		if (i - 1 > len)
+			return(FALSE);
+		i++;
+	}
+	return(TRUE);
 }
+
