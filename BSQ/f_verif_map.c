@@ -27,27 +27,27 @@ int		ft_verif_map(char **map)
 	return(TRUE);
 }
 
-char	*ft_recup_code(char *str, char **map)
+char	*ft_recup_code(char **map)
 {
 	int		i;
 	char	*code;
 	int		lenstr;
 	if (!(code = (char *)malloc(sizeof(char) * 4)))
 		return (NULL);
-	lenstr = ft_strlen(str);
+	lenstr = ft_strlen(map[0]);
 	if (lenstr > 4)
 	{
 		code[3] = '\0';
-		code[2] = str[lenstr - 1];
-		code[1] = str[lenstr - 2];
-		code[0] = str[lenstr - 3];
+		code[2] = map[0][lenstr - 1];
+		code[1] = map[0][lenstr - 2];
+		code[0] = map[0][lenstr - 3];
 	}
 	else
 		return (NULL);
 	return (code);
 }
 
-int		ft_verif_cara(char **map, char *cara)
+int		ft_verif_cara(char **map, char *code)
 {
 	int i;
 	int	j;
@@ -58,7 +58,7 @@ int		ft_verif_cara(char **map, char *cara)
 		j = 0;
 		while (map[i][j])
 		{
-			if ((map[i][j] != cara[0] && map[i][j] != cara[1]))
+			if ((map[i][j] != code[0] && map[i][j] != code[1]))
 				return (FALSE);
 			j++;
 		}

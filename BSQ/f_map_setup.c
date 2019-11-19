@@ -31,7 +31,21 @@ char	**ft_first_colnline(char **map)
 	while (map[++line])
 		map[line][0] = map[line - 1][0] + map[line][0];
 	col = 0;
-	while (map[0][++col])
-		map[0][col] = map[0][col - 1] + map[0][col];
+	while (map[1][++col])
+		map[1][col] = map[1][col - 1] + map[1][col];
+	return (map);
+}
+
+char	**ft_map_setup(char **map)
+{
+
+}
+
+char	**ft_map_setup_main(char **map, char *code)
+{
+	if((map = ft_basic_setup(map, code)) == NULL)
+		return (NULL);
+	map = ft_first_colnline(map);
+	map = ft_map_setup(map);
 	return (map);
 }
