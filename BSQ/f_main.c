@@ -43,7 +43,7 @@ char	*read_and_write()
 int main(int argc, char **argv)
 {
     int i;
-
+	t_square	*bigsquare;
     char **map;
 	char *pre_map;
 	char *code;
@@ -55,6 +55,8 @@ int main(int argc, char **argv)
 		return(0);
 	printf("test\n");
 	map_converted = ft_map_setup_main(map, code);
+	bigsquare = square_finder(map);
+	printf("Taille = %d\nColonne = %d\nLigne = %d\n", bigsquare->size, bigsquare->colpos, bigsquare->lignepos);
 	//while(map_converted[i])
 	//{
 		//printf("%s\n", map_converted[i]);
