@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 04:34:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/19 16:07:31 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/19 16:55:26 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int main(int argc, char **argv)
     char **map;
 	char *pre_map;
 	char *code;
-	char **map_converted;
+	int **map_converted;
 	
 	pre_map = read_and_write();
 	map = ft_split(pre_map, "\n");
