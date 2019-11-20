@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 14:33:55 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/19 20:05:35 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/19 21:47:15 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		ft_verif_is_only_obs(char **map, char *code)
 		}
 		i++;
 	}
-	return(FALSE);
+	return (FALSE);
 }
 
 int		ft_verif_if_only_vide(char **map, char *code)
@@ -49,21 +49,21 @@ int		ft_verif_if_only_vide(char **map, char *code)
 		}
 		i++;
 	}
-	return(FALSE);
+	return (FALSE);
 }
 
 int		ft_verif_if_same(char *code)
 {
-	if(code[0] == code[1])
-		return(FALSE);
-	if(code[0] == code[2])
-		return(FALSE);
-	if(code[1] == code[2])
-		return(FALSE);
-	return(TRUE);
+	if (code[0] == code[1])
+		return (FALSE);
+	if (code[0] == code[2])
+		return (FALSE);
+	if (code[1] == code[2])
+		return (FALSE);
+	return (TRUE);
 }
 
-int ft_verif_is_toolong(char **map)
+int		ft_verif_is_toolong(char **map)
 {
 	int len;
 	int i;
@@ -74,21 +74,20 @@ int ft_verif_is_toolong(char **map)
 	len = ft_atoi(map[0]);
 	while (map[i])
 		i++;
-	if(i - 1 > len)
+	if (i - 1 > len)
 	{
 		return (FALSE);
 	}
 	i = 0;
-	while(map[0][i])
+	while (map[0][i])
 	{
 		while (map[0][i] >= '0' && map[0][i] <= '9')
 			i++;
 		while (map[0][i])
 			i++;
 		if (i - 1 > len)
-			return(FALSE);
+			return (FALSE);
 		i++;
 	}
-	return(TRUE);
+	return (TRUE);
 }
-

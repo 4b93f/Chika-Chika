@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 04:34:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/19 21:08:52 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/19 21:54:32 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,18 @@ char	*read_and_write()
 
 int main(int argc, char **argv)
 {
-    int i;
 	t_square	*bigsquare;
     char **map;
 	char *pre_map;
 	char *code;
 	int **map_converted;
+	
 	pre_map = read_and_write();
 	map = ft_split(pre_map, "\n");
 	code = ft_check_error(map);
 	if((ft_check_error(map) == NULL))
-		return(0);
-	printf("test\n");
+		free(map);
 	map_converted = ft_map_setup_main(map, code);
 	bigsquare = square_finder(map_converted);
-	//printf("Taille = %d\nColonne = %d\nLigne = %d\n", bigsquare->size, bigsquare->colpos, bigsquare->lignepos);
-	//while(map_converted[i])
-	//{
-		//printf("%s\n", map_converted[i]);
-		//i++;	
-	//}
-	while(map[i])
-	{
-		free(map[i]);
-		i++;
-	}
     return(0);
 }
