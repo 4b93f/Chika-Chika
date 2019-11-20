@@ -6,65 +6,62 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 15:56:34 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/18 21:33:42 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/19 21:49:04 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 
-int		ft_verif_map(char **str)
+int		ft_verif_map(char **map)
 {
 	int		i;
 	int		len;
-	int 	j;
-	int 	y;
-	
-	len = ft_atoi(str[0]);
+
+	len = ft_atoi(map[0]);
 	i = 0;
-	while(str[++i])
-		if (ft_strlen(str[i]) != len)
+	while (map[++i])
+		if (ft_strlen(map[i]) != len)
 			return (FALSE);
-	return(TRUE);
+	return (TRUE);
 }
 
-char	*ft_recup_code(char *str, char **chaine)
+char	*ft_recup_code(char **map)
 {
 	int		i;
 	char	*code;
 	int		lenstr;
+
 	if (!(code = (char *)malloc(sizeof(char) * 4)))
 		return (NULL);
-	lenstr = ft_strlen(str);
-	if (lenstr > 4)
+	lenstr = ft_strlen(map[0]);
+	if (lenstr > 3)
 	{
 		code[3] = '\0';
-		code[2] = str[lenstr - 1];
-		code[1] = str[lenstr - 2];
-		code[0] = str[lenstr - 3];
+		code[2] = map[0][lenstr - 1];
+		code[1] = map[0][lenstr - 2];
+		code[0] = map[0][lenstr - 3];
 	}
 	else
 		return (NULL);
-	if ((ft_verif_cara(chaine, code)) != 1)
-		return(0);
 	return (code);
 }
 
-int		ft_verif_cara(char **strs, char *cara)
+int		ft_verif_cara(char **map, char *code)
 {
 	int i;
 	int	j;
 
 	i = 1;
-	while (strs[i])
+	while (map[i])
 	{
 		j = 0;
-		while (strs[i][j])
+		while (map[i][j])
 		{
-			if ((strs[i][j] != cara[0] && strs[i][j] != cara[1]))
+			if ((map[i][j] != code[0] && map[i][j] != code[1]))
 				return (FALSE);
 			j++;
 		}
 		i++;
 	}
-	return(TRUE);
+	return (TRUE);
 }

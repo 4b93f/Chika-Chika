@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:07:51 by chly-huc          #+#    #+#             */
-/*   Updated: 2019/11/18 21:21:19 by chly-huc         ###   ########.fr       */
+/*   Updated: 2019/11/20 17:12:30 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,39 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-typedef enum 	e_bool
+typedef enum	e_bool
 {
 	TRUE = 1,
 	FALSE = 0
 }				t_bool;
 
-typedef struct 	s_struct
+typedef struct	s_square
 {
-	
-}				t_struct;
+	int		size;
+	int		colpos;
+	int		lignepos;
+}				t_square;
 
 char	**ft_split(char *str, char *charset);
 int		ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
 void	ft_putstr(char *str);
 void	ft_putchar(char c);
-int		ft_verif_map(char **str);
+int		ft_verif_map(char **map);
 int		ft_atoi(char *str);
-char	*ft_recup_code(char *str, char **chaine);
-int		ft_verif_cara(char **strs, char *cara);
+char	*ft_recup_code(char **map);
+int		ft_verif_cara(char **map, char *code);
+int		ft_verif_is_only_obs(char **map, char *code);
+int		ft_verif_if_only_vide(char **map, char *code);
+int		ft_verif_if_same(char *code);
+char	*ft_check_error(char **map);
+int		**ft_map_setup_main(char **map, char *code);
+int 	ft_verif_is_toolong(char **map);
+int 	ft_free_malloc(char **map);
+t_square	*square_finder(int **map);
+char	**ft_build(t_square *bigsquare, char **map, char *code);
+char	*ft_strjoin(char *dest, char *src, int first);
+char	*ft_strdup(char *src);
+void 	ft_display(char **strs);
 
 #endif
