@@ -1,0 +1,103 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/08 11:24:12 by chly-huc          #+#    #+#             */
+/*   Updated: 2020/01/28 14:55:18 by chly-huc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line.h"
+
+size_t ft_strlen(char *str)
+{
+	int i;
+	
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strdup(char *src)
+{
+	char	*dest;
+	int i;
+
+	i = 0;
+	if (!src)
+		return (0);
+	if (!((dest = (char *)malloc(sizeof(char) * ft_strlen(src) + 1))))
+		return (NULL);
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	int		i;
+	int		j;
+	char	*newstr;
+
+	i = 0;
+	j = 0;
+	if (!s)
+		return (NULL);
+	if (!(newstr = malloc(sizeof(char) * len + 1)))
+		return (NULL);
+	while (start--)
+		i++;
+	while (s[i] && len--)
+	{
+		newstr[j++] = (char)s[i++];
+		newstr[i] = '\0';
+	}
+	return (newstr);
+}
+
+static char		*ft_strcatplus(char *dest, char *src, int start)
+{
+	int j;
+	int i;
+
+	i = start;
+	j = 0;
+	while (src[j])
+	{
+		dest[i + j] = src[j];
+		j++;
+	}
+	dest[i + j] = '\0';
+	return (dest);
+}
+
+char			*ft_strjoin(char *s1, char *s2)
+{
+	char			*tab;
+	int				i;
+	
+	if (s1 == NULL)
+		return (ft_strdup(s2));
+	if (!(tab = malloc(sizeof(char) * ft_strlen(s1) + ft_strlen(s1) + 1)))
+		return (NULL);
+	i = 0;
+	while (s1 && s1[i])
+	{
+		tab[i] = s1[i];
+		i++;
+	}
+	tab = ft_strcatplus(tab, s2, i);
+	free(s1);
+	return (tab);
+}

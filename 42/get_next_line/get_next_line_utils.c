@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 11:24:12 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/01/21 06:19:31 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/01/25 09:33:53 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,30 +121,48 @@ static char		*ft_strcatplus(char *dest, char *src, int start)
 	return (dest);
 }
 
-char			*ft_strjoin(char const *s1, char const *s2)
+char			*ft_charjoin(char const *s1, char const s2)
 {
 	char	*tab;
 	char	*ss1;
-	char	*ss2;
 	int		i;
 	int		len_malloc;
 
 	ss1 = (char *)s1;
-	ss2 = (char *)s2;
-	if (s1 == NULL)
-		return (ft_strdup(s2));
-	if (!ss1 || !ss2)
-		return (NULL);
-	len_malloc = ft_strlen(ss1) + ft_strlen(ss2);
+	len_malloc = ft_strlen(ss1) + 1;
 	if (!(tab = malloc(sizeof(char) * len_malloc)))
 		return (NULL);
 	i = 0;
-	while (ss1[i])
+	while (ss1 && i < len_malloc && ss1[i])
 	{
 		tab[i] = ss1[i];
 		i++;
 	}
-	tab = ft_strcatplus(tab, ss2, i);
+	tab[i++] = s2;
+	tab[i] = 0;
+	return (tab);
+}
+
+char			*ft_strjoin(char const *s1, char const *s2)
+{
+	char			*tab;
+	unsigned char	*ss1;
+	unsigned char	*ss2;
+	int				i;
+	int				len_malloc;
+
+	ss1 = (unsigned char *)s1;
+	ss2 = (unsigned char *)s2;
+	len_malloc = ft_strlen((char *)ss1) + ft_strlen((char *)ss2) + 1;
+	if (!(tab = malloc(sizeof(char) * len_malloc)))
+		return (NULL);
+	i = 0;
+	while (ss1 && ss1[i])
+	{
+		tab[i] = ss1[i];
+		i++;
+	}
+	tab = ft_strcatplus(tab, (char*)ss2, i);
 	return (tab);
 }
 

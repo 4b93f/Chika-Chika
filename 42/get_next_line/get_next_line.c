@@ -6,11 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 10:29:20 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/01/21 06:31:56 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/01/25 10:17:44 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define BUF_SIZE 3
+#define BUF_SIZE 7
 #include "get_next_line.h"
 
 int check_error(int fd, char *line)
@@ -20,87 +20,89 @@ int check_error(int fd, char *line)
 	return (1);
 }
 
-char *save(const char *str)
+int find_end_string(char str, int j)
 {
-	char *save;
-	save = ft_strrchr(str, '\n');
-	return (ft_substr(save, 1, strlen(save - 1)));
-}
-
-int find_end_string(char *str)
-{
-	int i ;
+	int i;
 
 	i = 0;
-	if (!str)
+	if (str)
 		return (0);
-	while (str[i])
-	{
-		if (str[i] == '\n')
+	if (str == '\n')
+		if (str == '\n')
 			return (1);
-		i++;
-	}
 	return (0);
 }
-
-
-char	*readline(int fd, char *str)
-{
+char	*readline(int fd, char **line, char *str)
+{	
 	char buf[BUF_SIZE + 1];
+	char	*tmp;
 	int ret;
 	char *lu;
 	int i;
-
+	
 	ret = 0;
-	i = 0;
 	lu = NULL;
 	while ((ret = read(fd, buf, BUF_SIZE)) > 0)
 	{
+		i = 0;		
 		buf[ret] = '\0';
-		lu = ft_strjoin(lu, buf);
-		if (find_end_string(lu) == 1)
+		while (buf[i] && buf[i] != '\n')
+		{
+			tmp = *line;
+			*line = ft_charjoin(*line, buf[i]);
+			//printf("line:[%s] buf:[%c] i:[%d]\n", *line, buf[i], i);
+			//write(1, "!\n", 1);
+			free(tmp);
+			i++;
+		}
+		if (buf[i] == '\n')
 			break ;
 	}
-	return (lu);
+	if (buf[i] == '\n')
+		while (buf[++i])
+			*str++ = buf[i];
+	*str = 0;
+	return (*line);
 }
 
 int get_next_line(int fd, char **line)
 {
-	static char *str;
+	static char str[OPEN_MAX];
 	char *tmp;
 	int i;
 	int j;
+	int o;
+	
 	
 	i = 0;
-	j = 0;
 	if (check_error(fd, *line) == -1)
 		return (-1);
-	if (!str)
-		if(!(str = (char *)malloc(sizeof(char) * BUF_SIZE + 1)))
-			return (0);
 	if (*str)
-		ft_strcpy(*line, str);
-	str = readline(fd, str);
-	tmp = str;
-	if (str[i])
 	{
-		while (str[i] && str[i] != '\n')
-			i++;
-		if (i == 0)
-			(*line) = ft_strdup("");
-		else
+		while(str[i])
 		{
-			if (tmp != str)
+			if (str[i] == '\n')
 			{
+				*line = ft_substr(str, 0, i);
+				tmp = ft_substr(str, i + 1 , BUF_SIZE);
+				o = 0;
+				printf("tmp = %s\n", tmp);
+				while(tmp[o])
+				{
+					str[o] = tmp[o];
+					o++;
+				}
 				
+				return (1);
 			}
-			*line = ft_substr(line, 0, i + ft_strlen(tmp));
-			str = &str[i + 1];
+			i++;
 		}
+		*line = ft_strjoin(*line, str);	
 	}
-	else
-			(*line) = ft_strdup("");
-	printf("~line =%s~}", *line);
+	i = 0;
+	readline(fd, line, str);
+	*str = str[i];
+	//printf("~~~line final == %s~~~\n", *line);
 	return (1);
 }
 
@@ -108,10 +110,17 @@ int		main(int argc, char **argv)
 {
 	int		fd;
 	char	*line;
-	
-	fd = open("test", O_RDONLY);
-	get_next_line(fd, &line);
-	get_next_line(fd, &line);
-	get_next_line(fd, &line);
-
+	int j;
+		
+	line = NULL;
+	j = 0;
+	fd = open("test2", O_RDONLY);
+	while(j < 28)
+	{
+		get_next_line(fd, &line);
+		//printf("{%s}\n", line);
+		free(line);
+		line = NULL;
+		j++;
+	}
 }
