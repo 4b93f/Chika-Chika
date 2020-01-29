@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 17:36:40 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/01/14 01:15:02 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/01/28 19:01:17 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char		*ft_strcatplus(char *dest, char *src, int start)
+static char		*ft_strcat(char *dest, char *src, int start)
 {
 	int j;
 	int i;
@@ -31,27 +31,25 @@ static char		*ft_strcatplus(char *dest, char *src, int start)
 char			*ft_strjoin(char const *s1, char const *s2)
 {
 	char			*tab;
-	unsigned char	*ss1;
-	unsigned char	*ss2;
+	unsigned char	*chain_cpy1;
+	unsigned char	*chain_cpy2;
 	int				i;
 	int				len_malloc;
 
-	ss1 = (unsigned char *)s1;
-	ss2 = (unsigned char *)s2;
-	if (!ss1 || !s2)
-		return (NULL);
-	len_malloc = ft_strlen((char *)ss1) + ft_strlen((char *)ss2);
-	if (!ss1 || !ss2)
-		return (0);
+	chain_cpy1 = (unsigned char *)s1;
+	chain_cpy2 = (unsigned char *)s2;
+	if (!s1)
+		return (ft_strdup(s2));
+	len_malloc = ft_strlen((char *)chain_cpy1) + ft_strlen((char *)chain_cpy2);
 	if (!(tab = malloc(sizeof(char) * len_malloc)))
 		return (NULL);
 	i = 0;
-	while (ss1[i])
+	while (chain_cpy1[i])
 	{
-		tab[i] = ss1[i];
+		tab[i] = chain_cpy1[i];
 		i++;
 	}
-	tab = ft_strcatplus(tab, (char*)ss2, i);
+	tab = ft_strcat(tab, (char*)chain_cpy2, i);
 	return (tab);
 }
 /*

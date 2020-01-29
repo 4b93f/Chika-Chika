@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 11:24:12 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/01/28 14:55:18 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/01/29 09:32:25 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,38 +66,23 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (newstr);
 }
 
-static char		*ft_strcatplus(char *dest, char *src, int start)
+char  *ft_strjoin(char *s1, char *s2)
 {
-	int j;
+	char *tab;
 	int i;
-
-	i = start;
-	j = 0;
-	while (src[j])
-	{
-		dest[i + j] = src[j];
-		j++;
-	}
-	dest[i + j] = '\0';
-	return (dest);
-}
-
-char			*ft_strjoin(char *s1, char *s2)
-{
-	char			*tab;
-	int				i;
+	int j;
 	
-	if (s1 == NULL)
-		return (ft_strdup(s2));
-	if (!(tab = malloc(sizeof(char) * ft_strlen(s1) + ft_strlen(s1) + 1)))
+	i = -1;
+	j = -1;
+	if (!s1)
+		return (ft_strdup((char*)s2));
+	if (!(tab = malloc(sizeof(char) * ft_strlen((char*)s1) + ft_strlen((char*)s2) + 1)))
 		return (NULL);
-	i = 0;
-	while (s1 && s1[i])
-	{
+	while(s1[++i])
 		tab[i] = s1[i];
-		i++;
-	}
-	tab = ft_strcatplus(tab, s2, i);
+	while(s2[++j])
+		tab[j + i] = s2[j];
+	tab[i + j] = '\0';
 	free(s1);
 	return (tab);
 }
