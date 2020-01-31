@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 10:29:20 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/01/29 09:25:57 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/01/31 12:33:55 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char *get_l(char *string)
 {
 	int  i;
 	int j;
-	char *line;
+	char *ligne;
 
 	i = 0;
 	j = 0;
@@ -59,16 +59,15 @@ static char *get_l(char *string)
 		return(NULL);
 	while (string[i] && string[i] != '\n')
 		i++;
-	line = ft_substr(string, 0, i);
-	if (!(line = malloc(sizeof(char) * i + 1)))
+	if (!(ligne = ft_substr(string, 0, i)))
 		return (NULL);
-	while(j < i)
+	while (j < i)
 	{
-		line[j] = string[j];
+		ligne[j] = string[j];
 		j++;
 	}
-	line[i] = '\0';
-	return (line);
+	ligne[i] = '\0';
+	return (ligne);
 }
 
 char    *readline(int fd, char *string)
@@ -77,13 +76,12 @@ char    *readline(int fd, char *string)
     int ret;
     char *temp;
     temp = NULL;
-    while (!(find_end_string(buf)) && (ret = read(fd, buf, BUF_SIZE)) > 0)
+    while ((ret = read(fd, buf, BUF_SIZE)) > 0)
     {
         buf[ret] = '\0';
-		temp = string;
         string = ft_strjoin(string, buf);
-        printf("{string = %s}\n", string);
-        free(temp);
+		if (find_end_string(buf))
+			break;
     }
     return (string);
 }
@@ -98,13 +96,11 @@ char     *rest(char *strings)
     i = 0;
     if (!strings)
         return (NULL);
-    while (strings[j])
-        j++;
     while (strings[i] && strings[i] != '\n')
         i++;
-    if (!(tmp = ft_substr(strings, i + 1, j)))
+    if (!(tmp = ft_substr(strings, i + 1, strlen(strings))))
         return (NULL);
-    free(strings);
+   	free(strings);
     return (tmp);
 }
 
@@ -115,19 +111,25 @@ int get_next_line(int fd, char **line)
     char *tmp;
 
     i = 0;
+	tmp  = NULL;
+	*line = NULL;
     if (check_error(fd, str) < 0)
+	{
+		printf("regarde\n");
         return (-1);
+	}
     if (str && str[0] == '\n')
     {
         *line = ft_strdup("");
         str = rest(str);
         return (1);
     }
-    str = readline(fd, str);
-    *line = get_l(str);
+    if (!(str = readline(fd, str)))
+		return (-1);
+    if (!(*line = get_l(str)))
+		return (-1);
     if (!find_end_string(str))
     {
-        *line = ft_strdup("");
         free(str);
         return (0);
     }
@@ -135,49 +137,35 @@ int get_next_line(int fd, char **line)
     return(1);
 }
 
-int			main(int argc, char **argv)
+void	ft_putendl(char const *s)
 {
-	char	*line;
-	int		fd;
-	int		ret;
-	int j = 0;
-	argc = 2;
-	fd = open(argv[1], O_RDONLY);
+	int i;
 
-	while ((ret = get_next_line(fd, &line)) > 0)
-	{
-		//printf("|line final = %s|\n", line);
-		//printf("ret : %d\n", ret);
-		free(line);
-	}
-		printf("lien final = %s\n", line);
-		printf("ret : %d\n", ret);
-		free(line);
-		//system("leaks a.out");
-	//printf("ret : %d\n", ret);
-		//system ("leaks a.out");
-	/*
-	  if ()
-	  	return freerror(str, ret)
-	   printf("%d  |  ", get_next_line(fd, &line));
-	   printf("%s\n", line);
-	   free(line);
-	   printf("%d  |  ", get_next_line(fd, &line));
-	   printf("%s\n", line);
-	   free(line);
-	   printf("%d  |  ", get_next_line(fd, &line));
-	   printf("%s\n", line);
-	   free(line);
-	   printf("%d  |  ", get_next_line(fd, &line));
-	   printf("%s\n", line);
-	   free(line);
-	   printf("%d  |  ", get_next_line(fd, &line));
-	   printf("%s\n", line);
-	   free(line);
-		system("leaks a.out");
-	*/
-	close(fd);
-	CHECK
-	return (0);
+	i = ft_strlen((char*)s);
+	if (s)
+		write(1, s, i);
+	write(1, "\n", 1);
 }
 
+int			main(int argc, char **argv)
+{
+	int		fd;
+	char	*line;
+
+	if (argc == 1)
+		fd = 0;
+	else if (argc == 2)
+		fd = open(argv[1], O_RDONLY);
+	else
+		return (2);
+	while (get_next_line(fd, &line) > 0)
+	{
+		ft_putendl(line);
+		free(line);
+	}
+	ft_putendl(line);
+	free(line);
+	CHECK
+	if (argc == 2)
+		close(fd);
+}

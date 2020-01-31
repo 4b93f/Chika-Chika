@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 10:34:53 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/01/29 07:42:18 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/01/30 15:16:14 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,10 @@
 # include "leak_detector.h"
 
 int 	get_next_line(int fd, char **line);
-char	*ft_strcpy(char *dest, char *src);
-char		*ft_strcpy(char *dest, char *src);
 char		*ft_strdup(char *s);
-void	ft_putendl_fd(char *s, int fd);
-char			*ft_charjoin(char const *s1, char const s2);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-void	ft_putendl(char const *s);
 void			ft_putstr_fd(char *s, int fd);
-char	*ft_strrchr(const char *s, int c);
-char	*ft_ntm(char *dest, char *src);
 char			*ft_strjoin(char *s1, char *s2);
 size_t 			ft_strlen(char *str);
-
-
-
 
 #endif
