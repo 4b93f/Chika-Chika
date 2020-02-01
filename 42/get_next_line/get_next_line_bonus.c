@@ -6,11 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 10:29:20 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/01 01:08:45 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/01 00:41:31 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int		find_end_string(char *str)
 {
@@ -32,7 +32,7 @@ char	*get_l(char *string)
 {
 	int		i;
 	int		j;
-	char	*chain;
+	char	*ligne;
 
 	i = 0;
 	j = 0;
@@ -40,15 +40,15 @@ char	*get_l(char *string)
 		return (NULL);
 	while (string[i] && string[i] != '\n')
 		i++;
-	if (!(chain = ft_substr(string, 0, i)))
+	if (!(ligne = ft_substr(string, 0, i)))
 		return (NULL);
 	while (j < i)
 	{
-		chain[j] = string[j];
+		ligne[j] = string[j];
 		j++;
 	}
-	chain[i] = '\0';
-	return (chain);
+	ligne[i] = '\0';
+	return (ligne);
 }
 
 char	*readline(int fd, char *string)

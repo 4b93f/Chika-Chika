@@ -6,12 +6,12 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 10:34:53 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/01 01:15:21 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/01 00:40:39 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/types.h>
@@ -21,7 +21,7 @@
 # include <limits.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 496
+#  define BUFFER_SIZE 1
 # endif
 
 int		get_next_line(int fd, char **line);
