@@ -1,51 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/08 03:44:51 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/01/08 07:49:29 by chly-huc         ###   ########.fr       */
+/*   Created: 2020/01/07 16:52:53 by chly-huc          #+#    #+#             */
+/*   Updated: 2020/01/10 12:35:50 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		nbnb(int nb)
+void			ft_putnbr_fd(int n, int fd)
 {
-	int len;
+	long int nbr;
 
-	len = 0;
-	if (nb <= 0)
+	nbr = n;
+	if (nbr < 0)
 	{
-		len++;
+		ft_putchar_fd('-', fd);
+		nbr = nbr * -1;
 	}
-	while (nb != 0)
+	if (nbr > 9)
 	{
-		nb = nb / 10;
-		len++;
+		ft_putnbr_fd(nbr / 10, fd);
+		ft_putnbr_fd(nbr % 10, fd);
 	}
-	return (len);
+	else
+	{
+		ft_putchar_fd(nbr + '0', fd);
+	}
 }
-
-char	*ft_itoa(int n)
-{
-	int		i;
-	char	*str;
-
-	i = nbnb(n);
-	if (!(str = malloc(sizeof(char) * (i + 1))))
-		return (NULL);
-	str[i--] = '\0';
-	if (n == 0 && (str[0] = '0'))
-		return (str);
-	if (n < 0)
-		str[0] = '-';
-	while (n != 0)
-	{
-		str[i--] = '0' + ((str[0] == '-') ? -(n % 10) : n % 10);
-		n = n / 10;
-	}
-	return (str);
-}
+/*
+** Ecrire un nombre dans un fichier donné
+*/

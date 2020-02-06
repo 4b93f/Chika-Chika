@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 10:34:53 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/01 01:15:21 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/01 03:28:11 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <limits.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 496
+#  define BUFFER_SIZE 1
 # endif
 
 int		get_next_line(int fd, char **line);
