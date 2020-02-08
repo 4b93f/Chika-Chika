@@ -6,43 +6,16 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 13:32:23 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/06 16:09:14 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/06 17:05:10 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		checkbase(char *base)
+long long		checktabase(char *base)
 {
-	int		i;
-	int		j;
-
-	i = 0;
-	if ((base[0] == '\0') || (base[1] == '\0'))
-		return (0);
-	while (base[i])
-	{
-		j = i + 1;
-		if ((base[i] == '+') || (base[i] == '-'))
-			return (0);
-		if ((base[i] == ' ') || (base[i] == '\t') || (base[i] == '\n')
-		|| (base[i] == '\r') || (base[i] == '\v') || (base[i] == '\f'))
-			return (0);
-		while (base[j])
-		{
-			if (base[i] == base[j])
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-int		checktabase(char *base)
-{
-	int		i;
-	int		j;
+	long long		i;
+	long long		j;
 
 	i = 0;
 	if ((base[0] == '\0') || (base[1] == '\0'))
@@ -66,11 +39,11 @@ int		checktabase(char *base)
 	return (i);
 }
 
-int		ft_atoi_base(char *str, char *base)
+long long		ft_atoi_base(char *str, char *base)
 {
-	int res;
-	int sign;
-	int j;
+	long long res;
+	long long sign;
+	long long j;
 
 	res = 0;
 	sign = 1;

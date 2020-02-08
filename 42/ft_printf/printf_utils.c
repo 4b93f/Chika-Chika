@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 15:32:43 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/06 15:03:19 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/06 16:57:47 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ static int		nbnb(int nb)
 }
 */
 
-char			*ft_itoa(int n)
+char			*ft_itoa(long long n)
 {
-	int		i;
+	long long		i;
 	char	*str;
 
 	i = nbnb(n);

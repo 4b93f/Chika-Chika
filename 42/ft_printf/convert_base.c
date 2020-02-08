@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 13:31:45 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/05 13:32:35 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/06 17:07:44 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int		checktabase(char *base);
-int		ft_atoi_base(char *str, char *base);
-int		checkbase(char *base);
-int		ft_strlen(char *str);
+long long		checktabase(char *base);
+long long		ft_atoi_base(char *str, char *base);
+long long		ft_strlen(char *str);
 
-void	ft_putcharv2(char c, char *str)
+void	set_long_long(char c, char *str)
 {
-	int i;
+	long long i;
 
 	i = 0;
 	while (str[i])
@@ -30,16 +29,16 @@ void	ft_putcharv2(char c, char *str)
 	str[i + 1] = '\0';
 }
 
-void	ft_putnbr_base(int nb, char *base, char *str)
+void	ft_putnbr_base(long long nb, char *base, char *str)
 {
 	if (nb < 0)
 	{
-		ft_putcharv2('-', str);
+		set_long_long('-', str);
 		nb = nb * (-1);
 	}
 	if (nb < ft_strlen(base))
 	{
-		ft_putcharv2(base[nb], str);
+		set_long_long(base[nb], str);
 	}
 	else
 	{
@@ -48,9 +47,9 @@ void	ft_putnbr_base(int nb, char *base, char *str)
 	}
 }
 
-int		ft_size_putnbr_base(int nb, char *base)
+long long		ft_size_putnbr_base(long long nb, char *base)
 {
-	int size;
+	long long size;
 
 	size = 0;
 	if (nb < 0)
@@ -70,9 +69,9 @@ int		ft_size_putnbr_base(int nb, char *base)
 
 char	*ft_convert_base(char *nbr, char *base_form, char *base_to)
 {
-	int		i;
+	long long		i;
 	char	*str;
-	int		howmany;
+	long long		howmany;
 
 	if (checktabase(base_form) == 0 || checktabase(base_to) == 0)
 		return (0);

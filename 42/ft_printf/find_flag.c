@@ -6,18 +6,23 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 06:05:56 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/06 12:40:01 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/08 20:25:51 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int		ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
 
 int find_flag(char *str, to_list *flag)
 {
     int i;
     int u;
     char *stock;
-    
+
     i = 0;
     u = 0;
     if (!(stock = malloc(sizeof(char*) * ft_strlen(str))))
@@ -63,13 +68,15 @@ void ft_flag(char *str, to_list *flag)
         flag->FLAG_DOT++;
     else if (str[i] == '*')
         flag->FLAG_STARS++;
+	else if (ft_isdigit(str[i]))
+		flag->FLAG_NBR += 1;
 }
 
 int no_format(char *str, to_list *flag)
 {
     int i;
     int y;
-    
+
     i = 0;
 
     char s[] = "cspdiuxX%%";

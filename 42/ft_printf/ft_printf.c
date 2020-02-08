@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:39:07 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/06 16:11:50 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/08 20:54:18 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		ft_init_struct(to_list *flag)
 	flag->FLAG_MINUS = 0;
 	flag->FLAG_DOT = 0;
 	flag->FLAG_STARS = 0;
+	flag->FLAG_NBR = 0;
 	return (0);
 }
 
@@ -53,11 +54,11 @@ int		ft_printf(const char *str, ...)
 
 int main()
 {
-	int i = -500000;
+	int i = 500000;
 	char str[] = "CA";
 	char c = 'X';
 	char const *p = "hello";
 
-	printf("%010X\n", 8562);
-	ft_printf("%010X", 8562);
+	printf("%90u\n", i);
+	ft_printf("%90u", i);
 }

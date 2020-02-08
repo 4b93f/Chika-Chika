@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 11:44:56 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/06 15:23:16 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/08 21:00:54 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,6 @@ void ft_flag_zero1(char *s1, char *s2)
 */
 int main()
 {
-	printf("%-50d", 15);
+	char str[] = "BONJOUR";
+	printf("%05% oui %05%");
 }

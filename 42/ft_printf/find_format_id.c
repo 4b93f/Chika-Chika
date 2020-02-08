@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 06:05:53 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/06 16:11:20 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/08 18:38:02 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int find_format_id(char *str, va_list ap, to_list *flag)
 	while (str[i])
 	{
 		if (str[i] == 's')
-			ft_string(str, ap);
+			ft_string(str, flag, ap);
 		else if ((str[i] == 'd') || (str[i] == 'i'))
 			ft_integer(str, ap, flag);
 		else if (str[i] == 'c')
-			ft_char(str, ap);
+			ft_char(str, flag, ap);
 		else if (str[i] == 'u')
 			ft_unsigned_int(str, ap, flag);
 		else if (str[i] == '%')
