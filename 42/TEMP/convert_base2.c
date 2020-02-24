@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 13:32:23 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/06 17:05:10 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/24 07:20:06 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-long long		checktabase(char *base)
+long long		checkbase(char *base)
 {
 	long long		i;
 	long long		j;
@@ -39,7 +39,7 @@ long long		checktabase(char *base)
 	return (i);
 }
 
-long long		ft_atoi_base(char *str, char *base)
+long long		ft_atoll_base(char *str, char *base)
 {
 	long long res;
 	long long sign;
@@ -58,9 +58,9 @@ long long		ft_atoi_base(char *str, char *base)
 		str++;
 	}
 	while (base[++j])
-		if (*str == base[j] && checktabase(base))
+		if (*str == base[j] && checkbase(base))
 		{
-			res = res * checktabase(base) + j;
+			res = res * checkbase(base) + j;
 			j = -1;
 			str++;
 		}

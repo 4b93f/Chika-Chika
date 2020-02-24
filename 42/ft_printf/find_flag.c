@@ -6,90 +6,52 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 06:05:56 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/08 20:25:51 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/14 19:14:50 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_isdigit(int c)
-{
-	return (c >= '0' && c <= '9');
-}
 
-int find_flag(char *str, to_list *flag)
+int find_specifier(char *str, to_list *flag)
 {
-    int i;
-    int u;
-    char *stock;
-
-    i = 0;
-    u = 0;
-    if (!(stock = malloc(sizeof(char*) * ft_strlen(str))))
-        return (0);
-    while (str[i] != '%')
-        i++;
-    while (str[++i])
-        stock[u++] = str[i];
-    i = 0;
-    while (stock[i])
-    {
-        u = 0;
-        while (FLAGS[u])
-        {
-            if (stock[i] == FLAGS[u])
-            {
-                ft_flag(stock, flag);
-                return (TRUE);
-            }
-            u++;
-        }
-        i++;
-    }
+    str[*i] == 'd' || str[*i] == 'i' ? 
     return (FALSE);
 }
 
-void ft_flag(char *str, to_list *flag)
+void ft_flag(char *str, int *i, to_list *flag)
 {
-    int i;
-    int u;
-    int y;
-
-    i = 0;
-    u = 0;
-    y = 0;
-    while (str[i] == '%')
-        i++;
-    if (str[i] == '0')
-        flag->FLAG_ZERO += 1;
-    else if (str[i] == '-')
-        flag->FLAG_MINUS++;
-    else if (str[i] == '.')
-        flag->FLAG_DOT++;
-    else if (str[i] == '*')
-        flag->FLAG_STARS++;
-	else if (ft_isdigit(str[i]))
-		flag->FLAG_NBR += 1;
+    *i = *i + 1;
+    str[*i] == '0' ? flag->FLAG_ZERO = 1 : 0;
+    str[*i] == '-' ? flag->FLAG_MINUS = 1 : 0;
 }
 
-int no_format(char *str, to_list *flag)
+void ft_parsing(char *str, int *i, to_list *flag)
+{
+    int y;
+    
+    y = i;
+    while (!(no_format(y, flag)))
+    {
+        ft_flag(str, i, flag);
+        y++;
+    }
+    
+}
+
+int no_format(char c, to_list *flag)
 {
     int i;
     int y;
 
     i = 0;
-
-    char s[] = "cspdiuxX%%";
-    while (str[i])
+    y = 0;
+    
+    while (FORMAT[y])
     {
-        y = 0;
-        while (s[y])
-        {
-            if (str[i] == s[y])
-                return (FALSE);
-            y++;
-        }
-        i++;
+        if (c == FORMAT[y])
+            return (TRUE);
+        y++;
     }
-    return (TRUE);
+    return (FALSE);
 }

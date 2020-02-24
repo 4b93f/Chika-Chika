@@ -6,19 +6,16 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 13:31:45 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/06 17:07:44 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/24 07:24:55 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "ft_printf.h"
 
-long long		checktabase(char *base);
-long long		ft_atoi_base(char *str, char *base);
-long long		ft_strlen(char *str);
-
-void	set_long_long(char c, char *str)
+static void	set_long_long(char c, char *str)
 {
 	long long i;
 
@@ -29,7 +26,7 @@ void	set_long_long(char c, char *str)
 	str[i + 1] = '\0';
 }
 
-void	ft_putnbr_base(long long nb, char *base, char *str)
+static void	ft_putnbr_base(long long nb, char *base, char *str)
 {
 	if (nb < 0)
 	{
@@ -47,7 +44,7 @@ void	ft_putnbr_base(long long nb, char *base, char *str)
 	}
 }
 
-long long		ft_size_putnbr_base(long long nb, char *base)
+static long long		ft_size_putnbr_base(long long nb, char *base)
 {
 	long long size;
 
@@ -73,9 +70,9 @@ char	*ft_convert_base(char *nbr, char *base_form, char *base_to)
 	char	*str;
 	long long		howmany;
 
-	if (checktabase(base_form) == 0 || checktabase(base_to) == 0)
+	if (checkbase(base_form) == 0 || checkbase(base_to) == 0)
 		return (0);
-	i = ft_atoi_base(nbr, base_form);
+	i = ft_atoll_base(nbr, base_form);
 	howmany = ft_size_putnbr_base(i, base_to);
 	if (!(str = (char *)malloc(sizeof(char) * (howmany + 1))))
 		return (0);

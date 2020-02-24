@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 19:31:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/08 20:52:48 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/10 16:20:06 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int ft_index(char *str)
     while (str[i] != '%')
         i++;
     i++;
-	return (0);
+	return (i);
 }
 
 int		nbnb(long long nb)
@@ -122,9 +122,9 @@ void ft_flag_zero(char *str, to_list *flag, long long nb)
     int u;
     char *tmp;
     u = 0;
+	i = 0;
 	
     tmp = malloc(sizeof(char*) * ft_strlen(str));
-    i = ft_index(str);
     tmp = ft_substr(str, i + 1, strlen(str));
     while (!(i = ft_strrrchr(tmp, FORMAT[u])))
 		u++;

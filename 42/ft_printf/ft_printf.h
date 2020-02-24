@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 05:55:47 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/08 20:52:58 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/13 16:21:56 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct		so_list
 	struct so_list	*next;
 }					to_list;
 
-
 int 					find_format_id(char *str, va_list ap, to_list *flag);
 int						ft_int(char *str);
 char					*ft_itoa(long long n);
@@ -54,9 +53,9 @@ void					ft_putnbr_fd(int n, int fd);
 void					ft_putchar_fd(char c, int fd);
 int 					ft_unsigned_int(char *str, va_list ap, to_list *flag);
 char					*ft_u_itoa(unsigned int n);
-static unsigned int		nbnb1(unsigned int nb);
+unsigned int		nbnb1(unsigned int nb);
 int						nbnb(long long nb);
-int 					ft_pourcentage(char *str, va_list ap);
+int 					ft_pourcentage(char *str, to_list *flag, va_list ap);
 char 					*itoa_base(void const *p);
 int 					ft_p(char *str, va_list ap);
 int 					ft_hexa_caps(char *str, to_list *flag, va_list ap);
@@ -70,8 +69,16 @@ int 					find_flag(char *str, to_list *flag);
 int						ft_init_struct(to_list *flag);
 void 					ft_flag_zero1(char *s1, char *s2);
 void 					apply_flag1(char *str, to_list *flag, char *s1);
-char					*ft_strjoin(char const *s1, char const *s2);
+char					*ft_strjoin(char *s1, char *s2);
 void 					ft_flag_nbr(char *s1, to_list *flag, long long nb);
 void 					ft_flag_nbr1(char *s1, to_list *flag, char *s2);
+int ft_index(char *str);
+void flag_zero(int *i, char *str, va_list args, int *p);
+void	ft_putnbr(int nb);
+void flag_num(int *i, char *str, va_list args, int *p);
+void ft_parsing(int *i, char *str, va_list args, int *p);
+void flag_minus(int *i, char *str, va_list args, int *p);
+void	ft_putstr(char *str);
+void hexa1(va_list args, int *p);
 
 #endif

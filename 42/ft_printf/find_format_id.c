@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 06:05:53 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/08 18:38:02 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/18 13:34:03 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int find_format_id(char *str, va_list ap, to_list *flag)
 	i = 0;
 	while (str[i] != '%')
 		i++;
-	i++;
 	while (str[i])
 	{
 		if (str[i] == 's')
@@ -31,7 +30,7 @@ int find_format_id(char *str, va_list ap, to_list *flag)
 		else if (str[i] == 'u')
 			ft_unsigned_int(str, ap, flag);
 		else if (str[i] == '%')
-			ft_pourcentage(str, ap);
+			ft_pourcentage(str, flag, ap);
 		else if (str[i] == 'p')
 			ft_p(str, ap);
 		else if (str[i] == 'X' || str[i] == 'x')

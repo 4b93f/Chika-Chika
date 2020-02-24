@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pourcentage.c                                   :+:      :+:    :+:   */
+/*   ft_flag_minus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/04 14:04:27 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/10 16:29:26 by chly-huc         ###   ########.fr       */
+/*   Created: 2020/02/13 14:51:15 by chly-huc          #+#    #+#             */
+/*   Updated: 2020/02/13 15:44:23 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_pourcentage(char *str, to_list *flag, va_list ap)
+void apply_minus(va_list args, int *p, int len)
 {
-    int i;
-    char *tmp;
-    
-    i = 0;
-    apply_p();
-    return (1);
+    int count;
+    int tmp;
+    tmp = va_arg(args, int);
 }
 
-void apply_p(char *str, to_list *flag)
+void flag_minus(int *i, char *str, va_list args, int *p)
 {
-    int i;
-    char *tmp;
+    int len;
 
-    i = 0;
-    while (str[i])
-    {
-        if (str[i] == '%')
-            i++;
-        tmp = str + ft_index(str + i);
-        printf("%c", str[i]);
-        i++;
-    }
+    len = 0;
+    while (str[*i] <= '0' && str[*i] >= '9')
+        *i = *i + 1;
+    apply_minus(args, p, len);
 }
