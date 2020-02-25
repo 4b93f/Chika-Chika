@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 23:28:59 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/24 08:30:26 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/25 00:04:22 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_apply(va_list args, to_list *flag, int len)
+static int	ft_apply(to_list *flag)
 {
 	int i;
 
@@ -31,12 +31,12 @@ static int	ft_apply(va_list args, to_list *flag, int len)
 	return (i);
 }
 
-int		ft_adress(char *str, va_list args, to_list *flag)
+int		ft_adress(va_list args, to_list *flag)
 {
 	char		*tmp;
 	int			i;
 	int			len;
-	int 		x;
+	int			x;
 
 	i = 0;
 	tmp = va_arg(args, char*);
@@ -44,7 +44,7 @@ int		ft_adress(char *str, va_list args, to_list *flag)
 	tmp = !tmp ? "(null)" : tmp;
 	len = ft_strlen(tmp);
 	len < flag->PRECISION || flag->PRECISION < 0 ? flag->PRECISION = len : 0;
-	x = ft_apply(args, flag, len);
+	x = ft_apply(flag);
 	flag->PRECISION > 0 ? write(1, tmp, flag->PRECISION) : write(1, tmp, len);
 	if (flag->FLAG_MINUS > 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 13:31:45 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/24 07:24:55 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/25 00:02:06 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 
-static void	set_long_long(char c, char *str)
+static void			set_long_long(char c, char *str)
 {
 	long long i;
 
@@ -26,25 +26,25 @@ static void	set_long_long(char c, char *str)
 	str[i + 1] = '\0';
 }
 
-static void	ft_putnbr_base(long long nb, char *base, char *str)
+static void			ft_putnbr_base(long long nb, char *base, char *str)
 {
 	if (nb < 0)
 	{
 		set_long_long('-', str);
 		nb = nb * (-1);
 	}
-	if (nb < ft_strlen(base))
+	if (nb < ft_strllen(base))
 	{
 		set_long_long(base[nb], str);
 	}
 	else
 	{
-		ft_putnbr_base(nb / ft_strlen(base), base, str);
-		ft_putnbr_base(nb % ft_strlen(base), base, str);
+		ft_putnbr_base(nb / ft_strllen(base), base, str);
+		ft_putnbr_base(nb % ft_strllen(base), base, str);
 	}
 }
 
-static long long		ft_size_putnbr_base(long long nb, char *base)
+static long long	ft_size_putnbr_base(long long nb, char *base)
 {
 	long long size;
 
@@ -54,17 +54,17 @@ static long long		ft_size_putnbr_base(long long nb, char *base)
 		size++;
 		nb *= -1;
 	}
-	if (nb < ft_strlen(base))
+	if (nb < ft_strllen(base))
 		size++;
 	else
 	{
-		size = size + ft_size_putnbr_base(nb / ft_strlen(base), base);
-		size = size + ft_size_putnbr_base(nb % ft_strlen(base), base);
+		size = size + ft_size_putnbr_base(nb / ft_strllen(base), base);
+		size = size + ft_size_putnbr_base(nb % ft_strllen(base), base);
 	}
 	return (size);
 }
 
-char	*ft_convert_base(char *nbr, char *base_form, char *base_to)
+char					*ft_convert_base(char *nbr, char *base_form, char *base_to)
 {
 	long long		i;
 	char	*str;

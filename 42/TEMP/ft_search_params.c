@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 12:28:57 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/24 06:57:32 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/25 05:44:55 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	ft_search_all(char *str, int *i, to_list *flag, va_list args)
 		str[*i] == '-' ? flag->FLAG_MINUS += 1 : 0;
 		*i = *i + 1;
 	}
-	flag->FLAG_NBR += ft_width_calc(str, i, flag, args);
-	flag->WIDTH = ft_width_calc(str, i, flag, args);
+	flag->FLAG_NBR += ft_width_calc(str, i, args);
+	flag->WIDTH = ft_width_calc(str, i, args);
 	if (str[*i] == '.')
 	{
 		*i = *i + 1;
-		flag->PRECISION = ft_width_calc(str, i, flag, args);
+		flag->PRECISION = ft_width_calc(str, i, args);
 	}
 	if (flag->FLAG_NBR < 0)
 	{

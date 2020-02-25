@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 18:07:17 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/24 09:01:25 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/25 08:06:06 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdarg.h>
-# include "../libft/libft.h"
+# include "libft/libft.h"
 
 # define TRUE 1
 # define FALSE 0
@@ -38,12 +38,12 @@ typedef struct		so_list
 	struct so_list	*next;
 }					to_list;
 
-int						ft_character(char *str, va_list args, to_list *flag);
-int 					ft_string(char *str, va_list args, to_list *flag);
-int 					ft_integer(char *str, va_list args, to_list *flag, int x);
-int 					ft_adress(char *str, va_list args, to_list *flag);
-int						ft_hexa(char *str, va_list args, to_list *flag, int *i);
-int						ft_percentage(char *str, va_list args, to_list *flag, int x);
+int						ft_character(va_list args, to_list *flag);
+int 					ft_string(va_list args, to_list *flag);
+int 					ft_integer(va_list args, to_list *flag, int x);
+int 					ft_adress(va_list args, to_list *flag);
+int						ft_hexa(va_list args, to_list *flag);
+int						ft_percentage(to_list *flag, int x);
 int						ft_uint(va_list args, to_list *flag, int x);
 int						ft_init_struct(to_list *flag);
 void					ft_search_all(char *str, int *i, to_list *flag, va_list args);
@@ -54,12 +54,15 @@ char					*ft_itoll(long long n);
 long long				checkbase(char *base);
 long long				ft_atoll_base(char *str, char *base);
 long long				ft_strllen(char *str);
-static unsigned int		unbnb(unsigned int nb);
 int						mini_atoi(char *str, int *i);
-int						ft_width_calc(char *str, int *i, to_list *flag, va_list args);
+int						ft_width_calc(char *str, int *i, va_list args);
 char					*ft_convert_adress(void const *p);
 void					ft_putchar(char c);
 void					ft_putnbr(int n);
 char					*ft_u_itoa(unsigned int n);
+int						ft_hexa_caps(va_list args, to_list *flag);
+long long				nbnb(long long nb);
+int			unbnb(unsigned long long nb);
+void	ft_putunbr(unsigned long long n);
 
 #endif

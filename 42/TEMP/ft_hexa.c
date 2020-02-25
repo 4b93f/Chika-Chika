@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 02:37:35 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/24 08:34:24 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/25 08:18:41 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_apply(int fill, to_list *flag, int len)
+static int		ft_apply(int fill, to_list *flag, int len)
 {
 	int tmp;
 	int stock;
@@ -41,7 +41,7 @@ int		ft_apply(int fill, to_list *flag, int len)
 	return (i);
 }
 
-int				ft_hexa(char *str, va_list args, to_list *flag, int *i)
+int				ft_hexa(va_list args, to_list *flag)
 {
 	char		*tmp;
 	int			j;
@@ -52,6 +52,8 @@ int				ft_hexa(char *str, va_list args, to_list *flag, int *i)
 	j = 0;
 	x = 0;
 	tmp = ft_itoll(va_arg(args, unsigned long long));
+	if (ft_strchr(tmp, '0') && flag->PRECISION == 0)
+		return (0);
 	tmp = ft_convert_base(tmp, NUMBER, BASE1);
 	tmp = !tmp ? "(null)" : tmp;
 	len = ft_strlen(tmp);
@@ -59,11 +61,7 @@ int				ft_hexa(char *str, va_list args, to_list *flag, int *i)
 	len < flag->PRECISION ? flag->PRECISION = len : 0;
 	x = ft_apply(fill, flag, len);
 	write(1, tmp, len);
-	if (flag->FLAG_MINUS > 0)
-	{
-		flag->FLAG_NBR = flag->FLAG_NBR - flag->PRECISION + 1;
-		while (j++ < flag->FLAG_NBR - 1)
+	while (j++ < flag->FLAG_NBR - len && flag->FLAG_MINUS > 0)
 			x += write(1, " ", 1);
-	}
 	return (x + len);
 }

@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 06:51:28 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/24 07:34:46 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/25 00:19:03 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		mini_atoi(char *str, int *i)
 	return (res);
 }
 
-int		ft_width_calc(char *str, int *i, to_list *flag, va_list args)
+int		ft_width_calc(char *str, int *i, va_list args)
 {
 	int res;
 
@@ -54,4 +54,14 @@ int		ft_width_calc(char *str, int *i, to_list *flag, va_list args)
 		return (res);
 	}
 	return (0);
+}
+
+long long		ft_strllen(char *str)
+{
+	long long		i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

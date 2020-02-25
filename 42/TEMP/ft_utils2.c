@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 06:49:55 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/24 07:23:25 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/25 07:37:22 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,15 @@ void	ft_putnbr(int n)
 	}
 	else
 		ft_putchar(nbr + '0');
+}
+
+void	ft_putunbr(unsigned long long n)
+{
+	if (n > 9)
+	{
+		ft_putunbr(n / 10);
+		ft_putunbr(n % 10);
+	}
+	else
+		ft_putchar(n + '0');
 }

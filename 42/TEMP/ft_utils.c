@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 13:14:06 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/24 07:26:02 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/25 08:05:50 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static long long int		nbnb(long long nb)
+long long	nbnb(long long nb)
 {
 	long long len;
 
@@ -29,7 +29,7 @@ static long long int		nbnb(long long nb)
 
 char					*ft_itoll(long long n)
 {
-	long long i;
+	long long		i;
 	char			*str;
 
 	i = nbnb(n);
@@ -46,10 +46,9 @@ char					*ft_itoll(long long n)
 	return (str);
 }
 
-static unsigned int		unbnb(unsigned int nb)
+int		unbnb(unsigned long long nb)
 {
-	unsigned int len;
-
+	unsigned long long len;
 	len = 0;
 	if (nb <= 0)
 		len++;
