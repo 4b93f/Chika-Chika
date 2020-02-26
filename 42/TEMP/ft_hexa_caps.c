@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 23:18:10 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/25 08:25:02 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/26 04:20:39 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int				ft_hexa_caps(va_list args, to_list *flag)
 	tmp = ft_itoll(va_arg(args, unsigned long long));
 	if (ft_strchr(tmp, '0') && flag->PRECISION == 0)
 		return (0);
-	tmp = ft_convert_base(tmp, NUMBER, BASE1);
+	tmp = ft_convert_base(tmp, NUMBER, BASE2);
 	tmp = !tmp ? "(null)" : tmp;
 	len = ft_strlen(tmp);
 	fill = flag->PRECISION;

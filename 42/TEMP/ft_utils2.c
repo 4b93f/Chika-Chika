@@ -6,34 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 06:49:55 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/25 07:37:22 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/26 02:00:23 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-char	*ft_convert_adress(void const *p)
-{
-	unsigned long	adress;
-	char			*base;
-	char			*fin;
-	int				i;
-
-	if (!(fin = malloc(sizeof(char*) * 11)))
-		return (NULL);
-	adress = (unsigned long)p;
-
-	base = "0123456789abcdef";
-	i = 8;
-	while ((i >= 8 || adress / 16) > 0)
-	{
-		fin[i] = base[(adress % 16)];
-		adress /= 16;
-		i--;
-	}
-	fin[i] = base[(adress % 16)];
-	return (fin);
-}
 
 void	ft_putchar(char c)
 {

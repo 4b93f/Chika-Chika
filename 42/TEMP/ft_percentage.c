@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 05:07:26 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/25 00:08:25 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/26 03:33:52 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ int		ft_percentage(to_list *flag, int x)
 	}
 	if (flag->FLAG_MINUS > 0)
 	{
-		flag->FLAG_NBR = flag->FLAG_NBR - flag->PRECISION + 1;
+		write(1, "%%", 1);
 		while (i++ < flag->FLAG_NBR - 1)
 			x += write(1, &fill, 1);
 	}
-	write(1, "%%", 1);
-	return (x + i + 1);
+	else
+		write(1, "%%", 1);
+	return (x + 1);
 }

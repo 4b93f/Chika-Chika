@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 12:28:57 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/25 05:44:55 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/26 14:29:14 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_search_all(char *str, int *i, to_list *flag, va_list args)
 	{
 		*i = *i + 1;
 		flag->PRECISION = ft_width_calc(str, i, args);
+		flag->V_P = 1;
 	}
 	if (flag->FLAG_NBR < 0)
 	{
@@ -38,5 +39,6 @@ void	ft_search_all(char *str, int *i, to_list *flag, va_list args)
 		flag->FLAG_MINUS += 1;
 		flag->WIDTH *= -1;
 	}
+
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 18:07:17 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/25 08:06:06 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/26 14:28:34 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,13 @@ typedef struct		so_list
 	int FLAG_NBR;
 	int WIDTH;
 	int PRECISION;
+	int V_P;
 	struct so_list	*next;
 }					to_list;
 
 int						ft_character(va_list args, to_list *flag);
 int 					ft_string(va_list args, to_list *flag);
-int 					ft_integer(va_list args, to_list *flag, int x);
+int 					ft_integer(va_list args, to_list *flag, int x, int nb);
 int 					ft_adress(va_list args, to_list *flag);
 int						ft_hexa(va_list args, to_list *flag);
 int						ft_percentage(to_list *flag, int x);
@@ -56,7 +57,7 @@ long long				ft_atoll_base(char *str, char *base);
 long long				ft_strllen(char *str);
 int						mini_atoi(char *str, int *i);
 int						ft_width_calc(char *str, int *i, va_list args);
-char					*ft_convert_adress(void const *p);
+char	*ft_convert_adress(void *value, int base);
 void					ft_putchar(char c);
 void					ft_putnbr(int n);
 char					*ft_u_itoa(unsigned int n);

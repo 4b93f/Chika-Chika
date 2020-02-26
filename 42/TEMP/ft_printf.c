@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 18:05:23 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/25 08:50:45 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/26 15:05:04 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ int		ft_printf(const char *str, ...)
 	va_end(args);
 	return (ret);
 }
-
+/*
 int main()
 {
-	printf("\nRet MOI = %d\n", ft_printf("%1.4s et %-6.8s et %4.2s", "tuuu", "12345", "hu"));
-	printf("\nRet LUI = %d\n", printf("%1.4s et %-6.8s et %4.2s", "tuuu", "12345", "hu"));
+	printf("Ret = %d\n", ft_printf("%-5.0i", 0));
+	printf("Ret = %d\n", printf("%-5.0i", 0));
 }
+*/
