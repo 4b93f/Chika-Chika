@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 04:39:39 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/29 02:52:20 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/29 08:23:25 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ int nb_space, to_list *flag, int nb0)
 	while (nb0-- > 0)
 		i += write(1, "0", 1);
 	if (!(flag->V_P == 1 && flag->PRECISION == 0 && nb == 0 && nb0 <= 0))
+	{
 		ft_putunbr(nb);
+		i += unbnb(nb);
+	}
 	if (flag->FLAG_MINUS > 0)
 		while (nb_space-- > 0)
 			i += write(1, " ", 1);
@@ -82,7 +85,5 @@ int				ft_uint(va_list args, to_list *flag, int nb_space)
 		-(flag->PRECISION) : flag->PRECISION;
 	flag->PRECISION == 0 && flag->V_P == 1 && nb == 0 ? nb_space += 1 : 0;
 	i += apply(nb, nb_space, flag, nb0);
-	if (nb == 0)
-		return (i);
-	return (i + to_print);
+	return (i);
 }
