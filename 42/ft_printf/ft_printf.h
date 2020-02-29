@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/01 05:55:47 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/13 16:21:56 by chly-huc         ###   ########.fr       */
+/*   Created: 2020/02/14 18:07:17 by chly-huc          #+#    #+#             */
+/*   Updated: 2020/02/29 07:55:35 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,16 @@
 # define FT_PRINTF_H
 # include <unistd.h>
 # include <stdlib.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <string.h>
-# include <limits.h>
-#include <stdio.h>
-#include <stdarg.h>
-#include "ft_printf.h"
+# include <stdio.h>
+# include <stdarg.h>
+# include "libft/libft.h"
 
 # define TRUE 1
 # define FALSE 0
 # define BASE1 "0123456789abcdef"
 # define BASE2 "0123456789ABCDEF"
-# define FLAGS "-+ 0123456789"
+# define NUMBER "0123456789"
+# define FLAGS "0-+ "
 # define FORMAT "cspdiuxX%%"
 
 typedef struct		so_list
@@ -37,48 +33,38 @@ typedef struct		so_list
 	int FLAG_DOT;
 	int FLAG_STARS;
 	int FLAG_NBR;
+	int WIDTH;
+	int PRECISION;
+	int V_P;
 	struct so_list	*next;
 }					to_list;
 
-int 					find_format_id(char *str, va_list ap, to_list *flag);
-int						ft_int(char *str);
-char					*ft_itoa(long long n);
-void					ft_string(char *str, to_list *flag, va_list ap);
-void					ft_putstr_fd(char *s, int fd);
-char					*ft_strdup(const char *s);
-size_t					ft_strlen(const char *str);
-int						ft_integer(char *str, va_list ap, to_list *flag);
-int     				ft_char(char *str, to_list *flag, va_list ap);
-void					ft_putnbr_fd(int n, int fd);
-void					ft_putchar_fd(char c, int fd);
-int 					ft_unsigned_int(char *str, va_list ap, to_list *flag);
-char					*ft_u_itoa(unsigned int n);
-unsigned int		nbnb1(unsigned int nb);
-int						nbnb(long long nb);
-int 					ft_pourcentage(char *str, to_list *flag, va_list ap);
-char 					*itoa_base(void const *p);
-int 					ft_p(char *str, va_list ap);
-int 					ft_hexa_caps(char *str, to_list *flag, va_list ap);
-int 					ft_hexa_nocaps(char *str, to_list *flag, va_list ap);
-char					*ft_convert_base(char *nbr, char *base_form, char *base_to);
-void 					apply_flag(char *str, to_list *flag, long long i);
-void 					ft_flag(char *str, to_list *flag);
-void 					ft_flag_zero(char *str, to_list *flag, long long nb);
-int						ft_strrrchr(const char *s, int c);
-int 					find_flag(char *str, to_list *flag);
+int						ft_character(va_list args, to_list *flag);
+int 					ft_string(va_list args, to_list *flag, int x);
+int 					ft_integer(va_list args, to_list *flag, int x, long long nb);
+int 					ft_adress(va_list args, to_list *flag);
+int						ft_hexa(va_list args, to_list *flag, int x);
+int						ft_percentage(to_list *flag, int x);
+int				ft_uint(va_list args, to_list *flag, int nb_space);
 int						ft_init_struct(to_list *flag);
-void 					ft_flag_zero1(char *s1, char *s2);
-void 					apply_flag1(char *str, to_list *flag, char *s1);
-char					*ft_strjoin(char *s1, char *s2);
-void 					ft_flag_nbr(char *s1, to_list *flag, long long nb);
-void 					ft_flag_nbr1(char *s1, to_list *flag, char *s2);
-int ft_index(char *str);
-void flag_zero(int *i, char *str, va_list args, int *p);
-void	ft_putnbr(int nb);
-void flag_num(int *i, char *str, va_list args, int *p);
-void ft_parsing(int *i, char *str, va_list args, int *p);
-void flag_minus(int *i, char *str, va_list args, int *p);
-void	ft_putstr(char *str);
-void hexa1(va_list args, int *p);
+void					ft_search_all(char *str, int *i, to_list *flag, va_list args);
+int 					ft_find_specifier(char *str, int *i, to_list *flag, va_list args);
+int						ft_init_struct(to_list *flag);
+char					*ft_convert_base(char *nbr, char *base_form, char *base_to);
+char					*ft_itoll(long long n);
+long long				checkbase(char *base);
+long long				ft_atoll_base(char *str, char *base);
+long long				ft_strllen(char *str);
+int						mini_atoi(char *str, int *i);
+int						ft_width_calc(char *str, int *i, va_list args);
+void					ft_putchar(char c);
+void					ft_putnbr(long long n);
+char					*ft_u_itoa(unsigned int n);
+int						ft_hexa_caps(va_list args, to_list *flag, int i);
+long long				nbnb(long long nb);
+int			unbnb(unsigned long long nb);
+void	ft_putunbr(unsigned long long n);
+long	ft_power(long n, long pow);
+char	*ft_strrev(char *str);
 
 #endif

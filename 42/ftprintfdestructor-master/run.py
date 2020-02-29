@@ -4,7 +4,7 @@ import inputs
 import random
 
 N = 1000
-M = 20
+M = 10
 COMP = "gcc -Wall -Wextra -Werror -g3 -fsanitize=address "
 
 tests = []

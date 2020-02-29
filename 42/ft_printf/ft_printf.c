@@ -5,61 +5,45 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/08 16:39:07 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/10 16:42:24 by chly-huc         ###   ########.fr       */
+/*   Created: 2020/02/14 18:05:23 by chly-huc          #+#    #+#             */
+/*   Updated: 2020/02/29 08:05:43 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <limits.h>
 
-int		ft_init_struct(to_list *flag)
+int		error(to_list *flag)
 {
-	flag->FLAG_ZERO = 0;
-	flag->FLAG_MINUS = 0;
-	flag->FLAG_DOT = 0;
-	flag->FLAG_STARS = 0;
-	flag->FLAG_NBR = 0;
-	return (0);
+	ft_init_struct(flag);
+	return (1);
 }
 
 int		ft_printf(const char *str, ...)
 {
-	va_list ap;
-	int		nbarg;
-	int		i;
-	to_list *flag;
-	my_struct *index;
+	va_list		args;
+	to_list		*flag;
+	int			i;
+	int			ret;
 
 	i = 0;
-	flag = malloc(sizeof(to_list));
-	index = malloc(sizeof(my_struct));
-	ft_init_struct(flag);
-	nbarg = 0;
-	if (!str)
-		return (0);
-	va_start(ap, str);
+	ret = 0;
+	if (!(flag = malloc(sizeof(to_list))))
+		return (-1);
+	if (!str || !error(flag))
+		return (-1);
+	va_start(args, str);
 	while (str[i])
 	{
 		if (str[i] == '%')
 		{
-			find_flag((char*)str, flag);
-			find_format_id((char*)str, ap, flag);
+			ft_search_all((char*)str, &i, flag, args);
+			ret += ft_find_specifier((char*)str, &i, flag, args);
 		}
 		else
-			printf("%c", str[i]);
+			ret += write(1, &str[i], 1);
 		i++;
 	}
-	va_end(ap);
-	return (1);
-}
-
-int main()
-{
-	int i = 500000;
-	char str[] = "CA";
-	char c = 'X';
-	char const *p = "hello";
-
-	printf("%90u\n", i);
-	ft_printf("%90u", i);
+	va_end(args);
+	return (ret);
 }

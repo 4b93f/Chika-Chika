@@ -5,35 +5,84 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/05 13:55:46 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/06 17:05:42 by chly-huc         ###   ########.fr       */
+/*   Created: 2020/02/24 02:37:35 by chly-huc          #+#    #+#             */
+/*   Updated: 2020/02/29 02:42:46 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_hexa_nocaps(char *str, to_list *flag, va_list ap)
+static int		ft_check2(int *nb_space, to_list *flag, int to_print)
 {
-    char *nbr;
+	int nb0;
 
-    int i;
-    i = va_arg(ap, int);
-    nbr = ft_itoa(va_arg(ap, int));
-    nbr = ft_convert_base(nbr, "0123456789", BASE1);
-    apply_flag1(str, flag, nbr);
-    printf("%s", nbr);
-    return (1);
+	nb0 = 0;
+	*nb_space = flag->FLAG_NBR - flag->PRECISION;
+	nb0 = flag->PRECISION - to_print;
+	return (nb0);
 }
 
-int ft_hexa_caps(char *str, to_list *flag, va_list ap)
+static int		ft_check(int *nb_space, to_list *flag, int to_print)
 {
-    char *nbr;
-    unsigned long long i;
+	int nb0;
 
-    i = va_arg(ap, unsigned long long);
-    nbr = ft_itoa(i);
-    nbr = ft_convert_base(nbr, "0123456789", BASE2);
-    apply_flag1(str, flag, nbr);
-    printf("%s", nbr);
-    return (1);
+	nb0 = 0;
+	if (flag->PRECISION > 0 && flag->PRECISION >= flag->FLAG_NBR)
+	{
+		nb0 = flag->FLAG_NBR - to_print;
+		if (flag->PRECISION >= flag->FLAG_NBR)
+			nb0 = flag->PRECISION - to_print;
+	}
+	else if (flag->PRECISION > to_print && flag->FLAG_NBR >
+	flag->PRECISION && flag->PRECISION > 0)
+	{
+		nb0 = ft_check2(nb_space, flag, to_print);
+	}
+	else
+		*nb_space = flag->FLAG_NBR - to_print;
+	if (flag->FLAG_NBR > 0 && flag->PRECISION == 0)
+		*nb_space = flag->FLAG_NBR;
+	return (nb0);
+}
+
+static int		apply(char *str, int nb_space, to_list *flag, int nb0)
+{
+	int i;
+
+	i = 0;
+	if (flag->FLAG_MINUS == 0)
+		while (nb_space-- > 0)
+			i += write(1, " ", 1);
+	while (nb0-- > 0)
+		i += write(1, "0", 1);
+	if (!(flag->V_P == 1 && flag->PRECISION == 0))
+		i += write(1, str, ft_strlen(str));
+	if (flag->FLAG_MINUS > 0)
+		while (nb_space-- > 0)
+			i += write(1, " ", 1);
+	return (i);
+}
+
+int				ft_hexa(va_list args, to_list *flag, int i)
+{
+	int			to_print;
+	int			nb_space;
+	char		*str;
+	int			nb0;
+
+	nb_space = 0;
+	str = ft_itoll(va_arg(args, unsigned long long));
+	str = ft_convert_base(str, NUMBER, BASE1);
+	str = !str ? "(null)" : str;
+	to_print = ft_strlen(str);
+	nb0 = ft_check(&nb_space, flag, to_print);
+	if (flag->FLAG_ZERO > 0 && flag->PRECISION < 0)
+	{
+		nb0 = flag->FLAG_NBR - to_print;
+		nb_space = 0;
+	}
+	flag->PRECISION = flag->PRECISION < 0 ?
+		-(flag->PRECISION) : flag->PRECISION;
+	i += apply(str, nb_space, flag, nb0);
+	return (i);
 }

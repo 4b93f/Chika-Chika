@@ -5,25 +5,96 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/01 06:34:36 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/08 20:24:32 by chly-huc         ###   ########.fr       */
+/*   Created: 2020/02/20 14:32:27 by chly-huc          #+#    #+#             */
+/*   Updated: 2020/02/29 07:56:42 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-
-int		ft_integer(char *str, va_list ap, to_list *flag)
+static int		ft_check2(long long nb, int *nb_space,
+to_list *flag, int to_print)
 {
-	char *buf;
-	char *tmp;
-	int i;
-	i = va_arg(ap, int);
-	buf = ft_itoa(i);
-	apply_flag(str, flag, i);
-	if (i < 0)
-		printf("%s\n", (buf + 1));
+	int nb0;
+
+	nb0 = 0;
+	*nb_space = flag->FLAG_NBR - flag->PRECISION;
+	if (nb < 0)
+	{
+		nb0 = flag->PRECISION - to_print + 1;
+		*nb_space = *nb_space - 1;
+	}
 	else
-		printf("%s\n", (buf));
-	return (1);
+		nb0 = flag->PRECISION - to_print;
+	return (nb0);
+}
+
+static int		ft_check(long long nb,
+int *nb_space, to_list *flag, int to_print)
+{
+	int nb0;
+
+	nb0 = 0;
+	if (flag->PRECISION > 0 && flag->PRECISION >= flag->FLAG_NBR)
+	{
+		nb0 = flag->FLAG_NBR - to_print;
+		if (flag->PRECISION >= flag->FLAG_NBR)
+			nb0 = flag->PRECISION - to_print;
+		if (nb < 0)
+			nb0++;
+	}
+	else if (flag->PRECISION > to_print && flag->FLAG_NBR >
+	flag->PRECISION && flag->PRECISION > 0)
+	{
+		nb0 = ft_check2(nb, nb_space, flag, to_print);
+	}
+	else
+		*nb_space = flag->FLAG_NBR - to_print;
+	return (nb0);
+}
+
+static int		apply(long long nb, int nb_space, to_list *flag, int nb0)
+{
+	int i;
+
+	i = 0;
+	if (flag->FLAG_MINUS == 0)
+		while (nb_space-- > 0)
+			i += write(1, " ", 1);
+	if (nb < 0)
+		write(1, "-", 1);
+	while (nb0-- > 0)
+		i += write(1, "0", 1);
+	if (!(flag->V_P == 1 && flag->PRECISION == 0 && nb == 0 && nb0 <= 0))
+	{
+		nb < 0 ? ft_putnbr(-nb) : ft_putnbr(nb);
+		i += nbnb(nb);
+	}
+	if (flag->FLAG_MINUS > 0)
+		while (nb_space-- > 0)
+			i += write(1, " ", 1);
+	return (i);
+}
+
+int				ft_integer(va_list args,
+to_list *flag, int nb_space, long long nb)
+{
+	int i;
+	int nb0;
+	int to_print;
+
+	nb = (long long)va_arg(args, int);
+	i = 0;
+	to_print = nbnb(nb);
+	nb0 = ft_check(nb, &nb_space, flag, to_print);
+	if (flag->FLAG_ZERO > 0 && flag->PRECISION < 0)
+	{
+		nb0 = flag->FLAG_NBR - to_print;
+		nb_space = 0;
+	}
+	flag->PRECISION = flag->PRECISION < 0 ?
+		-(flag->PRECISION) : flag->PRECISION;
+	flag->PRECISION == 0 && flag->V_P == 1 && nb == 0 ? nb_space += 1 : 0;
+	i += apply(nb, nb_space, flag, nb0);
+	return (i);
 }
