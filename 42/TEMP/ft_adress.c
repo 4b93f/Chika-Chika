@@ -6,40 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 23:28:59 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/26 03:07:06 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/29 02:44:32 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-long	ft_power(long n, long pow)
-{
-	if (pow == 0)
-		return (1);
-	return (n * ft_power(n, pow - 1));
-}
-
-char	*ft_strrev(char *str)
-{
-	int		length;
-	int		i;
-	char	temp;
-
-	length = 0;
-	while (str[length])
-		length++;
-	i = 0;
-	while (i < (length / 2))
-	{
-		temp = str[i];
-		str[i] = str[length - i - 1];
-		str[length - i - 1] = temp;
-		i++;
-	}
-	return (str);
-}
-
-int		check(int base, long *nb, int *sign, long *len)
+static int		check(int base, long *nb, int *sign, long *len)
 {
 	if (base < 2 || base > 16)
 		return (0);
@@ -56,7 +29,7 @@ int		check(int base, long *nb, int *sign, long *len)
 	return (1);
 }
 
-char	*ft_convert_adress(void *value, int base)
+static char		*ft_convert_adress(void *value, int base)
 {
 	long	nb;
 	long	len;
@@ -82,7 +55,7 @@ char	*ft_convert_adress(void *value, int base)
 	return (ft_strrev(result));
 }
 
-static int	ft_apply(to_list *flag, int len)
+static int		ft_apply(to_list *flag, int len)
 {
 	int i;
 
@@ -102,7 +75,7 @@ static int	ft_apply(to_list *flag, int len)
 	return (i);
 }
 
-int		ft_adress(va_list args, to_list *flag)
+int				ft_adress(va_list args, to_list *flag)
 {
 	void		*tmp;
 	int			x;

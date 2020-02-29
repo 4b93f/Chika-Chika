@@ -6,63 +6,50 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 12:15:37 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/26 07:02:31 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/29 02:49:38 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int		ft_apply(to_list *flag, int len)
+static int		ft_check(to_list *flag, int *to_print)
 {
-	int i;
+	int nb_space;
 
-	i = 0;
-	if (flag->PRECISION < 0)
-		flag->FLAG_NBR -= flag->FLAG_MINUS > 0 ? len - 1 : len;
-	if (flag->FLAG_NBR > 0 && flag->FLAG_MINUS == 0)
+	nb_space = 0;
+	if (flag->PRECISION > 0)
 	{
-		flag->FLAG_NBR = flag->PRECISION > 0 ? flag->FLAG_NBR -
-		flag->PRECISION : flag->FLAG_NBR;
-		while (i < flag->FLAG_NBR)
-		{
-			write(1, " ", 1);
-			i++;
-		}
+		if (flag->PRECISION < *to_print)
+			*to_print = flag->PRECISION;
+		if (flag->FLAG_NBR > *to_print)
+			nb_space = flag->FLAG_NBR - *to_print;
 	}
-	return (i);
+	else
+		nb_space = flag->FLAG_NBR - *to_print;
+	if (flag->FLAG_NBR > 0 && flag->PRECISION == 0)
+		nb_space = flag->FLAG_NBR;
+	return (nb_space);
 }
 
-int		ft_string(va_list args, to_list *flag)
+int				ft_string(va_list args, to_list *flag, int i)
 {
-	char		*tmp;
-	int			i;
-	int			len;
-	int			x;
+	int			to_print;
+	int			nb_space;
+	char		*str;
 
-	i = 0;
-	x = 0;
-	tmp = va_arg(args, char*);
-	tmp = !tmp ? "(null)" : tmp;
-	len = ft_strlen(tmp);
-	if (flag->FLAG_NBR <= len && flag->PRECISION < 0)
-	{
-		ft_putstr_fd(tmp, 1);
-		return (len);
-	}
-	flag->PRECISION > len ? flag->PRECISION = len : 0;
-	x = ft_apply(flag, len);
-	if (flag->PRECISION == 0)
-		return (flag->FLAG_NBR);
-	flag->PRECISION > 0 ? write(1, tmp, flag->PRECISION) : write(1, tmp, len);
+	nb_space = 0;
+	str = va_arg(args, char*);
+	str = !str ? "(null)" : str;
+	to_print = ft_strlen(str);
+	nb_space = ft_check(flag, &to_print);
+	if (flag->FLAG_MINUS == 0)
+		while (nb_space-- > 0)
+			i += write(1, " ", 1);
+	if (!(flag->V_P == 1 && flag->PRECISION == 0))
+		write(1, str, to_print);
+	i += to_print;
 	if (flag->FLAG_MINUS > 0)
-	{
-		flag->FLAG_NBR = flag->PRECISION > 0 ? flag->FLAG_NBR -
-		flag->PRECISION : flag->FLAG_NBR - 1;
-		while (i < flag->FLAG_NBR)
-		{
-			x += write(1, " ", 1);
-			i++;
-		}
-	}
-	return (flag->PRECISION > 0 ? x + flag->PRECISION : x + len);
+		while (nb_space-- > 0)
+			i += write(1, " ", 1);
+	return (i);
 }

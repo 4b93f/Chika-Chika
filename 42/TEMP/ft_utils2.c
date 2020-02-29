@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 06:49:55 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/26 02:00:23 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/29 02:49:46 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,31 @@ void	ft_putunbr(unsigned long long n)
 	}
 	else
 		ft_putchar(n + '0');
+}
+
+long	ft_power(long n, long pow)
+{
+	if (pow == 0)
+		return (1);
+	return (n * ft_power(n, pow - 1));
+}
+
+char	*ft_strrev(char *str)
+{
+	int		length;
+	int		i;
+	char	temp;
+
+	length = 0;
+	while (str[length])
+		length++;
+	i = 0;
+	while (i < (length / 2))
+	{
+		temp = str[i];
+		str[i] = str[length - i - 1];
+		str[length - i - 1] = temp;
+		i++;
+	}
+	return (str);
 }

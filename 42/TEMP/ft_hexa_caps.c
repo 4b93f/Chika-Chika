@@ -6,62 +6,83 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 23:18:10 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/26 04:20:39 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/29 02:43:09 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int		ft_apply(int fill, to_list *flag, int len)
+static int		ft_check2(int *nb_space, to_list *flag, int to_print)
 {
-	int tmp;
-	int stock;
+	int nb0;
+
+	nb0 = 0;
+	*nb_space = flag->FLAG_NBR - flag->PRECISION;
+	nb0 = flag->PRECISION - to_print;
+	return (nb0);
+}
+
+static int		ft_check(int *nb_space, to_list *flag, int to_print)
+{
+	int nb0;
+
+	nb0 = 0;
+	if (flag->PRECISION > 0 && flag->PRECISION >= flag->FLAG_NBR)
+	{
+		nb0 = flag->FLAG_NBR - to_print;
+		if (flag->PRECISION >= flag->FLAG_NBR)
+			nb0 = flag->PRECISION - to_print;
+	}
+	else if (flag->PRECISION > to_print && flag->FLAG_NBR >
+	flag->PRECISION && flag->PRECISION > 0)
+	{
+		nb0 = ft_check2(nb_space, flag, to_print);
+	}
+	else
+		*nb_space = flag->FLAG_NBR - to_print;
+	if (flag->FLAG_NBR > 0 && flag->PRECISION == 0)
+		*nb_space = flag->FLAG_NBR;
+	return (nb0);
+}
+
+static int		apply(char *str, int nb_space, to_list *flag, int nb0)
+{
 	int i;
 
 	i = 0;
-	tmp = fill;
-	flag->FLAG_ZERO > 0 ? stock = '0' : 0;
-	flag->FLAG_ZERO == 0 ? stock = ' ' : 0;
-	if (tmp == 1)
-		tmp = tmp + len - 1;
-	if (flag->FLAG_NBR > 0 && flag->FLAG_MINUS == 0 && flag->PRECISION != 0)
-	{
-		tmp == 0 ? flag->FLAG_NBR = flag->FLAG_NBR - 1 : 0;
-		tmp > 1 ? flag->FLAG_NBR = flag->FLAG_NBR - tmp - 1 : 0;
-		tmp < 1 ? flag->FLAG_NBR = flag->FLAG_NBR - len - 1 : 0;
-		while (i < flag->FLAG_NBR + 1)
-		{
-			write(1, &stock, 1);
-			i = i + 1;
-		}
-	}
-	if (fill > len)
-		while (fill-- > len)
-			i += write(1, "0", 1);
+	if (flag->FLAG_MINUS == 0)
+		while (nb_space-- > 0)
+			i += write(1, " ", 1);
+	while (nb0-- > 0)
+		i += write(1, "0", 1);
+	if (!(flag->V_P == 1 && flag->PRECISION == 0))
+		i += write(1, str, ft_strlen(str));
+	if (flag->FLAG_MINUS > 0)
+		while (nb_space-- > 0)
+			i += write(1, " ", 1);
 	return (i);
 }
 
-int				ft_hexa_caps(va_list args, to_list *flag)
+int				ft_hexa_caps(va_list args, to_list *flag, int i)
 {
-	char		*tmp;
-	int			j;
-	int			len;
-	int			fill;
-	int			x;
+	int			to_print;
+	int			nb_space;
+	char		*str;
+	int			nb0;
 
-	j = 0;
-	x = 0;
-	tmp = ft_itoll(va_arg(args, unsigned long long));
-	if (ft_strchr(tmp, '0') && flag->PRECISION == 0)
-		return (0);
-	tmp = ft_convert_base(tmp, NUMBER, BASE2);
-	tmp = !tmp ? "(null)" : tmp;
-	len = ft_strlen(tmp);
-	fill = flag->PRECISION;
-	len < flag->PRECISION ? flag->PRECISION = len : 0;
-	x = ft_apply(fill, flag, len);
-	write(1, tmp, len);
-	while (j++ < flag->FLAG_NBR - len && flag->FLAG_MINUS > 0)
-		x += write(1, " ", 1);
-	return (x + len);
+	nb_space = 0;
+	str = ft_itoll(va_arg(args, unsigned long long));
+	str = ft_convert_base(str, NUMBER, BASE2);
+	str = !str ? "(null)" : str;
+	to_print = ft_strlen(str);
+	nb0 = ft_check(&nb_space, flag, to_print);
+	if (flag->FLAG_ZERO > 0 && flag->PRECISION < 0)
+	{
+		nb0 = flag->FLAG_NBR - to_print;
+		nb_space = 0;
+	}
+	flag->PRECISION = flag->PRECISION < 0 ?
+		-(flag->PRECISION) : flag->PRECISION;
+	i += apply(str, nb_space, flag, nb0);
+	return (i);
 }

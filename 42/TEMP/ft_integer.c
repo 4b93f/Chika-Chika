@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 14:32:27 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/26 15:24:52 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/29 01:03:43 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static int		ft_check(int nb, int *nb_space, to_list *flag, int to_print)
 static int		apply(int nb, int nb_space, to_list *flag, int nb0)
 {
 	int i;
-	int trash;
 
 	i = 0;
 	if (flag->FLAG_MINUS == 0)
@@ -64,9 +63,7 @@ static int		apply(int nb, int nb_space, to_list *flag, int nb0)
 		i += write(1, "-", 1);
 	while (nb0-- > 0)
 		i += write(1, "0", 1);
-	if (flag->V_P == 1 && flag->PRECISION == 0 && nb == 0 && nb0 <= 0)
-		(void)trash;
-	else
+	if (!(flag->V_P == 1 && flag->PRECISION == 0 && nb == 0 && nb0 <= 0))
 		nb < 0 ? ft_putnbr(-nb) : ft_putnbr(nb);
 	if (flag->FLAG_MINUS > 0)
 		while (nb_space-- > 0)

@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 06:51:28 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/26 14:28:49 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/29 02:50:35 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_init_struct(to_list *flag)
+int				ft_init_struct(to_list *flag)
 {
 	flag->FLAG_ZERO = 0;
 	flag->FLAG_MINUS = 0;
@@ -25,7 +25,7 @@ int		ft_init_struct(to_list *flag)
 	return (1);
 }
 
-int		mini_atoi(char *str, int *i)
+int				mini_atoi(char *str, int *i)
 {
 	int res;
 
@@ -40,7 +40,7 @@ int		mini_atoi(char *str, int *i)
 	return (res);
 }
 
-int		ft_width_calc(char *str, int *i, va_list args)
+int				ft_width_calc(char *str, int *i, va_list args)
 {
 	int res;
 

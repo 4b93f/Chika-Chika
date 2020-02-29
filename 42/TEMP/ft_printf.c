@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 18:05:23 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/26 15:05:04 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/29 02:45:27 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,3 @@ int		ft_printf(const char *str, ...)
 	va_end(args);
 	return (ret);
 }
-/*
-int main()
-{
-	printf("Ret = %d\n", ft_printf("%-5.0i", 0));
-	printf("Ret = %d\n", printf("%-5.0i", 0));
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 13:31:45 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/25 00:02:06 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/29 02:40:58 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ static long long	ft_size_putnbr_base(long long nb, char *base)
 	return (size);
 }
 
-char					*ft_convert_base(char *nbr, char *base_form, char *base_to)
+char				*ft_convert_base(char *nbr, char *base_form, char *base_to)
 {
 	long long		i;
-	char	*str;
+	char			*str;
 	long long		howmany;
 
 	if (checkbase(base_form) == 0 || checkbase(base_to) == 0)
