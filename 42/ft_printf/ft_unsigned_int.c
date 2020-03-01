@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 04:39:39 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/29 08:23:25 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/03/01 08:36:30 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int				ft_uint(va_list args, to_list *flag, int nb_space)
 	int					to_print;
 	unsigned long long	nb;
 
-	nb = va_arg(args, long long);
+	nb = va_arg(args, unsigned long long);
 	i = 0;
 	to_print = unbnb(nb);
 	nb0 = ft_check(&nb_space, flag, to_print);
@@ -80,6 +80,13 @@ int				ft_uint(va_list args, to_list *flag, int nb_space)
 	{
 		nb0 = flag->FLAG_NBR - to_print;
 		nb_space = 0;
+		flag->PRECISION = flag->PRECISION < 0 ?
+			-(flag->PRECISION) : flag->PRECISION;
+		if (flag->FLAG_MINUS > 0)
+		{
+			nb_space = nb0;
+			nb0 = 0;
+		}
 	}
 	flag->PRECISION = flag->PRECISION < 0 ?
 		-(flag->PRECISION) : flag->PRECISION;

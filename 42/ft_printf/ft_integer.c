@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 14:32:27 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/29 07:56:42 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/03/01 07:24:47 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,9 @@ int *nb_space, to_list *flag, int to_print)
 		if (nb < 0)
 			nb0++;
 	}
-	else if (flag->PRECISION > to_print && flag->FLAG_NBR >
+	else if (flag->PRECISION >= to_print && flag->FLAG_NBR >
 	flag->PRECISION && flag->PRECISION > 0)
-	{
 		nb0 = ft_check2(nb, nb_space, flag, to_print);
-	}
 	else
 		*nb_space = flag->FLAG_NBR - to_print;
 	return (nb0);
@@ -87,11 +85,26 @@ to_list *flag, int nb_space, long long nb)
 	i = 0;
 	to_print = nbnb(nb);
 	nb0 = ft_check(nb, &nb_space, flag, to_print);
+	//printf("flag->NBR = %d\n", flag->FLAG_NBR);
+	//printf("flag->PRECI = %d\n", flag->PRECISION);
+	//printf("i = %d\n", i);
+	//printf("Flag->MINUS = %d\n", flag->FLAG_MINUS);
+	//printf("to_print = %d\n", to_print);
+	//printf("flagneg = %d\n", flag->PRECI_NEG);
 	if (flag->FLAG_ZERO > 0 && flag->PRECISION < 0)
 	{
 		nb0 = flag->FLAG_NBR - to_print;
 		nb_space = 0;
+		flag->PRECISION = flag->PRECISION < 0 ?
+			-(flag->PRECISION) : flag->PRECISION;
+		if (flag->FLAG_MINUS > 0)
+		{
+			nb_space = nb0;
+			nb0 = 0;
+		}
 	}
+	//printf("nb0 = %d\n", nb0);
+	//printf("nb_space = %d\n", nb_space);
 	flag->PRECISION = flag->PRECISION < 0 ?
 		-(flag->PRECISION) : flag->PRECISION;
 	flag->PRECISION == 0 && flag->V_P == 1 && nb == 0 ? nb_space += 1 : 0;
