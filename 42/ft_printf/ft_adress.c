@@ -6,53 +6,38 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 23:28:59 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/29 02:44:32 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/03/01 07:54:42 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int		check(int base, long *nb, int *sign, long *len)
+static char		*ft_convert_adress(void *value)
 {
-	if (base < 2 || base > 16)
-		return (0);
-	if (base != 10 && *nb < 0)
-		return (0);
-	if (base == 10 && *nb < 0)
-	{
-		*sign = -1;
-		*nb = -(*nb);
-	}
-	else
-		*sign = 1;
-	*len = 1;
-	return (1);
-}
+	unsigned long long nb;
+	unsigned long long div;
+	char c;
+	int i;
+	char *str;
 
-static char		*ft_convert_adress(void *value, int base)
-{
-	long	nb;
-	long	len;
-	char	*result;
-	int		sign;
-	int		i;
-
-	nb = (long)value;
-	if (!check(base, &nb, &sign, &len))
-		return (NULL);
-	while (ft_power(base, len) <= nb)
-		len++;
-	if (!(result = malloc(sizeof(char) * (len + 2))))
-		return (NULL);
-	i = -1;
-	while (++i < len)
+	i = 0;
+	nb = (unsigned long long)value;
+	str = malloc(sizeof(char*) * (unbnb(nb)));
+	div = 16;
+	while (nb / div && div * 16)
+		div *= 16;
+	if (!(nb / div))
+		div /= 16;
+	while (div)
 	{
-		result[i] = (base <= 10 || (base > 10 && (nb % base) < 10))
-			? (nb % base) + 48 : (nb % base) - 10 + 'a';
-		nb /= base;
+		c = (nb / div < 10) ? nb / div + '0' : nb / div + 'a' - 10;
+		str[i] = c;
+		i++;
+		nb %= div;
+		div /= 16;
 	}
-	result[i] = '\0';
-	return (ft_strrev(result));
+	str[i] = '\0';
+	return (str);
 }
 
 static int		ft_apply(to_list *flag, int len)
@@ -84,13 +69,12 @@ int				ft_adress(va_list args, to_list *flag)
 	i = 0;
 	x = 0;
 	tmp = va_arg(args, void*);
-	tmp = ft_strjoin("0x", ft_convert_adress(tmp, 16));
+	tmp = ft_strjoin("0x", ft_convert_adress(tmp));
 	x += ft_apply(flag, ft_strlen(tmp));
 	ft_putstr_fd(tmp, 1);
-	i += ft_strlen(tmp);
 	if (flag->FLAG_MINUS > 0)
 	{
-		while (i++ < flag->FLAG_NBR)
+		while (i++ < flag->FLAG_NBR - (int)ft_strlen(tmp) && flag->FLAG_NBR > (int)ft_strlen(tmp))
 			x += write(1, " ", 1);
 	}
 	return (x + ft_strlen(tmp));

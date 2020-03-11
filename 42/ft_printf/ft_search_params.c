@@ -6,7 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 12:28:57 by chly-huc          #+#    #+#             */
+<<<<<<< HEAD:42/ft_printf/ft_search_params.c
 /*   Updated: 2020/02/29 03:01:20 by chly-huc         ###   ########.fr       */
+=======
+/*   Updated: 2020/03/01 09:23:59 by chly-huc         ###   ########.fr       */
+>>>>>>> f7653d0aa2f48bba2bdeabb371e5ddf9149e5e90:42/TEMP/ft_search_params.c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +32,7 @@ int		width_and_preci(to_list *flag, va_list args, char *str, int i)
 void	ft_search_all(char *str, int *i, to_list *flag, va_list args)
 {
 	*i = *i + 1;
-	while (str[*i] == '-' || str[*i] == '0' || str[*i] == '#' || str[*i] == '+')
+	while (str[*i] == '-' || str[*i] == '0')
 	{
 		str[*i] == '0' ? flag->FLAG_ZERO += 1 : 0;
 		str[*i] == '-' ? flag->FLAG_MINUS += 1 : 0;
@@ -39,6 +43,7 @@ void	ft_search_all(char *str, int *i, to_list *flag, va_list args)
 	{
 		flag->FLAG_MINUS += 1;
 		flag->FLAG_NBR *= -1;
+		flag->PRECI_NEG = 1;
 	}
 	if (flag->WIDTH < 0)
 	{
