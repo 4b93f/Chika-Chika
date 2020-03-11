@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 02:10:35 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/01/14 02:18:56 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/26 13:10:23 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,19 +92,3 @@ char			**ft_split(char const *str, char charset)
 /*
 ** Split une chaine de caractère avec le caractére "c"
 */
-
-int main()
-{
-	char **str;
-	char oh[] = "oui bonjour la site";
-	char c = ' ';
-	int i;
-
-	i = 0;
-	str = ft_split(oh, c);
-	while(str[i])
-	{
-		printf("%s\n", str[i]);
-		i++;
-	}	
-}

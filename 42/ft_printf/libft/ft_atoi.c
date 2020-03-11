@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 15:20:02 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/14 16:45:04 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/02/08 16:45:39 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,3 @@ int		ft_atoi(const char *str)
 /*
 ** Changer une chaine de caractère en "nombre"
 */
-
-int main()
-{
-	printf("atoi = %d\n", ft_atoi("123456789987654321"));
-	printf("real atoi = %d\n", atoi("123456789987654321"));
-}

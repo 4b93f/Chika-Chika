@@ -5,19 +5,51 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/01 07:33:24 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/08 17:16:16 by chly-huc         ###   ########.fr       */
+/*   Created: 2020/02/20 12:15:37 by chly-huc          #+#    #+#             */
+/*   Updated: 2020/02/29 02:49:38 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_string(char *str, to_list *flag, va_list ap)
+static int		ft_check(to_list *flag, int *to_print)
 {
-	char *s1;
+	int nb_space;
 
-	s1 = va_arg(ap, char*);
-	apply_flag1(str, flag, s1);
-	puts(s1);
-	return ;
+	nb_space = 0;
+	if (flag->PRECISION > 0)
+	{
+		if (flag->PRECISION < *to_print)
+			*to_print = flag->PRECISION;
+		if (flag->FLAG_NBR > *to_print)
+			nb_space = flag->FLAG_NBR - *to_print;
+	}
+	else
+		nb_space = flag->FLAG_NBR - *to_print;
+	if (flag->FLAG_NBR > 0 && flag->PRECISION == 0)
+		nb_space = flag->FLAG_NBR;
+	return (nb_space);
+}
+
+int				ft_string(va_list args, to_list *flag, int i)
+{
+	int			to_print;
+	int			nb_space;
+	char		*str;
+
+	nb_space = 0;
+	str = va_arg(args, char*);
+	str = !str ? "(null)" : str;
+	to_print = ft_strlen(str);
+	nb_space = ft_check(flag, &to_print);
+	if (flag->FLAG_MINUS == 0)
+		while (nb_space-- > 0)
+			i += write(1, " ", 1);
+	if (!(flag->V_P == 1 && flag->PRECISION == 0))
+		write(1, str, to_print);
+	i += to_print;
+	if (flag->FLAG_MINUS > 0)
+		while (nb_space-- > 0)
+			i += write(1, " ", 1);
+	return (i);
 }
