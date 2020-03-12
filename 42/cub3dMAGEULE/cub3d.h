@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/03/11 18:05:25 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/03/12 12:00:08 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "minilibx/mlx.h"
+# include "get_next_line/get_next_line.h"
 //# include "ft_libgfx/minilibx_macos_sierra/mlx.h"
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -47,6 +48,12 @@ typedef struct s_color
   unsigned char b;
   unsigned char colors;
 }               t_color;
+
+typedef struct s_map
+{
+  Posj;
+  
+}
 
 typedef struct s_struct
 {
