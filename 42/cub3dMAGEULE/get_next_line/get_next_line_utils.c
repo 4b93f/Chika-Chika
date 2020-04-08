@@ -31,7 +31,7 @@ int		check_error(int fd, char *str)
 	return (1);
 }
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlen1(char *str)
 {
 	int	i;
 
@@ -43,7 +43,7 @@ size_t	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strdup(char *src)
+char	*ft_strdup1(char *src)
 {
 	char	*dest;
 	int		i;
@@ -51,7 +51,7 @@ char	*ft_strdup(char *src)
 	i = 0;
 	if (!src)
 		return (0);
-	if (!((dest = (char *)malloc(sizeof(char) * ft_strlen(src) + 1))))
+	if (!((dest = (char *)malloc(sizeof(char) * ft_strlen1(src) + 1))))
 		return (NULL);
 	i = 0;
 	while (src[i])
@@ -63,7 +63,7 @@ char	*ft_strdup(char *src)
 	return (dest);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr1(char const *s, unsigned int start, size_t len)
 {
 	int		i;
 	int		j;
@@ -85,7 +85,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (newstr);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin1(char *s1, char *s2)
 {
 	char	*tab;
 	int		i;
@@ -94,9 +94,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	i = -1;
 	j = -1;
 	if (!s1)
-		return (ft_strdup(s2));
-	if (!(tab = malloc(sizeof(char) * ft_strlen((char*)s1)
-					+ ft_strlen((char*)s2) + 1)))
+		return (ft_strdup1(s2));
+	if (!(tab = malloc(sizeof(char) * ft_strlen1((char*)s1)
+					+ ft_strlen1((char*)s2) + 1)))
 		return (NULL);
 	while (s1[++i])
 		tab[i] = s1[i];

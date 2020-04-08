@@ -25,9 +25,9 @@
 # endif
 
 int		get_next_line(int fd, char **line);
-char	*ft_strdup(char *src);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strjoin(char *s1, char *s2);
-size_t	ft_strlen(char *str);
+char	*ft_strdup1(char *src);
+char	*ft_substr1(char const *s, unsigned int start, size_t len);
+char	*ft_strjoin1(char *s1, char *s2);
+size_t	ft_strlen1(char *str);
 int		check_error(int fd, char *str);
 #endif

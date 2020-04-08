@@ -10,13 +10,35 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
+
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	int				i;
+	unsigned char	*ds;
+	unsigned char	*source;
+
+	if (!dest && !src)
+		return (NULL);
+	i = 0;
+	ds = (unsigned char *)dest;
+	source = (unsigned char *)src;
+	while (n--)
+	{
+		ds[i] = source[i];
+		i++;
+	}
+	return (dest);
+}
+
 void *ft_realloc(void *ptr, int new_size)
 {
 	char *new_str;
 	int x;
 
-	if (ptr == 0)
-		return (malloc(new_size));
+	if (ptr == NULL)
+		return (ptr);
 	x = sizeof(ptr);
-	if (<= new)
+	new_str = malloc(new_size);
+	return (new_str);
 }

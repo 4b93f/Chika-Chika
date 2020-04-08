@@ -40,7 +40,7 @@ char	*get_l(char *string)
 		return (NULL);
 	while (string[i] && string[i] != '\n')
 		i++;
-	if (!(chain = ft_substr(string, 0, i)))
+	if (!(chain = ft_substr1(string, 0, i)))
 		return (NULL);
 	while (j < i)
 	{
@@ -61,7 +61,7 @@ char	*readline(int fd, char *string)
 	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
-		string = ft_strjoin(string, buf);
+		string = ft_strjoin1(string, buf);
 		if (find_end_string(buf))
 			break ;
 	}
@@ -80,7 +80,7 @@ char	*rest(char *strings)
 		return (NULL);
 	while (strings[i] && strings[i] != '\n')
 		i++;
-	tmp = malloc(sizeof(char*) * ft_strlen(strings));
+	tmp = malloc(sizeof(char*) * ft_strlen1(strings));
 	while (strings[i])
 	{
 		tmp[j] = strings[i + 1];
@@ -103,7 +103,7 @@ int		get_next_line(int fd, char **line)
 	if (!find_end_string(str[fd]))
 	{
 		if (str[fd] == NULL)
-			*line = ft_strdup("");
+			*line = ft_strdup1("");
 		free(str[fd]);
 		str[fd] = NULL;
 		return (0);

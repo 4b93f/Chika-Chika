@@ -31,7 +31,7 @@ int		check_error(int fd, char *str)
 	return (1);
 }
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlen1(char *str)
 {
 	int	i;
 
@@ -43,7 +43,7 @@ size_t	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strdup(char *src)
+char	*ft_strdup1(char *src)
 {
 	char	*dest;
 	int		i;
@@ -63,7 +63,7 @@ char	*ft_strdup(char *src)
 	return (dest);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr1(char const *s, unsigned int start, size_t len)
 {
 	int		i;
 	int		j;
@@ -85,7 +85,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (newstr);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin1(char *s1, char *s2)
 {
 	char	*tab;
 	int		i;

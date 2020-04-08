@@ -12,21 +12,21 @@
 
 #include "cub3d.h"
 
-void ft_parsing()
+char **ft_parsing(int fd)
 {
-	int **tab;
-	int i;
+	char **str;
 	int lenlen;
-	int fd;
-	char **line;
+	char *line;
 
-	fd = open("map.txt", O_RDONLY);
-	i = 0;
-	
-	while (get_next_line(fd, &line) > 0)
+	lenlen = -1;
+	while (TRUE)
 	{
-		lenlen += get_next_line(fd, &line);
+		if ((get_next_line(fd, &line) <= 0))
+			return (str);
+		lenlen++;
+		if (!(str[lenlen] = ft_realloc(line, lenlen)))
+			return (0);
+		str[lenlen] = line;
+		free(line);
 	}
-	 
-	if (!(tab = malloc(sizeof(int **) * lenlen)))
 }

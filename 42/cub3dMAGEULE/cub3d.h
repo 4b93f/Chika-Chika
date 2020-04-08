@@ -15,7 +15,8 @@
 
 # include "minilibx/mlx.h"
 # include "get_next_line/get_next_line.h"
-//# include "ft_libgfx/minilibx_macos_sierra/mlx.h"
+# include "libft/libft.h"
+
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -49,11 +50,6 @@ typedef struct s_color
   unsigned char colors;
 }               t_color;
 
-typedef struct s_map
-{
-  Posj;
-  
-}
 
 typedef struct s_struct
 {
@@ -88,5 +84,8 @@ typedef struct s_struct
   t_color color;
 }               t_struct;
 
+void *ft_realloc(void *ptr, int new_size);
+char	*ft_strdup(const char *s);
+char **ft_parsing(int fd);
 
 #endif
