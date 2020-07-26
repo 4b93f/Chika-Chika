@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/03/12 12:00:08 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/07/25 18:26:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <string.h>
 # define TRUE 1
 # define FALSE 0
+# define WRONG_MAP 0
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 # define KEY_DOWN 125
@@ -83,6 +84,7 @@ typedef struct s_struct
   void *window;
   t_color color;
 }               t_struct;
+
 
 void *ft_realloc(void *ptr, int new_size);
 char	*ft_strdup(const char *s);

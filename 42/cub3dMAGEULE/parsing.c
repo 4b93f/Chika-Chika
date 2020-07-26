@@ -3,30 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 11:29:43 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/03/12 12:16:55 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/07/18 18:31:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char **ft_parsing(int fd)
+char **ft_parsing()
 {
+	int fd;
 	char **str;
-	int lenlen;
+	int cmpt;
 	char *line;
 
-	lenlen = -1;
-	while (TRUE)
+	cmpt = -1;
+	fd = open("map.txt", O_RDONLY);
+
+	while (get_next_line(fd, &line) > 0)
 	{
-		if ((get_next_line(fd, &line) <= 0))
-			return (str);
-		lenlen++;
-		if (!(str[lenlen] = ft_realloc(line, lenlen)))
-			return (0);
-		str[lenlen] = line;
+		cmpt++;
+		str[cmpt] = ft_realloc(line, cmpt);
+		str[cmpt] = line;
+		printf("%s\n", str[cmpt]);
 		free(line);
 	}
+	str[cmpt] = line;
+	printf("%s\n", str[cmpt]);
+	free(line);
+	return(0);
 }
