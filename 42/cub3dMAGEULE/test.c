@@ -1,24 +1,24 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/09 01:50:11 by root              #+#    #+#             */
+/*   Updated: 2020/08/09 02:56:46 by root             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include <stdio.h>
+
+#define TRUE 1
+#define FALSE 0
 int main()
 {
-    int fd;
-	char **str;
-	int cmpt;
-	char *line;
+    int i = 0;
+    int j = 0;
+    int k = 0;
 
-	cmpt = -1;
-	fd = open("map.txt", O_RDONLY);
-
-	while (get_next_line(fd, &line) > 0)
-	{
-		cmpt++;
-		str[cmpt] = ft_realloc(line, cmpt);
-		str[cmpt] = line;
-		free(line);
-	}
-	str[cmpt] = line;
-	free(line);
-	printf("c'est cette merde qui fonctionne pas =%c", str[0][7]);
-	return(0);
+    while(map[i][j] && map[i][j] == ' ' && map[i][k] == ' ')
 }

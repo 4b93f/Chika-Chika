@@ -31,14 +31,13 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-void *ft_realloc(void *ptr, int new_size)
+char *ft_realloc(char *ptr, int new_size)
 {
-	char *new_str;
-	int x;
+	char **new_str;
 
 	if (ptr == NULL)
 		return (ptr);
-	x = sizeof(ptr);
-	new_str = malloc(new_size);
+	if (!(new_str = malloc(new_size)))
+		return (NULL);
 	return (new_str);
 }
