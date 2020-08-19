@@ -17,6 +17,7 @@ t_params ft_create_struct(char *path)
     t_params params;
     params.resx = 0;
     params.resy = 0;
+    params.map_find = 0;
     params.res = NULL;
     params.textno = NULL;
     params.textso = NULL;
@@ -43,7 +44,7 @@ void ft_free_struct(t_params *to_free)
     int i;
 
     i = -1;
-    while(to_free->map[++i]);
+    while(to_free->map[++i])
         free(to_free->map[i]);
     free(to_free->map);
     free(to_free);

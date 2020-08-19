@@ -13,7 +13,7 @@ char *taking_info(char *line)
     return (line + i);
 }
 
-void search_params(t_params *params, char *path, int fd)
+int search_params(t_params *params, char *path, int fd)
 {
     int i;
     char *line;
@@ -37,8 +37,11 @@ void search_params(t_params *params, char *path, int fd)
             params->colorc = taking_info(line);
         else if (!strncmp("R", line, 1))
             params->res = taking_info(line);
-        else if (strchr(line, '1'))
+        else if (strchr(line, '1') || strchr(line, '0'))
+        {
             params->map = ft_map_parsing(path, fd, line);
+            params->map_find++;
+        }
     }
     params->textsp = ft_strtrim(params->textsp, " ");
     params->res = ft_strtrim(params->res, " ");
@@ -49,4 +52,5 @@ void search_params(t_params *params, char *path, int fd)
     params->colorf = ft_strtrim(params->colorf, " ");
     params->colorc = ft_strtrim(params->colorc, " ");
     i++;
+    return(TRUE);
 }

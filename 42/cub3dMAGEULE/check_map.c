@@ -32,6 +32,7 @@ int  ft_updownwall(char *map)
     return(TRUE);
 }
 
+int findpos = 0;
 
 int ft_wrong_char(char *map)
 {
@@ -42,6 +43,8 @@ int ft_wrong_char(char *map)
         return(FALSE);
     while (map[i])
     {
+        if (map[i] == 'N' || map[i] == 'S' || map[i] == 'W' || map[i] == 'E')
+            findpos++;
         if (map[i] == 'N' || map[i] == 'S' || map[i] == 'W' || map[i] == 'E' || map[i] == ' ' || map[i] == '0' || map[i] == '1'|| map[i] == '2')
             i++;
         else
@@ -133,6 +136,8 @@ int ft_check_map(char **map)
         return(FALSE);
     if (ft_check_space(map) == 0)
         return(FALSE);
+    if (findpos == 0 || findpos > 1)
+        return (FALSE);
     return(TRUE);
 }
 

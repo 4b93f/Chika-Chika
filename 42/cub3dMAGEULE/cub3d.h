@@ -89,6 +89,7 @@ typedef struct s_params
 {
   int resx;
   int resy;
+  int map_find;
   char *res;
   char *textno;
   char *textso;
@@ -110,7 +111,7 @@ void ft_free_struct(t_params *to_free);
 int ft_check_map(char **map);
 void ft_error(void);
 int		ft_isdigit(int c);
-void search_params(t_params *params, char *path, int fd);
+int search_params(t_params *params, char *path, int fd);
 //int search_params(t_struct *params)
 
 #endif
