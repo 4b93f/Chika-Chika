@@ -1,6 +1,23 @@
 #include "cub3d.h"
 
-void ft_updownwall(char *map)
+int ft_check_startend(char *str)
+{
+    int i;
+
+    i = 0;
+    while (str[i] && str[i] == ' ')
+        i++;
+    if (str[i] != '1')
+        return(FALSE);
+    i = strlen(str) - 1;
+    while(i > 0 && str[i] == ' ')
+        i--;
+    if (str[i] != '1')
+        return(FALSE);
+    return(TRUE);
+}
+
+int  ft_updownwall(char *map)
 {
     int i;
     i = 0;
@@ -9,10 +26,12 @@ void ft_updownwall(char *map)
     while (map[i])
     {
         if (map[i] != '1' && map[i] != ' ')
-            return (ft_error());
+            return(FALSE);
         i++;
     }
+    return(TRUE);
 }
+
 
 int ft_wrong_char(char *map)
 {
@@ -46,9 +65,26 @@ int ft_check_space(char **map)
         {
             if (map[i][j] == ' ')
             {
-                while(map[i][j] && map[i][j] == ' ')
-                    j++;
-                if (map[i][j] != '1')
+                k = j;
+                while(k > 0 && map[i][k] == ' ')
+                    k--;
+                if (map[i][k] != '1' && k != 0)
+                    return(FALSE);
+                k = j;
+                while(map[i][k] && map[i][k] == ' ')
+                    k++;
+                if (map[i][k] != '1' && map[i][k])
+                    return(FALSE);
+                /************************************/
+                k = i;
+                while(k > 0 && map[k][j] == ' ')
+                    k--;
+                if (map[k][j] != '1' && k != 0 && (map[k] <= (map[k - 1])))
+                    return(FALSE);
+                k = i;
+                while(map[k] != NULL && map[k][j] == ' ')
+                    k++;
+                if (map[k] != NULL && map[k][j] != '1' && (map[k] <= (map[k + 1])))
                     return(FALSE);
             }
             j++;
@@ -56,40 +92,47 @@ int ft_check_space(char **map)
         j = 0;
         i++;
     }
-}
-
-
-int ft_check_startend(char *map)
-{
-    int i;
-
-    i = 0;
-    while (map[i] && map[i] != ' ')
-        i++;
-    if (map[i] != 1)
-        return(FALSE);
-    i = ft_strlen(map);
-    while(i > 0 && map[i] == '  ')
-        i--;
-    if (map[i] != '1')
-        return(FALSE);
     return(TRUE);
 }
 
+int ft_search_player(char **map)
+{
+    int i;
+    int findpos;
 
+    i = 0;
+    findpos = 0;
+    while(map[i])
+    {
+        if (strchr(map[i], 'S') || strchr(map[i], 'N') || strchr(map[i], 'E') || strchr(map[i], 'W'))
+            findpos++;
+        i++;
+    }
+    if (findpos > 1)
+        return (FALSE);
+    return (TRUE);
+}
 int ft_check_map(char **map)
 {
     int i;
-
+    
     i = 1;
-    updownwall(map[0]);
+    if (ft_search_player(map) == 0)
+        return(FALSE);
+    if (!map[2])
+        return(FALSE);
+    if (ft_updownwall(map[0]) == 0)
+        return(FALSE);
     while(map[i + 1] != NULL)
     {
-        if (wrong_char(map[i]) == FALSE)
+        if (ft_wrong_char(map[i]) == FALSE)
             return(FALSE);
         i++;
     }
-    updownwall(map[i]);
+    if (ft_updownwall(map[i]) == 0)
+        return(FALSE);
+    if (ft_check_space(map) == 0)
+        return(FALSE);
     return(TRUE);
 }
 

@@ -23,7 +23,6 @@ ft_lstiter.c ft_lstlast.c \
 
 HEADERS =	libft.h
 NAME = 		libft.a
-CC = 		gcc
 CFLAGS =	-Wall -Wextra -Werror
 OBJS = 		${SRCS:.c=.o}
 OBJ = 		${BONUS:.c=.o}

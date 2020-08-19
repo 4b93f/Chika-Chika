@@ -89,26 +89,28 @@ typedef struct s_params
 {
   int resx;
   int resy;
+  char *res;
   char *textno;
   char *textso;
   char *textwe;
   char *textea;
   char *textsp;
   char *textp;
-  char *textc;
+  char *colorf;
+  char *colorc;
   char **map;
 }              t_params;
 
-
-void *ft_realloc(void *ptr, int new_size);
 char	*ft_strdup(const char *s);
 char **final_pars(int fd);
 void parse_params(t_struct *params);
-char **ft_map_parsing(char *path);
+char **ft_map_parsing(char *path, int fd, char *firstline);
 t_params *ft_malloc_struct(char *path);
 void ft_free_struct(t_params *to_free);
 int ft_check_map(char **map);
 void ft_error(void);
 int		ft_isdigit(int c);
+void search_params(t_params *params, char *path, int fd);
+//int search_params(t_struct *params)
 
 #endif

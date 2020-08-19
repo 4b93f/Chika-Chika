@@ -123,18 +123,36 @@ unsigned int rgb_to_jeff(t_color color)
     return (color.r * 65536 + color.g * 256 + color.b);
 }
 */
-
-void ft_error(void)
+void ft_error()
 {
-    printf("%s\n", "Erreur dans la mère de florian");
+    printf("error\n");
+    exit(0);
 }
-
 int main(int argc, char **argv)
 {
     if (argc != 2)
         exit(0);
+    int fd;
+    fd = open(argv[1], O_RDONLY);
     t_params *params;
     params = ft_malloc_struct(argv[1]);
+
+    search_params(params, argv[1], fd);
+    
+    int i = 0;
+    while(params->map[i])
+    {
+        printf("%s\n", params->map[i]);
+        i++;
+    }
+    printf("\nSPRITE = [%s]\n", params->textsp);
+    printf("RES = [%s]\n", params->res);
+    printf("NO = [%s]\n", params->textno);
+    printf("SO = [%s]\n", params->textso);
+    printf("WE = [%s]\n", params->textwe);
+    printf("EA = [%s]\n", params->textea);
+    printf("F = [%s]\n", params->colorf);
+    printf("C = [%s]\n", params->colorc);
     if (ft_check_map(params->map) == 0)
         ft_error();
     //ft_free_struct(params);

@@ -1,24 +1,28 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/09 01:50:11 by root              #+#    #+#             */
-/*   Updated: 2020/08/09 02:56:46 by root             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "cub3d.h"
 
-#include <stdio.h>
-
-#define TRUE 1
-#define FALSE 0
-int main()
+char *taking_info(char *line)
 {
-    int i = 0;
-    int j = 0;
-    int k = 0;
+    int i;
 
-    while(map[i][j] && map[i][j] == ' ' && map[i][k] == ' ')
+    i = 0;
+    while (line[i] && line[i] != '\t' && line[i] != '\n' && line[i] != '\r'  && line[i] != '\v'
+     && line[i] != '\f' && ft_isalpha(line[i]))
+        i++;
+    return (line + i);
+}
+
+int main(int argc, char **argv)
+{
+    int i;
+    char *str;
+    int fd;
+    char *line;
+
+    i = 0;
+    fd = open("map_test", O_RDONLY);
+    get_next_line(fd, &line);
+    printf("%s\n", ft_strtrim(taking_info(line), " "));
+    str = ft_strtrim(taking_info(line), " ");
+    printf("%ld", strlen(str));
+
 }
