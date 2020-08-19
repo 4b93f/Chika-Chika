@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: becentrale <becentrale@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/08/09 01:19:04 by root             ###   ########.fr       */
+/*   Updated: 2020/08/19 18:40:19 by becentrale       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,27 +137,17 @@ int main(int argc, char **argv)
     int fd;
     fd = open(argv[1], O_RDONLY);
     t_params *params;
-    params = ft_malloc_struct(argv[1]);
+    t_ray *ray;
+    
+    params = ft_malloc_params(argv[1]);
+    ray = ft_malloc_ray();
 
     if (search_params(params, argv[1], fd) == 0)
         ft_error();
     if (params->map_find == 0)
         ft_error();
-    //int i = 0;
-    //while(params->map[i])
-    //{
-       //printf("%s\n", params->map[i]);
-        //i++;
-    //}
-    //printf("\nSPRITE = [%s]\n", params->textsp);
-    //printf("RES = [%s]\n", params->res);
-    //printf("NO = [%s]\n", params->textno);
-    //printf("SO = [%s]\n", params->textso);
-    //printf("WE = [%s]\n", params->textwe);
-    //printf("EA = [%s]\n", params->textea);
-    //printf("F = [%s]\n", params->colorf);
-    //printf("C = [%s]\n", params->colorc);
     if (ft_check_map(params->map) == 0)
         ft_error();
+    ft_raycast(params, ray);
     //ft_free_struct(params);
 }
