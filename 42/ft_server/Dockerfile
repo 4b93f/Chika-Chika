@@ -1,55 +1,23 @@
 FROM debian:buster
 
-COPY srcs/nginx.conf ./root/
-COPY srcs/wordpress-5.4.tar.gz ./root/
-COPY srcs/wp-config.php ./root/
-COPY srcs/config.inc.php ./root/
-COPY srcs/wordpress.sql ./root/
-COPY srcs/mysql.sh ./root/
-COPY srcs/start.sh ./root/
+COPY srcs/nginx-conf ./root
+COPY srcs/wordpress-5.4.tar.gz ./root
+COPY srcs/wp-config.php ./root
+COPY srcs/config.inc.php ./root
+COPY srcs/start.sh ./root
 
 # UPDATE
+
 RUN apt-get update
-RUN apt-get upgrade -y
 
-# INSTALL NGINX
+#INSTALL ALL REQUIS
+
+RUN apt-get install -y procps
+RUN apt-get install -y wget
+RUN apt-get install nano
+RUN apt-get -y install php7.3-fpm php7.3-common php7.3-mysql php7.3-gmp php7.3-curl php7.3-intl php7.3-mbstring php7.3-xmlrpc php7.3-gd php7.3-xml php7.3-cli php7.3-zip php7.3-soap php7.3-imap
 RUN apt-get -y install nginx
-
-# INSTALL MYSQL
 RUN apt-get -y install mariadb-server
-
-# INSTALL PHP
-RUN apt-get -y install php7.3 php-mysql php-fpm php-cli php-mbstring php-json
-
-# INSTALL TOOLS
-RUN apt-get -y install wget
-
-# INSTALL VIM
-RUN apt-get install vim
-
-# INSTALL PHPMYADMIN
-RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.tar.gz
-RUN tar xf phpMyAdmin-4.9.0.1-all-languages.tar.gz
-RUN mv phpMyAdmin-4.9.0.1-all-languages.tar.gz usr/share/phpMyAdmin
-
-# CONFIG PHPMYADMIN
-
-RUN sudo -cp pr /usr/share/phpMyAdmin/config.sample.inc.php /usr/share/phpMyAdmin/config.inc.php
-RUN mkdir -p /usr/shar/phpMyAdmin/tmp && chmod 777 /usr/share/phpMyAdmin/tmp
-RUN chown -R www-data:www-data /var/lib/phpmyadmin
-
-# CONFIG MYSQL
-
-RUN bash root/mysql.sh
-
-# INSTALL WORDPRESS
-
-RUN tar xf /root/wordpress-5.4.tar.gz
-RUN chown -R www-data:www-data /usr/share/phpMyAdmin
-
-
-
-
 
 # START
 
