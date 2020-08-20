@@ -29,9 +29,7 @@ echo "FLUSH PRIVILEGES;" | mysql -u root --skip-password
 # INSTALL PHPMYADMIN
 mkdir /var/www/mywebsite/phpmyadmin
 wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.tar.gz
-tar -xvf phpMyAdmin-4.9.0.1-all-languages.tar.gz
-mv phpMyAdmin-4.9.0.1-all-languages.tar.gz phpMyAdmin
-mv phpMyAdmin /var/www/mywebsite/phpmyadmin
+tar -xvf phpMyAdmin-4.9.0.1-all-languages.tar.gz --strip-components 1 -C /var/www/mywebsite/phpmyadmin
 mv ./root/config.inc.php /var/www/mywebsite/phpmyadmin/config.inc.php
 
 
