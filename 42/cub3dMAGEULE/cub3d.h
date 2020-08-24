@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: becentrale <becentrale@student.42.fr>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/08/19 18:44:37 by becentrale       ###   ########.fr       */
+/*   Updated: 2020/08/22 00:25:54 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_color
 
 typedef struct s_struct
 {
-  int w;
+  int width;
   int mapY;
   int mapX;
   int stepX;
@@ -111,7 +111,7 @@ int ft_check_map(char **map);
 void ft_error(void);
 int		ft_isdigit(int c);
 int search_params(t_params *params, char *path, int fd);
-void ft_raycast(t_params *params, t_ray *ray);
+//void ft_raycast(t_params *params, t_ray *ray);
 t_ray *ft_malloc_ray();
 //int search_params(t_struct *params)
 

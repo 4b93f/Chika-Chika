@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+         #
+#    By: root <root@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/09 21:51:32 by chly-huc          #+#    #+#              #
-#    Updated: 2020/01/10 12:37:13 by chly-huc         ###   ########.fr        #
+#    Updated: 2020/08/22 00:20:00 by root             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ ft_lstiter.c ft_lstlast.c \
 
 HEADERS =	libft.h
 NAME = 		libft.a
-CFLAGS =	-Wall -Wextra -Werror
 OBJS = 		${SRCS:.c=.o}
 OBJ = 		${BONUS:.c=.o}
 

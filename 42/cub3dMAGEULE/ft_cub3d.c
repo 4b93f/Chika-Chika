@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_cub3d.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: becentrale <becentrale@student.42.fr>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/08/19 18:40:19 by becentrale       ###   ########.fr       */
+/*   Updated: 2020/08/22 00:23:32 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ unsigned int rgb_to_jeff(t_color color)
     return (color.r * 65536 + color.g * 256 + color.b);
 }
 */
+
 void ft_error()
 {
     printf("error\n");
@@ -140,7 +141,6 @@ int main(int argc, char **argv)
     t_ray *ray;
     
     params = ft_malloc_params(argv[1]);
-    ray = ft_malloc_ray();
 
     if (search_params(params, argv[1], fd) == 0)
         ft_error();
@@ -148,6 +148,7 @@ int main(int argc, char **argv)
         ft_error();
     if (ft_check_map(params->map) == 0)
         ft_error();
-    ft_raycast(params, ray);
+    //ray = ft_malloc_ray();
+    //ft_raycast(params, ray);
     //ft_free_struct(params);
 }
