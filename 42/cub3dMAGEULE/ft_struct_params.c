@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct_params.c                                    :+:      :+:    :+:   */
+/*   ft_struct_params.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: becentrale <becentrale@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 01:14:46 by root              #+#    #+#             */
-/*   Updated: 2020/08/19 18:45:32 by becentrale       ###   ########.fr       */
+/*   Updated: 2020/08/24 16:39:43 by becentrale       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_params ft_create_params(char *path)
+t_params ft_create_params()
 {
     t_params params;
     params.screenwidth = 0;
@@ -31,11 +31,11 @@ t_params ft_create_params(char *path)
     return(params);
 }
 
-t_params *ft_malloc_params(char *path)
+t_params *ft_malloc_params()
 {
     t_params *malloc_params;
     malloc_params = malloc(sizeof(t_params));
-    *malloc_params = ft_create_params(path);
+    *malloc_params = ft_create_params();
     return(malloc_params);
 }
 

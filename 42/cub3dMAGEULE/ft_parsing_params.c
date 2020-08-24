@@ -13,7 +13,7 @@ char *taking_info(char *line)
     return (line + i);
 }
 
-int search_params(t_params *params, char *path, int fd)
+int search_params(t_params *params, int fd)
 {
     int i;
     char *line;
@@ -39,7 +39,7 @@ int search_params(t_params *params, char *path, int fd)
             params->res = taking_info(line);
         else if (strchr(line, '1') || strchr(line, '0'))
         {
-            params->map = ft_map_parsing(path, fd, line);
+            params->map = ft_map_parsing(fd, line);
             params->map_find++;
         }
     }

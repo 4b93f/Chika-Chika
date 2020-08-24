@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: becentrale <becentrale@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/08/22 00:23:32 by root             ###   ########.fr       */
+/*   Updated: 2020/08/24 18:26:28 by becentrale       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,15 @@ void ft_error()
     exit(0);
 }
 
+void ft_resolution(t_params *params)
+{
+    char **tmp;
+    
+    tmp = ft_split(params->res, ' ');
+    params->screenwidth = ft_atoi(tmp[0]);
+    params->screenheight = ft_atoi(tmp[1]);
+    return;
+}
 
 int main(int argc, char **argv)
 {
@@ -139,16 +148,20 @@ int main(int argc, char **argv)
     fd = open(argv[1], O_RDONLY);
     t_params *params;
     t_ray *ray;
+    t_color *color;
     
-    params = ft_malloc_params(argv[1]);
+    params = ft_malloc_params();
+    color = ft_malloc_color();
 
-    if (search_params(params, argv[1], fd) == 0)
+    if (search_params(params, fd) == 0)
         ft_error();
+    ft_resolution(params);
+    ray = ft_malloc_ray(params);
     if (params->map_find == 0)
         ft_error();
     if (ft_check_map(params->map) == 0)
         ft_error();
-    //ray = ft_malloc_ray();
-    //ft_raycast(params, ray);
+    ft_raycast(params, ray, color);
+   //mlx_loop(ray->mlx);
     //ft_free_struct(params);
 }

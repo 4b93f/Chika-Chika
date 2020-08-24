@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: becentrale <becentrale@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 16:26:08 by root              #+#    #+#             */
-/*   Updated: 2020/08/22 00:25:37 by root             ###   ########.fr       */
+/*   Updated: 2020/08/24 16:36:25 by becentrale       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char **ft_test(char **str, char *line)
 }
 
 
-char **ft_map_parsing(char *path, int fd, char *firstline)
+char **ft_map_parsing(int fd, char *firstline)
 {
 	char **str;
 	int cmpt;

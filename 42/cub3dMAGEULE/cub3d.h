@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: becentrale <becentrale@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/08/22 00:25:54 by root             ###   ########.fr       */
+/*   Updated: 2020/08/24 16:39:55 by becentrale       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_color
 }               t_color;
 
 
-typedef struct s_struct
+typedef struct s_ray
 {
   int width;
   int mapY;
@@ -82,7 +82,6 @@ typedef struct s_struct
   double perpwalldist;
   void *mlx;
   void *window;
-  t_color color;
 }               t_ray;
 
 typedef struct s_params
@@ -104,15 +103,15 @@ typedef struct s_params
 
 char	*ft_strdup(const char *s);
 char **final_pars(int fd);
-char **ft_map_parsing(char *path, int fd, char *firstline);
-t_params *ft_malloc_params(char *path);
+char **ft_map_parsing(int fd, char *firstline);
+t_params *ft_malloc_params();
 void ft_free_struct(t_params *to_free);
 int ft_check_map(char **map);
 void ft_error(void);
 int		ft_isdigit(int c);
-int search_params(t_params *params, char *path, int fd);
-//void ft_raycast(t_params *params, t_ray *ray);
+int search_params(t_params *params, int fd);
+void ft_raycast(t_params *params, t_ray *ray, t_color *color);
 t_ray *ft_malloc_ray();
-//int search_params(t_struct *params)
+t_color *ft_malloc_color();
 
 #endif
