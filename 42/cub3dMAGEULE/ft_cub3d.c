@@ -6,7 +6,7 @@
 /*   By: becentrale <becentrale@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/08/24 18:26:28 by becentrale       ###   ########.fr       */
+/*   Updated: 2020/08/25 15:18:46 by becentrale       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,6 @@ int main(int argc, char **argv)
     if (ft_check_map(params->map) == 0)
         ft_error();
     ft_raycast(params, ray, color);
-   //mlx_loop(ray->mlx);
+    mlx_loop(ray->mlx);
     //ft_free_struct(params);
 }
