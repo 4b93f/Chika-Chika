@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_struct_ray.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: becentrale <becentrale@student.42.fr>      +#+  +:+       +#+        */
+/*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 18:30:34 by becentrale        #+#    #+#             */
-/*   Updated: 2020/08/25 15:53:18 by becentrale       ###   ########.fr       */
+/*   Updated: 2020/09/08 21:41:14 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ t_ray ft_create_ray(t_params *params)
     ray.width = 0;
     ray.posX = 0;
     ray.posY = 0;
-    ray.dirX = 0;
-    ray.dirY = 1;
+    ray.dirX = 1;
+    ray.dirY = 0;
     ray.planeX = 0;
     ray.planeY = 0.66;
     ray.raydirX = 0;
-    ray.raydirY = 1;
+    ray.raydirY = 0;
     ray.camX = 0;
     ray.deltadistX = 0; // distance entre le 1er axe X et le 2eme //
     ray.deltadistY = 0;  // distance entre le 1er axe Y et le 2eme //

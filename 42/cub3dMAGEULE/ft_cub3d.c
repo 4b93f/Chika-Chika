@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: becentrale <becentrale@student.42.fr>      +#+  +:+       +#+        */
+/*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/08/25 15:18:46 by becentrale       ###   ########.fr       */
+/*   Updated: 2020/09/08 20:52:23 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 #define mapWidth 24
 #define mapHeight 24
-#define screenWidth 1024
-#define screenHeight 1024
+#define screenWidth 600
+#define screenHeight 900
 
 /*
 void verline(int x, int drawstart, int drawend, t_struct info)
@@ -163,5 +163,6 @@ int main(int argc, char **argv)
         ft_error();
     ft_raycast(params, ray, color);
     mlx_loop(ray->mlx);
+    printf("!\n");
     //ft_free_struct(params);
 }
