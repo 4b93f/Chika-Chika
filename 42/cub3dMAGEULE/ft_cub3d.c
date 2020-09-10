@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/10 22:56:57 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/10 23:36:59 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,10 +140,20 @@ void ft_resolution(t_params *params)
     return;
 }
 
+void AVANCE(t_params *params)
+{
+    if(!(params->map[(int)(params->ray->posX + params->ray->dirX * params->ray->movespeed)][(int)params->ray->posY]))
+        params->ray->posX += params->ray->dirX * params->ray->movespeed;
+    if(!(params->map[(int)(params->ray->posX)][(int)(params->ray->posY - params->ray->dirY * params->ray->movespeed)]))
+        params->ray->posY += params->ray->dirY * params->ray->movespeed;
+    ft_raycast(params, params->ray, params->color);
+}
+
+
 int key_pressed(int key, void *params)
 {
     if (key == 13)
-        printf("W\n");
+        AVANCE(params);
     if (key == 0)
         printf("A\n");
     if (key == 1)
@@ -153,6 +163,12 @@ int key_pressed(int key, void *params)
     if (key == 53)
         exit(0); 
     return(0);
+}
+
+int start(int key, void *params)
+{
+    
+    return(1);
 }
 
 int main(int argc, char **argv)
@@ -178,6 +194,7 @@ int main(int argc, char **argv)
         ft_error();
     ft_raycast(params, ray, color);
     mlx_hook(ray->window, 2, 1L << 0, key_pressed, params);
+    mlx_loop_hook(ray->window, start, params);
     mlx_loop(ray->mlx);
     printf("!\n");
     //ft_free_struct(params);

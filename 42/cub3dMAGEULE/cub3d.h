@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/10 20:20:51 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/10 23:27:34 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ typedef struct s_ray
   int lineheight;
   int drawstart;
   int drawend;
-  int movespeed;
   int rotspeed;
+  double movespeed;
   double posX;
   double posY;
   double dirX;
@@ -91,6 +91,8 @@ typedef struct s_params
   char *colorf;
   char *colorc;
   char **map;
+  t_ray *ray;
+  t_color *color;
 }              t_params;
 
 char	*ft_strdup(const char *s);
