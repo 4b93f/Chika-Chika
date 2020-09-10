@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/08 20:52:23 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/10 22:56:57 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,21 @@ void ft_resolution(t_params *params)
     return;
 }
 
+int key_pressed(int key, void *params)
+{
+    if (key == 13)
+        printf("W\n");
+    if (key == 0)
+        printf("A\n");
+    if (key == 1)
+        printf("S\n");
+    if (key == 2)
+        printf("D\n");
+    if (key == 53)
+        exit(0); 
+    return(0);
+}
+
 int main(int argc, char **argv)
 {
     if (argc != 2)
@@ -162,6 +177,7 @@ int main(int argc, char **argv)
     if (ft_check_map(params->map) == 0)
         ft_error();
     ft_raycast(params, ray, color);
+    mlx_hook(ray->window, 2, 1L << 0, key_pressed, params);
     mlx_loop(ray->mlx);
     printf("!\n");
     //ft_free_struct(params);
