@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: becentrale <becentrale@student.42.fr>      +#+  +:+       +#+        */
+/*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/08/24 16:39:55 by becentrale       ###   ########.fr       */
+/*   Updated: 2020/09/10 20:20:51 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,6 @@
 # define KEY_DOWN 125
 # define KEY_UP 126
 
-
-typedef struct  s_keys
-{
-  int			left:1;
-	int			right:1;
-	int			down:1;
-	int			up:1;
-}               t_keys;
 
 typedef struct s_color
 {
