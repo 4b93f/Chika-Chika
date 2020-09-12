@@ -78,7 +78,6 @@ int ft_check_space(char **map)
                     k++;
                 if (map[i][k] != '1' && map[i][k])
                     return(FALSE);
-                /************************************/
                 k = i;
                 while(k > 0 && map[k][j] == ' ')
                     k--;

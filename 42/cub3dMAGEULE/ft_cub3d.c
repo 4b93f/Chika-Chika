@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/10 23:36:59 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/13 01:56:10 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,11 +142,16 @@ void ft_resolution(t_params *params)
 
 void AVANCE(t_params *params)
 {
-    if(!(params->map[(int)(params->ray->posX + params->ray->dirX * params->ray->movespeed)][(int)params->ray->posY]))
+    if(params->map[(int)(params->ray->posX + params->ray->dirX * params->ray->movespeed)][(int)params->ray->posY])
+    {
+        printf("1\n");
         params->ray->posX += params->ray->dirX * params->ray->movespeed;
-    if(!(params->map[(int)(params->ray->posX)][(int)(params->ray->posY - params->ray->dirY * params->ray->movespeed)]))
-        params->ray->posY += params->ray->dirY * params->ray->movespeed;
-    ft_raycast(params, params->ray, params->color);
+    }
+    if(params->map[(int)(params->ray->posY)][(int)(params->ray->posX + params->ray->dirX * params->ray->movespeed)] == '0')
+    {
+        printf("2\n");
+        params->ray->posX += params->ray->dirX * params->ray->movespeed;
+    }
 }
 
 
@@ -165,9 +170,9 @@ int key_pressed(int key, void *params)
     return(0);
 }
 
-int start(int key, void *params)
+int start(t_params *params)
 {
-    
+    ft_raycast(params, params->ray, params->color);
     return(1);
 }
 
@@ -188,14 +193,14 @@ int main(int argc, char **argv)
         ft_error();
     ft_resolution(params);
     ray = ft_malloc_ray(params);
+    params->color = color;
+    params->ray = ray;
     if (params->map_find == 0)
         ft_error();
     if (ft_check_map(params->map) == 0)
         ft_error();
-    ft_raycast(params, ray, color);
     mlx_hook(ray->window, 2, 1L << 0, key_pressed, params);
-    mlx_loop_hook(ray->window, start, params);
+    mlx_loop_hook(ray->mlx, start, params);
     mlx_loop(ray->mlx);
-    printf("!\n");
     //ft_free_struct(params);
 }
