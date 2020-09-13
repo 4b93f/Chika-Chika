@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 20:21:51 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/10 22:58:17 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/13 20:03:20 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,29 @@ int which_key(int key, void *params)
 
 int main()
 {
+    int bpp;
+    int sizeline;
+    int endian;
     void *mlx;
     void *window;
+    void *img;
+    unsigned char r;
+    unsigned char g;
+    unsigned char b;
+
+    r = 255;
+    g = 255;
+
     t_keys *params;
     params = malloc(sizeof(t_keys));
     mlx = mlx_init();
+    img = mlx_new_image(mlx, 1000, 1000);
     window = mlx_new_window(mlx, 1000, 1000, "Title");
-    
-    int i = 0;
-
-    while(i++ < 100)
-        mlx_pixel_put(mlx, window, 100, i, 255);
-    //mlx_hook(window, 2, 1L << 0, key, params);
-    mlx_hook(window, 2, 1L << 0, key_pressed, params);
-    mlx_hook(window, 3, 1L << 1, key_released, params);
-    //mlx_key_hook(window, which_key, params);
+    char *imgdata = mlx_get_data_addr(img, &bpp, &sizeline, &endian);
+    imgdata[500 * 4 + 4 * 1000 * sizeline / 8] = r;
+    imgdata[500 * 4 + 4 * 1000 * sizeline / 8 + 1] = g;
+    imgdata[500 * 4 + 4 * 1000 * sizeline / 8 + 2] = b;
+    mlx_put_image_to_window(mlx, window, imgdata, 0,0);
     mlx_loop(mlx);
     return (0);
 }

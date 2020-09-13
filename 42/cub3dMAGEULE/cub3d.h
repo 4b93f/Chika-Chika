@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/13 00:52:32 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/13 18:35:23 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@
 # define TRUE 1
 # define FALSE 0
 # define WRONG_MAP 0
-# define KEY_LEFT 123
-# define KEY_RIGHT 124
-# define KEY_DOWN 125
-# define KEY_UP 126
 
 
 typedef struct s_color
@@ -56,7 +52,7 @@ typedef struct s_ray
   int lineheight;
   int drawstart;
   int drawend;
-  int rotspeed;
+  double rotspeed;
   double movespeed;
   double posX;
   double posY;

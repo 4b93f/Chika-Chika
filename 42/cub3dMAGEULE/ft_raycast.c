@@ -6,34 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/09/13 01:27:37 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/13 17:43:32 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void ft_getposplayer(char **map, t_ray *ray)
-{
-    int i;
-    int j;
-
-    i = 0;
-    j = 0;
-    while(map[i])
-    {
-        while(map[i][j])
-        {
-            if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
-            {
-                ray->posX = i;
-                ray->posY = j;
-            }
-            j++;
-        }
-        j = 0;
-        i++;
-    }    
-}
 
 void verline(int x, int drawstart, int drawend, t_ray *ray)
 {
@@ -49,7 +26,6 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
     int x;
 
     x = 0;
-    ft_getposplayer(params->map, ray);
     while(x++ < params->screenwidth)
     {
         ray->hit = 0;
