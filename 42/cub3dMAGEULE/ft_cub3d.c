@@ -17,112 +17,27 @@
 #define screenWidth 600
 #define screenHeight 900
 
-/*
-void verline(int x, int drawstart, int drawend, t_struct info)
+void    ft_mlx_pixel_to_image(t_params *params)
 {
-    while (drawstart < drawend)
+    int bpp;
+    int sizeline;
+    int endian;
+    void *img;
+    char *imgdata;
+    unsigned char r = 0;
+
+    img = mlx_new_image(params->ray->mlx, 1000, 1000);
+    imgdata = mlx_get_data_addr(img, &bpp, &sizeline, &endian);
+    while (x < params->screenwidth)
     {
-        mlx_pixel_put(info.mlx, info.window, x, drawstart, 65030);
-        drawstart++;
+        imgdata[x * 1000 + y] = r;
+        imgdata[x * 1000 + y + 1] = r;
+        imgdata[x * 1000 + y + 2] = r;
     }
+    mlx_put_image_to_window(mlx, window, img, 0,0);
+
 }
 
-int ft_cub3d(t_struct *info, t_color color)
-{
-    int x;
-    int fd;
-    char **worldMap;
-
-    x = -1;
-    fd = open("map.txt", O_RDONLY);
-    worldMap = ft_parsing(fd);
-    while (++x < screenWidth)
-    {
-        info->camX = 2 * x / screenWidth - 1;
-        info->raydirX = info->dirX + info->planeX * info->camX;
-        info->raydirY = info->dirY + info->planeY * info->camX;
-        info->deltadistX = (info->raydirX == 0) ? 0 : ((info->raydirY == 0) ? 1 : (info->raydirY * info->raydirY) / (1 / info->raydirY));
-        info->deltadistY = (info->raydirX == 0) ? 0 : ((info->raydirY == 0) ? 1 : (info->raydirX * info->raydirX) / (1 / info->raydirX));
-        int mapX;
-        int mapY;
-        double sidedistX;
-        double sidedistY;
-        double perpwalldist;
-        int hit = 0;
-        int side;
-
-        mapX = (int)info->posX;
-        mapY = (int)info->posY;
-        if (info->raydirX < 0)
-        {
-            info->stepX = -1;
-            sidedistX = (info->posX - mapX) * info->deltadistX;
-        }
-        else
-        {
-            info->stepX = 1;
-            sidedistX = (mapX + 1.0 - info->posX) * info->deltadistX;
-        }
-        if (info->raydirY < 0)
-        {
-            info->stepY = - 1;
-            sidedistY = (info->posY - mapY) * info->deltadistY;
-        }
-        else
-        {
-            info->stepY = 1;
-            sidedistY = (mapY + 1.0 - info->posY) * info->deltadistY;
-        }
-
-        while (hit == 0)
-        {
-            if (sidedistX < sidedistY)
-            {
-                sidedistX += info->deltadistX;
-                mapX += info->stepX;
-                side = 0;
-            }
-            else
-            {
-                sidedistY += info->deltadistY;
-                mapY += info->stepY;
-                side = 1;
-            }
-            if (worldMap[mapX][mapY] > 0) 
-                hit = 1;
-        }
-        if (side == 0)
-            perpwalldist = (mapX - info->posX + (1 - info->stepX) / 2) / info->raydirX;
-        else
-            perpwalldist = (mapY - info->posY + (1 - info->stepY) / 2) / info->raydirY;
-        int lineheight;
-        lineheight = (int)(screenHeight / perpwalldist);
-        info->drawstart = (-lineheight) / 2 + screenHeight / 2;
-        if (info->drawstart < 0) 
-            info->drawstart = 0;
-        info->drawend = lineheight / 2 + screenHeight / 2;
-        if (info->drawend >= screenHeight)
-            info->drawend = screenHeight - 1;
-        if (worldMap[mapX][mapY] == 1)
-            color.r = 255;
-        if (worldMap[mapX][mapY] == 2)
-            color.g = 225;
-        if (worldMap[mapX][mapY] == 3) 
-            color.b = 255;
-        side == 1 ? color.colors /=  2 : 0;
-        //printf("drawStart == [%d]\n", info->drawstart);
-        //printf("drawEnd == [%d]\n", info->drawend);
-        //printf("hit == [%d]\n", hit);
-        verline(x, info->drawstart, info->drawend, *info);
-    }
-    return (0);
-}
-
-unsigned int rgb_to_jeff(t_color color)
-{
-    return (color.r * 65536 + color.g * 256 + color.b);
-}
-*/
 void reset_window(t_params *params)
 {
     int i = -1;

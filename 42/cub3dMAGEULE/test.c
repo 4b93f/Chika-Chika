@@ -59,23 +59,29 @@ int main()
     void *mlx;
     void *window;
     void *img;
+    int x;
+    int a = 0;
+    int y;
+
+    x = 500;
+    y = x;
     unsigned char r;
     unsigned char g;
     unsigned char b;
 
     r = 255;
     g = 255;
+    b = 0;
 
-    t_keys *params;
-    params = malloc(sizeof(t_keys));
     mlx = mlx_init();
-    img = mlx_new_image(mlx, 1000, 1000);
     window = mlx_new_window(mlx, 1000, 1000, "Title");
+    img = mlx_new_image(mlx, 1000, 1000);
     char *imgdata = mlx_get_data_addr(img, &bpp, &sizeline, &endian);
-    imgdata[500 * 4 + 4 * 1000 * sizeline / 8] = r;
-    imgdata[500 * 4 + 4 * 1000 * sizeline / 8 + 1] = g;
-    imgdata[500 * 4 + 4 * 1000 * sizeline / 8 + 2] = b;
-    mlx_put_image_to_window(mlx, window, imgdata, 0,0);
+    imgdata[x * 1000 + y] = r;
+    imgdata[x * 1000 + y + 1] = g;
+    imgdata[x * 1000 + y + 2] = r;
+    mlx_put_image_to_window(mlx, window, img, 0,0);
     mlx_loop(mlx);
     return (0);
 }
+
