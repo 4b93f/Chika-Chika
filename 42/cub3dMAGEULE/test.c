@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 20:21:51 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/13 20:03:20 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/15 21:05:57 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int main()
     int a = 0;
     int y;
 
-    x = 500;
-    y = x;
+    x = 100;
+    y = 1000;
     unsigned char r;
     unsigned char g;
     unsigned char b;
@@ -77,9 +77,13 @@ int main()
     window = mlx_new_window(mlx, 1000, 1000, "Title");
     img = mlx_new_image(mlx, 1000, 1000);
     char *imgdata = mlx_get_data_addr(img, &bpp, &sizeline, &endian);
-    imgdata[x * 1000 + y] = r;
-    imgdata[x * 1000 + y + 1] = g;
-    imgdata[x * 1000 + y + 2] = r;
+    while(x < 2000)
+    {
+        imgdata[x * 1000 + y] = r;
+        imgdata[x * 1000 + y + 1] = g;
+        imgdata[x * 1000 + y + 2] = r;
+        x++;
+    }
     mlx_put_image_to_window(mlx, window, img, 0,0);
     mlx_loop(mlx);
     return (0);

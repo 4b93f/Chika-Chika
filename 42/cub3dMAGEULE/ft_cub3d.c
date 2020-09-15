@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/13 19:39:26 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/15 20:48:53 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,6 @@
 #define mapHeight 24
 #define screenWidth 600
 #define screenHeight 900
-
-void    ft_mlx_pixel_to_image(t_params *params)
-{
-    int bpp;
-    int sizeline;
-    int endian;
-    void *img;
-    char *imgdata;
-    unsigned char r = 0;
-
-    img = mlx_new_image(params->ray->mlx, 1000, 1000);
-    imgdata = mlx_get_data_addr(img, &bpp, &sizeline, &endian);
-    while (x < params->screenwidth)
-    {
-        imgdata[x * 1000 + y] = r;
-        imgdata[x * 1000 + y + 1] = r;
-        imgdata[x * 1000 + y + 2] = r;
-    }
-    mlx_put_image_to_window(mlx, window, img, 0,0);
-
-}
 
 void reset_window(t_params *params)
 {
@@ -141,6 +120,7 @@ int key_pressed(int key, void *params)
 int start(t_params *params)
 {
     ft_raycast(params, params->ray, params->color);
+    mlx_put_image_to_window(params->ray->mlx, params->ray->window, params->image->img, 0,0);
     return(1);
 }
 
@@ -176,23 +156,24 @@ int main(int argc, char **argv)
     t_params *params;
     t_ray *ray;
     t_color *color;
+    t_image *image;
     
     params = ft_malloc_params();
     color = ft_malloc_color();
-
+    image = ft_malloc_image();
     if (search_params(params, fd) == 0)
         ft_error();
     ft_resolution(params);
     ray = ft_malloc_ray(params);
     params->color = color;
     params->ray = ray;
+    params->image = image;
     if (params->map_find == 0)
         ft_error();
     if (ft_check_map(params->map) == 0)
         ft_error();
     ft_getposray(params->map, ray);
     mlx_hook(ray->window, 2, 1L << 0, key_pressed, params);
-    mlx_put_image_to_window()
     mlx_loop_hook(ray->mlx, start, params);
     mlx_loop(ray->mlx);
     //ft_free_struct(params);

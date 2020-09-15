@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/13 18:35:23 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/15 20:49:07 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,15 @@ typedef struct s_ray
   void *window;
 }               t_ray;
 
+typedef struct s_image
+{
+  int bpp;
+  int sizeline;
+  int endian;
+  void *img;
+  char *imgdata;
+}               t_image;
+
 typedef struct s_params
 {
   int map_find;
@@ -89,6 +98,7 @@ typedef struct s_params
   char **map;
   t_ray *ray;
   t_color *color;
+  t_image *image;
 }              t_params;
 
 char	*ft_strdup(const char *s);
@@ -103,5 +113,6 @@ int search_params(t_params *params, int fd);
 void ft_raycast(t_params *params, t_ray *ray, t_color *color);
 t_ray *ft_malloc_ray();
 t_color *ft_malloc_color();
+t_image *ft_malloc_image();
 
 #endif

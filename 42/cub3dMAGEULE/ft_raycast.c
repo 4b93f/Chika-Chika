@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/09/13 17:43:32 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/15 21:13:18 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,28 @@ void verline(int x, int drawstart, int drawend, t_ray *ray)
         drawstart++;
     }
 }
+
+
+void    ft_mlx_pixel_to_image(int x, int drawstart, int drawend, t_params *params)
+{
+    unsigned char r = 255;
+    unsigned char g = 0;
+
+    params->image->img = mlx_new_image(params->ray->mlx, 1000, 1000);
+    params->image->imgdata = mlx_get_data_addr(params->image->img, &params->image->bpp, &params->image->sizeline, &params->image->endian);
+    while (drawstart < drawend)
+    {
+        params->image->imgdata[x * 4 + 4 * drawstart] = r;
+        params->image->imgdata[x * 4 + 4 * drawstart + 1] = g;
+        params->image->imgdata[x * 4 + 4 * drawstart + 2] = r;
+        x++;
+        
+    }
+    x = 0;
+    printf("!\n");
+    printf("%d\n", x);
+}
+
 
 void ft_raycast(t_params *params,t_ray *ray, t_color *color)
 {
@@ -91,7 +113,7 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
         if(params->map[ray->mapX][ray->mapY] == 3)
             color->b = 255;
         ray->side == 1 ? color->colors /=  2 : 0;
-        verline(x, ray->drawstart, ray->drawend, ray);
+        ft_mlx_pixel_to_image(x, ray->drawstart, ray->drawend, params);
     }    
     return;    
 }
