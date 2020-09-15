@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/15 20:48:53 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/16 01:50:45 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,35 @@
 #define screenWidth 600
 #define screenHeight 900
 
+void ft_pixel_to_image1(int x, int y, t_params *params)
+{
+    unsigned char a = 100;
+    unsigned char r = 0;
+    unsigned char g = 0;
+    unsigned char b = 0;
+    params->image->imgdata[x * 4 + y * params->image->sizeline] = a;
+    params->image->imgdata[x * 4 + y * params->image->sizeline + 1] = r;
+    params->image->imgdata[x * 4 + y * params->image->sizeline + 2] = g;
+    params->image->imgdata[x * 4 + y * params->image->sizeline + 3] = b;
+}
+
 void reset_window(t_params *params)
 {
-    int i = -1;
-    int j = -1;
-    while(++i <= params->screenwidth)
+    int i = 0;
+    int j = 0;
+    unsigned char r = 0;
+    unsigned char g = 0;
+    unsigned char b = 0;
+    while(j < (900 * 600))
     {
-        while(++j <= params->screenheight)
-            mlx_pixel_put(params->ray->mlx, params->ray->window, i, j, 0);
-        j = 0;
+        params->image->imgdata[i * 4 + j * params->image->sizeline + 1] = r;
+        params->image->imgdata[i * 4 + j * params->image->sizeline + 2] = g;
+        params->image->imgdata[i * 4 + j * params->image->sizeline + 3] = b;
+        j++;
     }
+    mlx_put_image_to_window(params->ray->mlx, params->ray->window, params->image->img, 0,0);
 }
+
 
 void ft_error()
 {
@@ -152,6 +170,9 @@ int main(int argc, char **argv)
     if (argc != 2)
         exit(0);
     int fd;
+    int bpp;
+    int sizeline;
+    int endian;
     fd = open(argv[1], O_RDONLY);
     t_params *params;
     t_ray *ray;
@@ -160,13 +181,15 @@ int main(int argc, char **argv)
     
     params = ft_malloc_params();
     color = ft_malloc_color();
-    image = ft_malloc_image();
     if (search_params(params, fd) == 0)
         ft_error();
     ft_resolution(params);
     ray = ft_malloc_ray(params);
     params->color = color;
     params->ray = ray;
+    image = ft_malloc_image();
+    image->img = mlx_new_image(ray->mlx, 900, 600);
+    image->imgdata = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
     params->image = image;
     if (params->map_find == 0)
         ft_error();
