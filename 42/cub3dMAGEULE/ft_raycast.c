@@ -6,10 +6,12 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/09/16 01:24:16 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/16 23:41:01 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#define txtH 64
+#define txtW 64
 #include "cub3d.h"
 
 void ft_pixel_to_image(int x, int y, t_params *params)
@@ -32,6 +34,7 @@ void verline(int x, int drawstart, int drawend, t_params *params)
         drawstart++;
     }
 }
+
 
 void ft_raycast(t_params *params,t_ray *ray, t_color *color)
 {

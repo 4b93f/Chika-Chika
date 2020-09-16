@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 20:21:51 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/16 01:50:29 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/16 23:35:40 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,42 +51,26 @@ int which_key(int key, void *params)
 }
 */
 
-int main()
+int     main(void)
 {
-    int bpp;
-    int sizeline;
-    int endian;
-    void *mlx;
-    void *window;
-    void *img;
-    int x;
-    int a = 0;
-    int y;
-
-    x = 0;
-    y = 0;
-    unsigned char r;
-    unsigned char g;
-    unsigned char b;
-
-    r = 255;
-    g = 255;
-    b = 0;
+    /*
+    void    *mlx;
+    void    *img;
+    void    *window;
+    char    *relative_path = "./textures/east.xpm";
+    int     img_width;
+    int     img_height;
 
     mlx = mlx_init();
-    window = mlx_new_window(mlx, 1250, 1250, "Title");
-    img = mlx_new_image(mlx, 1250, 1250);
-    char *imgdata = mlx_get_data_addr(img, &bpp, &sizeline, &endian);
-    while(x < 1562500)
-    {
-        imgdata[x * 4 + y * sizeline] = r;
-        imgdata[x * 4 + y * sizeline] = g;
-        imgdata[x * 4 + y * sizeline] = r;
-        x++;
-    }
-    printf("%d\n", sizeline);
+    window = mlx_new_window(mlx, 2000, 2000, "ok");
+    img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
+    printf("%s\n", img);    
     mlx_put_image_to_window(mlx, window, img, 0,0);
+   
     mlx_loop(mlx);
-    return (0);
+    */
+   double x = 3.8;
+
+   round(x);
 }
 

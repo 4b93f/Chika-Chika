@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/16 01:50:45 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/16 23:52:32 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,24 @@
 #define mapHeight 24
 #define screenWidth 600
 #define screenHeight 900
+#define txtH 64
+#define txtW 64
 
-void ft_pixel_to_image1(int x, int y, t_params *params)
+void reset_image(t_params *params)
 {
-    unsigned char a = 100;
+    int x = 0;
+    int y = 0;
     unsigned char r = 0;
     unsigned char g = 0;
     unsigned char b = 0;
-    params->image->imgdata[x * 4 + y * params->image->sizeline] = a;
-    params->image->imgdata[x * 4 + y * params->image->sizeline + 1] = r;
-    params->image->imgdata[x * 4 + y * params->image->sizeline + 2] = g;
-    params->image->imgdata[x * 4 + y * params->image->sizeline + 3] = b;
-}
-
-void reset_window(t_params *params)
-{
-    int i = 0;
-    int j = 0;
-    unsigned char r = 0;
-    unsigned char g = 0;
-    unsigned char b = 0;
-    while(j < (900 * 600))
+    
+    while(x < (600 * 900))
     {
-        params->image->imgdata[i * 4 + j * params->image->sizeline + 1] = r;
-        params->image->imgdata[i * 4 + j * params->image->sizeline + 2] = g;
-        params->image->imgdata[i * 4 + j * params->image->sizeline + 3] = b;
-        j++;
+        params->image->imgdata[x * 4 + y * params->image->sizeline] = r;
+        params->image->imgdata[x * 4 + y * params->image->sizeline + 1] = g;
+        params->image->imgdata[x * 4 + y * params->image->sizeline + 2] = b;
+        x++;
     }
-    mlx_put_image_to_window(params->ray->mlx, params->ray->window, params->image->img, 0,0);
 }
 
 
@@ -69,7 +59,7 @@ void AVANCE(t_params *params)
         params->ray->posX += params->ray->dirX * params->ray->movespeed;
     if(params->map[(int)params->ray->posX][(int)(params->ray->posY + params->ray->dirY * params->ray->movespeed)])
         params->ray->posY += params->ray->dirY * params->ray->movespeed;
-    reset_window(params);
+   reset_image(params);
 }
 
 void RECULE(t_params *params)
@@ -78,7 +68,7 @@ void RECULE(t_params *params)
          params->ray->posX -= params->ray->dirX * params->ray->movespeed;
     if(params->map[(int)params->ray->posX][(int)(params->ray->posY - params->ray->dirY * params->ray->movespeed)])
         params->ray->posY -= params->ray->dirY * params->ray->movespeed;
-    reset_window(params);
+   reset_image(params);
 }
 
 void GAUCHE(t_params *params)
@@ -92,7 +82,7 @@ void GAUCHE(t_params *params)
     params->ray->dirY = olddirx * sin(-params->ray->rotspeed) + params->ray->dirY * cos(-params->ray->rotspeed);
     params->ray->planeX = params->ray->planeX * cos(-params->ray->rotspeed) - params->ray->planeY * sin(-params->ray->rotspeed);
     params->ray->planeY = oldplanex * sin(-params->ray->rotspeed) + params->ray->planeY * cos(-params->ray->rotspeed);
-    reset_window(params);
+    reset_image(params);
 }
 
 void DROITE(t_params *params)
@@ -106,7 +96,8 @@ void DROITE(t_params *params)
     params->ray->dirY = olddirx * sin(params->ray->rotspeed) + params->ray->dirY * cos(params->ray->rotspeed);
     params->ray->planeX = params->ray->planeX * cos(params->ray->rotspeed) - params->ray->planeY * sin(params->ray->rotspeed);
     params->ray->planeY = oldplanex * sin(params->ray->rotspeed) + params->ray->planeY * cos(params->ray->rotspeed);
-    reset_window(params);
+    reset_image(params);
+    
 }
 
 
@@ -163,6 +154,38 @@ void ft_getposray(char **map, t_ray *ray)
         j = 0;
         i++;
     }    
+}
+
+
+void test(t_params *params)
+{
+    int textnum = params->map[params->ray->mapX][params->ray->mapY] - 1;
+    double wallx;
+    if(params->ray->side == 0)
+        wallx = params->ray->posY + params->ray->perpwalldist * params->ray->raydirY;
+    else
+        wallx = params->ray->posX + params->ray->perpwalldist * params->ray->raydirX;
+    wallx -= round(wallx);
+
+    int texx = (int)wallx * (double)txtH;
+    if (params->ray->side == 0 && params->ray->raydirX > 0)
+        texx = txtW - texx -1;
+    if (params->ray->side == 1 && params->ray->raydirY < 0)
+        texx = txtW - texx - 1;
+
+
+    int y = params->ray->drawstart - 1;
+    double step = 1.0 * txtH / params->ray->lineheight;
+    double texpos = (params->ray->drawstart - params->screenheight / 2 + params->ray->lineheight / 2) * step;
+    while(++y < params->ray->drawend)
+    {
+        int texy = (int)texpos & (txtH - 1);
+        texpos += step;
+        unsigned int color = texture[textnum][txtH * texy + texx];
+        if (params->ray->side == 1)
+            color = (color >> 1) & 8355711;
+            buffer[y][x] = color;
+    }
 }
 
 int main(int argc, char **argv)
