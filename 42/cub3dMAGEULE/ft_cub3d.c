@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/16 23:52:32 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/20 18:55:15 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,18 @@ void ft_resolution(t_params *params)
 
 void AVANCE(t_params *params)
 {
-    if(params->map[(int)(params->ray->posX + params->ray->dirX * params->ray->movespeed)][(int)params->ray->posY])
+    if(params->map[(int)(params->ray->posX + params->ray->dirX * params->ray->movespeed)][(int)params->ray->posY] == '0')
         params->ray->posX += params->ray->dirX * params->ray->movespeed;
-    if(params->map[(int)params->ray->posX][(int)(params->ray->posY + params->ray->dirY * params->ray->movespeed)])
+    if(params->map[(int)params->ray->posX][(int)(params->ray->posY + params->ray->dirY * params->ray->movespeed)]== '0')
         params->ray->posY += params->ray->dirY * params->ray->movespeed;
    reset_image(params);
 }
 
 void RECULE(t_params *params)
 {
-    if(params->map[(int)(params->ray->posX - params->ray->dirX * params->ray->movespeed)][(int)params->ray->posY])
+    if(params->map[(int)(params->ray->posX - params->ray->dirX * params->ray->movespeed)][(int)params->ray->posY]== '0')
          params->ray->posX -= params->ray->dirX * params->ray->movespeed;
-    if(params->map[(int)params->ray->posX][(int)(params->ray->posY - params->ray->dirY * params->ray->movespeed)])
+    if(params->map[(int)params->ray->posX][(int)(params->ray->posY - params->ray->dirY * params->ray->movespeed)]== '0')
         params->ray->posY -= params->ray->dirY * params->ray->movespeed;
    reset_image(params);
 }
@@ -101,24 +101,26 @@ void DROITE(t_params *params)
 }
 
 
-int key_pressed(int key, void *params)
+int key_pressed(int key, t_params *params)
 {
     if (key == 13)
     {
         AVANCE(params);
+        printf("[%f][%f]\n", params->ray->posX, params->ray->posY);
     }
     if (key == 0)
     {
-        printf("A\n");
+        printf("[%f][%f]\n", params->ray->posX, params->ray->posY);
         GAUCHE(params);
     }
     if (key == 1)
     {
         RECULE(params);
+    printf("[%f][%f]\n", params->ray->posX, params->ray->posY);
     }
     if (key == 2)
     {
-        printf("D\n");
+        printf("[%f][%f]\n", params->ray->posX, params->ray->posY);
         DROITE(params);
     }
     if (key == 53)
@@ -148,17 +150,37 @@ void ft_getposray(char **map, t_ray *ray)
             {
                 ray->posX = i;
                 ray->posY = j;
+                map[i][j] = '0';
             }
             j++;
         }
         j = 0;
         i++;
-    }    
+    }   
 }
 
-
+/*
 void test(t_params *params)
 {
+    unsigned int buffer[screenHeight][screenWidth];
+    void texture[0];
+    
+    int y = 0;
+    int x = 0;
+    while(x < txtW)
+    {
+        while(y < txtH)
+        {
+            int xorcolor = pow(x  * 256 / txtW)(y * 256 / txtH));
+            int ycolor = y * 256 / txtH;
+            int xycolor = y * 128 / txtH + x * 128 / txtW;
+            texture[0][txtW * y + x] = 65536 * 256;
+            y++;
+        }
+        y = 0;
+        x++;
+    }
+    
     int textnum = params->map[params->ray->mapX][params->ray->mapY] - 1;
     double wallx;
     if(params->ray->side == 0)
@@ -173,7 +195,6 @@ void test(t_params *params)
     if (params->ray->side == 1 && params->ray->raydirY < 0)
         texx = txtW - texx - 1;
 
-
     int y = params->ray->drawstart - 1;
     double step = 1.0 * txtH / params->ray->lineheight;
     double texpos = (params->ray->drawstart - params->screenheight / 2 + params->ray->lineheight / 2) * step;
@@ -182,12 +203,11 @@ void test(t_params *params)
         int texy = (int)texpos & (txtH - 1);
         texpos += step;
         unsigned int color = texture[textnum][txtH * texy + texx];
-        if (params->ray->side == 1)
-            color = (color >> 1) & 8355711;
-            buffer[y][x] = color;
+        buffer[x][y] = color;
     }
+    
 }
-
+*/
 int main(int argc, char **argv)
 {
     if (argc != 2)
