@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/16 01:35:31 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/22 23:09:05 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ typedef struct s_color
   unsigned char colors;
 }               t_color;
 
+
+typedef struct s_event
+{
+  int up;
+  int down;
+  int left;
+  int right;  
+}              t_event;
 
 typedef struct s_ray
 {
@@ -99,6 +107,7 @@ typedef struct s_params
   t_ray *ray;
   t_color *color;
   t_image *image;
+  t_event *event;
 }              t_params;
 
 char	*ft_strdup(const char *s);
@@ -114,6 +123,7 @@ void ft_raycast(t_params *params, t_ray *ray, t_color *color);
 t_ray *ft_malloc_ray();
 t_color *ft_malloc_color();
 t_image *ft_malloc_image();
+t_event *ft_malloc_event();
 void ft_pixel_to_image(int x, int y, t_params *params);
 
 #endif

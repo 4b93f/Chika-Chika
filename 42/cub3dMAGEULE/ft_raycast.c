@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/09/20 18:39:13 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/22 20:46:28 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,8 @@ void ft_pixel_to_image(int x, int y, t_params *params)
 
 void verline(int x, int drawstart, int drawend, t_params *params)
 {
-    while (drawstart <= drawend)
-    {
+    while (++drawstart <= drawend)
         ft_pixel_to_image(x, drawstart, params);
-        drawstart++;
-    }
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/20 18:55:15 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/23 01:53:04 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,18 @@ void AVANCE(t_params *params)
 {
     if(params->map[(int)(params->ray->posX + params->ray->dirX * params->ray->movespeed)][(int)params->ray->posY] == '0')
         params->ray->posX += params->ray->dirX * params->ray->movespeed;
-    if(params->map[(int)params->ray->posX][(int)(params->ray->posY + params->ray->dirY * params->ray->movespeed)]== '0')
+    if(params->map[(int)params->ray->posX][(int)(params->ray->posY + params->ray->dirY * params->ray->movespeed)] == '0')
         params->ray->posY += params->ray->dirY * params->ray->movespeed;
-   reset_image(params);
+    reset_image(params);
 }
 
 void RECULE(t_params *params)
-{
+{   
     if(params->map[(int)(params->ray->posX - params->ray->dirX * params->ray->movespeed)][(int)params->ray->posY]== '0')
          params->ray->posX -= params->ray->dirX * params->ray->movespeed;
     if(params->map[(int)params->ray->posX][(int)(params->ray->posY - params->ray->dirY * params->ray->movespeed)]== '0')
         params->ray->posY -= params->ray->dirY * params->ray->movespeed;
-   reset_image(params);
+    reset_image(params);
 }
 
 void GAUCHE(t_params *params)
@@ -97,41 +97,55 @@ void DROITE(t_params *params)
     params->ray->planeX = params->ray->planeX * cos(params->ray->rotspeed) - params->ray->planeY * sin(params->ray->rotspeed);
     params->ray->planeY = oldplanex * sin(params->ray->rotspeed) + params->ray->planeY * cos(params->ray->rotspeed);
     reset_image(params);
-    
 }
 
 
-int key_pressed(int key, t_params *params)
+
+
+int key_pressed(int key_pressed, t_params *params)
 {
-    if (key == 13)
-    {
-        AVANCE(params);
-        printf("[%f][%f]\n", params->ray->posX, params->ray->posY);
-    }
-    if (key == 0)
-    {
-        printf("[%f][%f]\n", params->ray->posX, params->ray->posY);
-        GAUCHE(params);
-    }
-    if (key == 1)
-    {
-        RECULE(params);
-    printf("[%f][%f]\n", params->ray->posX, params->ray->posY);
-    }
-    if (key == 2)
-    {
-        printf("[%f][%f]\n", params->ray->posX, params->ray->posY);
-        DROITE(params);
-    }
-    if (key == 53)
+    if (key_pressed == 13)
+        params->event->up = 1;
+    if (key_pressed == 0)
+        params->event->left = 1;
+    if (key_pressed == 1)
+        params->event->down = 1;
+    if (key_pressed == 2)
+        params->event->right = 1;
+    if (key_pressed == 53)
         exit(0); 
     return(0);
 }
 
+int key_released(int key_released, t_params *params)
+{
+    if (key_released == 13)
+        params->event->up = 0;
+    if (key_released == 0)
+        params->event->left = 0;
+    if (key_released == 1)
+        params->event->down = 0;
+    if (key_released == 2)
+        params->event->right = 0;
+    return(0);
+}
+
+void key_event(t_params *params)
+{
+    if (params->event->up == 1)
+        AVANCE(params);
+    if (params->event->left == 1)
+        GAUCHE(params);
+    if (params->event->down == 1)
+        RECULE(params);
+    if (params->event->right == 1)
+        DROITE(params);
+}
 int start(t_params *params)
 {
     ft_raycast(params, params->ray, params->color);
     mlx_put_image_to_window(params->ray->mlx, params->ray->window, params->image->img, 0,0);
+    key_event(params);
     return(1);
 }
 
@@ -160,41 +174,34 @@ void ft_getposray(char **map, t_ray *ray)
 }
 
 /*
-void test(t_params *params)
+void part1(t_params *params)
 {
-    unsigned int buffer[screenHeight][screenWidth];
-    void texture[0];
-    
-    int y = 0;
-    int x = 0;
-    while(x < txtW)
-    {
-        while(y < txtH)
-        {
-            int xorcolor = pow(x  * 256 / txtW)(y * 256 / txtH));
-            int ycolor = y * 256 / txtH;
-            int xycolor = y * 128 / txtH + x * 128 / txtW;
-            texture[0][txtW * y + x] = 65536 * 256;
-            y++;
-        }
-        y = 0;
-        x++;
-    }
-    
-    int textnum = params->map[params->ray->mapX][params->ray->mapY] - 1;
     double wallx;
     if(params->ray->side == 0)
         wallx = params->ray->posY + params->ray->perpwalldist * params->ray->raydirY;
     else
         wallx = params->ray->posX + params->ray->perpwalldist * params->ray->raydirX;
     wallx -= round(wallx);
+    if (params->map[ray->mapY][ray->mapX] == '1')
+        part2(params);
+}
 
-    int texx = (int)wallx * (double)txtH;
+void part2(t_params *params)
+{    
+    void texture[0];
+    texture[0] = mlx_xpm_file_to_image(mlx, path, &img_width, &img_height);
+    
+    int texx;
+    texx = (int)wallx * (double)txtH;
     if (params->ray->side == 0 && params->ray->raydirX > 0)
         texx = txtW - texx -1;
     if (params->ray->side == 1 && params->ray->raydirY < 0)
         texx = txtW - texx - 1;
+    tex_print();
+}
 
+void test(t_params *params)
+{
     int y = params->ray->drawstart - 1;
     double step = 1.0 * txtH / params->ray->lineheight;
     double texpos = (params->ray->drawstart - params->screenheight / 2 + params->ray->lineheight / 2) * step;
@@ -202,12 +209,12 @@ void test(t_params *params)
     {
         int texy = (int)texpos & (txtH - 1);
         texpos += step;
-        unsigned int color = texture[textnum][txtH * texy + texx];
+        unsigned int color = texture[0][txtH * texy + texx];
         buffer[x][y] = color;
     }
-    
 }
 */
+
 int main(int argc, char **argv)
 {
     if (argc != 2)
@@ -221,15 +228,18 @@ int main(int argc, char **argv)
     t_ray *ray;
     t_color *color;
     t_image *image;
+    t_event * event;
     
     params = ft_malloc_params();
     color = ft_malloc_color();
+    event = ft_malloc_event();
     if (search_params(params, fd) == 0)
         ft_error();
     ft_resolution(params);
     ray = ft_malloc_ray(params);
     params->color = color;
     params->ray = ray;
+    params->event = event;
     image = ft_malloc_image();
     image->img = mlx_new_image(ray->mlx, 900, 600);
     image->imgdata = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
@@ -240,6 +250,7 @@ int main(int argc, char **argv)
         ft_error();
     ft_getposray(params->map, ray);
     mlx_hook(ray->window, 2, 1L << 0, key_pressed, params);
+    mlx_hook(ray->window, 3, 1L<< 0, key_released, params);
     mlx_loop_hook(ray->mlx, start, params);
     mlx_loop(ray->mlx);
     //ft_free_struct(params);
