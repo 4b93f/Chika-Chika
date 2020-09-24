@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/23 01:53:04 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/24 01:29:28 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,8 +172,12 @@ void ft_getposray(char **map, t_ray *ray)
         i++;
     }   
 }
-
 /*
+void tex_print()
+{
+    
+}
+
 void part1(t_params *params)
 {
     double wallx;
@@ -181,13 +185,13 @@ void part1(t_params *params)
         wallx = params->ray->posY + params->ray->perpwalldist * params->ray->raydirY;
     else
         wallx = params->ray->posX + params->ray->perpwalldist * params->ray->raydirX;
-    wallx -= round(wallx);
+    wallx -= floor(wallx);
     if (params->map[ray->mapY][ray->mapX] == '1')
-        part2(params);
-}
+  
 
-void part2(t_params *params)
-{    
+
+
+  
     void texture[0];
     texture[0] = mlx_xpm_file_to_image(mlx, path, &img_width, &img_height);
     
@@ -200,8 +204,7 @@ void part2(t_params *params)
     tex_print();
 }
 
-void test(t_params *params)
-{
+
     int y = params->ray->drawstart - 1;
     double step = 1.0 * txtH / params->ray->lineheight;
     double texpos = (params->ray->drawstart - params->screenheight / 2 + params->ray->lineheight / 2) * step;
