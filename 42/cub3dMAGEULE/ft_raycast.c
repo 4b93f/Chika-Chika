@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/09/24 01:31:20 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/29 17:07:14 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ void ft_pixel_to_image(int x, int y, t_params *params)
     params->image->imgdata[x * 4 + y * params->image->sizeline + 1] = r;
     params->image->imgdata[x * 4 + y * params->image->sizeline + 2] = g;
     params->image->imgdata[x * 4 + y * params->image->sizeline + 3] = b;
+    params->image->imgsave[x * 4 + y * params->image->sizeline] = a;
+    params->image->imgsave[x * 4 + y * params->image->sizeline + 1] = r;
+    params->image->imgsave[x * 4 + y * params->image->sizeline + 2] = g;
+    params->image->imgsave[x * 4 + y * params->image->sizeline + 3] = b;
 }
 
 void verline(int x, int drawstart, int drawend, t_params *params)

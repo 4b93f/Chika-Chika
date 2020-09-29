@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/22 23:09:05 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/29 16:58:04 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct s_image
   int endian;
   void *img;
   char *imgdata;
+  char *imgsave;
 }               t_image;
 
 typedef struct s_params

@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/24 01:29:28 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/29 17:11:41 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,40 @@
 #define screenHeight 900
 #define txtH 64
 #define txtW 64
+
+void save(t_params *params)
+{
+    
+    int fd;
+    char *filetype = "BM";
+    unsigned int headersize = 40;
+    int img_height = screenWidth;
+    int img_width = screenHeight;
+    unsigned int bpp = 32;
+    int bytes_in_width = ((img_width * bpp + 31) / 32) * 4;
+    unsigned int planes = 1;
+    unsigned int compression = 0;
+    unsigned int imgsize = bytes_in_width * img_height;
+    unsigned int pixeldataoffset = 54;
+    unsigned int filesize = 54 + imgsize;
+    
+    char HEADER[54] = {};
+    memcpy(HEADER, "BM", 2);
+    memcpy(HEADER + 2, &filesize, 4);
+    memcpy(HEADER + 10, &pixeldataoffset, 4);
+    memcpy(HEADER + 14, &headersize, 4);
+    memcpy(HEADER + 18, &img_width, 4);
+    memcpy(HEADER + 22, &img_height, 4);
+    memcpy(HEADER + 26 , &planes, 2);
+    memcpy(HEADER + 28, &bpp, 4);
+    memcpy(HEADER + 34, &imgsize, 4);
+    
+
+    fd = open("test.bmp", O_WRONLY | O_CREAT, S_IRWXU);
+    write(fd, HEADER, 54);
+    write(fd, params->image->imgdata, imgsize);
+
+}
 
 void reset_image(t_params *params)
 {
@@ -144,6 +178,7 @@ void key_event(t_params *params)
 int start(t_params *params)
 {
     ft_raycast(params, params->ray, params->color);
+    save(params);
     mlx_put_image_to_window(params->ray->mlx, params->ray->window, params->image->img, 0,0);
     key_event(params);
     return(1);
@@ -246,6 +281,7 @@ int main(int argc, char **argv)
     image = ft_malloc_image();
     image->img = mlx_new_image(ray->mlx, 900, 600);
     image->imgdata = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
+    image->imgsave = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
     params->image = image;
     if (params->map_find == 0)
         ft_error();

@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 20:40:28 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/22 23:03:40 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/29 16:58:15 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_image ft_create_image()
     t_image image;
     image.img = NULL;
     image.imgdata = NULL;
+    image.imgsave = NULL;
     return(image);
 }
 
