@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/29 17:11:41 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/29 18:14:55 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,8 @@ void key_event(t_params *params)
 int start(t_params *params)
 {
     ft_raycast(params, params->ray, params->color);
-    save(params);
+    if (params->image->save == 1)
+        save(params);
     mlx_put_image_to_window(params->ray->mlx, params->ray->window, params->image->img, 0,0);
     key_event(params);
     return(1);
@@ -268,6 +269,7 @@ int main(int argc, char **argv)
     t_image *image;
     t_event * event;
     
+        
     params = ft_malloc_params();
     color = ft_malloc_color();
     event = ft_malloc_event();
@@ -283,6 +285,8 @@ int main(int argc, char **argv)
     image->imgdata = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
     image->imgsave = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
     params->image = image;
+    if (argv[2] == "--save")
+        params->image->save;
     if (params->map_find == 0)
         ft_error();
     if (ft_check_map(params->map) == 0)
