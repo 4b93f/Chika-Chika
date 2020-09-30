@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/09/29 17:31:02 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/30 21:28:04 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ void verline(int x, int drawstart, int drawend, t_params *params)
         ft_pixel_to_image(x, drawstart, params);
 }
 
+void tex_print(int x, int drawstart, int drawend, t_params *params)
+{
+    
+}
 
 void ft_raycast(t_params *params,t_ray *ray, t_color *color)
 {
@@ -96,14 +100,34 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
         ray->drawend = ray->lineheight / 2 + (int)params->screenheight / 2;
         if (ray->drawend >= params->screenheight)
             ray->drawend = params->screenheight - 1;
-        if(params->map[ray->mapX][ray->mapY] == 1)
-            color->r = 255;
-        if(params->map[ray->mapX][ray->mapY] == 2)
-            color->g = 255;
-        if(params->map[ray->mapX][ray->mapY] == 3)
-            color->b = 255;
-        ray->side == 1 ? color->colors /=  2 : 0;
+        
+        double wallx;
+        if(params->ray->side == 0)
+            wallx = params->ray->posY + params->ray->perpwalldist * params->ray->raydirY;
+        else
+            wallx = params->ray->posX + params->ray->perpwalldist * params->ray->raydirX;
+        wallx -= floor(wallx);
+        if (params->map[ray->mapY][ray->mapX] == '1')
+            
+        void texture[0];
+        texture[0] = mlx_xpm_file_to_image(mlx, path, &img_width, &img_height);
+        
+        int texx;
+        texx = (int)wallx * (double)txtH;
+        if (params->ray->side == 0 && params->ray->raydirX > 0)
+            texx = txtW - texx -1;
+        if (params->ray->side == 1 && params->ray->raydirY < 0)
+            texx = txtW - texx - 1;
+            
+        int y = params->ray->drawstart - 1;
+        double step = 1.0 * txtH / params->ray->lineheight;
+        double texpos = (params->ray->drawstart - params->screenheight / 2 + params->ray->lineheight / 2) * step;
+        while(++y < params->ray->drawend)
+        {
+            texy = (int)texpos;
+            texpos += step;
+        }
         verline(x, ray->drawstart, ray->drawend, params);
-    }    
+    }  
     return;    
 }

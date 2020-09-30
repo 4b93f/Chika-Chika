@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/29 18:14:55 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/09/30 21:16:15 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,51 +208,6 @@ void ft_getposray(char **map, t_ray *ray)
         i++;
     }   
 }
-/*
-void tex_print()
-{
-    
-}
-
-void part1(t_params *params)
-{
-    double wallx;
-    if(params->ray->side == 0)
-        wallx = params->ray->posY + params->ray->perpwalldist * params->ray->raydirY;
-    else
-        wallx = params->ray->posX + params->ray->perpwalldist * params->ray->raydirX;
-    wallx -= floor(wallx);
-    if (params->map[ray->mapY][ray->mapX] == '1')
-  
-
-
-
-  
-    void texture[0];
-    texture[0] = mlx_xpm_file_to_image(mlx, path, &img_width, &img_height);
-    
-    int texx;
-    texx = (int)wallx * (double)txtH;
-    if (params->ray->side == 0 && params->ray->raydirX > 0)
-        texx = txtW - texx -1;
-    if (params->ray->side == 1 && params->ray->raydirY < 0)
-        texx = txtW - texx - 1;
-    tex_print();
-}
-
-
-    int y = params->ray->drawstart - 1;
-    double step = 1.0 * txtH / params->ray->lineheight;
-    double texpos = (params->ray->drawstart - params->screenheight / 2 + params->ray->lineheight / 2) * step;
-    while(++y < params->ray->drawend)
-    {
-        int texy = (int)texpos & (txtH - 1);
-        texpos += step;
-        unsigned int color = texture[0][txtH * texy + texx];
-        buffer[x][y] = color;
-    }
-}
-*/
 
 int main(int argc, char **argv)
 {
@@ -285,8 +240,8 @@ int main(int argc, char **argv)
     image->imgdata = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
     image->imgsave = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
     params->image = image;
-    if (argv[2] == "--save")
-        params->image->save;
+    if (ft_strncmp(argv[2], "--save", 6) == 0)
+        params->image->save = 1;
     if (params->map_find == 0)
         ft_error();
     if (ft_check_map(params->map) == 0)
