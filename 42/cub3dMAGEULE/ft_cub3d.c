@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/30 21:16:15 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/01 19:36:09 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,7 +240,7 @@ int main(int argc, char **argv)
     image->imgdata = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
     image->imgsave = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
     params->image = image;
-    if (ft_strncmp(argv[2], "--save", 6) == 0)
+    if (argv[2] != NULL && strncmp(argv[2], "--save", 4) == 0)
         params->image->save = 1;
     if (params->map_find == 0)
         ft_error();

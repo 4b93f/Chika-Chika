@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 20:21:51 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/09/29 16:52:58 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/01 19:23:29 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-
-/*
-void	ft_bzero(void *b, size_t n)
-{
-	unsigned char	*str;
-
-	str = (unsigned char *)b;
-	while (n--)
-		*str++ = '\0';
-	return ;
-}
 
 int     main(void)
 {
@@ -50,11 +39,13 @@ int     main(void)
     img1 = texture[0];
     img2 = texture[1];
 
-    mlx_put_image_to_window(mlx, window, img2, 500,500);
+    mlx_put_image_to_window(mlx, window, img1, 500,500);
     system("leaks a.out");
     mlx_loop(mlx);
 }
-*/
+
+
+/*
 int main(void)
 {
     int fd;
@@ -103,5 +94,6 @@ int main(void)
     fd = open("test.bmp", O_WRONLY | O_CREAT, S_IRWXU);
     write(fd, HEADER, 54);
     write(fd, imgdata, imgsize);
+    printf("color = %hhu", imgdata[4 * bytes_in_width + 4 * 4 + 2]);
     return 0;
-}
+}*/

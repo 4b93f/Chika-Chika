@@ -6,9 +6,12 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/09/30 21:28:04 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/01 19:34:10 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
+// A CHANGER //
 
 #define txtH 64
 #define txtW 64
@@ -16,14 +19,9 @@
 
 void ft_pixel_to_image(int x, int y, t_params *params)
 {
-    unsigned char a = 100;
-    unsigned char r = 255;
-    unsigned char g = 0;
-    unsigned char b = 0;
-    params->image->imgdata[x * 4 + y * params->image->sizeline] = a;
-    params->image->imgdata[x * 4 + y * params->image->sizeline + 1] = r;
-    params->image->imgdata[x * 4 + y * params->image->sizeline + 2] = g;
-    params->image->imgdata[x * 4 + y * params->image->sizeline + 3] = b;
+    params->image->imgdata[x * 4 + y * params->image->sizeline + 1] = params->color->r;
+    params->image->imgdata[x * 4 + y * params->image->sizeline + 2] = params->color->g;
+    params->image->imgdata[x * 4 + y * params->image->sizeline + 3] = params->color->b;
 }
 
 void verline(int x, int drawstart, int drawend, t_params *params)
@@ -40,8 +38,25 @@ void tex_print(int x, int drawstart, int drawend, t_params *params)
 void ft_raycast(t_params *params,t_ray *ray, t_color *color)
 {
     int x;
-
+    int img_width;
+    int img_height;
+    int bpp;
+    int sizeline;
+    int endian;
+    void *txt;
+    
+    void *texture;
+    char *txtdata;
+    texture = mlx_xpm_file_to_image(params->ray->mlx, "./textures/north.xpm", &img_width, &img_height);
+    txtdata = mlx_get_data_addr(texture, &bpp, &sizeline, &endian);
+    
     x = 0;
+
+    double texpos;
+    double step;
+    int texy;
+    int y;
+    int texx;
     while(++x < params->screenwidth)
     {
         ray->hit = 0;
@@ -106,27 +121,32 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
             wallx = params->ray->posY + params->ray->perpwalldist * params->ray->raydirY;
         else
             wallx = params->ray->posX + params->ray->perpwalldist * params->ray->raydirX;
-        wallx -= floor(wallx);
-        if (params->map[ray->mapY][ray->mapX] == '1')
-            
-        void texture[0];
-        texture[0] = mlx_xpm_file_to_image(mlx, path, &img_width, &img_height);
+        wallx -= floor((wallx));
         
-        int texx;
-        texx = (int)wallx * (double)txtH;
+        texx = (int)(wallx * (double)txtW);
         if (params->ray->side == 0 && params->ray->raydirX > 0)
-            texx = txtW - texx -1;
+            texx = txtW - texx - 1;
         if (params->ray->side == 1 && params->ray->raydirY < 0)
             texx = txtW - texx - 1;
             
-        int y = params->ray->drawstart - 1;
-        double step = 1.0 * txtH / params->ray->lineheight;
-        double texpos = (params->ray->drawstart - params->screenheight / 2 + params->ray->lineheight / 2) * step;
-        while(++y < params->ray->drawend)
+        y = params->ray->drawstart;
+        
+        step = 1.0 * txtH / params->ray->lineheight;
+        texpos = (params->ray->drawstart - params->screenheight / 2 + params->ray->lineheight / 2) * step;
+        while(y++ < params->ray->drawend)
         {
             texy = (int)texpos;
             texpos += step;
         }
+        params->color->r = txtdata[texy * 4 + texx * sizeline + 0];
+        params->color->g = txtdata[texy * 4 + texx * sizeline + 1];
+        params->color->b = txtdata[texy * 4 + texx * sizeline + 2]; 
+        printf("%d\n", texy);
+        //printf("%d\n", texx);
+        //printf("r = %hhu\n", params->color->r);
+        //printf("g = %hhu\n", params->color->g);
+        //printf("b = %hhu\n", params->color->b);
+        
         verline(x, ray->drawstart, ray->drawend, params);
     }  
     return;    
