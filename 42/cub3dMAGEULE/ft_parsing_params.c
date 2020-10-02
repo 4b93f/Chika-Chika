@@ -43,14 +43,14 @@ int search_params(t_params *params, int fd)
             params->map_find++;
         }
     }
-    params->textsp = ft_strtrim(params->textsp, " ");
-    params->res = ft_strtrim(params->res, " ");
-    params->textno = ft_strtrim(params->textno, " ");
-    params->textso = ft_strtrim(params->textso, " ");
-    params->textwe = ft_strtrim(params->textwe, " ");
-    params->textea = ft_strtrim(params->textea, " ");
-    params->colorf = ft_strtrim(params->colorf, " ");
-    params->colorc = ft_strtrim(params->colorc, " ");
+    //params->textsp = ft_strtrim(params->textsp, " ");
+    //params->res = ft_strtrim(params->res, " ");
+    //params->textno = ft_strtrim(params->textno, " ");
+    //params->textso = ft_strtrim(params->textso, " ");
+    //params->textwe = ft_strtrim(params->textwe, " ");
+    //params->textea = ft_strtrim(params->textea, " ");
+    //params->colorf = ft_strtrim(params->colorf, " ");
+    //params->colorc = ft_strtrim(params->colorc, " ");
     i++;
     return(TRUE);
 }

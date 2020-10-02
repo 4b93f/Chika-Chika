@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 17:41:19 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/01/15 17:59:28 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/02 20:55:50 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (ft_strdup(""));
 	while (ft_strchr((char*)sset, ss1[end]))
 		end--;
+	free(s1);
 	return (ft_substr((char*)ss1, start, end - start + 1));
 }
 

@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/10/01 19:34:10 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/02 21:20:27 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,18 @@
 
 void ft_pixel_to_image(int x, int y, t_params *params)
 {
+    //printf("!");
+    params->image->imgdata[x * 4 + y * params->image->sizeline + 0] = params->color->a;
     params->image->imgdata[x * 4 + y * params->image->sizeline + 1] = params->color->r;
     params->image->imgdata[x * 4 + y * params->image->sizeline + 2] = params->color->g;
     params->image->imgdata[x * 4 + y * params->image->sizeline + 3] = params->color->b;
 }
 
+
 void verline(int x, int drawstart, int drawend, t_params *params)
 {
     while (++drawstart <= drawend)
         ft_pixel_to_image(x, drawstart, params);
-}
-
-void tex_print(int x, int drawstart, int drawend, t_params *params)
-{
-    
 }
 
 void ft_raycast(t_params *params,t_ray *ray, t_color *color)
@@ -54,7 +52,7 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
 
     double texpos;
     double step;
-    int texy;
+    int texy = 0;
     int y;
     int texx;
     while(++x < params->screenwidth)
@@ -116,6 +114,8 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
         if (ray->drawend >= params->screenheight)
             ray->drawend = params->screenheight - 1;
         
+
+        
         double wallx;
         if(params->ray->side == 0)
             wallx = params->ray->posY + params->ray->perpwalldist * params->ray->raydirY;
@@ -129,25 +129,27 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
         if (params->ray->side == 1 && params->ray->raydirY < 0)
             texx = txtW - texx - 1;
             
-        y = params->ray->drawstart;
+        y = params->ray->drawstart - 1;
         
         step = 1.0 * txtH / params->ray->lineheight;
         texpos = (params->ray->drawstart - params->screenheight / 2 + params->ray->lineheight / 2) * step;
+        //printf("X");
+
+        if ((int)texpos + step > 63)
+            printf("OUPS\n");
         while(y++ < params->ray->drawend)
         {
+                params->color->a = txtdata[texx * 4 + texy * sizeline + 0];
+                params->color->r = txtdata[texx * 4 + texy * sizeline + 1];
+                params->color->g = txtdata[texx * 4 + texy * sizeline + 2];
+                params->color->b = txtdata[texx * 4 + texy * sizeline + 3];
+            //printf("?");
+            ft_pixel_to_image(x, y, params);
             texy = (int)texpos;
             texpos += step;
         }
-        params->color->r = txtdata[texy * 4 + texx * sizeline + 0];
-        params->color->g = txtdata[texy * 4 + texx * sizeline + 1];
-        params->color->b = txtdata[texy * 4 + texx * sizeline + 2]; 
-        printf("%d\n", texy);
-        //printf("%d\n", texx);
-        //printf("r = %hhu\n", params->color->r);
-        //printf("g = %hhu\n", params->color->g);
-        //printf("b = %hhu\n", params->color->b);
         
-        verline(x, ray->drawstart, ray->drawend, params);
-    }  
-    return;    
+    }
+    return;
+    
 }

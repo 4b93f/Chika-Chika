@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/01 19:36:09 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/02 20:55:15 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,6 +250,7 @@ int main(int argc, char **argv)
     mlx_hook(ray->window, 2, 1L << 0, key_pressed, params);
     mlx_hook(ray->window, 3, 1L<< 0, key_released, params);
     mlx_loop_hook(ray->mlx, start, params);
+    system("leaks a.out");
     mlx_loop(ray->mlx);
     //ft_free_struct(params);
 }
