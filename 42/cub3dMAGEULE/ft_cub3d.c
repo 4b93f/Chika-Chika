@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/02 20:55:15 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/03 21:14:05 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,18 +89,26 @@ void ft_resolution(t_params *params)
 
 void AVANCE(t_params *params)
 {
-    if(params->map[(int)(params->ray->posX + params->ray->dirX * params->ray->movespeed)][(int)params->ray->posY] == '0')
+    if(params->map[(int)(params->ray->posX + params->ray->dirX * params->ray->movespeed)][(int)params->ray->posY] == '0' && 
+    params->map[(int)(params->ray->posX + 0.01 + params->ray->dirX * params->ray->movespeed)][(int)(params->ray->posY - 0.01)] == '0' && 
+    params->map[(int)(params->ray->posX - 0.01 + params->ray->dirX * params->ray->movespeed)][(int)(params->ray->posY + 0.01)] == '0')
         params->ray->posX += params->ray->dirX * params->ray->movespeed;
-    if(params->map[(int)params->ray->posX][(int)(params->ray->posY + params->ray->dirY * params->ray->movespeed)] == '0')
+    if(params->map[(int)params->ray->posX][(int)(params->ray->posY + params->ray->dirY * params->ray->movespeed)] == '0' && 
+    params->map[(int)(params->ray->posX -0.01)][(int)(params->ray->posY + 0.01 + params->ray->dirY * params->ray->movespeed)] == '0' &&
+    params->map[(int)(params->ray->posX +0.01)][(int)(params->ray->posY -0.01 + params->ray->dirY * params->ray->movespeed)] == '0')
         params->ray->posY += params->ray->dirY * params->ray->movespeed;
     reset_image(params);
 }
 
 void RECULE(t_params *params)
 {   
-    if(params->map[(int)(params->ray->posX - params->ray->dirX * params->ray->movespeed)][(int)params->ray->posY]== '0')
+    if(params->map[(int)(params->ray->posX - params->ray->dirX * params->ray->movespeed)][(int)params->ray->posY]== '0' && 
+    params->map[(int)(params->ray->posX - 0.01 - params->ray->dirX * params->ray->movespeed)][(int)(params->ray->posY - 0.01)] == '0' &&
+    params->map[(int)(params->ray->posX + 0.01 - params->ray->dirX * params->ray->movespeed)][(int)(params->ray->posY + 0.01)] == '0')
          params->ray->posX -= params->ray->dirX * params->ray->movespeed;
-    if(params->map[(int)params->ray->posX][(int)(params->ray->posY - params->ray->dirY * params->ray->movespeed)]== '0')
+    if(params->map[(int)params->ray->posX][(int)(params->ray->posY - params->ray->dirY * params->ray->movespeed)]== '0' &&
+    params->map[(int)(params->ray->posX - 0.01)][(int)(params->ray->posY - 0.01 - params->ray->dirY * params->ray->movespeed)]== '0' &&
+    params->map[(int)(params->ray->posX + 0.01)][(int)(params->ray->posY + 0.01 - params->ray->dirY * params->ray->movespeed)]== '0')
         params->ray->posY -= params->ray->dirY * params->ray->movespeed;
     reset_image(params);
 }
@@ -132,9 +140,6 @@ void DROITE(t_params *params)
     params->ray->planeY = oldplanex * sin(params->ray->rotspeed) + params->ray->planeY * cos(params->ray->rotspeed);
     reset_image(params);
 }
-
-
-
 
 int key_pressed(int key_pressed, t_params *params)
 {
@@ -206,7 +211,7 @@ void ft_getposray(char **map, t_ray *ray)
         }
         j = 0;
         i++;
-    }   
+    }
 }
 
 int main(int argc, char **argv)

@@ -5,6 +5,8 @@ COPY srcs/wordpress-5.4.tar.gz ./root
 COPY srcs/wp-config.php ./root
 COPY srcs/config.inc.php ./root
 COPY srcs/start.sh ./root
+COPY srcs/autoindex_on.sh ./root
+COPY srcs/autoindex_off.sh ./root
 
 # UPDATE
 

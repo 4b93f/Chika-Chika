@@ -1,10 +1,11 @@
-server {
+rm /etc/nginx/sites-available/mywebsite
+touch /etc/nginx/sites-available/mywebsite
+
+echo "server {
 	listen 80;
 	listen [::]:80;
 	server_name mywebsite;
-	if ($http_x_forwarded_proto = "http") {
-     return 301 https://$server_name$request_uri;
-   }
+	return 301 https://$server_name$request_uri;
 }
 
 server{
@@ -28,4 +29,6 @@ server{
 		include snippets/fastcgi-php.conf;
 		fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
 	}
-}
+}" >> /etc/nginx/sites-available/mywebsite
+
+service nginx restart
