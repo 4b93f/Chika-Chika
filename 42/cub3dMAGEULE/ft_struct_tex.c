@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_struct_image.c                                  :+:      :+:    :+:   */
+/*   ft_struct_tex.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/15 20:40:28 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/04 17:33:12 by chly-huc         ###   ########.fr       */
+/*   Created: 2020/10/04 17:45:32 by chly-huc          #+#    #+#             */
+/*   Updated: 2020/10/04 18:12:43 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_image ft_create_image()
+t_tex ft_create_tex()
 {
-    t_image image;
-    image.img_width = 0;
-    image.img_height = 0;
-    image.save = 0;
-    image.img = NULL;
-    image.imgdata = NULL;
-    image.imgsave = NULL;
-    return(image);
+    t_tex tex;
+    tex.tex_width = 0;
+    tex.tex_height = 0;
+    tex.tex = malloc(sizeof(char *) * 4);
+    return(tex);
 }
 
-t_image *ft_malloc_image()
+t_tex *ft_malloc_tex()
 {
-    t_image *malloc_image;
-    malloc_image = malloc(sizeof(t_image));
-    *malloc_image = ft_create_image();
-    return(malloc_image);
+    t_tex *malloc_tex;
+    malloc_tex = malloc(sizeof(t_tex));
+    *malloc_tex = ft_create_tex();
+    return(malloc_tex);
 }

@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/10/03 19:38:14 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/04 18:42:47 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,14 @@ void verline(int x, int drawstart, int drawend, t_params *params)
         ft_pixel_to_image(x, drawstart, params);
 }
 
+
 void ft_raycast(t_params *params,t_ray *ray, t_color *color)
 {
     int x;
-    int img_width;
-    int img_height;
-    int bpp;
-    int sizeline;
-    int endian;
+    int texnum = 0;
     void *txt;
     
-    void *texture;
-    char *txtdata;
-    texture = mlx_xpm_file_to_image(params->ray->mlx, "./textures/north.xpm", &img_width, &img_height);
-    txtdata = mlx_get_data_addr(texture, &bpp, &sizeline, &endian);
-    
     x = 0;
-
     double texpos;
     double step;
     int texy = 0;
@@ -92,12 +83,16 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
                 ray->sidedistX += ray->deltadistX;
                 ray->mapX += ray->stepX;
                 ray->side = 0;
+                texnum = ray->raydirX < 0 ? 2 : 3;
+            //si ray x < 0 alors load texture 0 sinon texture 2
             }
             else
             {
                 ray->sidedistY += ray->deltadistY;
                 ray->mapY += ray->stepY;
                 ray->side = 1;
+                texnum = ray->raydirY < 0 ? 1 : 0;
+            //si ray y < 0 alors load texture 1 sinon texture 3
             }
             if (params->map[ray->mapX][ray->mapY] == '1') 
                 ray->hit = 1;
@@ -150,11 +145,10 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
         
         while(y++ < params->ray->drawend)
         {
-                params->color->b = txtdata[texx * 4 + texy * sizeline + 0];
-                params->color->g = txtdata[texx * 4 + texy * sizeline + 1];
-                params->color->r = txtdata[texx * 4 + texy * sizeline + 2];
-                params->color->a = txtdata[texx * 4 + texy * sizeline + 3];
-            //printf("?");
+                params->color->b = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 0];
+                params->color->g = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 1];
+                params->color->r = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 2];
+                params->color->a = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 3];
             ft_pixel_to_image(x, y, params);
             texy = (int)texpos;
             texpos += step;

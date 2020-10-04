@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/03 21:14:05 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/04 18:56:11 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void save(t_params *params)
     unsigned int filesize = 54 + imgsize;
     
     char HEADER[54] = {};
-    memcpy(HEADER, "BM", 2);
+    memcpy(HEADER, filetype, 2);
     memcpy(HEADER + 2, &filesize, 4);
     memcpy(HEADER + 10, &pixeldataoffset, 4);
     memcpy(HEADER + 14, &headersize, 4);
@@ -95,7 +95,7 @@ void AVANCE(t_params *params)
         params->ray->posX += params->ray->dirX * params->ray->movespeed;
     if(params->map[(int)params->ray->posX][(int)(params->ray->posY + params->ray->dirY * params->ray->movespeed)] == '0' && 
     params->map[(int)(params->ray->posX -0.01)][(int)(params->ray->posY + 0.01 + params->ray->dirY * params->ray->movespeed)] == '0' &&
-    params->map[(int)(params->ray->posX +0.01)][(int)(params->ray->posY -0.01 + params->ray->dirY * params->ray->movespeed)] == '0')
+    params->map[(int)(params->ray->posX +0.01)][(int)(params->ray->posY - 0.01 + params->ray->dirY * params->ray->movespeed)] == '0')
         params->ray->posY += params->ray->dirY * params->ray->movespeed;
     reset_image(params);
 }
@@ -219,20 +219,20 @@ int main(int argc, char **argv)
     if (argc != 2)
         exit(0);
     int fd;
-    int bpp;
-    int sizeline;
-    int endian;
     fd = open(argv[1], O_RDONLY);
     t_params *params;
     t_ray *ray;
     t_color *color;
     t_image *image;
-    t_event * event;
+    t_event *event;
+    t_tex *tex;
     
         
     params = ft_malloc_params();
     color = ft_malloc_color();
     event = ft_malloc_event();
+    image = ft_malloc_image();
+    tex = ft_malloc_tex();
     if (search_params(params, fd) == 0)
         ft_error();
     ft_resolution(params);
@@ -240,11 +240,12 @@ int main(int argc, char **argv)
     params->color = color;
     params->ray = ray;
     params->event = event;
-    image = ft_malloc_image();
+    params->image = image;
+    params->tex = tex;
+    ft_get_tex(params);
     image->img = mlx_new_image(ray->mlx, 900, 600);
     image->imgdata = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
     image->imgsave = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
-    params->image = image;
     if (argv[2] != NULL && strncmp(argv[2], "--save", 4) == 0)
         params->image->save = 1;
     if (params->map_find == 0)

@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 20:21:51 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/01 19:23:29 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/04 16:56:04 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-
+/*
 int     main(void)
 {
     
@@ -43,7 +43,7 @@ int     main(void)
     system("leaks a.out");
     mlx_loop(mlx);
 }
-
+*/
 
 /*
 int main(void)
@@ -97,3 +97,22 @@ int main(void)
     printf("color = %hhu", imgdata[4 * bytes_in_width + 4 * 4 + 2]);
     return 0;
 }*/
+
+int main()
+{
+    char **texture;
+
+    texture = malloc(sizeof(char) * 1);
+    texture[0] = "OUI";
+    texture[1] = "NON";
+    texture[2] = "AH";
+    texture[3] = "ORNOT";
+
+    int i  = 0;
+    while(texture[i])
+    {
+        printf("%s\n", texture[i]);
+        i++;
+    }
+    system("leaks a.out");
+}

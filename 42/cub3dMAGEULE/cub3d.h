@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/02 20:46:46 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/04 18:15:00 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ typedef struct s_image
   int bpp;
   int sizeline;
   int endian;
+  int img_width;
+  int img_height;
   void *img;
   char *imgdata;
 
@@ -92,6 +94,16 @@ typedef struct s_image
   char *imgsave;
   
 }               t_image;
+
+typedef struct s_tex
+{
+  int bpp;
+  int sizeline;
+  int endian;
+  int tex_width;
+  int tex_height;
+  char **tex;
+}               t_tex;
 
 typedef struct s_params
 {
@@ -112,6 +124,7 @@ typedef struct s_params
   t_color *color;
   t_image *image;
   t_event *event;
+  t_tex *tex;
 }              t_params;
 
 char	*ft_strdup(const char *s);
@@ -128,6 +141,8 @@ t_ray *ft_malloc_ray();
 t_color *ft_malloc_color();
 t_image *ft_malloc_image();
 t_event *ft_malloc_event();
+t_tex *ft_malloc_tex();
+void ft_get_tex(t_params *params);
 void ft_pixel_to_image(int x, int y, t_params *params);
 
 #endif
