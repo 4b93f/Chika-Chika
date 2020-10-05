@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/10/04 18:42:47 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/05 20:00:24 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void ft_pixel_to_image(int x, int y, t_params *params)
     params->image->imgdata[x * 4 + y * params->image->sizeline + 3] = params->color->a;
 }
 
-
 void verline(int x, int drawstart, int drawend, t_params *params)
 {
     while (++drawstart <= drawend)
@@ -36,6 +35,7 @@ void verline(int x, int drawstart, int drawend, t_params *params)
 
 void ft_raycast(t_params *params,t_ray *ray, t_color *color)
 {
+
     int x;
     int texnum = 0;
     void *txt;
@@ -134,37 +134,34 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
         int floor = 0;
         int cell = params->ray->drawend;
         while(floor < params->ray->drawstart)
-        {
-                params->color->b = (unsigned char)255;
-                params->color->g = (unsigned char)0;
-                params->color->r = (unsigned char)0;
-                params->color->a = (unsigned char)0;
-                ft_pixel_to_image(x, floor, params);
-                floor++;
+        {        
+            params->color->b = params->color->floor_b;
+            params->color->g = params->color->floor_g;
+            params->color->r = params->color->floor_r;
+            params->color->a = (unsigned char)0;
+            ft_pixel_to_image(x, floor, params);
+            floor++;
+                
         }
-        
         while(y++ < params->ray->drawend)
         {
-                params->color->b = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 0];
-                params->color->g = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 1];
-                params->color->r = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 2];
-                params->color->a = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 3];
+            params->color->b = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 0];
+            params->color->g = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 1];
+            params->color->r = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 2];
+            params->color->a = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 3];
             ft_pixel_to_image(x, y, params);
             texy = (int)texpos;
             texpos += step;
         }
-        
-        
         while(cell < params->screenheight)
         {
-                params->color->b = (unsigned char)0;
-                params->color->g = (unsigned char)255;
-                params->color->r = (unsigned char)0;
-                params->color->a = (unsigned char)0;
-                ft_pixel_to_image(x, cell, params);
-                cell++;
+            params->color->b = params->color->cell_b;
+            params->color->g = params->color->cell_g;
+            params->color->r = params->color->cell_r;
+            params->color->a = (unsigned char)0;
+            ft_pixel_to_image(x, cell, params);
+            cell++;            
         }
-
     }
     return;
     

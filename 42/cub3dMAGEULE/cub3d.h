@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/04 18:15:00 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/05 20:18:43 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ typedef struct s_color
   unsigned char r;
   unsigned char g;
   unsigned char b;
+  int cell_r;
+  int cell_g;
+  int cell_b;
+  int floor_r;
+  int floor_g;
+  int floor_b;
 }               t_color;
 
 
@@ -118,7 +124,9 @@ typedef struct s_params
   char *textsp;
   char *textp;
   char *colorf;
+  char **argbcolorf;
   char *colorc;
+  char **argbcolorc;
   char **map;
   t_ray *ray;
   t_color *color;

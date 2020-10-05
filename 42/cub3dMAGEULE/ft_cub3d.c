@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/04 18:56:11 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/05 20:19:53 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void ft_resolution(t_params *params)
     tmp = ft_split(params->res, ' ');
     params->screenwidth = ft_atoi(tmp[0]);
     params->screenheight = ft_atoi(tmp[1]);
+    printf("%d\n", params->screenwidth);
     return;
 }
 
@@ -233,11 +234,11 @@ int main(int argc, char **argv)
     event = ft_malloc_event();
     image = ft_malloc_image();
     tex = ft_malloc_tex();
+    params->color = color;
     if (search_params(params, fd) == 0)
         ft_error();
     ft_resolution(params);
     ray = ft_malloc_ray(params);
-    params->color = color;
     params->ray = ray;
     params->event = event;
     params->image = image;
@@ -256,7 +257,6 @@ int main(int argc, char **argv)
     mlx_hook(ray->window, 2, 1L << 0, key_pressed, params);
     mlx_hook(ray->window, 3, 1L<< 0, key_released, params);
     mlx_loop_hook(ray->mlx, start, params);
-    system("leaks a.out");
     mlx_loop(ray->mlx);
     //ft_free_struct(params);
 }

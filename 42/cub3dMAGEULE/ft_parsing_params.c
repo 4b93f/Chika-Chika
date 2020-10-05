@@ -51,6 +51,14 @@ int search_params(t_params *params, int fd)
     params->textea = ft_strtrim(params->textea, " ");
     params->colorf = ft_strtrim(params->colorf, " ");
     params->colorc = ft_strtrim(params->colorc, " ");
+    params->argbcolorf = ft_split(params->colorf, ',');
+    params->argbcolorc = ft_split(params->colorc, ',');
     i++;
+    params->color->cell_r = ft_atoi(params->argbcolorc[0]);
+    params->color->cell_g = ft_atoi(params->argbcolorc[1]);
+    params->color->cell_b = ft_atoi(params->argbcolorc[2]);
+    params->color->floor_r = ft_atoi(params->argbcolorf[0]);
+    params->color->floor_g = ft_atoi(params->argbcolorf[1]);
+    params->color->floor_b = ft_atoi(params->argbcolorf[2]);
     return(TRUE);
 }

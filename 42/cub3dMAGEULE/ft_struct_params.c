@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 01:14:46 by root              #+#    #+#             */
-/*   Updated: 2020/10/02 20:48:50 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/05 20:16:24 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ t_params ft_create_params()
     params.screenwidth = 0;
     params.screenheight = 0;
     params.map_find = 0;
-    params.res = NULL;
+    params.screenwidth = 0;
+    params.screenheight = 0;
+    params.res = malloc(sizeof(char*) * 2);
     params.textno = NULL;
     params.textso = NULL;
     params.textwe = NULL;
@@ -26,7 +28,9 @@ t_params ft_create_params()
     params.textsp = NULL;
     params.textp = NULL;
     params.colorc = NULL;
+    params.argbcolorc = malloc(sizeof(char*) * 3);
     params.colorf = NULL;
+    params.argbcolorf = malloc(sizeof(char*) * 3);
     params.map = NULL;
     return(params);
 }
