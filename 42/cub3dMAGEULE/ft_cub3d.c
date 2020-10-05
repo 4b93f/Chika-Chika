@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/05 20:19:53 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/05 23:30:05 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 #define mapWidth 24
 #define mapHeight 24
-#define screenWidth 600
-#define screenHeight 900
 #define txtH 64
 #define txtW 64
 
@@ -25,8 +23,8 @@ void save(t_params *params)
     int fd;
     char *filetype = "BM";
     unsigned int headersize = 40;
-    int img_height = screenWidth;
-    int img_width = screenHeight;
+    int img_height = params->screenwidth;
+    int img_width = params->screenheight;
     unsigned int bpp = 32;
     int bytes_in_width = ((img_width * bpp + 31) / 32) * 4;
     unsigned int planes = 1;
@@ -45,8 +43,6 @@ void save(t_params *params)
     memcpy(HEADER + 26 , &planes, 2);
     memcpy(HEADER + 28, &bpp, 4);
     memcpy(HEADER + 34, &imgsize, 4);
-    
-
     fd = open("test.bmp", O_WRONLY | O_CREAT, S_IRWXU);
     write(fd, HEADER, 54);
     write(fd, params->image->imgdata, imgsize);
@@ -61,7 +57,7 @@ void reset_image(t_params *params)
     unsigned char g = 0;
     unsigned char b = 0;
     
-    while(x < (600 * 900))
+    while(x < (params->screenwidth * params->screenheight))
     {
         params->image->imgdata[x * 4 + y * params->image->sizeline] = r;
         params->image->imgdata[x * 4 + y * params->image->sizeline + 1] = g;
@@ -79,12 +75,16 @@ void ft_error()
 
 void ft_resolution(t_params *params)
 {
-    char **tmp;
+    char **tmp; 
+    int res_x;
+    int res_y;
     
     tmp = ft_split(params->res, ' ');
+    mlx_get_screen_size(params->ray->mlx, &res_x, &res_y);
     params->screenwidth = ft_atoi(tmp[0]);
     params->screenheight = ft_atoi(tmp[1]);
-    printf("%d\n", params->screenwidth);
+    params->screenwidth = params->screenwidth > res_x ? res_x : params->screenwidth;
+    params->screenheight = params->screenheight > res_y ? res_y : params->screenheight;
     return;
 }
 
@@ -95,8 +95,8 @@ void AVANCE(t_params *params)
     params->map[(int)(params->ray->posX - 0.01 + params->ray->dirX * params->ray->movespeed)][(int)(params->ray->posY + 0.01)] == '0')
         params->ray->posX += params->ray->dirX * params->ray->movespeed;
     if(params->map[(int)params->ray->posX][(int)(params->ray->posY + params->ray->dirY * params->ray->movespeed)] == '0' && 
-    params->map[(int)(params->ray->posX -0.01)][(int)(params->ray->posY + 0.01 + params->ray->dirY * params->ray->movespeed)] == '0' &&
-    params->map[(int)(params->ray->posX +0.01)][(int)(params->ray->posY - 0.01 + params->ray->dirY * params->ray->movespeed)] == '0')
+    params->map[(int)(params->ray->posX - 0.01)][(int)(params->ray->posY + 0.01 + params->ray->dirY * params->ray->movespeed)] == '0' &&
+    params->map[(int)(params->ray->posX + 0.01)][(int)(params->ray->posY - 0.01 + params->ray->dirY * params->ray->movespeed)] == '0')
         params->ray->posY += params->ray->dirY * params->ray->movespeed;
     reset_image(params);
 }
@@ -238,13 +238,14 @@ int main(int argc, char **argv)
     if (search_params(params, fd) == 0)
         ft_error();
     ft_resolution(params);
+    //printf("res = %d %d\n", params->screenwidth, params->screenheight);
     ray = ft_malloc_ray(params);
     params->ray = ray;
     params->event = event;
     params->image = image;
     params->tex = tex;
     ft_get_tex(params);
-    image->img = mlx_new_image(ray->mlx, 900, 600);
+    image->img = mlx_new_image(ray->mlx, params->screenwidth, params->screenheight);
     image->imgdata = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
     image->imgsave = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
     if (argv[2] != NULL && strncmp(argv[2], "--save", 4) == 0)

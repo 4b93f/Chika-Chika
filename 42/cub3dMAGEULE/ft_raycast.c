@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/10/05 20:00:24 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/05 20:44:36 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
     int texy = 0;
     int y;
     int texx;
+    //printf("oui = %d\n", params->screenheight);
     while(++x < params->screenwidth)
     {
         ray->hit = 0;
