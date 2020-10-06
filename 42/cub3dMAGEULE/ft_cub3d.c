@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/05 23:30:05 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/06 23:34:07 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,21 @@ void ft_resolution(t_params *params)
 
 void AVANCE(t_params *params)
 {
+    //printf("pos joueur = {%f} {%f}\n ", params->ray->posX, params->ray->posY);
     if(params->map[(int)(params->ray->posX + params->ray->dirX * params->ray->movespeed)][(int)params->ray->posY] == '0' && 
     params->map[(int)(params->ray->posX + 0.01 + params->ray->dirX * params->ray->movespeed)][(int)(params->ray->posY - 0.01)] == '0' && 
     params->map[(int)(params->ray->posX - 0.01 + params->ray->dirX * params->ray->movespeed)][(int)(params->ray->posY + 0.01)] == '0')
+    {
+        printf("OUI\n");
         params->ray->posX += params->ray->dirX * params->ray->movespeed;
+    }
     if(params->map[(int)params->ray->posX][(int)(params->ray->posY + params->ray->dirY * params->ray->movespeed)] == '0' && 
     params->map[(int)(params->ray->posX - 0.01)][(int)(params->ray->posY + 0.01 + params->ray->dirY * params->ray->movespeed)] == '0' &&
     params->map[(int)(params->ray->posX + 0.01)][(int)(params->ray->posY - 0.01 + params->ray->dirY * params->ray->movespeed)] == '0')
+    {
+        printf("non\n");
         params->ray->posY += params->ray->dirY * params->ray->movespeed;
+    }
     reset_image(params);
 }
 
@@ -107,10 +114,36 @@ void RECULE(t_params *params)
     params->map[(int)(params->ray->posX - 0.01 - params->ray->dirX * params->ray->movespeed)][(int)(params->ray->posY - 0.01)] == '0' &&
     params->map[(int)(params->ray->posX + 0.01 - params->ray->dirX * params->ray->movespeed)][(int)(params->ray->posY + 0.01)] == '0')
          params->ray->posX -= params->ray->dirX * params->ray->movespeed;
+
     if(params->map[(int)params->ray->posX][(int)(params->ray->posY - params->ray->dirY * params->ray->movespeed)]== '0' &&
-    params->map[(int)(params->ray->posX - 0.01)][(int)(params->ray->posY - 0.01 - params->ray->dirY * params->ray->movespeed)]== '0' &&
+    params->map[(int)(params->ray->posX - 0.01)][(int)(params->ray->posY + 0.01 - params->ray->dirY * params->ray->movespeed)]== '0' &&
     params->map[(int)(params->ray->posX + 0.01)][(int)(params->ray->posY + 0.01 - params->ray->dirY * params->ray->movespeed)]== '0')
         params->ray->posY -= params->ray->dirY * params->ray->movespeed;
+    reset_image(params);
+}
+
+        
+void STRAFE_GAUCHE(t_params *params)
+{
+    //printf("{%f} {%f}\n", params->ray->posX, params->ray->posY);
+    printf("WHERE I AM = %c\n", params->map[(int)params->ray->posX][(int)params->ray->posY]);
+    if (params->map[(int)(params->ray->posX - params->ray->planeX * params->ray->movespeed)][(int)(params->ray->posY)] == '0' &&
+    params->map[(int)(params->ray->posX - params->ray->planeX * params->ray->movespeed)][(int)(params->ray->posY - 0.01)] == '0')
+        params->ray->posX -=  params->ray->planeX * params->ray->movespeed;
+    if (params->map[(int)params->ray->posX][(int)(params->ray->posY - params->ray->planeY * params->ray->movespeed)] == '0' &&
+    params->map[(int)(params->ray->posX + 0.01)][(int)(params->ray->posY - 0.01 - params->ray->planeY * params->ray->movespeed)] == '0')
+        params->ray->posY -=  params->ray->planeY * params->ray->movespeed;
+    reset_image(params);
+}
+
+void STRAFE_DROITE(t_params *params)
+{
+    if (params->map[(int)(params->ray->posX + params->ray->planeX * params->ray->movespeed)][(int)(params->ray->posY)] == '0' && 
+    params->map[(int)(params->ray->posX + params->ray->planeX * params->ray->movespeed)][(int)(params->ray->posY - 0.01)] == '0')
+        params->ray->posX += params->ray->planeX * params->ray->movespeed;
+    if (params->map[(int)params->ray->posX][(int)(params->ray->posY + params->ray->planeY * params->ray->movespeed)] == '0' &&
+    params->map[(int)(params->ray->posX - 0.01)][(int)(params->ray->posY - 0.01 + params->ray->planeY * params->ray->movespeed)] == '0')
+         params->ray->posY += params->ray->planeY * params->ray->movespeed;
     reset_image(params);
 }
 
@@ -144,16 +177,21 @@ void DROITE(t_params *params)
 
 int key_pressed(int key_pressed, t_params *params)
 {
-    if (key_pressed == 13)
+    //printf("%d\n", key_pressed);
+    if (key_pressed == 13) 
         params->event->up = 1;
-    if (key_pressed == 0)
-        params->event->left = 1;
     if (key_pressed == 1)
         params->event->down = 1;
+    if (key_pressed == 0)
+        params->event->strafe_gauche = 1;
     if (key_pressed == 2)
+        params->event->strafe_droite = 1;
+    if (key_pressed == 123)
+        params->event->left = 1;
+    if (key_pressed == 124)
         params->event->right = 1;
     if (key_pressed == 53)
-        exit(0); 
+        exit(0);
     return(0);
 }
 
@@ -161,12 +199,17 @@ int key_released(int key_released, t_params *params)
 {
     if (key_released == 13)
         params->event->up = 0;
-    if (key_released == 0)
-        params->event->left = 0;
     if (key_released == 1)
         params->event->down = 0;
+    if (key_released == 0)
+        params->event->strafe_gauche = 0;
     if (key_released == 2)
+        params->event->strafe_droite = 0;
+    if (key_released == 123)
+        params->event->left = 0;
+    if (key_released == 124)
         params->event->right = 0;
+
     return(0);
 }
 
@@ -174,10 +217,14 @@ void key_event(t_params *params)
 {
     if (params->event->up == 1)
         AVANCE(params);
-    if (params->event->left == 1)
-        GAUCHE(params);
     if (params->event->down == 1)
         RECULE(params);
+    if(params->event->strafe_gauche == 1)
+        STRAFE_GAUCHE(params);
+    if (params->event->strafe_droite == 1)
+        STRAFE_DROITE(params);
+    if (params->event->left == 1)
+        GAUCHE(params);
     if (params->event->right == 1)
         DROITE(params);
 }

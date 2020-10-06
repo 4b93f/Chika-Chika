@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 20:21:51 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/05 23:07:55 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/06 17:39:52 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,13 +118,20 @@ int main()
 }
 */
 
+int start(t_params *params)
+{
+    return (1);
+}
+
 int main()
 {
     void *mlx;
-    int width;
-    int height;
+    void *win;
+    t_params *params;
 
+    params = NULL;
     mlx = mlx_init();
-    mlx_get_screen_size(mlx, &width, &height);
-    printf("%d\n", width);
+    win = mlx_new_window(mlx, 900, 900, "TITLE");
+    mlx_loop_hook(mlx, start, params);
+    //printf("%d\n", width);
 }
