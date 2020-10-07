@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/06 17:52:34 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/07 20:08:03 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,13 @@ typedef struct s_tex
   char **tex;
 }               t_tex;
 
+typedef struct s_sprite
+{
+  double x;
+  double y;
+  int texture;
+}              t_sprite;
+
 typedef struct s_params
 {
   int map_find;
@@ -137,22 +144,23 @@ typedef struct s_params
   t_tex *tex;
 }              t_params;
 
+int ft_check_map(char **map);
+int		ft_isdigit(int c);
 char	*ft_strdup(const char *s);
+int search_params(t_params *params, int fd);
 char **final_pars(int fd);
 char **ft_map_parsing(int fd, char *firstline);
-t_params *ft_malloc_params();
 void ft_free_struct(t_params *to_free);
-int ft_check_map(char **map);
 void ft_error(void);
-int		ft_isdigit(int c);
-int search_params(t_params *params, int fd);
 void ft_raycast(t_params *params, t_ray *ray, t_color *color);
+void ft_get_tex(t_params *params);
+void ft_pixel_to_image(int x, int y, t_params *params);
+t_params *ft_malloc_params();
 t_ray *ft_malloc_ray();
 t_color *ft_malloc_color();
 t_image *ft_malloc_image();
 t_event *ft_malloc_event();
+t_sprite *ft_malloc_sprite();
 t_tex *ft_malloc_tex();
-void ft_get_tex(t_params *params);
-void ft_pixel_to_image(int x, int y, t_params *params);
 
 #endif

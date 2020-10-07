@@ -6,21 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 16:30:33 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/04 18:19:29 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/07 20:14:17 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	ft_bzero(void *b, size_t n)
-{
-	unsigned char	*str;
-
-	str = (unsigned char *)b;
-	while (n--)
-		*str++ = '\0';
-	return ;
-}
 
 char *ft_new_tex(t_params *params, char *path)
 {

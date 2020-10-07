@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/10/05 20:44:36 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/07 21:28:53 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,22 @@ void verline(int x, int drawstart, int drawend, t_params *params)
     while (++drawstart <= drawend)
         ft_pixel_to_image(x, drawstart, params);
 }
+
+/*
+void tmp(t_params *params)
+{
+    numsprite = 19
+    double zbuffer[screenwidth];
+    int sprite_order[numsprite];
+    double sprite_distance[numsprite];
+    void sort_sprites(int * order, double *dist, int amount);
+
+    
+}
+
+
+*/
+
 
 
 void ft_raycast(t_params *params,t_ray *ray, t_color *color)
@@ -110,8 +126,6 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
         if (ray->drawend >= params->screenheight)
             ray->drawend = params->screenheight - 1;
         
-
-        
         double wallx;
         if(params->ray->side == 0)
             wallx = params->ray->posY + params->ray->perpwalldist * params->ray->raydirY;
@@ -163,6 +177,7 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
             ft_pixel_to_image(x, cell, params);
             cell++;            
         }
+        printf("!!!!\n");
     }
     return;
     
