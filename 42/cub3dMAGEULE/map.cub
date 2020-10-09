@@ -1,5 +1,6 @@
 R     900 600
-S            ./textures/pillar.xpm               
+S            ./textures/pillar.xpm         
+      
 NO           ./textures/north.xpm
 SO     ./textures/south.xpm           
 

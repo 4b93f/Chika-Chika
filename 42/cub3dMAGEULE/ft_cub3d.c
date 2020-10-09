@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/07 22:07:17 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/09 23:38:29 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,11 @@ void ft_resolution(t_params *params)
     int res_y;
     
     tmp = ft_split(params->res, ' ');
-    mlx_get_screen_size(params->ray->mlx, &res_x, &res_y);
+    //mlx_get_screen_size(params->ray->mlx, &res_x, &res_y);
     params->screenwidth = ft_atoi(tmp[0]);
     params->screenheight = ft_atoi(tmp[1]);
-    params->screenwidth = params->screenwidth > res_x ? res_x : params->screenwidth;
-    params->screenheight = params->screenheight > res_y ? res_y : params->screenheight;
+    //params->screenwidth = params->screenwidth > res_x ? res_x : params->screenwidth;
+    //params->screenheight = params->screenheight > res_y ? res_y : params->screenheight;
     return;
 }
 
@@ -119,7 +119,6 @@ void RECULE(t_params *params)
         params->ray->posY -= params->ray->dirY * 0.1;
     reset_image(params);
 }
-
         
 void STRAFE_GAUCHE(t_params *params)
 {
@@ -236,11 +235,11 @@ int mouse_event(t_params *params)
 
 int start(t_params *params)
 {
-    printf("!!!!\n");
+    //printf("!!!!!\n");
     ft_raycast(params, params->ray, params->color);
     if (params->image->save == 1)
         save(params);
-    mlx_put_image_to_window(params->ray->mlx, params->ray->window, params->image->img, 0,0);
+    mlx_put_image_to_window(params->ray->mlx, params->ray->window, params->sp->lol, 0,0);
     key_event(params);
     return(1);
 }
@@ -294,16 +293,18 @@ int main(int argc, char **argv)
     if (search_params(params, fd) == 0)
         ft_error();
     ft_resolution(params);
-    //printf("res = %d %d\n", params->screenwidth, params->screenheight);
     ray = ft_malloc_ray(params);
     params->ray = ray;
     params->event = event;
     params->image = image;
     params->tex = tex;
+    params->sp = sp;
     ft_get_tex(params);
+    ft_get_sprite(params, "./textures/pillar.xpm");
     image->img = mlx_new_image(ray->mlx, params->screenwidth, params->screenheight);
     image->imgdata = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
     image->imgsave = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
+    
     if (argv[2] != NULL && strncmp(argv[2], "--save", 4) == 0)
         params->image->save = 1;
     if (params->map_find == 0)

@@ -6,15 +6,15 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/10/07 21:28:53 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/09 23:35:59 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 // A CHANGER //
 
 #define txtH 64
 #define txtW 64
+#define numsprite 1
 #include "cub3d.h"
 
 void ft_pixel_to_image(int x, int y, t_params *params)
@@ -26,6 +26,14 @@ void ft_pixel_to_image(int x, int y, t_params *params)
     params->image->imgdata[x * 4 + y * params->image->sizeline + 3] = params->color->a;
 }
 
+void ft_sprite_to_image(int x, int y, t_params *params)
+{
+    params->sp->spdata[x * 4 + y * params->sp->sizeline + 0] = params->color->b;
+    params->sp->spdata[x * 4 + y * params->sp->sizeline + 1] = params->color->g;
+    params->sp->spdata[x * 4 + y * params->sp->sizeline + 2] = params->color->r;
+    params->sp->spdata[x * 4 + y * params->sp->sizeline + 3] = params->color->a;
+}
+
 void verline(int x, int drawstart, int drawend, t_params *params)
 {
     while (++drawstart <= drawend)
@@ -33,25 +41,81 @@ void verline(int x, int drawstart, int drawend, t_params *params)
 }
 
 /*
-void tmp(t_params *params)
+void tmp(t_params *params, t_sprite *sp)
 {
-    numsprite = 19
-    double zbuffer[screenwidth];
-    int sprite_order[numsprite];
+    ft_get_sprite(sp, params);
+    int z;
+    sp->x = 2;
+    sp->y = 6;
+    double zbuffer[params->screenwidth];  // 1D buffer
+
+    //for sorting sprite
+    int sprite_order[numsprite];    
     double sprite_distance[numsprite];
-    void sort_sprites(int * order, double *dist, int amount);
-
+    //
     
+    void sort_sprites(int * order, double *dist, int amount);
+    zbuffer[z] = params->ray->perpwalldist;
+    
+    
+    int i = -1;
+    
+    while(++i < numsprite)
+    {
+        sprite_order[i] = i;
+        sprite_distance[i] = ((params->ray->posX - sp->x) * (params->ray->posX - sp->x) * (params->ray->posY - sp->y));
+        
+    }
+    i = -1;    
+
+    while(i++ < numsprite)
+    {
+        double spriteX = sp->x - params->ray->posX;
+        double spriteY = sp->y - params->ray->posY;
+        
+        double invdet = 1.0 / (params->ray->planeX * params->ray->dirX - params->ray->dirX * params->ray->planeY);
+        double transformX = invdet * (params->ray->dirY * spriteX - params->ray->dirX * spriteY);
+        double transformY = invdet * (-params->ray->planeY * spriteX + params->ray->planeX * spriteY);
+        int sprite_screenX = ((int)(params->screenwidth / 2) * (1 + transformX / transformY));
+        int sprite_height = abs((int)(params->screenheight / transformY));
+        int drawstarY = -sprite_height / 2 + params->screenwidth / 2;
+        if (drawstarY < 0)
+            drawstarY = 0;
+        int drawendY = sprite_height / 2 + params->screenheight / 2;
+        if (drawendY < 0)
+            drawendY = 0;
+        
+        int sprite_width = abs((int)params->screenheight / transformY);
+        int drawstartX = -sprite_height / 2 + sprite_screenX;
+        if (drawstartX < 0)
+            drawstartX = 0;
+        int drawendX = sprite_width / 2 + sprite_screenX;
+        if (drawendX < 0)
+            drawendX = 0;
+
+        int spX = 0;
+        int spY = 0;;
+        int stripe = drawstartX - 1;
+        while(++stripe < drawendX)
+        {
+            spriteX = ((int)(256 * (stripe - (-sprite_width / 2 + sprite_screenX)) * txtW / sprite_width / 256));
+            if (transformY > 0 && stripe > 0 && stripe < params->screenwidth && transformY < zbuffer[stripe])
+            {
+                params->color->b = sp->sp[0][spX * 4 + spY * sp->sizeline];
+                params->color->g = sp->sp[0][spX * 4 + spY * sp->sizeline + 1];
+                params->color->r = sp->sp[0][spX * 4 + spY * sp->sizeline + 2];
+                params->color->a = sp->sp[0][spX * 4 + spY * sp->sizeline + 3];
+                ft_pixel_to_image(x, stripe, params);
+                int d = (stripe) * 256 - params->screenheight * 128 + sprite_height * 128;
+                spriteY = ((d * txtH) / sprite_height) / 256;
+            }
+        }
+    }
 }
-
-
 */
-
-
 
 void ft_raycast(t_params *params,t_ray *ray, t_color *color)
 {
-
     int x;
     int texnum = 0;
     void *txt;
@@ -177,7 +241,86 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
             ft_pixel_to_image(x, cell, params);
             cell++;            
         }
-        printf("!!!!\n");
+
+
+   
+        int z;
+        double zbuffer[params->screenwidth];  // 1D buffer
+        zbuffer[z] = params->ray->perpwalldist;
+        params->sp->x = 1;
+        params->sp->y = 14;
+
+        //for sorting sprite
+        int sprite_order[numsprite];    
+        double sprite_distance[numsprite];
+        //
+        
+        void sort_sprites(int * order, double *dist, int amount);
+        
+        
+        int i = 0;
+        
+        while(i < numsprite)
+        {
+            sprite_order[i] = i;
+            sprite_distance[i] = ((params->ray->posX - params->sp->x) * (params->ray->posX - params->sp->x) * (params->ray->posY - params->sp->y));
+            i++;
+        }
+        i = 0;    
+
+        while(i < numsprite)
+        {
+            double spriteX = params->sp->x - params->ray->posX;
+            double spriteY = params->sp->y - params->ray->posY;
+            
+            double invdet = 1.0 / (params->ray->planeX * params->ray->dirY - params->ray->dirX * params->ray->planeY);
+            double transformX = invdet * (params->ray->dirY * spriteX - params->ray->dirX * spriteY);
+            double transformY = invdet * (-params->ray->planeY * spriteX + params->ray->planeX * spriteY);
+            int sprite_screenX = (int)((params->screenwidth / 2) * (1 + transformX / transformY));
+            int sprite_height = abs((int)(params->screenheight / transformY));
+            int drawstarY = -sprite_height / 2 + (params->screenwidth / 2);
+            if (drawstarY < 0)
+                drawstarY = 0;
+            int drawendY = sprite_height / 2 + params->screenheight / 2;
+            if (drawendY >= params->screenheight)
+                drawendY = params->screenheight - 1;
+            
+            int sprite_width = abs((int)(params->screenheight / transformY));
+            int drawstartX = -sprite_width / 2 + sprite_screenX;
+            if (drawstartX < 0)
+                drawstartX = 0;
+            int drawendX = sprite_width / 2 + sprite_screenX;
+            if (drawendX >= params->screenwidth)
+                drawendX = params->screenwidth - 1;
+
+            int spX = 0;
+            int spY = 0;;
+            int stripe = drawstartX;
+            int Y = drawstarY;
+            while(stripe < drawendX)
+            {
+                spX = (int)(params->sp->sizeline * (stripe - (-sprite_width / 2 + sprite_screenX)) * params->sp->sp_width / sprite_width) / params->sp->sizeline;
+                if (transformY > 0 && stripe > 0 && stripe < params->screenwidth && transformY < zbuffer[stripe])
+                {
+                    while(Y < drawendY)
+                    {
+                        //printf("%d\n", stripe);
+                        params->color->b = (unsigned char)255;
+                        params->color->g = (unsigned char)0;
+                        params->color->r = (unsigned char)0;
+                        params->color->a = (unsigned char)0;
+                        ft_sprite_to_image(texy, texx, params);
+                        //printf("!!!!!!\n");
+                        //printf("!!!!!1\n");
+                        int d = Y * params->sp->sizeline - (params->screenheight * params->ray->camX);
+                        spY = ((d * params->sp->sp_height) / sprite_height) / params->sp->sizeline;
+                        Y++;
+                    }
+                }
+                stripe++;
+            }
+            i++;
+        }
     }
     return;
     

@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/07 20:08:03 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/09 23:38:01 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,16 @@ typedef struct s_tex
 
 typedef struct s_sprite
 {
+  int bpp;
+  int sizeline;
+  int endian;
+  int sp_width;
+  int sp_height;
   double x;
   double y;
-  int texture;
+  void *lol;
+  char *spdata;
+  char **sp;
 }              t_sprite;
 
 typedef struct s_params
@@ -139,9 +146,10 @@ typedef struct s_params
   char **map;
   t_ray *ray;
   t_color *color;
-  t_image *image;
   t_event *event;
+  t_image *image;
   t_tex *tex;
+  t_sprite *sp;
 }              t_params;
 
 int ft_check_map(char **map);
@@ -152,9 +160,10 @@ char **final_pars(int fd);
 char **ft_map_parsing(int fd, char *firstline);
 void ft_free_struct(t_params *to_free);
 void ft_error(void);
-void ft_raycast(t_params *params, t_ray *ray, t_color *color);
+void ft_raycast(t_params *params,t_ray *ray, t_color *color);
 void ft_get_tex(t_params *params);
 void ft_pixel_to_image(int x, int y, t_params *params);
+void ft_get_sprite(t_params *params, char *path);
 t_params *ft_malloc_params();
 t_ray *ft_malloc_ray();
 t_color *ft_malloc_color();
