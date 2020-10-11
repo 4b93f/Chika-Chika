@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/10/09 23:35:59 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/11 19:30:34 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,20 @@ void ft_pixel_to_image(int x, int y, t_params *params)
     params->image->imgdata[x * 4 + y * params->image->sizeline + 3] = params->color->a;
 }
 
-void ft_sprite_to_image(int x, int y, t_params *params)
+void ft_sprite_to_image(int x, int y, t_params *params, int Y, int stripe)
 {
-    params->sp->spdata[x * 4 + y * params->sp->sizeline + 0] = params->color->b;
-    params->sp->spdata[x * 4 + y * params->sp->sizeline + 1] = params->color->g;
-    params->sp->spdata[x * 4 + y * params->sp->sizeline + 2] = params->color->r;
-    params->sp->spdata[x * 4 + y * params->sp->sizeline + 3] = params->color->a;
+    /*
+    params->image->imgdata[x * 4 + y * params->image->sizeline + 0] = params->color->b;
+    params->image->imgdata[x * 4 + y * params->image->sizeline + 1] = params->color->g;
+    params->image->imgdata[x * 4 + y * params->image->sizeline + 2] = params->color->r;
+    params->image->imgdata[x * 4 + y * params->image->sizeline + 3] = params->color->a;
+    */
+    //printf("ok\n");
+    params->image->imgdata[stripe * 4 + Y * params->image->sizeline + 0] = params->sp->spdata[x * 4 + y * params->sp->sizeline + 0];
+    params->image->imgdata[stripe * 4 + Y * params->image->sizeline + 1] = params->sp->spdata[x * 4 + y * params->sp->sizeline + 1];
+    params->image->imgdata[stripe * 4 + Y * params->image->sizeline + 2] = params->sp->spdata[x * 4 + y * params->sp->sizeline + 2];
+    params->image->imgdata[stripe * 4 + Y * params->image->sizeline + 3] = params->sp->spdata[x * 4 + y * params->sp->sizeline + 3];
+    
 }
 
 void verline(int x, int drawstart, int drawend, t_params *params)
@@ -121,11 +129,12 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
     void *txt;
     
     x = 0;
-    double texpos;
-    double step;
+    double texpos = 0;;
+    double step = 0;;
     int texy = 0;
-    int y;
-    int texx;
+    int y = 0;
+    int texx = 0;;
+    int stripe;
     //printf("oui = %d\n", params->screenheight);
     while(++x < params->screenwidth)
     {
@@ -247,7 +256,7 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
         int z;
         double zbuffer[params->screenwidth];  // 1D buffer
         zbuffer[z] = params->ray->perpwalldist;
-        params->sp->x = 1;
+        params->sp->x = 2;
         params->sp->y = 14;
 
         //for sorting sprite
@@ -278,13 +287,13 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
             double transformY = invdet * (-params->ray->planeY * spriteX + params->ray->planeX * spriteY);
             int sprite_screenX = (int)((params->screenwidth / 2) * (1 + transformX / transformY));
             int sprite_height = abs((int)(params->screenheight / transformY));
-            int drawstarY = -sprite_height / 2 + (params->screenwidth / 2);
+            int drawstarY = -sprite_height / 2 + params->screenwidth / 2;
             if (drawstarY < 0)
                 drawstarY = 0;
             int drawendY = sprite_height / 2 + params->screenheight / 2;
             if (drawendY >= params->screenheight)
                 drawendY = params->screenheight - 1;
-            
+
             int sprite_width = abs((int)(params->screenheight / transformY));
             int drawstartX = -sprite_width / 2 + sprite_screenX;
             if (drawstartX < 0)
@@ -292,28 +301,31 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
             int drawendX = sprite_width / 2 + sprite_screenX;
             if (drawendX >= params->screenwidth)
                 drawendX = params->screenwidth - 1;
-
-            int spX = 0;
-            int spY = 0;;
-            int stripe = drawstartX;
+            stripe = drawstartX;
             int Y = drawstarY;
+            //printf("%d\n", drawstarY);
             while(stripe < drawendX)
             {
-                spX = (int)(params->sp->sizeline * (stripe - (-sprite_width / 2 + sprite_screenX)) * params->sp->sp_width / sprite_width) / params->sp->sizeline;
+                int spX = (int)(params->sp->sizeline * (stripe - (-sprite_width / 2 + sprite_screenX)) * txtW / sprite_width) / params->sp->sizeline;
                 if (transformY > 0 && stripe > 0 && stripe < params->screenwidth && transformY < zbuffer[stripe])
                 {
                     while(Y < drawendY)
                     {
-                        //printf("%d\n", stripe);
-                        params->color->b = (unsigned char)255;
-                        params->color->g = (unsigned char)0;
-                        params->color->r = (unsigned char)0;
+                        
+                        int d = Y * 256 - params->screenheight * 128 + sprite_height * 128;
+                        int spY = ((d * txtH) / sprite_height) / 256;
+                        /*
                         params->color->a = (unsigned char)0;
-                        ft_sprite_to_image(texy, texx, params);
-                        //printf("!!!!!!\n");
-                        //printf("!!!!!1\n");
-                        int d = Y * params->sp->sizeline - (params->screenheight * params->ray->camX);
-                        spY = ((d * params->sp->sp_height) / sprite_height) / params->sp->sizeline;
+                        params->color->r = (unsigned char)255;
+                        params->color->g = (unsigned char)255;
+                        params->color->b = (unsigned char)0;
+                        */
+                        params->color->b = params->sp->spdata[spX * 4 + spY * params->sp->sizeline + 0];
+                        params->color->g = params->sp->spdata[spX * 4 + spY * params->sp->sizeline + 1];
+                        params->color->r = params->sp->spdata[spX * 4 + spY * params->sp->sizeline + 2];
+                        params->color->a = params->sp->spdata[spX * 4 + spY * params->sp->sizeline + 3];
+                        //printf("%d %d %d %d\n", params->color->a, params->color->r, params->color->g, params->color->b);
+                        ft_sprite_to_image(spY, spX, params, Y, stripe);
                         Y++;
                     }
                 }

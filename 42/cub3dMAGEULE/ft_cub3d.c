@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/09 23:38:29 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/11 18:08:27 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,7 @@ int start(t_params *params)
     ft_raycast(params, params->ray, params->color);
     if (params->image->save == 1)
         save(params);
-    mlx_put_image_to_window(params->ray->mlx, params->ray->window, params->sp->lol, 0,0);
+    mlx_put_image_to_window(params->ray->mlx, params->ray->window, params->image->img, 0,0);
     key_event(params);
     return(1);
 }
