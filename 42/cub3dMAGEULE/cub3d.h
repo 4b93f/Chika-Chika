@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/11 17:23:37 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/12 17:30:14 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@
 typedef struct s_color
 {
   unsigned char a;
-  unsigned char r;
-  unsigned char g;
-  unsigned char b;
+  int r;
+  int g;
+  int b;
   int cell_r;
   int cell_g;
   int cell_b;
