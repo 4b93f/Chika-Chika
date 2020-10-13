@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 16:30:33 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/09 22:43:55 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/13 18:54:04 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void ft_get_tex(t_params *params)
     params->tex->tex[1] = ft_new_tex(params, params->textso);
     params->tex->tex[2] = ft_new_tex(params, params->textwe);
     params->tex->tex[3] = ft_new_tex(params, params->textea);
+    params->tex->tex[4] = ft_new_tex(params, params->textf);
     return;
 }

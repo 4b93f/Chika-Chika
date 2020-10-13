@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/12 17:34:40 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/13 17:57:24 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,7 +300,7 @@ int main(int argc, char **argv)
     params->tex = tex;
     params->sp = sp;
     ft_get_tex(params);
-    ft_get_sprite(params, "./textures/pillar.xpm");
+    ft_get_sprite(params, params->textsp);
     image->img = mlx_new_image(ray->mlx, params->screenwidth, params->screenheight);
     image->imgdata = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
     image->imgsave = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);

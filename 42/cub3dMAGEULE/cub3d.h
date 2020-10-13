@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/12 17:30:14 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/13 19:58:11 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ typedef struct s_tex
 typedef struct s_sprite
 {
   int bpp;
+  int **sprite
   int sizeline;
   int endian;
   int sp_width;
@@ -141,6 +142,7 @@ typedef struct s_params
   char *textea;
   char *textsp;
   char *textp;
+  char *textf;
   char *colorf;
   char **argbcolorf;
   char *colorc;

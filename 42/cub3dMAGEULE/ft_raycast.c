@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/10/12 17:48:07 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/13 19:56:42 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 
 void ft_pixel_to_image(int x, int y, t_params *params)
 {
-    //printf("!");
     params->image->imgdata[x * 4 + y * params->image->sizeline + 0] = params->color->b;
     params->image->imgdata[x * 4 + y * params->image->sizeline + 1] = params->color->g;
     params->image->imgdata[x * 4 + y * params->image->sizeline + 2] = params->color->r;
@@ -29,6 +28,9 @@ void ft_pixel_to_image(int x, int y, t_params *params)
 
 void ft_sprite_to_image(int x, int y, t_params *params, int Y, int X)
 {
+    int isblack;
+
+    isblack = params->sp->spdata[x * 4 + y * params->sp->sizeline + 1] + params->sp->spdata[x * 4 + y * params->sp->sizeline + 2] + params->sp->spdata[x * 4 + y * params->sp->sizeline + 3];
     /*
     params->image->imgdata[x * 4 + y * params->image->sizeline + 0] = params->color->b;
     params->image->imgdata[x * 4 + y * params->image->sizeline + 1] = params->color->g;
@@ -36,10 +38,13 @@ void ft_sprite_to_image(int x, int y, t_params *params, int Y, int X)
     params->image->imgdata[x * 4 + y * params->image->sizeline + 3] = params->color->a;
     */
     //printf("ok\n");
-    params->image->imgdata[X * 4 + Y * params->image->sizeline + 0] = params->sp->spdata[x * 4 + y * params->sp->sizeline + 0];
-    params->image->imgdata[X * 4 + Y * params->image->sizeline + 1] = params->sp->spdata[x * 4 + y * params->sp->sizeline + 1];
-    params->image->imgdata[X * 4 + Y * params->image->sizeline + 2] = params->sp->spdata[x * 4 + y * params->sp->sizeline + 2];
-    params->image->imgdata[X * 4 + Y * params->image->sizeline + 3] = params->sp->spdata[x * 4 + y * params->sp->sizeline + 3];
+if (isblack)
+    {
+        params->image->imgdata[X * 4 + Y * params->image->sizeline + 0] = params->sp->spdata[x * 4 + y * params->sp->sizeline + 0];
+        params->image->imgdata[X * 4 + Y * params->image->sizeline + 1] = params->sp->spdata[x * 4 + y * params->sp->sizeline + 1];
+        params->image->imgdata[X * 4 + Y * params->image->sizeline + 2] = params->sp->spdata[x * 4 + y * params->sp->sizeline + 2];
+        params->image->imgdata[X * 4 + Y * params->image->sizeline + 3] = params->sp->spdata[x * 4 + y * params->sp->sizeline + 3];
+    }
     
 }
 
@@ -50,6 +55,11 @@ void verline(int x, int drawstart, int drawend, t_params *params)
 }
 
 void test(t_params *params, t_ray *ray, t_color *color, int x);
+
+void sortSprites(int* order, double* dist, int amount)
+{
+    
+}
 
 void ft_raycast(t_params *params,t_ray *ray, t_color *color)
 {
@@ -64,6 +74,48 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
     int y = 0;
     int texx = 0;
     double zbuffer[params->screenwidth];
+    int a = 0;
+    int tx = 0;
+    int ty = 0;
+    /*
+    while(a < params->screenheight)
+    {
+        float rayDirX0 = params->ray->dirX - params->ray->planeX;
+        float rayDirY0 = params->ray->dirY - params->ray->planeY;
+        float rayDirX1 = params->ray->dirX + params->ray->planeX;
+        float rayDirY1 = params->ray->dirY + params->ray->planeY;
+        int p = a - params->screenheight / 2;
+        
+        float posZ = 0.5 * params->screenheight;
+        float rowDistance = posZ / p;
+        
+        float floorStepX = rowDistance * (rayDirX1 - rayDirX0) / params->screenwidth;
+        float floorStepY = rowDistance * (rayDirY1 - rayDirY0) / params->screenwidth;
+        
+        float floorX = params->ray->posX + rowDistance * rayDirX0;
+        float floorY = params->ray->posY + rowDistance * rayDirY0;
+        int z = 0;
+        while(++z < params->screenwidth)
+        {
+            int cellX = (int)(floorX);
+            int cellY = (int)(floorY);
+        
+            params->color->b = params->tex->tex[4][tx * 4 + ty * params->tex->sizeline + 0];
+            params->color->g = params->tex->tex[4][tx * 4 + ty * params->tex->sizeline + 1];
+            params->color->r = params->tex->tex[4][tx * 4 + ty * params->tex->sizeline + 2];
+            params->color->a = params->tex->tex[4][tx * 4 + ty * params->tex->sizeline + 3];
+            ft_pixel_to_image(z, a,params);
+
+            tx = (int)(txtW * (floorX - cellX)) & (txtW - 1);
+            ty = (int)(txtH * (floorY - cellY)) & (txtH - 1);
+            floorX += floorStepX;
+            floorY += floorStepY;
+        }
+        a++;
+        
+    }
+    
+    */
     while(++x < params->screenwidth)
     {
         ray->hit = 0;
@@ -145,6 +197,7 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
 
         int floor = 0;
         int cell = params->ray->drawend;
+        
         while(floor < params->ray->drawstart)
         {        
             params->color->b = params->color->floor_b;
@@ -155,6 +208,7 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
             floor++;
                 
         }
+        
         zbuffer[x] = params->ray->perpwalldist;
         while(y++ < params->ray->drawend)
         {
@@ -169,7 +223,8 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
         }
         //printf("!\n");
     }
-        params->sp->x = 2;
+    
+        params->sp->x = 3;
         params->sp->y = 15;
 
         //for sorting sprite
@@ -220,7 +275,7 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
             //printf("trans = %f X = %d screen = %d buffer = %f\n", transformY, drawstartX, params->screenwidth, zbuffer[X]);
             while(X < drawendX)
             {
-                printf("transformY=%f X= %d screenwidth=%d zbuffer[X]=%f\n",  transformY, X, params->screenwidth, zbuffer[X]);
+                //printf("transformY=%f X= %d screenwidth=%d zbuffer[X]=%f\n",  transformY, X, params->screenwidth, zbuffer[X]);
                 int spX = (int)(256 * (X - (-sprite_width / 2 + sprite_screenX)) * txtW / sprite_width) / 256;
                 if (transformY > 0 && X > 0 && X < params->screenwidth && transformY < zbuffer[X])
                 {

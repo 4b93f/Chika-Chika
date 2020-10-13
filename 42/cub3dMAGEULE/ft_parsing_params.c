@@ -23,6 +23,8 @@ int search_params(t_params *params, int fd)
     {
         if (!strncmp("S ", line, 2))
             params->textsp = taking_info(line);
+        else if (!strncmp("FLOOR", line, 5))
+            params->textf = taking_info(line);
         else if (!strncmp("NO", line, 2))
             params->textno = taking_info(line);
         else if (!strncmp("SO", line, 2))

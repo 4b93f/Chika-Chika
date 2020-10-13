@@ -5,7 +5,8 @@ NO           ./textures/north.xpm
 SO     ./textures/south.xpm           
 
 WE                             ./textures/west.xpm          
-EA     ./textures/east.xpm    
+EA     ./textures/east.xpm
+FLOOR   ./textures/wood.xpm
 F 0   ,25    ,80
 C 145 , 0,   80
 
