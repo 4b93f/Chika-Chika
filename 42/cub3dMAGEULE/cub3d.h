@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/13 19:58:11 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/14 20:21:52 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,25 @@ typedef struct s_tex
 
 typedef struct s_sprite
 {
+  int x;
+  int y;
+}               t_sprite;
+
+typedef struct s_sprites
+{
+  int x;
+  int y;
+  struct s_sprite *next;
+}              t_sprites;
+
+typedef struct s_draw_sprite
+{
+  t_sprite *sprites;
   int bpp;
-  int **sprite
+  int *pos_sprite;
   int sizeline;
   int endian;
+  int numsprite;
   int sp_width;
   int sp_height;
   double x;
@@ -128,7 +143,7 @@ typedef struct s_sprite
   char *spdata;
   char *testdata;
   char **sp;
-}              t_sprite;
+}              t_draw_sprite;
 
 typedef struct s_params
 {
@@ -153,14 +168,16 @@ typedef struct s_params
   t_event *event;
   t_image *image;
   t_tex *tex;
-  t_sprite *sp;
+  t_draw_sprite *sp;
+  t_sprite *sprites;
 }              t_params;
 
-int ft_check_map(char **map);
+int ft_check_map(t_params *params,char **map);
 int		ft_isdigit(int c);
-char	*ft_strdup(const char *s);
 int search_params(t_params *params, int fd);
-char **final_pars(int fd);
+int numsprite(char **map);
+char	*ft_strdup(const char *s);
+char **ft_realloc(char **str, char *line);
 char **ft_map_parsing(int fd, char *firstline);
 void ft_free_struct(t_params *to_free);
 void ft_error(void);
@@ -173,7 +190,7 @@ t_ray *ft_malloc_ray();
 t_color *ft_malloc_color();
 t_image *ft_malloc_image();
 t_event *ft_malloc_event();
-t_sprite *ft_malloc_sprite();
+t_draw_sprite *ft_malloc_sprite(t_params * params);
 t_tex *ft_malloc_tex();
 
 #endif

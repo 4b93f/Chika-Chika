@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/10/13 19:56:42 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/14 22:05:06 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define txtH 64
 #define txtW 64
-#define numsprite 1
+//#define params->sp->numsprite 
 #include "cub3d.h"
 
 
@@ -56,10 +56,31 @@ void verline(int x, int drawstart, int drawend, t_params *params)
 
 void test(t_params *params, t_ray *ray, t_color *color, int x);
 
-void sortSprites(int* order, double* dist, int amount)
+
+void sortSprites(t_params *params)
 {
-    
+    double first;
+    double second;
+    int i;
+    t_sprite tmp;
+
+    i = 0;
+    while(i < params->sp->numsprite && i + 1 != params->sp->numsprite)
+    {
+        first = ((params->ray->posX - params->sprites[i].x) * (params->ray->posX - params->sprites[i].x) + (params->ray->posY - params->sprites[i].y) * (params->ray->posY - params->sprites[i].y));
+        second = ((params->ray->posX - params->sprites[i + 1].x) * (params->ray->posX - params->sprites[i + 1].x) + (params->ray->posY - params->sprites[i + 1].y) * (params->ray->posY - params->sprites[i + 1].y));
+        if (first < second)
+        {
+            tmp = params->sprites[i];
+            params->sprites[i] = params->sprites[i + 1];
+            params->sprites[i + 1] = tmp;
+            i = 0;    
+        }
+        else
+            i++;
+    }
 }
+
 
 void ft_raycast(t_params *params,t_ray *ray, t_color *color)
 {
@@ -208,7 +229,6 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
             floor++;
                 
         }
-        
         zbuffer[x] = params->ray->perpwalldist;
         while(y++ < params->ray->drawend)
         {
@@ -219,38 +239,24 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
             ft_pixel_to_image(x, y, params);
             texy = (int)texpos;
             texpos += step;
-            //printf("x = %d\n", x);
         }
-        //printf("!\n");
     }
-    
-        params->sp->x = 3;
-        params->sp->y = 15;
-
-        //for sorting sprite
-        int sprite_order[numsprite];    
-        double sprite_distance[numsprite];
-        //
-        
-        void sort_sprites(int * order, double *dist, int amount);
-        
+        int sprite_order[params->sp->numsprite];    
+        double sprite_distance[params->sp->numsprite];
+        sortSprites(params);
         
         int i = 0;
-        
-        while(i < numsprite)
+        while(i < params->sp->numsprite)
         {
             sprite_order[i] = i;
-            sprite_distance[i] = ((params->ray->posX - params->sp->x) * (params->ray->posX - params->sp->x) * (params->ray->posY - params->sp->y));
+            sprite_distance[i] = ((params->ray->posX - params->sprites[i].x) * (params->ray->posX - params->sprites[i].x) * (params->ray->posY - params->sprites[i].y));
             i++;
         }
         i = 0;    
-
-        while(i < numsprite)
+        while(i < params->sp->numsprite)
         {
-            double spriteX = params->sp->x - params->ray->posX - 0.5;
-            double spriteY = params->sp->y - params->ray->posY - 0.5;
-            
-            //printf("%f\n", spriteX);
+            double spriteX = params->sprites[i].x - params->ray->posX - 0.5;
+            double spriteY = params->sprites[i].y - params->ray->posY - 0.5;
             
             double invdet = 1.0 / (params->ray->planeX * params->ray->dirY - params->ray->dirX * params->ray->planeY);
             double transformX = invdet * (params->ray->dirY * spriteX - params->ray->dirX * spriteY);
@@ -272,10 +278,9 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
             if (drawendX >= params->screenwidth)
                 drawendX = params->screenwidth - 1;
             int X = drawstartX;
-            //printf("trans = %f X = %d screen = %d buffer = %f\n", transformY, drawstartX, params->screenwidth, zbuffer[X]);
+            
             while(X < drawendX)
             {
-                //printf("transformY=%f X= %d screenwidth=%d zbuffer[X]=%f\n",  transformY, X, params->screenwidth, zbuffer[X]);
                 int spX = (int)(256 * (X - (-sprite_width / 2 + sprite_screenX)) * txtW / sprite_width) / 256;
                 if (transformY > 0 && X > 0 && X < params->screenwidth && transformY < zbuffer[X])
                 {

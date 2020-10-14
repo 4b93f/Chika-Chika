@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: becentrale <becentrale@student.42.fr>      +#+  +:+       +#+        */
+/*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 16:26:08 by root              #+#    #+#             */
-/*   Updated: 2020/08/24 16:36:25 by becentrale       ###   ########.fr       */
+/*   Updated: 2020/10/14 17:38:50 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char **ft_test(char **str, char *line)
+char **ft_realloc(char **str, char *line)
 {
 	char **cpy;
 	int i;
@@ -44,15 +44,15 @@ char **ft_map_parsing(int fd, char *firstline)
 	if(!(str = malloc(sizeof(char*) * 1)))
 		return(0);
 	str[0] = NULL;
-	str = ft_test(str, firstline);
+	str = ft_realloc(str, firstline);
 	cmpt = -1;
 	while (get_next_line(fd, &line) > 0)
 	{
 		cmpt++;
-		if(!(str = ft_test(str, line)))
+		if(!(str = ft_realloc(str, line)))
 			return (0);
 	}
-	if(!(str = ft_test(str, line)))
+	if(!(str = ft_realloc(str, line)))
 			return (0);
 	return (str);
 }

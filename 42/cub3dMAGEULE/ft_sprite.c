@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 17:49:20 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/11 17:22:05 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/14 17:11:58 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ char *ft_new_sprite(t_params *params, char *path)
 
 void ft_get_sprite(t_params *params, char *path)
 {
-    //printf("!!!!!\n");
     params->sp->sp[0] = ft_new_sprite(params, path);
 }

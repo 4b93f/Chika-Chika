@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 19:47:26 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/13 19:49:13 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/14 22:11:21 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,30 @@ int  ft_updownwall(char *map)
 
 int findpos = 0;
 
-int ft_wrong_char(char *map)
+int numsprite(char **map)
+{
+    int i;
+    int j;
+    int num;
+
+    i = 0;
+    j = 0;
+    num = 0;
+    while(map[i])
+    {
+        while(map[i][j])
+        {
+            if(map[i][j] == '2')
+                num++;
+            j++;
+        }
+        j = 0;
+        i++;
+    }
+    return(num);
+}
+
+int ft_check_char(t_params *params, char *map)
 {
     int i;
 
@@ -58,7 +81,11 @@ int ft_wrong_char(char *map)
         if (map[i] == 'N' || map[i] == 'S' || map[i] == 'W' || map[i] == 'E')
             findpos++;
         if (map[i] == 'N' || map[i] == 'S' || map[i] == 'W' || map[i] == 'E' || map[i] == ' ' || map[i] == '0' || map[i] == '1'|| map[i] == '2')
+        {
+            if (map[i] == '2')
+                params->sp->numsprite += 1;
             i++;
+        }
         else
             return (FALSE);
     }
@@ -126,7 +153,8 @@ int ft_search_player(char **map)
         return (FALSE);
     return (TRUE);
 }
-int ft_check_map(char **map)
+
+int ft_check_map(t_params *params, char **map)
 {
     int i;
     
@@ -139,7 +167,7 @@ int ft_check_map(char **map)
         return (FALSE);
     while(map[i + 1] != NULL)
     {
-        if (ft_wrong_char(map[i]) == FALSE)
+        if (ft_check_char(params, map[i]) == FALSE)
             return (FALSE);
         i++;
     }

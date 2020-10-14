@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/13 17:57:24 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/14 21:38:27 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,6 +268,37 @@ void ft_getposray(char **map, t_ray *ray)
     }
 }
 
+void ft_getpose_sprite(char **map, t_draw_sprite *sp, t_sprite *sprites)
+{
+    int i;
+    int j;
+    int k;
+    
+    i = 0;
+    j = 0;
+    k = 0;
+    while(map[i])
+    {
+        while(map[i][j])
+        {
+            if (map[i][j] == '2')
+            {
+                sprites[k].x = i + 1;
+                sprites[k].y = j + 1;
+                k++;
+                map[i][j] = '0';
+                //printf("%d\n", k);
+            }
+            j++;
+        }
+        j = 0;
+        //printf("i = %d\n", i);
+        i++;
+    }
+    printf("!\n");
+    //printf("X=%d Y=%d\n", sprites[k].x, sprites[k].y);
+}
+
 int main(int argc, char **argv)
 {
     if (argc != 2)
@@ -280,18 +311,19 @@ int main(int argc, char **argv)
     t_image *image;
     t_event *event;
     t_tex *tex;
-    t_sprite *sp;
+    t_draw_sprite *sp;
+    t_sprite *sprites;
     
-        
+    sprites = malloc(sizeof(*sp));
     params = ft_malloc_params();
     color = ft_malloc_color();
-    event = ft_malloc_event();
-    image = ft_malloc_image();
-    sp = ft_malloc_sprite();
-    tex = ft_malloc_tex();
     params->color = color;
     if (search_params(params, fd) == 0)
         ft_error();
+    sp = ft_malloc_sprite(params);
+    event = ft_malloc_event();
+    image = ft_malloc_image();
+    tex = ft_malloc_tex();
     ft_resolution(params);
     ray = ft_malloc_ray(params);
     params->ray = ray;
@@ -299,6 +331,7 @@ int main(int argc, char **argv)
     params->image = image;
     params->tex = tex;
     params->sp = sp;
+    params->sprites = sprites;
     ft_get_tex(params);
     ft_get_sprite(params, params->textsp);
     image->img = mlx_new_image(ray->mlx, params->screenwidth, params->screenheight);
@@ -309,8 +342,9 @@ int main(int argc, char **argv)
         params->image->save = 1;
     if (params->map_find == 0)
         ft_error();
-    if (ft_check_map(params->map) == 0)
+    if (ft_check_map(params, params->map) == 0)
         ft_error();
+    ft_getpose_sprite(params->map, sp, sprites);
     ft_getposray(params->map, ray);
     mlx_hook(ray->window, 2, 1L << 0, key_pressed, params);
     mlx_hook(ray->window, 3, 1L << 0, key_released, params);
