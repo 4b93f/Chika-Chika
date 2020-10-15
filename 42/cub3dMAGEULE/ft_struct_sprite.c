@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 20:05:34 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/14 21:17:42 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/15 17:21:19 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_draw_sprite ft_create_sprite(t_params *params)
     int i;
 
     i = 0;
-    sp.numsprite = numsprite(params->map);
+    sp.numsprite = 0;
     //printf("!\n");
     sp.sp_width = 0;
     sp.sp_height = 0;

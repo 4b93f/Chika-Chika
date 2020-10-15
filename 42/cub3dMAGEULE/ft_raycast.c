@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/10/14 22:05:06 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/15 19:30:21 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,7 +252,7 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
             sprite_distance[i] = ((params->ray->posX - params->sprites[i].x) * (params->ray->posX - params->sprites[i].x) * (params->ray->posY - params->sprites[i].y));
             i++;
         }
-        i = 0;    
+        i = 0;
         while(i < params->sp->numsprite)
         {
             double spriteX = params->sprites[i].x - params->ray->posX - 0.5;

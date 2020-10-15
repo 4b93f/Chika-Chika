@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/14 20:21:52 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/15 18:12:50 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,8 @@ typedef struct s_draw_sprite
 typedef struct s_params
 {
   int map_find;
+  int find_pos;
+  int player_orientation;
   int screenwidth;
   int screenheight;
   char *res;
@@ -173,6 +175,10 @@ typedef struct s_params
 }              t_params;
 
 int ft_check_map(t_params *params,char **map);
+int ft_check_startend(char *str);
+int  ft_updownwall(char *map);
+int ft_check_char(t_params *params, char *map);
+int ft_check_space(char **map);
 int		ft_isdigit(int c);
 int search_params(t_params *params, int fd);
 int numsprite(char **map);
@@ -184,6 +190,7 @@ void ft_error(void);
 void ft_raycast(t_params *params,t_ray *ray, t_color *color);
 void ft_get_tex(t_params *params);
 void ft_pixel_to_image(int x, int y, t_params *params);
+void ft_orientation(t_params *params, t_ray *ray);
 void ft_get_sprite(t_params *params, char *path);
 t_params *ft_malloc_params();
 t_ray *ft_malloc_ray();

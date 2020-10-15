@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 18:30:34 by becentrale        #+#    #+#             */
-/*   Updated: 2020/10/07 21:59:31 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/15 18:45:07 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ t_ray ft_create_ray(t_params *params)
     ray.width = 0;
     ray.posX = 0;
     ray.posY = 0;
-    ray.dirX = 1;
+    ray.dirX = 0;
     ray.dirY = 0;
     ray.planeX = 0;
-    ray.planeY = 0.66;
+    ray.planeY = 0;
     ray.raydirX = 0;
     ray.raydirY = 0;
     ray.camX = 0;

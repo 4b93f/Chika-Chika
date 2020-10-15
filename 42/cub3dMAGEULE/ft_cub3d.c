@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/14 21:38:27 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/15 19:17:34 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,6 @@ void DROITE(t_params *params)
 
 int key_pressed(int key_pressed, t_params *params)
 {
-    //printf("%d\n", key_pressed);
     if (key_pressed == 13) 
         params->event->up = 1;
     if (key_pressed == 1)
@@ -287,16 +286,12 @@ void ft_getpose_sprite(char **map, t_draw_sprite *sp, t_sprite *sprites)
                 sprites[k].y = j + 1;
                 k++;
                 map[i][j] = '0';
-                //printf("%d\n", k);
             }
             j++;
         }
         j = 0;
-        //printf("i = %d\n", i);
         i++;
     }
-    printf("!\n");
-    //printf("X=%d Y=%d\n", sprites[k].x, sprites[k].y);
 }
 
 int main(int argc, char **argv)
@@ -344,6 +339,7 @@ int main(int argc, char **argv)
         ft_error();
     if (ft_check_map(params, params->map) == 0)
         ft_error();
+    ft_orientation(params, ray);
     ft_getpose_sprite(params->map, sp, sprites);
     ft_getposray(params->map, ray);
     mlx_hook(ray->window, 2, 1L << 0, key_pressed, params);
