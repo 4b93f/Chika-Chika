@@ -44,6 +44,9 @@ int search_params(t_params *params, int fd)
             params->map = ft_map_parsing(fd, line);
             params->map_find++;
         }
+        else if ((strncmp(" ", line, 1)) && strncmp("", line, 1))
+            ft_error(1);
+
     }
     params->textsp = ft_strtrim(params->textsp, " ");
     params->res = ft_strtrim(params->res, " ");

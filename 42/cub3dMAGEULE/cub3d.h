@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/15 18:12:50 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/16 15:46:26 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,27 @@ typedef struct s_color
   int floor_b;
 }               t_color;
 
+typedef struct s_bmp
+{
+  int fd;
+  int img_height;
+  int img_width;
+  char *filetype;
+  unsigned int headersize;
+  unsigned int bpp;
+  int bytes_int_width;
+  unsigned int planes;
+  unsigned int img_size;
+  unsigned int pixeldataoffset;
+  unsigned int filesize;
+}              t_bmp;
 
 typedef struct s_event
 {
   int up;
   int down;
-  int strafe_gauche;
-  int strafe_droite;
+  int turn_left;
+  int turn_right;
   int left;
   int right;  
 }              t_event;
@@ -182,13 +196,28 @@ int ft_check_space(char **map);
 int		ft_isdigit(int c);
 int search_params(t_params *params, int fd);
 int numsprite(char **map);
+int key_pressed(int key_pressed, t_params *params);
+int key_released(int key_released, t_params *params);
+void key_event(t_params *params);
+void ft_getposray(char **map, t_ray *ray);
 char	*ft_strdup(const char *s);
 char **ft_realloc(char **str, char *line);
 char **ft_map_parsing(int fd, char *firstline);
+void up(t_params *params);
+void down(t_params *params);
+void left(t_params *params);
+void ft_getpose_sprite(char **map, t_draw_sprite *sp, t_sprite *sprites);
+void right(t_params *params);
+void turn_right(t_params *params);
+void turn_left(t_params *params);
+void reset_image(t_params *params);
 void ft_free_struct(t_params *to_free);
-void ft_error(void);
+void ft_error(int error);
+void save(t_params *params);
+void ft_error();
 void ft_raycast(t_params *params,t_ray *ray, t_color *color);
 void ft_get_tex(t_params *params);
+void DROITE(t_params *params);
 void ft_pixel_to_image(int x, int y, t_params *params);
 void ft_orientation(t_params *params, t_ray *ray);
 void ft_get_sprite(t_params *params, char *path);

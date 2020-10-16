@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_struct_event.c                                  :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/22 23:00:36 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/16 15:17:28 by chly-huc         ###   ########.fr       */
+/*   Created: 2020/10/16 15:07:53 by chly-huc          #+#    #+#             */
+/*   Updated: 2020/10/16 15:50:26 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_event ft_create_event()
+void ft_error(int error)
 {
-    t_event event;
-    event.up = 0;
-    event.down = 0;
-    event.left = 0;
-    event.right = 0;
-    event.turn_left = 0;
-    event.turn_right = 0;
-    return(event);
+    if (error == 0)
+        printf("Error\nMap file not include\n");
+    if (error == 1)
+        printf("Error\nWrong parameters in map file\n");
+    if (error == 2)
+        printf("Error\nMap not find\n");
+    exit(0);
 }
 
-t_event *ft_malloc_event()
-{
-    t_event *malloc_event;
-    malloc_event = malloc(sizeof(t_event));
-    *malloc_event = ft_create_event();
-    return(malloc_event);
-}
