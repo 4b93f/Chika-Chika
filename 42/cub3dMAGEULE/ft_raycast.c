@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/10/15 19:30:21 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/16 17:55:07 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,45 +98,12 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
     int a = 0;
     int tx = 0;
     int ty = 0;
-    /*
-    while(a < params->screenheight)
+    int o = 0;
+    while(params->map[o])
     {
-        float rayDirX0 = params->ray->dirX - params->ray->planeX;
-        float rayDirY0 = params->ray->dirY - params->ray->planeY;
-        float rayDirX1 = params->ray->dirX + params->ray->planeX;
-        float rayDirY1 = params->ray->dirY + params->ray->planeY;
-        int p = a - params->screenheight / 2;
-        
-        float posZ = 0.5 * params->screenheight;
-        float rowDistance = posZ / p;
-        
-        float floorStepX = rowDistance * (rayDirX1 - rayDirX0) / params->screenwidth;
-        float floorStepY = rowDistance * (rayDirY1 - rayDirY0) / params->screenwidth;
-        
-        float floorX = params->ray->posX + rowDistance * rayDirX0;
-        float floorY = params->ray->posY + rowDistance * rayDirY0;
-        int z = 0;
-        while(++z < params->screenwidth)
-        {
-            int cellX = (int)(floorX);
-            int cellY = (int)(floorY);
-        
-            params->color->b = params->tex->tex[4][tx * 4 + ty * params->tex->sizeline + 0];
-            params->color->g = params->tex->tex[4][tx * 4 + ty * params->tex->sizeline + 1];
-            params->color->r = params->tex->tex[4][tx * 4 + ty * params->tex->sizeline + 2];
-            params->color->a = params->tex->tex[4][tx * 4 + ty * params->tex->sizeline + 3];
-            ft_pixel_to_image(z, a,params);
-
-            tx = (int)(txtW * (floorX - cellX)) & (txtW - 1);
-            ty = (int)(txtH * (floorY - cellY)) & (txtH - 1);
-            floorX += floorStepX;
-            floorY += floorStepY;
-        }
-        a++;
-        
+        //printf("{%s}\n", params->map[o]);
+        o++;
     }
-    
-    */
     while(++x < params->screenwidth)
     {
         ray->hit = 0;
@@ -220,7 +187,7 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
         int cell = params->ray->drawend;
         
         while(floor < params->ray->drawstart)
-        {        
+        {
             params->color->b = params->color->floor_b;
             params->color->g = params->color->floor_g;
             params->color->r = params->color->floor_r;
@@ -239,6 +206,15 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
             ft_pixel_to_image(x, y, params);
             texy = (int)texpos;
             texpos += step;
+        }
+
+        while(cell < params->screenheight)
+        {
+            params->color->b = params->color->cell_b;
+            params->color->g = params->color->cell_g;
+            params->color->r = params->color->cell_r;
+            ft_pixel_to_image(x, cell, params);
+            cell++;
         }
     }
         int sprite_order[params->sp->numsprite];    

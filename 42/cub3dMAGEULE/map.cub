@@ -1,18 +1,17 @@
-R     900 600
-R       600 900
-S            ./textures/barrel.xpm          
-NO           ./textures/north.xpm
-SO     ./textures/south.xpm           
-WE                             ./textures/west.xpm          
+R 600 900 
+S          ./textures/barrel.xpm  
+NO       ./textures/north.xpm        
+SO     ./textures/south.xpm         
+WE                             ./textures/west.xpm                     
 EA     ./textures/east.xpm
 FLOOR   ./textures/wood.xpm
-F 0   ,25    ,80
-C 145 , 0,   80
+F  255,0,255
+C  0,225,80
 
 11111111111111111111111111111111
 11111111111111011111111111111111
 10222222000010000020000000000001
-11011111110W00011111110011000111
+11011111110S00011111110011000111
 10001    1000011   1002000000111
 10001    102012101  100002020111
 11111111111111000111111111111111

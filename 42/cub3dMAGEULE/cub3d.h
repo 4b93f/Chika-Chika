@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/16 15:46:26 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/16 19:07:28 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,28 @@
 # include <stdio.h>
 # include <errno.h>
 # include <string.h>
-# define TRUE 1
-# define FALSE 0
-# define WRONG_MAP 0
 
+enum e_bool
+{
+  FALSE,
+  TRUE
+}; 
+
+enum e_error
+{
+  NO_MAPFILE,
+  WRONG_PARAMS,
+  NO_MAP,
+  MALLOC_ERROR,
+  DUPLICATE_PARAMETERS,
+  ANOMALY_TEXTURES,
+  RGB_ERROR,
+  RGB_MISSING,
+  ANOMALY_RES,
+  PLAYER_NOT_FOUND,
+  ANOMALY_SPRITE,
+  SOMETHING_IS_MISSING
+};
 
 typedef struct s_color
 {
@@ -212,9 +230,8 @@ void turn_right(t_params *params);
 void turn_left(t_params *params);
 void reset_image(t_params *params);
 void ft_free_struct(t_params *to_free);
-void ft_error(int error);
 void save(t_params *params);
-void ft_error();
+void ft_error(int num);
 void ft_raycast(t_params *params,t_ray *ray, t_color *color);
 void ft_get_tex(t_params *params);
 void DROITE(t_params *params);

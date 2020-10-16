@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/16 15:50:44 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/16 19:12:47 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ void ft_resolution(t_params *params)
     char **tmp; 
     int res_x;
     int res_y;
-    
     tmp = ft_split(params->res, ' ');
+    if (tmp[0] == NULL || tmp[1] == NULL)
+        ft_error(ANOMALY_RES);
     //mlx_get_screen_size(params->ray->mlx, &res_x, &res_y);
     params->screenwidth = ft_atoi(tmp[0]);
     params->screenheight = ft_atoi(tmp[1]);
@@ -68,7 +69,7 @@ int start(t_params *params)
 int main(int argc, char **argv)
 {
     if (argc != 2)
-        ft_error(0);
+        ft_error(NO_MAPFILE);
     int fd;
     
     fd = open(argv[1], O_RDONLY);
@@ -99,7 +100,9 @@ int main(int argc, char **argv)
     params->sp = sp;
     params->sprites = sprites;
     ft_get_tex(params);
+    //("!\n");
     ft_get_sprite(params, params->textsp);
+    //printf("{%d}\n", params->find_pos);
     image->img = mlx_new_image(ray->mlx, params->screenwidth, params->screenheight);
     image->imgdata = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
     image->imgsave = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
@@ -107,7 +110,7 @@ int main(int argc, char **argv)
     if (argv[2] != NULL && strncmp(argv[2], "--save", 4) == 0)
         params->image->save = 1;
     if (params->map_find == 0)
-        ft_error(2);
+        ft_error(NO_MAP);
     ft_check_map(params, params->map);
     ft_orientation(params, ray);
     ft_getpose_sprite(params->map, sp, sprites);
