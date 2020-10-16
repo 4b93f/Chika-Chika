@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/16 19:12:47 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/16 23:23:55 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,23 @@ void reset_image(t_params *params)
 
 void ft_resolution(t_params *params)
 {
-    char **tmp; 
+    char **tmp;
+    int i;
+    int y = 0;
+
+    i = -1; 
     int res_x;
     int res_y;
+    if (!params->res)
+        ft_error(ANOMALY_RES);
     tmp = ft_split(params->res, ' ');
-    if (tmp[0] == NULL || tmp[1] == NULL)
+    if (tmp[2] || tmp[0] == NULL || tmp[1] == NULL)
         ft_error(ANOMALY_RES);
     //mlx_get_screen_size(params->ray->mlx, &res_x, &res_y);
     params->screenwidth = ft_atoi(tmp[0]);
     params->screenheight = ft_atoi(tmp[1]);
+    if (params->screenwidth < 1 || params->screenheight < 1)
+        ft_error(ANOMALY_RES);
     //params->screenwidth = params->screenwidth > res_x ? res_x : params->screenwidth;
     //params->screenheight = params->screenheight > res_y ? res_y : params->screenheight;
     return;
@@ -68,8 +76,6 @@ int start(t_params *params)
 
 int main(int argc, char **argv)
 {
-    if (argc != 2)
-        ft_error(NO_MAPFILE);
     int fd;
     
     fd = open(argv[1], O_RDONLY);

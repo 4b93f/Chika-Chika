@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/16 19:07:28 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/16 21:48:14 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ enum e_error
   ANOMALY_TEXTURES,
   RGB_ERROR,
   RGB_MISSING,
+  WRONG_CHAR_IN_RGB,
   ANOMALY_RES,
   PLAYER_NOT_FOUND,
   ANOMALY_SPRITE,
