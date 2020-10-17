@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 20:21:51 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/09 22:40:29 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/17 18:55:01 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int     main(void)
 
     mlx = mlx_init();
     window = mlx_new_window(mlx, 1000, 1000, "ok");
-    img = mlx_xpm_file_to_image(mlx, "./textures/pillar.xpm", &img_width, &img_height);
+    img = mlx_xpm_file_to_image(mlx, "./textur/pillar.xpm", &img_width, &img_height);
     mlx_put_image_to_window(mlx, window, img, 500,500);
     mlx_loop(mlx);
 }

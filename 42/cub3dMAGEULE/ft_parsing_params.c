@@ -31,7 +31,7 @@ void ft_check_floor(t_params *params)
     int k;
     int l;
 
-    i = 0;
+    i = -1;
     j = 0;
     k = 0;
     l = 0;
@@ -43,12 +43,27 @@ void ft_check_floor(t_params *params)
             j++;
         while(params->argbcolorf[i][j])
         {
-            if(!ft_isspace(params->argbcolorf[i][j]) && ft_isascii(params->argbcolorc[i][j]))
+            if(!ft_isspace(params->argbcolorf[i][j]) && ft_isascii(params->argbcolorf[i][j]))
                 ft_error(WRONG_CHAR_IN_RGB);
             j++;
         }
         j = 0;
     }
+}
+
+int find_duplicate(char *str, int c)
+{
+    int i;
+    int num;
+
+    i = -1;
+    num = 0;
+    while (str[++i])
+    {
+        if (str[i] == c)
+            num++;
+    }
+    return(num);
 }
 
 void ft_check_cell(t_params *params)
@@ -82,9 +97,11 @@ void ft_check_cell(t_params *params)
 
 int ft_params_format(t_params *params)
 {
-    if (params->colorf == NULL && params->colorc == NULL && params->res == NULL && params->textsp == NULL && 
-    params->textno == NULL && params->textso == NULL && params->textwe == NULL && params->textea == NULL)
+    if (params->colorf == NULL || params->colorc == NULL || params->res == NULL || params->textsp == NULL || 
+    params->textno == NULL || params->textso == NULL || params->textwe == NULL || params->textea == NULL)
         ft_error(SOMETHING_IS_MISSING);
+    if (find_duplicate(params->colorc, ',') != 2 || find_duplicate(params->colorf, ',') != 2)
+        ft_error(WRONG_CHAR_IN_RGB);
     params->textsp = ft_strtrim(params->textsp, " ");
     params->res = ft_strtrim(params->res, " ");
     params->textno = ft_strtrim(params->textno, " ");
@@ -116,10 +133,8 @@ int ft_params_format(t_params *params)
 
 int search_params(t_params *params, int fd)
 {
-    int i;
     char *line;
 
-    i = 0;
     while(get_next_line(fd, &line) > 0)
     {   
         //printf("1\n");
@@ -148,6 +163,5 @@ int search_params(t_params *params, int fd)
             ft_error(WRONG_PARAMS);
     }
     ft_params_format(params);
-    i++;
     return(TRUE);
 }

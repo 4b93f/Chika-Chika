@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/16 23:23:55 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/17 18:22:35 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ int main(int argc, char **argv)
         params->image->save = 1;
     if (params->map_find == 0)
         ft_error(NO_MAP);
-    ft_check_map(params, params->map);
+    if (ft_check_map(params, params->map) == 0)
+    ft_error(WRONG_MAP_FORMAT);
     ft_orientation(params, ray);
     ft_getpose_sprite(params->map, sp, sprites);
     ft_getposray(params->map, ray);
