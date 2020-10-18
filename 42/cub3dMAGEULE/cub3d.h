@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/17 18:13:07 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/18 21:40:29 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ enum e_error
   PLAYER_NOT_FOUND,
   ANOMALY_SPRITE,
   SOMETHING_IS_MISSING,
-  WRONG_MAP_FORMAT
+  WRONG_MAP_FORMAT,
+  ERROR_ARGUMENT
 };
 
 typedef struct s_color
@@ -247,5 +248,6 @@ t_image *ft_malloc_image();
 t_event *ft_malloc_event();
 t_draw_sprite *ft_malloc_sprite(t_params * params);
 t_tex *ft_malloc_tex();
+void parameters(t_params *params, int argc, char **argv);
 
 #endif

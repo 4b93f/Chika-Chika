@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/10/18 16:38:28 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/18 22:41:42 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
             params->color->g = params->color->floor_g;
             params->color->r = params->color->floor_r;
             params->color->a = (unsigned char)0;
-            ft_pixel_to_image(x, floor, params);
+            //ft_pixel_to_image(x, floor, params);
             floor++;
                 
         }
@@ -195,7 +195,7 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
             params->color->g = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 1];
             params->color->r = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 2];
             params->color->a = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 3];
-            ft_pixel_to_image(x, y, params);
+            //ft_pixel_to_image(x, y, params);
             texy = (int)texpos;
             texpos += step;
         }
@@ -205,7 +205,7 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
             params->color->b = params->color->cell_b;
             params->color->g = params->color->cell_g;
             params->color->r = params->color->cell_r;
-            ft_pixel_to_image(x, cell, params);
+            //ft_pixel_to_image(x, cell, params);
             cell++;
         }
     }
@@ -256,12 +256,13 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
                     {
                         int d = Y * 256 - params->screenheight * 128 + sprite_height * 128;
                         int spY = ((d * txtH) / sprite_height) / 256;
-                        ft_sprite_to_image(spX, spY, params, Y, X);
+                        //ft_sprite_to_image(spX, spY, params, Y, X);
                     }
                 }
                 X++;
             }
             i++;
         }
+        system ("leaks a.out | grep 'leaked'");
         return;
     }
