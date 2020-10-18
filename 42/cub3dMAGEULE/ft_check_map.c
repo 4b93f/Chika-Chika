@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 19:47:26 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/17 18:14:31 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/18 19:14:44 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,30 +71,60 @@ int ft_check_char(t_params *params, char *map)
     return (TRUE);
 }
 
-int ft_void_algo(int *i, int *j, int *k, char **map)
+void ft_void_algo(int *i, int *j, int *k, char **map)
 {    
     *k = *j;
     while(*k > 0 && map[*i][*k] == ' ')
         *k = *k - 1;
     if (map[*i][*k] != '1' && *k != 0)
-        return (FALSE);
+        ft_error(WRONG_MAP_FORMAT);
     *k = *j;
     while(map[*i][*k] && map[*i][*k] == ' ')
         *k = *k + 1;
     if (map[*i][*k] != '1' && map[*i][*k])
-        return (FALSE);
+        ft_error(WRONG_MAP_FORMAT);
     *k = *i;
     while(*k > 0 && map[*k][*j] == ' ')
         *k = *k - 1;
     if (map[*k][*j] != '1' && *k != 0 && (map[*k] <= (map[*k - 1])))
-        return (FALSE);
+        ft_error(WRONG_MAP_FORMAT);
     *k = *i;
     while(map[*k] != NULL && map[*k][*j] == ' ')
         *k = *k + 1;
     if (map[*k] != NULL && map[*k][*j] != '1' && (map[*k] <= (map[*k + 1])))
-        return (FALSE);
-    return (TRUE);
+        ft_error(WRONG_MAP_FORMAT);
 }
+
+void ft_zero_algo(int *i, int *j, int *k, char **map)
+{    
+    while(*k > 0 && map[*i][*k] != '1')
+        *k = *k - 1;
+    if (map[*i][*k] != '1' && *k != 0)
+       ft_error(WRONG_MAP_FORMAT);
+    *k = *j;
+    while(map[*i][*k] && map[*i][*k] != '1')
+        *k = *k + 1;
+    if (map[*i][*k] != '1' && map[*i - 1][*k] && map[*i + 1][*k])
+       ft_error(WRONG_MAP_FORMAT);
+    *k = *i;
+    while(*k > 0 && map[*k][*j] != '1')
+    {
+        if (map[*k][*j] == ' ')
+           ft_error(WRONG_MAP_FORMAT);
+        *k = *k - 1;
+    }
+    *k = *i;
+    while(map[*k] && *k > 0 && map[*k][*j] != '1')
+    {
+        if (map[*k][*j] == ' ')
+           ft_error(WRONG_MAP_FORMAT);
+        *k = *k + 1;
+    }
+    if (!map[*k])
+       ft_error(WRONG_MAP_FORMAT);
+}
+
+
 
 int ft_check_space(char **map)
 {
@@ -102,22 +132,25 @@ int ft_check_space(char **map)
     int j;
     int k;
 
-    i = 0;
+    i = -1;
     j = 0;
     k = 0;
-    while(map[i])
+    while(map[++i])
     {
-        while(map[i][j])
+        while(map[i][++j])
         {
             if (map[i][j] == ' ')
             {
-                if (!ft_void_algo(&i, &j, &k, map))
-                    return (FALSE);
+                k = j;
+                ft_void_algo(&i, &j, &k, map);
             }
-            j++;
+            if (map[i][j] == '0')
+            {
+                k = j;
+                ft_zero_algo(&i, &j, &k, map);
+            }
         }
-        j = 0;
-        i++;
+        j = -1;
     }
     return (TRUE);
 }

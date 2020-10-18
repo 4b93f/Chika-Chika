@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 17:36:46 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/16 15:21:36 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/18 16:38:36 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void ft_getposray(char **map, t_ray *ray)
         {
             if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
             {
-                ray->posX = i;
-                ray->posY = j;
+                ray->posX = i + 0.5;
+                ray->posY = j + 0.5;
                 map[i][j] = '0';
             }
             j++;

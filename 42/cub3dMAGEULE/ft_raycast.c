@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/10/16 20:39:06 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/18 16:38:28 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,6 @@ void verline(int x, int drawstart, int drawend, t_params *params)
         ft_pixel_to_image(x, drawstart, params);
 }
 
-void test(t_params *params, t_ray *ray, t_color *color, int x);
-
-
 void sortSprites(t_params *params)
 {
     double first;
@@ -90,7 +87,7 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
     
     x = 0;
     double texpos = 0;;
-    double step = 0;;
+    double step = 0;
     int texy = 0;
     int y = 0;
     int texx = 0;
@@ -102,7 +99,7 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
     while(++x < params->screenwidth)
     {
         ray->hit = 0;
-        ray->camX = (2 * x) / (double)(params->screenwidth) - 1;
+        ray->camX = 2 * x / (double)(params->screenwidth) - 1;
         ray->raydirX = ray->dirX + ray->planeX * ray->camX;
         ray->raydirY = ray->dirY + ray->planeY * ray->camX;
         ray->mapX = (int)ray->posX;
