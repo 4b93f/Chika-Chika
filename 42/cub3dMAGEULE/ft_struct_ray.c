@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 18:30:34 by becentrale        #+#    #+#             */
-/*   Updated: 2020/10/18 22:58:43 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/18 23:29:32 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,8 @@ t_ray	ft_create_ray(t_params *params)
 	t_ray ray;
 
 	ray.width = 0;
-	ray.posX = 0;
-	ray.posY = 0;
-	ray.dirX = 0;
-	ray.dirY = 0;
-	ray.planeX = 0;
-	ray.planeY = 0;
 	ray.raydirX = 0;
 	ray.raydirY = 0;
-	ray.camX = 0;
 	ray.deltadistX = 0;
 	ray.deltadistY = 0;
 	ray.hit = 0;
@@ -40,8 +33,6 @@ t_ray	ft_create_ray(t_params *params)
 	ray.lineheight = 0;
 	ray.drawstart = 0;
 	ray.drawend = 0;
-	ray.movespeed = 0.40;
-	ray.rotspeed = 0.10;
 	ray.mlx = mlx_init();
 	ray.window = mlx_new_window(ray.mlx, params->screenwidth,
 	params->screenheight, "TITLE");

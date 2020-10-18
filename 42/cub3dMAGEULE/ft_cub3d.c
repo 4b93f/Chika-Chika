@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/18 21:40:26 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/18 23:42:14 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int main(int argc, char **argv)
     int fd;
     
     fd = open(argv[1], O_RDONLY);
+	t_player *player;
     t_params *params;
     t_ray *ray;
     t_color *color;
@@ -87,9 +88,12 @@ int main(int argc, char **argv)
     t_tex *tex;
     t_draw_sprite *sp;
     t_sprite *sprites;
-    
-    sprites = malloc(sizeof(*sp));
+	t_bmp *bmp;
+
     params = ft_malloc_params();
+	bmp = ft_malloc_bmp(params)
+	player = ft_malloc_player();
+    sprites = malloc(sizeof(*sp));
     color = ft_malloc_color();
     params->color = color;
     search_params(params, fd);
@@ -100,6 +104,7 @@ int main(int argc, char **argv)
     ft_resolution(params);
     ray = ft_malloc_ray(params);
     params->ray = ray;
+	params->player = player;
     params->event = event;
     params->image = image;
     params->tex = tex;
@@ -120,7 +125,7 @@ int main(int argc, char **argv)
     ft_error(WRONG_MAP_FORMAT);
     ft_orientation(params, ray);
     ft_getpose_sprite(params->map, sp, sprites);
-    ft_getposray(params->map, ray);
+    ft_getposray(params->map, player);
     mlx_hook(ray->window, 2, 1L << 0, key_pressed, params);
     mlx_hook(ray->window, 3, 1L << 0, key_released, params);
     mlx_hook(ray->window, 17, 1L << 17, mouse_event, params);

@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_struct_event.c                                  :+:      :+:    :+:   */
+/*   ft_struct_player.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/22 23:00:36 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/18 23:34:46 by chly-huc         ###   ########.fr       */
+/*   Created: 2020/10/18 23:03:43 by chly-huc          #+#    #+#             */
+/*   Updated: 2020/10/18 23:28:01 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_event	ft_create_event(void)
+t_player	ft_create_player(void)
 {
-	t_event	event;
+	t_player player;
 
-	event.up = 0;
-	event.down = 0;
-	event.left = 0;
-	event.right = 0;
-	event.turn_left = 0;
-	event.turn_right = 0;
-	return (event);
+	player.posX = 0;
+	player.posY = 0;
+	player.dirX = 0;
+	player.dirY = 0;
+	player.planeX = 0;
+	player.planeY = 0;
+	player.rotspeed = 0.10;
+	player.movespeed = 0.40;
+	player.camX = 0;
+	return (player);
 }
 
-t_event	*ft_malloc_event(void)
+t_player	*ft_malloc_player(void)
 {
-	t_event	*malloc_event;
+	t_player *malloc_player;
 
-	malloc_event = malloc(sizeof(t_event));
-	*malloc_event = ft_create_event();
-	return (malloc_event);
+	malloc_player = malloc(sizeof(t_player));
+	*malloc_player = ft_create_player();
+	return (malloc_player);
 }

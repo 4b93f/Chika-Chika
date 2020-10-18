@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/18 21:40:29 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/18 23:42:22 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,19 @@ typedef struct s_event
   int right;  
 }              t_event;
 
+typedef struct	s_player
+{
+	double posX;
+  	double posY;
+  	double dirX;
+  	double dirY;
+  	double planeX;
+  	double planeY;
+	double rotspeed;
+  	double movespeed;
+	double camX;
+}				t_player;
+
 typedef struct s_ray
 {
   int width;
@@ -103,17 +116,8 @@ typedef struct s_ray
   int lineheight;
   int drawstart;
   int drawend;
-  double rotspeed;
-  double movespeed;
-  double posX;
-  double posY;
-  double dirX;
-  double dirY;
-  double planeX;
-  double planeY;
   double raydirX;
   double raydirY;
-  double camX;
   double sidedistX; // distance entre ray et prochain axe Y//
   double sidedistY; // distance entre ray et prochain axe X//
   double deltadistX; // distance entre le 1er axe X et le 2eme //
@@ -207,6 +211,7 @@ typedef struct s_params
   t_tex *tex;
   t_draw_sprite *sp;
   t_sprite *sprites;
+  t_player *player;
 }              t_params;
 
 int ft_check_map(t_params *params,char **map);
@@ -219,11 +224,11 @@ int search_params(t_params *params, int fd);
 int numsprite(char **map);
 int key_pressed(int key_pressed, t_params *params);
 int key_released(int key_released, t_params *params);
-void key_event(t_params *params);
-void ft_getposray(char **map, t_ray *ray);
 char	*ft_strdup(const char *s);
 char **ft_realloc(char **str, char *line);
 char **ft_map_parsing(int fd, char *firstline);
+void key_event(t_params *params);
+void ft_getposray(char **map, t_player *player);
 void up(t_params *params);
 void down(t_params *params);
 void left(t_params *params);
@@ -241,13 +246,15 @@ void DROITE(t_params *params);
 void ft_pixel_to_image(int x, int y, t_params *params);
 void ft_orientation(t_params *params, t_ray *ray);
 void ft_get_sprite(t_params *params, char *path);
-t_params *ft_malloc_params();
-t_ray *ft_malloc_ray();
-t_color *ft_malloc_color();
-t_image *ft_malloc_image();
-t_event *ft_malloc_event();
-t_draw_sprite *ft_malloc_sprite(t_params * params);
-t_tex *ft_malloc_tex();
 void parameters(t_params *params, int argc, char **argv);
+t_params *ft_malloc_params(void);
+t_ray *ft_malloc_ray(t_params *params);
+t_color *ft_malloc_color(void);
+t_image *ft_malloc_image(void);
+t_event *ft_malloc_event(void);
+t_draw_sprite *ft_malloc_sprite(t_params * params);
+t_player	*ft_malloc_player(void);
+t_tex *ft_malloc_tex();
+t_bmp	*ft_malloc_bmp(t_params *params);
 
 #endif

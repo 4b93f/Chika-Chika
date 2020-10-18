@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 01:14:46 by root              #+#    #+#             */
-/*   Updated: 2020/10/18 22:58:41 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/18 23:18:04 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ t_params	ft_create_params(void)
 	t_params	params;
 
 	params.screenwidth = 0;
+	params.screenheight = 0;
 	params.map_find = 0;
 	params.find_pos = 0;
 	params.player_orientation = 0;
-	params.screenheight = 0;
 	params.res = NULL;
 	params.textno = NULL;
 	params.textso = NULL;

@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/10/18 22:41:42 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/18 23:29:20 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void sortSprites(t_params *params)
     i = 0;
     while(i < params->sp->numsprite && i + 1 != params->sp->numsprite)
     {
-        first = ((params->ray->posX - params->sprites[i].x) * (params->ray->posX - params->sprites[i].x) + (params->ray->posY - params->sprites[i].y) * (params->ray->posY - params->sprites[i].y));
-        second = ((params->ray->posX - params->sprites[i + 1].x) * (params->ray->posX - params->sprites[i + 1].x) + (params->ray->posY - params->sprites[i + 1].y) * (params->ray->posY - params->sprites[i + 1].y));
+        first = ((params->player->posX - params->sprites[i].x) * (params->player->posX - params->sprites[i].x) + (params->player->posY - params->sprites[i].y) * (params->player->posY - params->sprites[i].y));
+        second = ((params->player->posX - params->sprites[i + 1].x) * (params->player->posX - params->sprites[i + 1].x) + (params->player->posY - params->sprites[i + 1].y) * (params->player->posY - params->sprites[i + 1].y));
         if (first < second)
         {
             tmp = params->sprites[i];
@@ -99,32 +99,32 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
     while(++x < params->screenwidth)
     {
         ray->hit = 0;
-        ray->camX = 2 * x / (double)(params->screenwidth) - 1;
-        ray->raydirX = ray->dirX + ray->planeX * ray->camX;
-        ray->raydirY = ray->dirY + ray->planeY * ray->camX;
-        ray->mapX = (int)ray->posX;
-        ray->mapY = (int)ray->posY;
+        params->player->camX = 2 * x / (double)(params->screenwidth) - 1;
+        ray->raydirX = params->player->dirX + params->player->planeX * params->player->camX;
+        ray->raydirY = params->player->dirY + params->player->planeY * params->player->camX;
+        ray->mapX = (int)params->player->posX;
+        ray->mapY = (int)params->player->posY;
         ray->deltadistX = (ray->raydirY == 0) ? 0 : ((ray->raydirX == 0) ? 1 : fabs(1 / ray->raydirX));
         ray->deltadistY = (ray->raydirX == 0) ? 0 : ((ray->raydirY == 0) ? 1 : fabs(1 / ray->raydirY));
         if (ray->raydirX < 0)
         {
             ray->stepX = -1;
-            ray->sidedistX = (ray->posX - ray->mapX) * ray->deltadistX;
+            ray->sidedistX = (params->player->posX - ray->mapX) * ray->deltadistX;
         }
         else
         {
             ray->stepX = 1;
-            ray->sidedistX = (ray->mapX + 1.0 - ray->posX) * ray->deltadistX;
+            ray->sidedistX = (ray->mapX + 1.0 - params->player->posX) * ray->deltadistX;
         } 
         if (ray->raydirY < 0)
         {
             ray->stepY = - 1;
-            ray->sidedistY = (ray->posY - ray->mapY) * ray->deltadistY;
+            ray->sidedistY = (params->player->posY - ray->mapY) * ray->deltadistY;
         }
         else
         {
             ray->stepY = 1;
-            ray->sidedistY = (ray->mapY + 1.0 - ray->posY) * ray->deltadistY;
+            ray->sidedistY = (ray->mapY + 1.0 - params->player->posY) * ray->deltadistY;
         }
         while (ray->hit == 0)
         {
@@ -146,9 +146,9 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
                 ray->hit = 1;
         }
         if (ray->side == 0)
-            ray->perpwalldist = (ray->mapX - ray->posX + (1 - ray->stepX) / 2) / ray->raydirX;
+            ray->perpwalldist = (ray->mapX - params->player->posX + (1 - ray->stepX) / 2) / ray->raydirX;
         else
-            ray->perpwalldist = (ray->mapY - ray->posY + (1 - ray->stepY) / 2) / ray->raydirY;
+            ray->perpwalldist = (ray->mapY - params->player->posY + (1 - ray->stepY) / 2) / ray->raydirY;
         ray->lineheight = (params->screenheight / ray->perpwalldist);
         ray->drawstart = (-ray->lineheight / 2 + (params->screenheight / 2));
         if (ray->drawstart < 0)
@@ -159,9 +159,9 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
         
         double wallx;
         if(params->ray->side == 0)
-            wallx = params->ray->posY + params->ray->perpwalldist * params->ray->raydirY;
+            wallx = params->player->posY + params->ray->perpwalldist * params->ray->raydirY;
         else
-            wallx = params->ray->posX + params->ray->perpwalldist * params->ray->raydirX;
+            wallx = params->player->posX + params->ray->perpwalldist * params->ray->raydirX;
         wallx -= floor((wallx));
         
         texx = (int)(wallx * (double)txtW);
@@ -217,18 +217,18 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
         while(i < params->sp->numsprite)
         {
             sprite_order[i] = i;
-            sprite_distance[i] = ((params->ray->posX - params->sprites[i].x) * (params->ray->posX - params->sprites[i].x) * (params->ray->posY - params->sprites[i].y));
+            sprite_distance[i] = ((params->player->posX - params->sprites[i].x) * (params->player->posX - params->sprites[i].x) * (params->player->posY - params->sprites[i].y));
             i++;
         }
         i = 0;
         while(i < params->sp->numsprite)
         {
-            double spriteX = params->sprites[i].x - params->ray->posX - 0.5;
-            double spriteY = params->sprites[i].y - params->ray->posY - 0.5;
+            double spriteX = params->sprites[i].x - params->player->posX - 0.5;
+            double spriteY = params->sprites[i].y - params->player->posY - 0.5;
             
-            double invdet = 1.0 / (params->ray->planeX * params->ray->dirY - params->ray->dirX * params->ray->planeY);
-            double transformX = invdet * (params->ray->dirY * spriteX - params->ray->dirX * spriteY);
-            double transformY = invdet * (-params->ray->planeY * spriteX + params->ray->planeX * spriteY);
+            double invdet = 1.0 / (params->player->planeX * params->player->dirY - params->player->dirX * params->player->planeY);
+            double transformX = invdet * (params->player->dirY * spriteX - params->player->dirX * spriteY);
+            double transformY = invdet * (-params->player->planeY * spriteX + params->player->planeX * spriteY);
             int sprite_screenX = (int)((params->screenwidth / 2) * (1 + transformX / transformY));
             int sprite_height = abs((int)(params->screenheight / transformY));
             int drawstartY = -sprite_height / 2 + params->screenheight / 2;
