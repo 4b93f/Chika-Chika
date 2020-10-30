@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/18 23:42:14 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/30 18:10:00 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int main(int argc, char **argv)
 	t_bmp *bmp;
 
     params = ft_malloc_params();
-	bmp = ft_malloc_bmp(params)
 	player = ft_malloc_player();
     sprites = malloc(sizeof(*sp));
     color = ft_malloc_color();
@@ -102,6 +101,8 @@ int main(int argc, char **argv)
     image = ft_malloc_image();
     tex = ft_malloc_tex();
     ft_resolution(params);
+	bmp = ft_malloc_bmp(params);
+	params->bmp = bmp;
     ray = ft_malloc_ray(params);
     params->ray = ray;
 	params->player = player;
@@ -111,9 +112,7 @@ int main(int argc, char **argv)
     params->sp = sp;
     params->sprites = sprites;
     ft_get_tex(params);
-    //("!\n");
     ft_get_sprite(params, params->textsp);
-    //printf("{%d}\n", params->find_pos);
     image->img = mlx_new_image(ray->mlx, params->screenwidth, params->screenheight);
     image->imgdata = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
     image->imgsave = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);

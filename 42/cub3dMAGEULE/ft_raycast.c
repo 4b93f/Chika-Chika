@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/10/18 23:29:20 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/30 18:30:32 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,7 @@ void ft_sprite_to_image(int x, int y, t_params *params, int Y, int X)
     int isblack;
 
     isblack = params->sp->spdata[x * 4 + y * params->sp->sizeline + 1] + params->sp->spdata[x * 4 + y * params->sp->sizeline + 2] + params->sp->spdata[x * 4 + y * params->sp->sizeline + 3];
-    /*
-    params->image->imgdata[x * 4 + y * params->image->sizeline + 0] = params->color->b;
-    params->image->imgdata[x * 4 + y * params->image->sizeline + 1] = params->color->g;
-    params->image->imgdata[x * 4 + y * params->image->sizeline + 2] = params->color->r;
-    params->image->imgdata[x * 4 + y * params->image->sizeline + 3] = params->color->a;
-    */
-    //printf("ok\n");
-if (isblack)
+	if (isblack)
     {
         params->image->imgdata[X * 4 + Y * params->image->sizeline + 0] = params->sp->spdata[x * 4 + y * params->sp->sizeline + 0];
         params->image->imgdata[X * 4 + Y * params->image->sizeline + 1] = params->sp->spdata[x * 4 + y * params->sp->sizeline + 1];
@@ -184,18 +177,18 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
             params->color->g = params->color->floor_g;
             params->color->r = params->color->floor_r;
             params->color->a = (unsigned char)0;
-            //ft_pixel_to_image(x, floor, params);
+            ft_pixel_to_image(x, floor, params);
             floor++;
                 
         }
         zbuffer[x] = params->ray->perpwalldist;
-        while(y++ < params->ray->drawend)
+        while(++y < params->ray->drawend)
         {
             params->color->b = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 0];
             params->color->g = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 1];
             params->color->r = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 2];
             params->color->a = params->tex->tex[texnum][texx * 4 + texy * params->tex->sizeline + 3];
-            //ft_pixel_to_image(x, y, params);
+            ft_pixel_to_image(x, y, params);
             texy = (int)texpos;
             texpos += step;
         }
@@ -205,7 +198,7 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
             params->color->b = params->color->cell_b;
             params->color->g = params->color->cell_g;
             params->color->r = params->color->cell_r;
-            //ft_pixel_to_image(x, cell, params);
+            ft_pixel_to_image(x, cell, params);
             cell++;
         }
     }
@@ -256,13 +249,12 @@ void ft_raycast(t_params *params,t_ray *ray, t_color *color)
                     {
                         int d = Y * 256 - params->screenheight * 128 + sprite_height * 128;
                         int spY = ((d * txtH) / sprite_height) / 256;
-                        //ft_sprite_to_image(spX, spY, params, Y, X);
+                        ft_sprite_to_image(spX, spY, params, Y, X);
                     }
                 }
                 X++;
             }
             i++;
         }
-        system ("leaks a.out | grep 'leaked'");
         return;
     }

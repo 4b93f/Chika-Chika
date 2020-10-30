@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/18 23:42:22 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/30 14:49:38 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,11 @@ typedef struct s_bmp
   int fd;
   int img_height;
   int img_width;
+  int imgsize;
   char *filetype;
   unsigned int headersize;
   unsigned int bpp;
-  int bytes_int_width;
+  int bytes_in_width;
   unsigned int planes;
   unsigned int img_size;
   unsigned int pixeldataoffset;
@@ -212,6 +213,7 @@ typedef struct s_params
   t_draw_sprite *sp;
   t_sprite *sprites;
   t_player *player;
+  t_bmp *bmp;
 }              t_params;
 
 int ft_check_map(t_params *params,char **map);
@@ -247,6 +249,7 @@ void ft_pixel_to_image(int x, int y, t_params *params);
 void ft_orientation(t_params *params, t_ray *ray);
 void ft_get_sprite(t_params *params, char *path);
 void parameters(t_params *params, int argc, char **argv);
+void ft_void_algo(int *i, int *j, int *k, char **map);
 t_params *ft_malloc_params(void);
 t_ray *ft_malloc_ray(t_params *params);
 t_color *ft_malloc_color(void);
@@ -256,5 +259,6 @@ t_draw_sprite *ft_malloc_sprite(t_params * params);
 t_player	*ft_malloc_player(void);
 t_tex *ft_malloc_tex();
 t_bmp	*ft_malloc_bmp(t_params *params);
+void ft_zero_algo(int *i, int *j, int *k, char **map);
 
 #endif
