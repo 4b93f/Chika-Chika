@@ -6,16 +6,16 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/30 14:49:38 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/31 15:07:23 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "minilibx/mlx.h"
-# include "get_next_line/get_next_line.h"
-# include "libft/libft.h"
+# include "../minilibx/mlx.h"
+# include "../get_next_line/get_next_line.h"
+# include "../libft/libft.h"
 
 # include <sys/types.h>
 # include <sys/stat.h>
