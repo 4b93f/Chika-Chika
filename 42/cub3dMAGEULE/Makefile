@@ -16,31 +16,45 @@ MLX = -lmlx -lm -framework OpenGL -framework AppKit
 			@${CC} ${CFLAGS} -I ${HEADERS} -c $^ -o ${<:.c=.o}
 
 $(NAME) : $(OBJS)
-	@echo "\033[33m[Remove last version...]"
+	@echo "[Remove last version...]"
 	@rm -rf Cub3D
-	@echo "\033[33m[Libft compilation...]"
+	@echo "[Libft compilation...]"
 	@$(MAKE) -C ./libft && mv ./libft/libft.a ./includes
-	@echo "\033[33m[Cub3D compilation...]"
+	@echo "[Cub3D compilation...]"
 	@$(MAKE) -C ./minilibx && mv ./minilibx/libmlx.dylib ./srcs
-	@echo "\033[33m[Minilibx compilation...]"
+	@echo "[Minilibx compilation...]"
 	@gcc -Wall -Wextra -Werror $(MLX) $(OBJS) ./includes/libft.a -I./usr/include -o $(NAME)
-	@echo "\033[33m[Done !]"
+	@echo "[Done !]"
 
 
-all:		${NAME} 
+all:		${NAME}
 	
 clean:	
-			@rm -f ${OBJS} ${OBJ}
+			@rm -f ${OBJS} ${OBJS}
 
 
 fclean:		clean
-			@rm -f ${NAME} ${OBJ}
+			@rm -f ${NAME} ${OBJS}
+			@echo "[Remove libft...]"
+			@$(MAKE) -C libft fclean
+			@rm -f ./includes/libft.a
+			@echo "[Remove minilibx...]"
+			@$(MAKE) -C minilibx clean
+			@rm -f ./srcs/libmlx.dylib
+			@echo "[Done!]"
 
 
 clarify:
+			@echo "[Clean cub3d.o ...]"
 			@rm -f ${OBJS}
+			@echo "[Clean libft.o ...]"
+			@$(MAKE) -C libft clarify
+			@echo "[Clean minilib.o ...]"
+			@$(MAKE) -C minilibx clarify
+
+
 
 re:			fclean all clarify
 
 
-.PHONY : fclean all re clean
+.PHONY : fclean all re clean clarify

@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:35:00 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/31 15:46:19 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/31 17:04:35 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,6 @@ void trim_info(t_params *params)
 	cut(params->textno);
 	cut(params->colorf);
 	cut(params->colorc);
-	//printf("{%s}\n",params->textso);
-	system ("leaks a.out");
 }
 
 void	atoi_info(t_params *params)
@@ -250,7 +248,6 @@ void	parse_info(t_params *params, int fd, char *line)
 	}
 	else if ((strncmp(" ", line, 1)) && strncmp("", line, 1))
 		ft_error(WRONG_PARAMS);
-	free(line);
 }
 
 int		search_params(t_params *params, int fd)

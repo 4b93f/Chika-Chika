@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 17:45:32 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/31 15:42:26 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/31 17:02:04 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ t_tex	ft_create_tex(void)
 
 	tex.tex_width = 0;
 	tex.tex_height = 0;
+	tex.texnum = 0;
+	tex.texpos = 0;
+	tex.step = 0;
+	tex.texx = 0;
+	tex.texy = 0;
 	tex.tex = malloc(sizeof(char *) * 4);
 	return (tex);
 }

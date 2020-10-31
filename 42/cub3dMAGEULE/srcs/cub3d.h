@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/31 15:07:23 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/31 17:09:44 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,11 @@ typedef struct s_tex
   int endian;
   int tex_width;
   int tex_height;
+  int texnum;
+  double texpos;
+  int texx;
+  int texy;
+  double step;
   char **tex;
 }               t_tex;
 
