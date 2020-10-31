@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/30 18:10:00 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/10/31 15:46:35 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int main(int argc, char **argv)
     t_sprite *sprites;
 	t_bmp *bmp;
 
+    parameters(params, argc, argv);
     params = ft_malloc_params();
 	player = ft_malloc_player();
     sprites = malloc(sizeof(*sp));
@@ -117,7 +118,6 @@ int main(int argc, char **argv)
     image->imgdata = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
     image->imgsave = mlx_get_data_addr(image->img, &image->bpp, &image->sizeline, &image->endian);
     
-    parameters(params, argc, argv);
     if (params->map_find == 0)
         ft_error(NO_MAP);
     if (ft_check_map(params, params->map) == 0)
