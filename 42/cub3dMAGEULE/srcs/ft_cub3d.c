@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/01 18:06:07 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/01 18:34:35 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,6 @@
 #define mapHeight 24
 #define txtH 64
 #define txtW 64
-
-void ft_resolution(t_params *params)
-{
-    char **tmp;
-    int i;
-    int y = 0;
-
-    i = -1; 
-    int res_x;
-    int res_y;
-    if (!params->res)
-        ft_error(ANOMALY_RES);
-    tmp = ft_split(params->res, ' ');
-    if (tmp[2] || tmp[0] == NULL || tmp[1] == NULL)
-        ft_error(ANOMALY_RES);
-    //mlx_get_screen_size(params->ray->mlx, &res_x, &res_y);
-    params->screenwidth = ft_atoi(tmp[0]);
-    params->screenheight = ft_atoi(tmp[1]);
-    if (params->screenwidth < 1 || params->screenheight < 1)
-        ft_error(ANOMALY_RES);
-    //params->screenwidth = params->screenwidth > res_x ? res_x : params->screenwidth;
-    //params->screenheight = params->screenheight > res_y ? res_y : params->screenheight;
-    return;
-}
 
 int mouse_event(t_params *params)
 {

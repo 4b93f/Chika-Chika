@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/01 18:08:28 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/01 18:36:37 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,6 +284,7 @@ void			print_cell_floor(t_params *params, t_color *color, int x);
 void			print_wall(t_params *params, int x, int y);
 void			ft_sprite_to_image(t_params *params);
 void			sprite(t_params *params, double *zbuffer);
+void	ft_resolution(t_params *params);
 t_params		*ft_malloc_params(void);
 t_spvalues		*ft_malloc_spvalues();
 t_ray			*ft_malloc_ray(t_params *params);
