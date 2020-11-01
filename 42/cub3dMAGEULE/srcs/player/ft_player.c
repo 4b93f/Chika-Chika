@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 17:36:46 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/31 15:44:13 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/01 18:09:52 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	ft_getposray(char **map, t_player *player)
 			if (map[i][j] == 'N' || map[i][j] == 'S' ||
 			map[i][j] == 'W' || map[i][j] == 'E')
 			{
-				player->posX = i + 0.5;
-				player->posY = j + 0.5;
+				player->posx = i + 0.5;
+				player->posy = j + 0.5;
 				map[i][j] = '0';
 			}
 			j++;
@@ -42,17 +42,17 @@ void	turn_left(t_params *params)
 	double olddirx;
 	double oldplanex;
 
-	olddirx = params->player->dirX;
-	oldplanex = params->player->planeX;
-	params->player->dirX = params->player->dirX * cos(-params->player->rotspeed)
-	- params->player->dirY * sin(-params->player->rotspeed);
-	params->player->dirY = olddirx * sin(-params->player->rotspeed) +
-	params->player->dirY * cos(-params->player->rotspeed);
-	params->player->planeX = params->player->planeX *
-	cos(-params->player->rotspeed) - params->player->planeY *
+	olddirx = params->player->dirx;
+	oldplanex = params->player->planex;
+	params->player->dirx = params->player->dirx * cos(-params->player->rotspeed)
+	- params->player->diry * sin(-params->player->rotspeed);
+	params->player->diry = olddirx * sin(-params->player->rotspeed) +
+	params->player->diry * cos(-params->player->rotspeed);
+	params->player->planex = params->player->planex *
+	cos(-params->player->rotspeed) - params->player->planey *
 	sin(-params->player->rotspeed);
-	params->player->planeY = oldplanex * sin(-params->player->rotspeed) +
-	params->player->planeY * cos(-params->player->rotspeed);
+	params->player->planey = oldplanex * sin(-params->player->rotspeed) +
+	params->player->planey * cos(-params->player->rotspeed);
 	reset_image(params);
 }
 
@@ -61,18 +61,18 @@ void	turn_right(t_params *params)
 	double olddirx;
 	double oldplanex;
 
-	olddirx = params->player->dirX;
-	oldplanex = params->player->planeX;
-	params->player->dirX = params->player->dirX *
-	cos(params->player->rotspeed) - params->player->dirY *
+	olddirx = params->player->dirx;
+	oldplanex = params->player->planex;
+	params->player->dirx = params->player->dirx *
+	cos(params->player->rotspeed) - params->player->diry *
 	sin(params->player->rotspeed);
-	params->player->dirY = olddirx * sin(params->player->rotspeed) +
-	params->player->dirY * cos(params->player->rotspeed);
-	params->player->planeX = params->player->planeX *
-	cos(params->player->rotspeed) - params->player->planeY *
+	params->player->diry = olddirx * sin(params->player->rotspeed) +
+	params->player->diry * cos(params->player->rotspeed);
+	params->player->planex = params->player->planex *
+	cos(params->player->rotspeed) - params->player->planey *
 	sin(params->player->rotspeed);
-	params->player->planeY = oldplanex * sin(params->player->rotspeed)
-	+ params->player->planeY * cos(params->player->rotspeed);
+	params->player->planey = oldplanex * sin(params->player->rotspeed)
+	+ params->player->planey * cos(params->player->rotspeed);
 	reset_image(params);
 }
 
@@ -91,22 +91,22 @@ void	ft_orientation(t_params *params, t_ray *ray)
 {
 	if (intcmp(params->player_orientation, 'N') == 1)
 	{
-		params->player->dirX = -1.0;
-		params->player->planeY = 0.66;
+		params->player->dirx = -1.0;
+		params->player->planey = 0.66;
 	}
 	if (intcmp(params->player_orientation, 'S') == 1)
 	{
-		params->player->dirX = 1.0;
-		params->player->planeY = -0.66;
+		params->player->dirx = 1.0;
+		params->player->planey = -0.66;
 	}
 	if (intcmp(params->player_orientation, 'W') == 1)
 	{
-		params->player->dirY = -1.0;
-		params->player->planeX = -0.66;
+		params->player->diry = -1.0;
+		params->player->planex = -0.66;
 	}
 	if (intcmp(params->player_orientation, 'E') == 1)
 	{
-		params->player->dirY = 1.0;
-		params->player->planeX = 0.66;
+		params->player->diry = 1.0;
+		params->player->planex = 0.66;
 	}
 }

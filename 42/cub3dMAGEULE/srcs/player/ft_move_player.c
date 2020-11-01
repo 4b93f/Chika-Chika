@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:27:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/31 15:44:10 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/01 18:09:34 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,76 +14,76 @@
 
 void	up(t_params *params)
 {
-	if (params->map[(int)(params->player->posX + params->player->dirX *
-	params->player->movespeed)][(int)params->player->posY] == '0' &&
-	params->map[(int)(params->player->posX + params->player->dirX *
-	params->player->movespeed)][(int)(params->player->posY - 0.01)] == '0' &&
-	params->map[(int)(params->player->posX + params->player->dirX *
-	params->player->movespeed)][(int)(params->player->posY + 0.01)] == '0')
-		params->player->posX += params->player->dirX * 0.1;
-	if (params->map[(int)params->player->posX][(int)(params->player->posY
-	+ params->player->dirY * params->player->movespeed)] == '0' &&
-	params->map[(int)(params->player->posX - 0.01)][(int)(params->player->posY +
-	0.01 + params->player->dirY * params->player->movespeed)] == '0' &&
-	params->map[(int)(params->player->posX + 0.01)][(int)(params->player->posY -
-	0.01 + params->player->dirY * params->player->movespeed)] == '0')
-		params->player->posY += params->player->dirY * 0.1;
+	if (params->map[(int)(params->player->posx + params->player->dirx *
+	params->player->movespeed)][(int)params->player->posy] == '0' &&
+	params->map[(int)(params->player->posx + params->player->dirx *
+	params->player->movespeed)][(int)(params->player->posy - 0.01)] == '0' &&
+	params->map[(int)(params->player->posx + params->player->dirx *
+	params->player->movespeed)][(int)(params->player->posy + 0.01)] == '0')
+		params->player->posx += params->player->dirx * 0.1;
+	if (params->map[(int)params->player->posx][(int)(params->player->posy
+	+ params->player->diry * params->player->movespeed)] == '0' &&
+	params->map[(int)(params->player->posx - 0.01)][(int)(params->player->posy +
+	0.01 + params->player->diry * params->player->movespeed)] == '0' &&
+	params->map[(int)(params->player->posx + 0.01)][(int)(params->player->posy -
+	0.01 + params->player->diry * params->player->movespeed)] == '0')
+		params->player->posy += params->player->diry * 0.1;
 	reset_image(params);
 }
 
 void	down(t_params *params)
 {
-	if (params->map[(int)(params->player->posX - params->player->dirX *
-	params->player->movespeed)][(int)params->player->posY] == '0' &&
-	params->map[(int)(params->player->posX - params->player->dirX *
-	params->player->movespeed)][(int)(params->player->posY + 0.01)] == '0' &&
-	params->map[(int)(params->player->posX - params->player->dirX *
-	params->player->movespeed)][(int)(params->player->posY - 0.01)] == '0')
-		params->player->posX -= params->player->dirX * 0.1;
-	if (params->map[(int)params->player->posX][(int)(params->player->posY -
-	params->player->dirY * params->player->movespeed)] == '0' &&
-	params->map[(int)(params->player->posX + 0.01)][(int)(params->player->posY -
-	params->player->dirY * params->player->movespeed)] == '0' &&
-	params->map[(int)(params->player->posX - 0.01)][(int)(params->player->posY -
-	params->player->dirY * params->player->movespeed)] == '0')
-		params->player->posY -= params->player->dirY * 0.1;
+	if (params->map[(int)(params->player->posx - params->player->dirx *
+	params->player->movespeed)][(int)params->player->posy] == '0' &&
+	params->map[(int)(params->player->posx - params->player->dirx *
+	params->player->movespeed)][(int)(params->player->posy + 0.01)] == '0' &&
+	params->map[(int)(params->player->posx - params->player->dirx *
+	params->player->movespeed)][(int)(params->player->posy - 0.01)] == '0')
+		params->player->posx -= params->player->dirx * 0.1;
+	if (params->map[(int)params->player->posx][(int)(params->player->posy -
+	params->player->diry * params->player->movespeed)] == '0' &&
+	params->map[(int)(params->player->posx + 0.01)][(int)(params->player->posy -
+	params->player->diry * params->player->movespeed)] == '0' &&
+	params->map[(int)(params->player->posx - 0.01)][(int)(params->player->posy -
+	params->player->diry * params->player->movespeed)] == '0')
+		params->player->posy -= params->player->diry * 0.1;
 	reset_image(params);
 }
 
 void	left(t_params *params)
 {
-	if (params->map[(int)(params->player->posX - params->player->planeX *
-	params->player->movespeed)][(int)(params->player->posY)] == '0' &&
-	params->map[(int)(params->player->posX - params->player->planeX *
-	params->player->movespeed)][(int)(params->player->posY - 0.01)] == '0' &&
-	params->map[(int)(params->player->posX - params->player->planeX *
-	params->player->movespeed)][(int)(params->player->posY + 0.01)] == '0')
-		params->player->posX -= params->player->planeX * 0.1;
-	if (params->map[(int)params->player->posX][(int)(params->player->posY -
-	params->player->planeY * params->player->movespeed)] == '0' &&
-	params->map[(int)(params->player->posX - 0.01)][(int)(params->player->posY -
-	params->player->planeY * params->player->movespeed)] == '0' &&
-	params->map[(int)(params->player->posX + 0.01)][(int)(params->player->posY -
-	params->player->planeY * params->player->movespeed)] == '0')
-		params->player->posY -= params->player->planeY * 0.1;
+	if (params->map[(int)(params->player->posx - params->player->planex *
+	params->player->movespeed)][(int)(params->player->posy)] == '0' &&
+	params->map[(int)(params->player->posx - params->player->planex *
+	params->player->movespeed)][(int)(params->player->posy - 0.01)] == '0' &&
+	params->map[(int)(params->player->posx - params->player->planex *
+	params->player->movespeed)][(int)(params->player->posy + 0.01)] == '0')
+		params->player->posx -= params->player->planex * 0.1;
+	if (params->map[(int)params->player->posx][(int)(params->player->posy -
+	params->player->planey * params->player->movespeed)] == '0' &&
+	params->map[(int)(params->player->posx - 0.01)][(int)(params->player->posy -
+	params->player->planey * params->player->movespeed)] == '0' &&
+	params->map[(int)(params->player->posx + 0.01)][(int)(params->player->posy -
+	params->player->planey * params->player->movespeed)] == '0')
+		params->player->posy -= params->player->planey * 0.1;
 	reset_image(params);
 }
 
 void	right(t_params *params)
 {
-	if (params->map[(int)(params->player->posX + params->player->planeX *
-	params->player->movespeed)][(int)(params->player->posY)] == '0' &&
-	params->map[(int)(params->player->posX + params->player->planeX *
-	params->player->movespeed)][(int)(params->player->posY + 0.01)] == '0' &&
-	params->map[(int)(params->player->posX + params->player->planeX *
-	params->player->movespeed)][(int)(params->player->posY - 0.01)] == '0')
-		params->player->posX += params->player->planeX * 0.1;
-	if (params->map[(int)params->player->posX][(int)(params->player->posY +
-	params->player->planeY * params->player->movespeed)] == '0' &&
-	params->map[(int)(params->player->posX + 0.01)][(int)(params->player->posY +
-	params->player->planeY * params->player->movespeed)] == '0' &&
-	params->map[(int)(params->player->posX - 0.01)][(int)(params->player->posY +
-	params->player->planeY * params->player->movespeed)] == '0')
-		params->player->posY += params->player->planeY * 0.1;
+	if (params->map[(int)(params->player->posx + params->player->planex *
+	params->player->movespeed)][(int)(params->player->posy)] == '0' &&
+	params->map[(int)(params->player->posx + params->player->planex *
+	params->player->movespeed)][(int)(params->player->posy + 0.01)] == '0' &&
+	params->map[(int)(params->player->posx + params->player->planex *
+	params->player->movespeed)][(int)(params->player->posy - 0.01)] == '0')
+		params->player->posx += params->player->planex * 0.1;
+	if (params->map[(int)params->player->posx][(int)(params->player->posy +
+	params->player->planey * params->player->movespeed)] == '0' &&
+	params->map[(int)(params->player->posx + 0.01)][(int)(params->player->posy +
+	params->player->planey * params->player->movespeed)] == '0' &&
+	params->map[(int)(params->player->posx - 0.01)][(int)(params->player->posy +
+	params->player->planey * params->player->movespeed)] == '0')
+		params->player->posy += params->player->planey * 0.1;
 	reset_image(params);
 }

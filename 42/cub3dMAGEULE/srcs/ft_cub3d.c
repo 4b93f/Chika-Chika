@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/31 15:46:35 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/01 18:06:07 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,6 @@
 #define mapHeight 24
 #define txtH 64
 #define txtW 64
-
-void reset_image(t_params *params)
-{
-    int x = 0;
-    int y = 0;
-    unsigned char r = 0;
-    unsigned char g = 0;
-    unsigned char b = 0;
-    
-    while(x < (params->screenwidth * params->screenheight))
-    {
-        params->image->imgdata[x * 4 + y * params->image->sizeline] = r;
-        params->image->imgdata[x * 4 + y * params->image->sizeline + 1] = g;
-        params->image->imgdata[x * 4 + y * params->image->sizeline + 2] = b;
-        x++;
-    }
-}
 
 void ft_resolution(t_params *params)
 {
@@ -89,15 +72,19 @@ int main(int argc, char **argv)
     t_draw_sprite *sp;
     t_sprite *sprites;
 	t_bmp *bmp;
+	t_spvalues *sv;
 
     parameters(params, argc, argv);
     params = ft_malloc_params();
 	player = ft_malloc_player();
-    sprites = malloc(sizeof(*sp));
     color = ft_malloc_color();
     params->color = color;
+    sprites = malloc(sizeof(*sp));
+	
+	
     search_params(params, fd);
     sp = ft_malloc_sprite(params);
+	sv = ft_malloc_spvalues();
     event = ft_malloc_event();
     image = ft_malloc_image();
     tex = ft_malloc_tex();
@@ -106,6 +93,7 @@ int main(int argc, char **argv)
 	params->bmp = bmp;
     ray = ft_malloc_ray(params);
     params->ray = ray;
+	params->sv = sv;
 	params->player = player;
     params->event = event;
     params->image = image;

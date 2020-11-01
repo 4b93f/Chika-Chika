@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/31 17:09:44 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/01 18:08:28 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,243 +27,272 @@
 # include <errno.h>
 # include <string.h>
 
-enum e_bool
+enum					e_bool
 {
-  FALSE,
-  TRUE
-}; 
-
-enum e_error
-{
-  NO_MAPFILE,
-  WRONG_PARAMS,
-  NO_MAP,
-  MALLOC_ERROR,
-  DUPLICATE_PARAMETERS,
-  ANOMALY_TEXTURES,
-  RGB_ERROR,
-  RGB_MISSING,
-  WRONG_CHAR_IN_RGB,
-  ANOMALY_RES,
-  PLAYER_NOT_FOUND,
-  ANOMALY_SPRITE,
-  SOMETHING_IS_MISSING,
-  WRONG_MAP_FORMAT,
-  ERROR_ARGUMENT
+	FALSE,
+	TRUE
 };
 
-typedef struct s_color
+enum					e_error
 {
-  unsigned char a;
-  int r;
-  int g;
-  int b;
-  int cell_r;
-  int cell_g;
-  int cell_b;
-  int floor_r;
-  int floor_g;
-  int floor_b;
-}               t_color;
+	NO_MAPFILE,
+	WRONG_PARAMS,
+	NO_MAP,
+	MALLOC_ERROR,
+	DUPLICATE_PARAMETERS,
+	ANOMALY_TEXTURES,
+	RGB_ERROR,
+	RGB_MISSING,
+	WRONG_CHAR_IN_RGB,
+	ANOMALY_RES,
+	PLAYER_NOT_FOUND,
+	ANOMALY_SPRITE,
+	SOMETHING_IS_MISSING,
+	WRONG_MAP_FORMAT,
+	ERROR_ARGUMENT
+};
 
-typedef struct s_bmp
+typedef	struct			s_color
 {
-  int fd;
-  int img_height;
-  int img_width;
-  int imgsize;
-  char *filetype;
-  unsigned int headersize;
-  unsigned int bpp;
-  int bytes_in_width;
-  unsigned int planes;
-  unsigned int img_size;
-  unsigned int pixeldataoffset;
-  unsigned int filesize;
-}              t_bmp;
+	int				a;
+	int				r;
+	int				g;
+	int				b;
+	int				cell_r;
+	int				cell_g;
+	int				cell_b;
+	int				cell_index;
+	int				floor_r;
+	int				floor_g;
+	int				floor_b;
+	int				floor_index;
+}						t_color;
 
-typedef struct s_event
+typedef struct			s_bmp
 {
-  int up;
-  int down;
-  int turn_left;
-  int turn_right;
-  int left;
-  int right;  
-}              t_event;
+	int				fd;
+	int				img_height;
+	int				img_width;
+	int				imgsize;
+	int				bytes_in_width;
+	char			*filetype;
+	unsigned int	headersize;
+	unsigned int	bpp;
+	unsigned int	planes;
+	unsigned int	img_size;
+	unsigned int	pixeldataoffset;
+	unsigned int	filesize;
+}						t_bmp;
 
-typedef struct	s_player
+typedef struct			s_event
 {
-	double posX;
-  	double posY;
-  	double dirX;
-  	double dirY;
-  	double planeX;
-  	double planeY;
+	int			up;
+	int			down;
+	int			turn_left;
+	int			turn_right;
+	int			left;
+	int			right;
+}						t_event;
+
+typedef struct			s_player
+{
+	double posx;
+	double posy;
+	double dirx;
+	double diry;
+	double planex;
+	double planey;
 	double rotspeed;
-  	double movespeed;
-	double camX;
-}				t_player;
+	double movespeed;
+	double camx;
+}						t_player;
 
-typedef struct s_ray
+typedef struct			s_ray
 {
-  int width;
-  int mapY;
-  int mapX;
-  int stepX;
-  int stepY;
-  int hit;
-  int side;
-  int lineheight;
-  int drawstart;
-  int drawend;
-  double raydirX;
-  double raydirY;
-  double sidedistX; // distance entre ray et prochain axe Y//
-  double sidedistY; // distance entre ray et prochain axe X//
-  double deltadistX; // distance entre le 1er axe X et le 2eme //
-  double deltadistY;  // distance entre le 1er axe Y et le 2eme //
-  double perpwalldist;
-  void *mlx;
-  void *window;
-}               t_ray;
+	int			width;
+	int			mapy;
+	int			mapx;
+	int			stepx;
+	int			stepy;
+	int			hit;
+	int			side;
+	int			lineheight;
+	int			drawstart;
+	int			drawend;
+	double		raydirx;
+	double		raydiry;
+	double		sidedistx;
+	double		sidedisty;
+	double		deltadistx;
+	double		deltadisty;
+	double		perpwalldist;
+	void		*mlx;
+	void		*window;
+}						t_ray;
 
-typedef struct s_image
+typedef struct			s_image
 {
-  int bpp;
-  int sizeline;
-  int endian;
-  int img_width;
-  int img_height;
-  void *img;
-  char *imgdata;
+	int			bpp;
+	int			sizeline;
+	int			endian;
+	int			img_width;
+	int			img_height;
+	int			save;
+	void		*img;
+	char		*imgdata;
+	char		*imgsave;
+}						t_image;
 
-  int save;
-  char *imgsave;
-  
-}               t_image;
-
-typedef struct s_tex
+typedef struct			s_tex
 {
-  int bpp;
-  int sizeline;
-  int endian;
-  int tex_width;
-  int tex_height;
-  int texnum;
-  double texpos;
-  int texx;
-  int texy;
-  double step;
-  char **tex;
-}               t_tex;
+	int			bpp;
+	int			sizeline;
+	int			endian;
+	int			tex_width;
+	int			tex_height;
+	int			texnum;
+	double		texpos;
+	int			texx;
+	int			texy;
+	double		step;
+	char		**tex;
+}						t_tex;
 
-typedef struct s_sprite
+typedef struct			s_sprite
 {
-  int x;
-  int y;
-}               t_sprite;
+	int			x;
+	int			y;
+}						t_sprite;
 
-typedef struct s_sprites
+typedef struct			s_sprites
 {
-  int x;
-  int y;
-  struct s_sprite *next;
-}              t_sprites;
 
-typedef struct s_draw_sprite
+	struct s_sprite		*next;
+}						t_sprites;
+
+typedef struct			s_draw_sprite
 {
-  t_sprite *sprites;
-  int bpp;
-  int *pos_sprite;
-  int sizeline;
-  int endian;
-  int numsprite;
-  int sp_width;
-  int sp_height;
-  double x;
-  double y;
-  void *test;
-  void *lol;
-  char *spdata;
-  char *testdata;
-  char **sp;
-}              t_draw_sprite;
+	t_sprite	*sprites;
+	int			bpp;
+	int			*pos_sprite;
+	int			sizeline;
+	int			endian;
+	int			numsprite;
+	int			sp_width;
+	int			sp_height;
+	double		x;
+	double		y;
+	void		*test;
+	void		*lol;
+	char		*spdata;
+	char		*testdata;
+	char		**sp;
+}						t_draw_sprite;
 
-typedef struct s_params
+typedef struct			s_spvalues
 {
-  int map_find;
-  int find_pos;
-  int player_orientation;
-  int screenwidth;
-  int screenheight;
-  char *res;
-  char *textno;
-  char *textso;
-  char *textwe;
-  char *textea;
-  char *textsp;
-  char *textp;
-  char *textf;
-  char *colorf;
-  char **argbcolorf;
-  char *colorc;
-  char **argbcolorc;
-  char **map;
-  t_ray *ray;
-  t_color *color;
-  t_event *event;
-  t_image *image;
-  t_tex *tex;
-  t_draw_sprite *sp;
-  t_sprite *sprites;
-  t_player *player;
-  t_bmp *bmp;
-}              t_params;
+	int			i;
+	int			y;
+	int			j;
+	double		invdet;
+	double		transformx;
+	double		transformy;
+	int			sprite_screenx;
+	int			sprite_height;
+	int			sprite_width;
+	int			drawstartx;
+	int			drawstarty;
+	int			drawendx;
+	int			drawendy;
+	int			x;
+	int			spx;
+	int			spy;
+	t_sprite	tmp;
+}						t_spvalues;
 
-int ft_check_map(t_params *params,char **map);
-int ft_check_startend(char *str);
-int  ft_updownwall(char *map);
-int ft_check_char(t_params *params, char *map);
-int ft_check_space(char **map);
-int		ft_isdigit(int c);
-int search_params(t_params *params, int fd);
-int numsprite(char **map);
-int key_pressed(int key_pressed, t_params *params);
-int key_released(int key_released, t_params *params);
-char	*ft_strdup(const char *s);
-char **ft_realloc(char **str, char *line);
-char **ft_map_parsing(int fd, char *firstline);
-void key_event(t_params *params);
-void ft_getposray(char **map, t_player *player);
-void up(t_params *params);
-void down(t_params *params);
-void left(t_params *params);
-void ft_getpose_sprite(char **map, t_draw_sprite *sp, t_sprite *sprites);
-void right(t_params *params);
-void turn_right(t_params *params);
-void turn_left(t_params *params);
-void reset_image(t_params *params);
-void ft_free_struct(t_params *to_free);
-void save(t_params *params);
-void ft_error(int num);
-void ft_raycast(t_params *params,t_ray *ray, t_color *color);
-void ft_get_tex(t_params *params);
-void DROITE(t_params *params);
-void ft_pixel_to_image(int x, int y, t_params *params);
-void ft_orientation(t_params *params, t_ray *ray);
-void ft_get_sprite(t_params *params, char *path);
-void parameters(t_params *params, int argc, char **argv);
-void ft_void_algo(int *i, int *j, int *k, char **map);
-t_params *ft_malloc_params(void);
-t_ray *ft_malloc_ray(t_params *params);
-t_color *ft_malloc_color(void);
-t_image *ft_malloc_image(void);
-t_event *ft_malloc_event(void);
-t_draw_sprite *ft_malloc_sprite(t_params * params);
-t_player	*ft_malloc_player(void);
-t_tex *ft_malloc_tex();
-t_bmp	*ft_malloc_bmp(t_params *params);
-void ft_zero_algo(int *i, int *j, int *k, char **map);
+typedef struct			s_params
+{
+	int				map_find;
+	int				find_pos;
+	int				player_orientation;
+	int				screenwidth;
+	int				screenheight;
+	char			*res;
+	char			*textno;
+	char			*textso;
+	char			*textwe;
+	char			*textea;
+	char			*textsp;
+	char			*textp;
+	char			*textf;
+	char			*colorf;
+	char			**argbcolorf;
+	char			*colorc;
+	char			**argbcolorc;
+	char			**map;
+	t_ray			*ray;
+	t_color			*color;
+	t_event			*event;
+	t_image			*image;
+	t_tex			*tex;
+	t_draw_sprite	*sp;
+	t_sprite		*sprites;
+	t_player		*player;
+	t_bmp			*bmp;
+	t_spvalues		*sv;
+}						t_params;
+
+int				ft_check_map(t_params *params, char **map);
+int				ft_check_startend(char *str);
+int				ft_updownwall(char *map);
+int				ft_check_char(t_params *params, char *map);
+int				ft_check_space(char **map);
+int				ft_isdigit(int c);
+int				search_params(t_params *params, int fd);
+int				numsprite(char **map);
+int				key_pressed(int key_pressed, t_params *params);
+int				key_released(int key_released, t_params *params);
+char			*ft_strdup(const char *s);
+char			**ft_realloc(char **str, char *line);
+char			**ft_map_parsing(int fd, char *firstline);
+void			key_event(t_params *params);
+void			ft_getposray(char **map, t_player *player);
+void			up(t_params *params);
+void			down(t_params *params);
+void			left(t_params *params);
+void			reset_image(t_params *params);
+void			ft_getpose_sprite(char **map, t_draw_sprite *sp,
+		t_sprite *sprites);
+void			right(t_params *params);
+void			turn_right(t_params *params);
+void			turn_left(t_params *params);
+void			reset_image(t_params *params);
+void			ft_free_struct(t_params *to_free);
+void			save(t_params *params);
+void			ft_error(int num);
+void			ft_raycast(t_params *params, t_ray *ray, t_color *color);
+void			ft_get_tex(t_params *params);
+void			ft_pixel_to_image(int x, int y, t_params *params);
+void			ft_orientation(t_params *params, t_ray *ray);
+void			ft_get_sprite(t_params *params, char *path);
+void			parameters(t_params *params, int argc, char **argv);
+void			ft_void_algo(int *i, int *j, int *k, char **map);
+void			ft_zero_algo(int *i, int *j, int *k, char **map);
+void			get_next_value_bis(t_params *params, int x,
+		double wallx, int *y);
+void			print_cell_floor(t_params *params, t_color *color, int x);
+void			print_wall(t_params *params, int x, int y);
+void			ft_sprite_to_image(t_params *params);
+void			sprite(t_params *params, double *zbuffer);
+t_params		*ft_malloc_params(void);
+t_spvalues		*ft_malloc_spvalues();
+t_ray			*ft_malloc_ray(t_params *params);
+t_color			*ft_malloc_color(void);
+t_image			*ft_malloc_image(void);
+t_event			*ft_malloc_event(void);
+t_draw_sprite	*ft_malloc_sprite(t_params *params);
+t_player		*ft_malloc_player(void);
+t_tex			*ft_malloc_tex();
+t_bmp			*ft_malloc_bmp(t_params *params);
 
 #endif

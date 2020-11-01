@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 19:47:26 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/31 15:46:05 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/01 17:30:20 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int		ft_check_space(char **map)
 	i = -1;
 	j = 0;
 	k = 0;
-	int z = 0;
 	while (map[++i])
 	{
 		while (map[i][++j])

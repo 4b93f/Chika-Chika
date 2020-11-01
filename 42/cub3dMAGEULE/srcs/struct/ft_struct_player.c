@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 23:03:43 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/31 15:42:15 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/01 17:53:49 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ t_player	ft_create_player(void)
 {
 	t_player player;
 
-	player.posX = 0;
-	player.posY = 0;
-	player.dirX = 0;
-	player.dirY = 0;
-	player.planeX = 0;
-	player.planeY = 0;
+	player.posx = 0;
+	player.posy = 0;
+	player.dirx = 0;
+	player.diry = 0;
+	player.planex = 0;
+	player.planey = 0;
 	player.rotspeed = 0.10;
 	player.movespeed = 0.40;
-	player.camX = 0;
+	player.camx = 0;
 	return (player);
 }
 

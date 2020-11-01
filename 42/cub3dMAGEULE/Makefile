@@ -3,7 +3,8 @@ SRCS   = 	srcs/engine/ft_bitmap.c srcs/handle_info/ft_check_map.c srcs/handle_in
 			srcs/handle_info/ft_parsing_params.c srcs/player/ft_player.c srcs/engine/ft_raycast.c srcs/engine/ft_sprite.c \
  			srcs/struct/ft_struct_bmp.c srcs/struct/ft_struct_color.c srcs/struct/ft_struct_event.c srcs/struct/ft_struct_image.c \
 			srcs/struct/ft_struct_params.c srcs/struct/ft_struct_player.c srcs/struct/ft_struct_ray.c srcs/struct/ft_struct_sprite.c \
-			srcs/struct/ft_struct_tex.c srcs/engine/ft_textures.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
+			srcs/struct/ft_struct_tex.c srcs/engine/ft_textures.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c srcs/struct/ft_struct_spvalues.c \
+			srcs/engine/ft_print_sprite.c srcs/engine/ft_print.c srcs/engine/ft_raycast_bis.c
 
 
 HEADERS =	cub3d.h

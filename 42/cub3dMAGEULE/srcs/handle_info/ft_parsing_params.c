@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:35:00 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/31 17:04:35 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/01 17:30:46 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,6 @@ void	ft_check_cell(t_params *params)
 		j = 0;
 	}
 }
-
-
 void cut(char *s)
 {
 	int i;
@@ -198,30 +196,6 @@ int		ft_params_format(t_params *params)
 	format_color(params);
 	return (0);
 }
-/*
-char	**ft_tabstrdup(char **s)
-{
-	int i;
-	int j;
-	char **dup;
-	char **source;
-	source = (char **)s;
-
-	j = 0;
-	i = 0;
-
-	while (s[i] != NULL)
-		i++;
-	dup = (char**)malloc(sizeof(char*) * i + 1);
-	while (j < i)
-	{
-		dup[j] = ft_strdup(source[j]);
-		j++;
-	}
-	dup[j] = NULL;
-	return (dup);
-}
-*/
 
 void	parse_info(t_params *params, int fd, char *line)
 {
