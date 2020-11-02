@@ -4,7 +4,7 @@ SRCS   = 	srcs/engine/ft_bitmap.c srcs/handle_info/ft_check_map.c srcs/handle_in
  			srcs/struct/ft_struct_bmp.c srcs/struct/ft_struct_color.c srcs/struct/ft_struct_event.c srcs/struct/ft_struct_image.c \
 			srcs/struct/ft_struct_params.c srcs/struct/ft_struct_player.c srcs/struct/ft_struct_ray.c srcs/struct/ft_struct_sprite.c \
 			srcs/struct/ft_struct_tex.c srcs/engine/ft_textures.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c srcs/struct/ft_struct_spvalues.c \
-			srcs/engine/ft_print_sprite.c srcs/engine/ft_print.c srcs/engine/ft_raycast_bis.c
+			srcs/engine/ft_print_sprite.c srcs/engine/ft_print.c srcs/engine/ft_raycast_bis.c srcs/engine/ft_init_game.c \
 
 
 HEADERS =	cub3d.h
@@ -22,9 +22,9 @@ $(NAME) : $(OBJS)
 	@echo "[Libft compilation...]"
 	@$(MAKE) -C ./libft && mv ./libft/libft.a ./includes
 	@echo "[Cub3D compilation...]"
-	@$(MAKE) -C ./minilibx && mv ./minilibx/libmlx.dylib ./srcs
+	@$(MAKE) -C ./minilibx && mv ./minilibx/libmlx.dylib ../cub3dMAGEULE
 	@echo "[Minilibx compilation...]"
-	@gcc -Wall -Wextra -Werror $(MLX) $(OBJS) ./includes/libft.a -I./usr/include -o $(NAME)
+	@gcc -Wall -Wextra -Werror $(MLX) $(OBJS) libmlx.dylib ./includes/libft.a -I./usr/include -o $(NAME)
 	@echo "[Done !]"
 
 
@@ -41,7 +41,7 @@ fclean:		clean
 			@rm -f ./includes/libft.a
 			@echo "[Remove minilibx...]"
 			@$(MAKE) -C minilibx clean
-			@rm -f ./srcs/libmlx.dylib
+			@rm -f libmlx.dylib
 			@echo "[Done!]"
 
 

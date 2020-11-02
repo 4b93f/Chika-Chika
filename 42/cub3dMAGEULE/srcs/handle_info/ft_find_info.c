@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 17:16:21 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/01 18:35:37 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/02 16:16:03 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 void	ft_resolution(t_params *params)
 {
-    char	**tmp;
-    int		i;
-    int		y;
+	char	**tmp;
+	int		res_x;
+	int		res_y;
+	void	*mlx;
 
-    i = -1;
-	y = 0;
-    int res_x;
-    int res_y;
-    if (!params->res)
-        ft_error(ANOMALY_RES);
-    tmp = ft_split(params->res, ' ');
-    if (tmp[2] || tmp[0] == NULL || tmp[1] == NULL)
-        ft_error(ANOMALY_RES);
-    mlx_get_screen_size(params->ray->mlx, &res_x, &res_y);
-    params->screenwidth = ft_atoi(tmp[0]);
-    params->screenheight = ft_atoi(tmp[1]);
-    if (params->screenwidth < 1 || params->screenheight < 1)
-        ft_error(ANOMALY_RES);
-    params->screenwidth = params->screenwidth > res_x ? res_x : params->screenwidth;
-    params->screenheight = params->screenheight > res_y ? res_y : params->screenheight;
-    return;
+	mlx = mlx_init();
+	if (!params->res)
+		ft_error(ANOMALY_RES);
+	tmp = ft_split(params->res, ' ');
+	if (tmp[2] || tmp[0] == NULL || tmp[1] == NULL)
+		ft_error(ANOMALY_RES);
+	mlx_get_screen_size(mlx, &res_x, &res_y);
+	params->screenwidth = ft_atoi(tmp[0]);
+	params->screenheight = ft_atoi(tmp[1]);
+	if (params->screenwidth < 1 || params->screenheight < 1)
+		ft_error(ANOMALY_RES);
+	params->screenwidth = params->screenwidth >
+	res_x ? res_x : params->screenwidth;
+	params->screenheight = params->screenheight >
+	res_y ? res_y : params->screenheight;
+	return ;
 }
 
 int		ft_check_map(t_params *params, char **map)

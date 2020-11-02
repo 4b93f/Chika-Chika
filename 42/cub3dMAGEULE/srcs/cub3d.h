@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/01 18:36:37 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/02 16:42:24 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,7 @@ int				ft_check_startend(char *str);
 int				ft_updownwall(char *map);
 int				ft_check_char(t_params *params, char *map);
 int				ft_check_space(char **map);
+int				mlx_get_screen_size(void *mlx_ptr, int *sizex, int *sizey);
 int				ft_isdigit(int c);
 int				search_params(t_params *params, int fd);
 int				numsprite(char **map);
@@ -280,6 +281,7 @@ void			ft_void_algo(int *i, int *j, int *k, char **map);
 void			ft_zero_algo(int *i, int *j, int *k, char **map);
 void			get_next_value_bis(t_params *params, int x,
 		double wallx, int *y);
+void			ft_init_game(t_params *params, int fd);
 void			print_cell_floor(t_params *params, t_color *color, int x);
 void			print_wall(t_params *params, int x, int y);
 void			ft_sprite_to_image(t_params *params);
