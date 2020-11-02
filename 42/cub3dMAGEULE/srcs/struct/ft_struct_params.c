@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 01:14:46 by root              #+#    #+#             */
-/*   Updated: 2020/10/31 15:42:13 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/02 20:33:51 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,11 @@ t_params	ft_create_params(void)
 	params.textp = NULL;
 	params.textf = NULL;
 	params.colorc = NULL;
-	if (!(params.argbcolorc = malloc(sizeof(char*) * 3)))
-		ft_error(MALLOC_ERROR);
+	params.argbcolorc = NULL;
 	params.colorf = NULL;
-	if (!(params.argbcolorf = malloc(sizeof(char*) * 3)))
-		ft_error(MALLOC_ERROR);
+	params.argbcolorf = NULL;
 	params.map = NULL;
+	params.mlx = mlx_init();
 	return (params);
 }
 

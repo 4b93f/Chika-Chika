@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/02 16:42:24 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/02 20:43:06 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,7 @@ typedef struct			s_params
 	int				player_orientation;
 	int				screenwidth;
 	int				screenheight;
+	void			*mlx;
 	char			*res;
 	char			*textno;
 	char			*textso;
@@ -247,6 +248,7 @@ int				ft_check_startend(char *str);
 int				ft_updownwall(char *map);
 int				ft_check_char(t_params *params, char *map);
 int				ft_check_space(char **map);
+int				ft_isspace(int c);
 int				mlx_get_screen_size(void *mlx_ptr, int *sizex, int *sizey);
 int				ft_isdigit(int c);
 int				search_params(t_params *params, int fd);

@@ -1,9 +1,9 @@
-R	1000 1000
-S      ./textures/barrel.xpm 
-NO       ./textures/north.xpm        
-SO     ./textures/south.xpm         
+R			1000 1000     
+S 		./textures/barrel.xpm    
+NO 		./textures/north.xpm        
+SO  		./textures/south.xpm         
 WE              ./textures/west.xpm                     
-EA     ./textures/east.xpm
+EA ./textures/east.xpm
 F 255, 255, 255
 C 200, 60   ,220	
 

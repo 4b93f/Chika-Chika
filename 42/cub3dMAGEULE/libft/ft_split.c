@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: becentrale <becentrale@student.42.fr>      +#+  +:+       +#+        */
+/*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 02:10:35 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/08/19 18:03:45 by becentrale       ###   ########.fr       */
+/*   Updated: 2020/11/02 19:02:11 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char		**malloc_free(char **str)
 	return (NULL);
 }
 
-static int		count_words(char const *str, char c)
+static int		count_words(char *str, char c)
 {
 	int	i;
 
@@ -42,7 +42,7 @@ static int		count_words(char const *str, char c)
 	return (i);
 }
 
-static char		*malloc_word(char const *str, char c)
+static char		*malloc_word(char *str, char c)
 {
 	char	*word;
 	int		i;
@@ -62,7 +62,7 @@ static char		*malloc_word(char const *str, char c)
 	return (word);
 }
 
-char			**ft_split(char const *str, char charset)
+char			**ft_split(char *str, char charset)
 {
 	int		words;
 	int		i;
