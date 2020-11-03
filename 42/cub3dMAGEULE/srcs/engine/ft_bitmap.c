@@ -6,11 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:28:12 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/03 16:33:16 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 18:38:27 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	parameters(t_params *params, int argc, char **argv)
 {
@@ -31,10 +31,8 @@ void	parameters(t_params *params, int argc, char **argv)
 
 void	save(t_params *params)
 {
-	char *header;
 
-	if (!(header = (char*)malloc(sizeof(char) * 54)))
-		return ;
+	unsigned char header[54] = {0};
 	ft_memcpy(header, "BM", 2);
 	ft_memcpy(header + 2, &params->bmp->filesize, 4);
 	ft_memcpy(header + 10, &params->bmp->pixeldataoffset, 4);
@@ -44,8 +42,10 @@ void	save(t_params *params)
 	ft_memcpy(header + 26, &params->bmp->planes, 2);
 	ft_memcpy(header + 28, &params->bmp->bpp, 2);
 	ft_memcpy(header + 34, &params->bmp->imgsize, 4);
-	params->bmp->fd = open("first_image.bmp", O_WRONLY | O_CREAT, S_IRWXU);
+	params->bmp->fd = open("SS.bmp", O_WRONLY | O_CREAT, S_IRWXU);
+	printf("{%s}\n", header);
 	write(params->bmp->fd, header, 54);
 	write(params->bmp->fd, params->image->imgdata, params->bmp->imgsize);
+	close(params->bmp->fd);
 	exit(FALSE);
 }

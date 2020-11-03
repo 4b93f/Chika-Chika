@@ -6,11 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 16:26:08 by root              #+#    #+#             */
-/*   Updated: 2020/11/03 17:21:59 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 18:13:36 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
 char	**ft_realloc(char **str, char *line)
 {

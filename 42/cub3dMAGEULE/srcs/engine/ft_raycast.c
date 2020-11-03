@@ -6,11 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/11/03 17:47:20 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 21:05:21 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	init_base_value(t_params *params, t_ray *ray, int x)
 {
@@ -120,5 +120,4 @@ void	ft_raycast(t_params *params, t_ray *ray, t_color *color)
 		zbuffer[x] = params->ray->perpwalldist;
 	}
 	sprite(params, zbuffer);
-	//system("leaks Cub3D");
 }

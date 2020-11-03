@@ -6,11 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 23:03:43 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/03 17:36:28 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 18:14:03 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
 t_player	ft_create_player(void)
 {

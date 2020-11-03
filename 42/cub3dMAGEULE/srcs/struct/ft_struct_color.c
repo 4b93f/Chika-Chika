@@ -6,11 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 16:07:25 by becentrale        #+#    #+#             */
-/*   Updated: 2020/11/03 17:29:26 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 18:13:54 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
 t_color	ft_create_color(void)
 {

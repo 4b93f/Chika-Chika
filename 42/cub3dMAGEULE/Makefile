@@ -15,7 +15,7 @@ OBJS = 		${SRCS:.c=.o}
 MLX = -lmlx -lm -framework OpenGL -framework AppKit
 
 .c.o:
-			@${CC} ${CFLAGS} -I ${HEADERS} -c $^ -o ${<:.c=.o}
+			@${CC} -g ${CFLAGS} -I ${HEADERS} -c $^ -o ${<:.c=.o}
 
 $(NAME) : $(OBJS)
 	@echo "[Remove last version...]"
@@ -27,7 +27,7 @@ $(NAME) : $(OBJS)
 	@echo "[Cub3D compilation...]"
 	@$(MAKE) -C ./minilibx && mv ./minilibx/libmlx.dylib ../cub3dMAGEULE
 	@echo "[Minilibx compilation...]"
-	@gcc -Wall -Wextra -Werror $(MLX) $(OBJS) libmlx.dylib ./lib/libftprintf.a./lib/libft.a -I./usr/include -o $(NAME)
+	gcc -g -ggdb3 -Wall -Wextra -Werror $(MLX) $(OBJS) libmlx.dylib ./lib/libftprintf.a ./lib/libft.a -I./usr/include -o $(NAME)
 	@echo "[Done !]"
 
 

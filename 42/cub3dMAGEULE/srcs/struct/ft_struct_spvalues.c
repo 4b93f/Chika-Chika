@@ -6,11 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 14:50:16 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/01 17:31:05 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 18:14:11 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
 t_spvalues	ft_create_spvalues(void)
 {

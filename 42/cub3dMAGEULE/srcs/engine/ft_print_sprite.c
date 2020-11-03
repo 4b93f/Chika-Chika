@@ -6,11 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 17:10:57 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/03 16:38:48 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 18:13:16 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	sortsprites(t_params *params)
 {

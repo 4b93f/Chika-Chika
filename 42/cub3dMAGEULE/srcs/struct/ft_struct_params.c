@@ -6,11 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 01:14:46 by root              #+#    #+#             */
-/*   Updated: 2020/11/03 17:38:27 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 21:30:54 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
 t_params	ft_create_params(void)
 {
@@ -32,7 +32,6 @@ t_params	ft_create_params(void)
 	params.colorf = NULL;
 	params.argbcolorf = NULL;
 	params.map = NULL;
-	params.mlx = mlx_init();
 	return (params);
 }
 

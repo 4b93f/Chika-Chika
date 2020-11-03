@@ -6,11 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 20:05:34 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/31 15:42:23 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 18:14:07 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
 t_draw_sprite	ft_create_sprite(t_params *params)
 {

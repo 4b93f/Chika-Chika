@@ -6,11 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 15:20:06 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/03 17:25:00 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 18:13:43 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
 int		key_pressed(int key_pressed, t_params *params)
 {

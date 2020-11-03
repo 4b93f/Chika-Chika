@@ -6,11 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 20:42:38 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/03 14:27:21 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 18:14:31 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 int		ft_isspace(int c)
 {

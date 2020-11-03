@@ -6,11 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 16:19:44 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/03 17:02:47 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 21:34:06 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	ft_init(t_params *params)
 {

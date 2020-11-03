@@ -6,11 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 18:30:34 by becentrale        #+#    #+#             */
-/*   Updated: 2020/11/03 17:40:04 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 21:30:50 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../includes/cub3d.h"
 
 t_ray	ft_create_ray(t_params *params)
 {
@@ -33,7 +33,8 @@ t_ray	ft_create_ray(t_params *params)
 	ray.lineheight = 0;
 	ray.drawstart = 0;
 	ray.drawend = 0;
-	ray.window = mlx_new_window(params->mlx, params->screenwidth,
+	ray.mlx = mlx_init();
+	ray.window = mlx_new_window(ray.mlx, params->screenwidth,
 	params->screenheight, "TITLE");
 	return (ray);
 }
