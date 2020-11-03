@@ -6,11 +6,38 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 17:16:21 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/02 20:40:40 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 17:21:38 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	ft_getpose_sprite(char **map, t_draw_sprite *sp, t_sprite *sprites)
+{
+	int i;
+	int j;
+	int k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	while (map[i])
+	{
+		while (map[i][j])
+		{
+			if (map[i][j] == '2')
+			{
+				sprites[k].x = i + 1;
+				sprites[k].y = j + 1;
+				k++;
+				map[i][j] = '0';
+			}
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+}
 
 void	ft_resolution(t_params *params)
 {

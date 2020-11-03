@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 15:07:53 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/31 15:48:56 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 17:02:57 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	ft_error(int num)
 		"Error\nInvalid argument\n"
 	};
 
-	printf("%s", error[num]);
-	exit(0);
+	ft_printf("%s", error[num]);
+	exit(FALSE);
 }

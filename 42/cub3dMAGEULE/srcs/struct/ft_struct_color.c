@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 16:07:25 by becentrale        #+#    #+#             */
-/*   Updated: 2020/11/01 14:58:46 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 17:29:26 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ t_color	*ft_malloc_color(void)
 {
 	t_color *malloc_color;
 
-	malloc_color = malloc(sizeof(t_color));
+	if (!(malloc_color = malloc(sizeof(t_color))))
+		ft_error(MALLOC_ERROR);
 	*malloc_color = ft_create_color();
 	return (malloc_color);
 }

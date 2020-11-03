@@ -6,38 +6,42 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 20:45:46 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/02 20:59:01 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 17:23:08 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int		find_duplicate(char *str, int c)
+void	cut(char *s)
 {
 	int i;
-	int num;
 
-	i = -1;
-	num = 0;
-	while (str[++i])
+	i = 0;
+	while (s[i])
+		i++;
+	i--;
+	while (i != 0)
 	{
-		if (str[i] == c)
-			num++;
+		if (ft_isspace(s[i]))
+		{
+			while (ft_isspace(s[i]))
+				i--;
+			s[i + 1] = '\0';
+			return ;
+		}
+		else if (ft_isascii(s[i]))
+			return ;
+		i--;
 	}
-	return (num);
 }
 
 void	ft_check_floor(t_params *params)
 {
 	int i;
 	int j;
-	int k;
-	int l;
 
 	i = -1;
 	j = 0;
-	k = 0;
-	l = 0;
 	while (params->argbcolorf[++i])
 	{
 		while (params->argbcolorf[i][j] &&
@@ -60,13 +64,9 @@ void	ft_check_cell(t_params *params)
 {
 	int i;
 	int j;
-	int k;
-	int l;
 
 	i = -1;
 	j = 0;
-	k = 0;
-	l = 0;
 	while (params->argbcolorc[++i])
 	{
 		while (params->argbcolorc[i][j] &&

@@ -6,15 +6,15 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/02 20:39:12 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 17:56:42 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		mouse_event(t_params *params)
+int	mouse_event(t_params *params)
 {
-	exit(0);
+	exit(FALSE);
 }
 
 int		start(t_params *params)
@@ -25,7 +25,7 @@ int		start(t_params *params)
 	mlx_put_image_to_window(params->ray->mlx, params->ray->window,
 			params->image->img, 0, 0);
 	key_event(params);
-	return (1);
+	return (TRUE);
 }
 
 void	game(t_params *params)
@@ -50,7 +50,7 @@ void	game(t_params *params)
 	mlx_hook(params->ray->window, 17, 1L << 17, mouse_event, params);
 	mlx_loop_hook(params->mlx, start, params);
 	if (!(mlx_loop(params->mlx) == 0))
-		exit(0);
+		exit(TRUE);
 }
 
 int		main(int argc, char **argv)
@@ -60,7 +60,7 @@ int		main(int argc, char **argv)
 
 	fd = open(argv[1], O_RDONLY);
 	params = ft_malloc_params();
-	parameters(params, argc, argv);
 	ft_init_game(params, fd);
+	parameters(params, argc, argv);
 	game(params);
 }

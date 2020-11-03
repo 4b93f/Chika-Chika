@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 23:36:05 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/31 15:41:58 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 17:27:10 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ t_bmp	*ft_malloc_bmp(t_params *params)
 {
 	t_bmp *malloc_bmp;
 
-	malloc_bmp = malloc(sizeof(t_bmp));
+	if (!(malloc_bmp = malloc(sizeof(t_bmp))))
+		ft_error(MALLOC_ERROR);
 	*malloc_bmp = ft_create_bmp(params);
 	return (malloc_bmp);
 }

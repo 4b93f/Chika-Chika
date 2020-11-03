@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 16:19:44 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/02 20:39:15 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 17:02:47 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,14 @@ void	ft_init_2(t_params *params, t_draw_sprite *sp, int fd)
 	t_tex		*tex;
 	t_image		*image;
 
-	sprites = malloc(sizeof(*sp));
-	params->sprites = sprites;
-	search_params(params, fd);
-	tex = ft_malloc_tex();
-	params->tex = tex;
 	image = ft_malloc_image();
 	params->image = image;
+	if (!(sprites = malloc(sizeof(*sp))))
+		ft_error(MALLOC_ERROR);
+	params->sprites = sprites;
+	tex = ft_malloc_tex();
+	params->tex = tex;
+	search_params(params, fd);
 }
 
 void	ft_init_3(t_params *params)
@@ -52,11 +53,11 @@ void	ft_init_3(t_params *params)
 
 	event = ft_malloc_event();
 	params->event = event;
-	bmp = ft_malloc_bmp(params);
-	params->bmp = bmp;
 	ft_resolution(params);
 	ray = ft_malloc_ray(params);
 	params->ray = ray;
+	bmp = ft_malloc_bmp(params);
+	params->bmp = bmp;
 }
 
 void	ft_init_game(t_params *params, int fd)

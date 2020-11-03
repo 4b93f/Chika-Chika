@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 15:20:06 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/10/31 15:44:06 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 17:25:00 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int		key_pressed(int key_pressed, t_params *params)
 	if (key_pressed == 124)
 		params->event->turn_right = 1;
 	if (key_pressed == 53)
-		exit(0);
-	return (0);
+		exit(FALSE);
+	return (FALSE);
 }
 
 int		key_released(int key_released, t_params *params)
@@ -45,7 +45,7 @@ int		key_released(int key_released, t_params *params)
 		params->event->turn_left = 0;
 	if (key_released == 124)
 		params->event->turn_right = 0;
-	return (0);
+	return (FALSE);
 }
 
 void	key_event(t_params *params)

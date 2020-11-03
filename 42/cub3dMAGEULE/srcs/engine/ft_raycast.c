@@ -6,14 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/11/02 20:40:02 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 17:47:20 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-#define TXTH 64
-#define TXTW 64
 
 void	init_base_value(t_params *params, t_ray *ray, int x)
 {

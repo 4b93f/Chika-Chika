@@ -6,16 +6,20 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/02 20:43:06 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 17:49:34 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+#define TXTH 64
+#define TXTW 64
+
 # include "../minilibx/mlx.h"
 # include "../get_next_line/get_next_line.h"
 # include "../libft/libft.h"
+# include "../ft_printf/ft_printf.h"
 
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -49,24 +53,8 @@ enum					e_error
 	ANOMALY_SPRITE,
 	SOMETHING_IS_MISSING,
 	WRONG_MAP_FORMAT,
-	ERROR_ARGUMENT
+	ERROR_ARGUMENT,
 };
-
-typedef	struct			s_color
-{
-	int				a;
-	int				r;
-	int				g;
-	int				b;
-	int				cell_r;
-	int				cell_g;
-	int				cell_b;
-	int				cell_index;
-	int				floor_r;
-	int				floor_g;
-	int				floor_b;
-	int				floor_index;
-}						t_color;
 
 typedef struct			s_bmp
 {
@@ -84,15 +72,44 @@ typedef struct			s_bmp
 	unsigned int	filesize;
 }						t_bmp;
 
+typedef	struct			s_color
+{
+	int				a;
+	int				r;
+	int				g;
+	int				b;
+	int				cell_r;
+	int				cell_g;
+	int				cell_b;
+	int				cell_index;
+	int				floor_r;
+	int				floor_g;
+	int				floor_b;
+	int				floor_index;
+}						t_color;
+
 typedef struct			s_event
 {
 	int			up;
 	int			down;
-	int			turn_left;
-	int			turn_right;
 	int			left;
 	int			right;
+	int			turn_left;
+	int			turn_right;
 }						t_event;
+
+typedef struct			s_image
+{
+	int			bpp;
+	int			sizeline;
+	int			endian;
+	int			img_width;
+	int			img_height;
+	int			save;
+	void		*img;
+	char		*imgdata;
+	char		*imgsave;
+}						t_image;
 
 typedef struct			s_player
 {
@@ -130,21 +147,10 @@ typedef struct			s_ray
 	void		*window;
 }						t_ray;
 
-typedef struct			s_image
-{
-	int			bpp;
-	int			sizeline;
-	int			endian;
-	int			img_width;
-	int			img_height;
-	int			save;
-	void		*img;
-	char		*imgdata;
-	char		*imgsave;
-}						t_image;
-
 typedef struct			s_tex
 {
+	void		*texture;
+	char		*texturedata;
 	int			bpp;
 	int			sizeline;
 	int			endian;
@@ -156,6 +162,7 @@ typedef struct			s_tex
 	int			texy;
 	double		step;
 	char		**tex;
+
 }						t_tex;
 
 typedef struct			s_sprite
@@ -166,7 +173,6 @@ typedef struct			s_sprite
 
 typedef struct			s_sprites
 {
-
 	struct s_sprite		*next;
 }						t_sprites;
 
@@ -174,24 +180,21 @@ typedef struct			s_draw_sprite
 {
 	t_sprite	*sprites;
 	int			bpp;
-	int			*pos_sprite;
 	int			sizeline;
 	int			endian;
+	int			*pos_sprite;
 	int			numsprite;
 	int			sp_width;
 	int			sp_height;
 	double		x;
 	double		y;
-	void		*test;
-	void		*lol;
+	void		*mlx_sprite;
 	char		*spdata;
-	char		*testdata;
 	char		**sp;
 }						t_draw_sprite;
 
 typedef struct			s_spvalues
 {
-	int			i;
 	int			y;
 	int			j;
 	double		invdet;
@@ -224,8 +227,6 @@ typedef struct			s_params
 	char			*textwe;
 	char			*textea;
 	char			*textsp;
-	char			*textp;
-	char			*textf;
 	char			*colorf;
 	char			**argbcolorf;
 	char			*colorc;
@@ -249,12 +250,14 @@ int				ft_updownwall(char *map);
 int				ft_check_char(t_params *params, char *map);
 int				ft_check_space(char **map);
 int				ft_isspace(int c);
+int				find_duplicate(char *str, int c);
 int				mlx_get_screen_size(void *mlx_ptr, int *sizex, int *sizey);
 int				ft_isdigit(int c);
 int				search_params(t_params *params, int fd);
 int				numsprite(char **map);
 int				key_pressed(int key_pressed, t_params *params);
 int				key_released(int key_released, t_params *params);
+int				ft_printf(const char *str, ...);
 char			*ft_strdup(const char *s);
 char			**ft_realloc(char **str, char *line);
 char			**ft_map_parsing(int fd, char *firstline);
@@ -272,6 +275,7 @@ void			turn_left(t_params *params);
 void			reset_image(t_params *params);
 void			ft_free_struct(t_params *to_free);
 void			save(t_params *params);
+void			cut(char *s);
 void			ft_error(int num);
 void			ft_raycast(t_params *params, t_ray *ray, t_color *color);
 void			ft_get_tex(t_params *params);
@@ -283,12 +287,16 @@ void			ft_void_algo(int *i, int *j, int *k, char **map);
 void			ft_zero_algo(int *i, int *j, int *k, char **map);
 void			get_next_value_bis(t_params *params, int x,
 		double wallx, int *y);
+void			cut(char *s);
 void			ft_init_game(t_params *params, int fd);
 void			print_cell_floor(t_params *params, t_color *color, int x);
 void			print_wall(t_params *params, int x, int y);
 void			ft_sprite_to_image(t_params *params);
 void			sprite(t_params *params, double *zbuffer);
-void	ft_resolution(t_params *params);
+void			ft_resolution(t_params *params);
+void			ft_check_floor(t_params *params);
+void			ft_check_cell(t_params *params);
+void			format_color(t_params *params);
 t_params		*ft_malloc_params(void);
 t_spvalues		*ft_malloc_spvalues();
 t_ray			*ft_malloc_ray(t_params *params);

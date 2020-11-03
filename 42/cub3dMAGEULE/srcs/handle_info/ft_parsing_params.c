@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:35:00 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/02 21:00:10 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 17:25:13 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,6 @@ char	*taking_info(char *line, char *s)
 	return (line + i);
 }
 
-void	cut(char *s)
-{
-	int i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	i--;
-	while (i != 0)
-	{
-		if (ft_isspace(s[i]))
-		{
-			while (ft_isspace(s[i]))
-				i--;
-			s[i + 1] = '\0';
-			return ;
-		}
-		else if (ft_isascii(s[i]))
-			return ;
-		i--;
-	}
-}
-
 void	trim_info(t_params *params)
 {
 	cut(params->textsp);
@@ -67,12 +44,6 @@ void	trim_info(t_params *params)
 int		ft_params_format(t_params *params)
 {
 	trim_info(params);
-	params->color->cell_r = ft_atoi(params->argbcolorc[0]);
-	params->color->cell_g = ft_atoi(params->argbcolorc[1]);
-	params->color->cell_b = ft_atoi(params->argbcolorc[2]);
-	params->color->floor_r = ft_atoi(params->argbcolorf[0]);
-	params->color->floor_g = ft_atoi(params->argbcolorf[1]);
-	params->color->floor_b = ft_atoi(params->argbcolorf[2]);
 	if (!(params->argbcolorf = ft_split(params->colorf, ',')))
 		ft_error(RGB_MISSING);
 	if (!(params->argbcolorc = ft_split(params->colorc, ',')))
@@ -83,10 +54,16 @@ int		ft_params_format(t_params *params)
 	if (params->argbcolorf[0] == NULL || params->argbcolorf[1] == NULL ||
 			params->argbcolorf[2] == NULL || params->argbcolorf[3])
 		ft_error(RGB_MISSING);
+	params->color->cell_r = ft_atoi(params->argbcolorc[0]);
+	params->color->cell_g = ft_atoi(params->argbcolorc[1]);
+	params->color->cell_b = ft_atoi(params->argbcolorc[2]);
+	params->color->floor_r = ft_atoi(params->argbcolorf[0]);
+	params->color->floor_g = ft_atoi(params->argbcolorf[1]);
+	params->color->floor_b = ft_atoi(params->argbcolorf[2]);
 	ft_check_cell(params);
 	ft_check_floor(params);
 	format_color(params);
-	return (0);
+	return (FALSE);
 }
 
 void	parse_info(t_params *params, int fd, char *line)

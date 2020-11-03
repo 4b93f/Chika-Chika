@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 17:12:57 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/01 18:08:44 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 16:39:43 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ void	reset_image(t_params *params)
 
 void	ft_sprite_to_image(t_params *params)
 {
-	int isblack;
+	int black;
 
-	isblack = params->sp->spdata[params->sv->spx * 4 + params->sv->spy *
+	black = params->sp->spdata[params->sv->spx * 4 + params->sv->spy *
 		params->sp->sizeline + 1] + params->sp->spdata[params->sv->spx * 4 +
 		params->sv->spy * params->sp->sizeline + 2] + params->sp->spdata
 		[params->sv->spx * 4 + params->sv->spy * params->sp->sizeline + 3];
-	if (isblack)
+	if (black)
 	{
 		params->image->imgdata[params->sv->x * 4 + params->sv->y *
 		params->image->sizeline + 0] = params->sp->spdata[params->sv->spx * 4

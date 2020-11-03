@@ -6,12 +6,9 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 17:10:57 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/01 17:55:07 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/03 16:38:48 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#define TXTH 64
-#define TXTW 64
 
 #include "../cub3d.h"
 
@@ -65,7 +62,7 @@ void	algo(t_params *params, int i)
 		params->screenheight / 2;
 }
 
-void	tmp(t_params *params)
+void	calc_values(t_params *params)
 {
 	if (params->sv->drawstarty < 0)
 		params->sv->drawstarty = 0;
@@ -132,7 +129,7 @@ void	sprite(t_params *params, double *zbuffer)
 	while (i < params->sp->numsprite)
 	{
 		algo(params, i);
-		tmp(params);
+		calc_values(params);
 		print_sprite(params, zbuffer, &i);
 	}
 	return ;
