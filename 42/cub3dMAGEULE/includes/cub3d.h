@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/03 21:30:30 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/04 21:08:11 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,12 @@ typedef	struct			s_color
 	int				floor_b;
 	int				floor_index;
 }						t_color;
+
+typedef struct			s_ok
+{
+	void *mlx;
+	void *win;
+}						t_ok;
 
 typedef struct			s_event
 {
@@ -253,12 +259,13 @@ int				find_duplicate(char *str, int c);
 int				mlx_get_screen_size(void *mlx_ptr, int *sizex, int *sizey);
 int				ft_isdigit(int c);
 int				search_params(t_params *params, int fd);
+int		quit(t_params *params);
 int				numsprite(char **map);
 int				key_pressed(int key_pressed, t_params *params);
 int				key_released(int key_released, t_params *params);
 int				ft_printf(const char *str, ...);
 char			*ft_strdup(const char *s);
-char			**ft_realloc(char **str, char *line);
+char			**ft_realloc(char **str, char *line, char **free);
 char			**ft_map_parsing(int fd, char *firstline);
 void			key_event(t_params *params);
 void			ft_getposray(char **map, t_player *player);
@@ -273,6 +280,7 @@ void			turn_right(t_params *params);
 void			turn_left(t_params *params);
 void			reset_image(t_params *params);
 void			ft_free_struct(t_params *to_free);
+void			ft_free_tex(t_tex *to_free);
 void			save(t_params *params);
 void			cut(char *s);
 void			ft_error(int num);
@@ -295,6 +303,9 @@ void			sprite(t_params *params, double *zbuffer);
 void			ft_resolution(t_params *params);
 void			ft_check_floor(t_params *params);
 void			ft_check_cell(t_params *params);
+void		ft_free_params(t_params *to_free);
+void		ft_free_sprite(t_draw_sprite *to_free);
+void		ft_free_tex(t_tex *to_free);
 void			format_color(t_params *params);
 t_params		*ft_malloc_params(void);
 t_spvalues		*ft_malloc_spvalues();

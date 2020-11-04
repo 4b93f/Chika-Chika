@@ -6,15 +6,28 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/03 21:30:44 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/04 21:25:30 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+int		quit(t_params *params)
+{
+	mlx_destroy_image(params->ray->mlx, params->image->img);
+	mlx_destroy_image(params->ray->mlx, params->sp->mlx_sprite);
+	printf("oui\n");
+	if(params->tex->texture)
+		mlx_destroy_image(params->ray->mlx, params->tex->texture);
+	mlx_destroy_window(params->ray->mlx, params->ray->window);
+	free(params->ray->mlx);
+	exit(0);
+}
+
 int		mouse_event(t_params *params)
 {
-	exit(FALSE);
+	quit(params);
+	return (1);
 }
 
 int		start(t_params *params)
@@ -39,6 +52,7 @@ void	game(t_params *params)
 	ft_orientation(params, params->ray);
 	ft_getpose_sprite(params->map, params->sp, params->sprites);
 	ft_getposray(params->map, params->player);
+
 	params->image->img = mlx_new_image(params->ray->mlx, params->screenwidth,
 			params->screenheight);
 	params->image->imgdata = mlx_get_data_addr(params->image->img,
@@ -50,7 +64,7 @@ void	game(t_params *params)
 	mlx_hook(params->ray->window, 17, 1L << 17, mouse_event, params);
 	mlx_loop_hook(params->ray->mlx, start, params);
 	if (!(mlx_loop(params->ray->mlx) == 0))
-		exit(TRUE);
+		quit(params);
 }
 
 int		main(int argc, char **argv)

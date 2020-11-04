@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 17:45:32 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/03 20:12:08 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/04 21:10:18 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,15 @@ t_tex	*ft_malloc_tex(void)
 	malloc_tex = malloc(sizeof(t_tex));
 	*malloc_tex = ft_create_tex();
 	return (malloc_tex);
+}
+
+void		ft_free_tex(t_tex *to_free)
+{
+	int			i;
+
+	i = -1;
+	while (to_free->tex[++i])
+		free(to_free->tex[i]);
+	free(to_free->tex);
+	free(to_free);
 }

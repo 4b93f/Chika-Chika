@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 16:26:08 by root              #+#    #+#             */
-/*   Updated: 2020/11/03 18:13:36 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/04 20:36:11 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-char	**ft_realloc(char **str, char *line)
+char	**ft_realloc(char **str, char *line, char **strfree)
 {
 	char	**cpy;
 	int		i;
@@ -25,13 +25,12 @@ char	**ft_realloc(char **str, char *line)
 	i = 0;
 	while (str[i] != NULL)
 	{
-		cpy[i] = ft_strdup(str[i]);
-		free(str[i]);
+		cpy[i] = (str[i]);
 		i++;
 	}
 	cpy[i] = line;
 	cpy[i + 1] = NULL;
-	free(str);
+	free(strfree);
 	return (cpy);
 }
 
@@ -40,19 +39,24 @@ char	**ft_map_parsing(int fd, char *firstline)
 	char	**str;
 	int		cmpt;
 	char	*line;
+	char	**free;
 
 	if (!(str = malloc(sizeof(char*) * 1)))
-		return (0);
+		return (NULL);
 	str[0] = NULL;
-	str = ft_realloc(str, firstline);
+	free = str;
+	if (!(str = ft_realloc(str, firstline, free)))
+		return (NULL);
 	cmpt = -1;
 	while (get_next_line(fd, &line) > 0)
 	{
 		cmpt++;
-		if (!(str = ft_realloc(str, line)))
-			return (0);
+		free = str;
+		if (!(str = ft_realloc(str, line, free)))
+			return (NULL);
 	}
-	if (!(str = ft_realloc(str, line)))
+	free = str;
+	if (!(str = ft_realloc(str, line, free)))
 		return (0);
 	return (str);
 }

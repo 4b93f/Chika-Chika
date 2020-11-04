@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 20:05:34 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/03 18:14:07 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/04 21:22:27 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,15 @@ t_draw_sprite	*ft_malloc_sprite(t_params *params)
 	malloc_sp = malloc(sizeof(t_draw_sprite));
 	*malloc_sp = ft_create_sprite(params);
 	return (malloc_sp);
+}
+
+void		ft_free_sprite(t_draw_sprite *to_free)
+{
+	int			i;
+
+	i = -1;
+	while (to_free->sp[++i])
+		free(to_free->sp[i]);
+	free(to_free->sp);
+	free(to_free);
 }

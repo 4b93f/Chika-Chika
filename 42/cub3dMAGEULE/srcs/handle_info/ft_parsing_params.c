@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:35:00 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/03 20:01:36 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/04 20:06:48 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	trim_info(t_params *params)
 
 int		ft_params_format(t_params *params)
 {
+	int i;
 	trim_info(params);
 	if (!(params->argbcolorf = ft_split(params->colorf, ',')))
 		ft_error(RGB_MISSING);
@@ -63,6 +64,14 @@ int		ft_params_format(t_params *params)
 	ft_check_cell(params);
 	ft_check_floor(params);
 	format_color(params);
+	i = -1;
+	while (params->argbcolorf[++i])
+		free(params->argbcolorf[i]);
+	free(params->argbcolorf);
+	i = -1;
+	while (params->argbcolorc[++i])
+		free(params->argbcolorc[i]);
+	free(params->argbcolorc);
 	return (FALSE);
 }
 

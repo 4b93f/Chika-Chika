@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/11/03 21:05:21 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/04 21:12:44 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,4 +120,5 @@ void	ft_raycast(t_params *params, t_ray *ray, t_color *color)
 		zbuffer[x] = params->ray->perpwalldist;
 	}
 	sprite(params, zbuffer);
+	//system("leaks Cub3D");
 }
