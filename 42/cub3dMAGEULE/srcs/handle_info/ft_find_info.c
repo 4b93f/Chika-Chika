@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 17:16:21 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/03 21:36:07 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/06 18:59:50 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_resolution(t_params *params)
 {
 	char	**tmp;
 
+	tmp = NULL;
 	if (!params->res)
 		ft_error(ANOMALY_RES);
 	if (!(tmp = ft_split(params->res, ' ')))

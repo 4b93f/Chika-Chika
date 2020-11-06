@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 16:26:08 by root              #+#    #+#             */
-/*   Updated: 2020/11/04 20:36:11 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/06 18:59:49 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	**ft_realloc(char **str, char *line, char **strfree)
 	char	**cpy;
 	int		i;
 
+	cpy = NULL;
 	i = 0;
 	while (str[i] != NULL)
 		i++;

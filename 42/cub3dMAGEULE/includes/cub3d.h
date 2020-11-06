@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/06 16:48:50 by chly-huc         ###   ########.fr       */
+/*   Created: 2020/11/06 19:15:57 by chly-huc          #+#    #+#             */
+/*   Updated: 2020/11/06 20:07:52 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ typedef struct			s_sprites
 
 typedef struct			s_tex
 {
+	void		*txt;
 	int			bpp;
 	int			sizeline;
 	int			endian;
@@ -210,12 +211,6 @@ typedef struct			s_spvalues
 	t_sprite	tmp;
 }						t_spvalues;
 
-typedef struct	s_mlx_ptr
-{
-	void		*mlx_txt;
-	char		*mlx_txtdata;
-}				t_ptr;
-
 typedef struct			s_params
 {
 	int				map_find;
@@ -234,6 +229,14 @@ typedef struct			s_params
 	char			**argbcolorf;
 	char			**argbcolorc;
 	char			**map;
+	void            *mlx_txt_n;
+	void            *mlx_txt_s;
+	void            *mlx_txt_w;
+	void            *mlx_txt_e;
+	char            *mlx_txtdata_n;
+	char            *mlx_txtdata_s;
+	char            *mlx_txtdata_w;
+	void            *mlx_txtdata_e;
 	t_ray			*ray;
 	t_color			*color;
 	t_event			*event;
@@ -244,7 +247,6 @@ typedef struct			s_params
 	t_player		*player;
 	t_bmp			*bmp;
 	t_spvalues		*sv;
-	t_ptr			*ptr;
 }						t_params;
 
 int				ft_check_map(t_params *params, char **map);
@@ -274,7 +276,6 @@ void			reset_image(t_params *params);
 void			ft_getpose_sprite(char **map, t_draw_sprite *sp,
 		t_sprite *sprites);
 void			right(t_params *params);
-t_ptr	*ft_malloc_ptr(void);
 void			turn_right(t_params *params);
 void			turn_left(t_params *params);
 void			reset_image(t_params *params);

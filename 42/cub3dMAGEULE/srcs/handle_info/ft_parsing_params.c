@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:35:00 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/06 15:45:08 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/06 18:59:47 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int		search_params(t_params *params, int fd)
 {
 	char *line;
 
+	line = NULL;
 	while (get_next_line(fd, &line) > 0)
 	{
 		parse_info(params, fd, line);

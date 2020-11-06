@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/05 15:36:18 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/06 20:56:02 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 int		quit(t_params *params)
 {
-	/*
 	mlx_destroy_image(params->ray->mlx, params->image->img);
 	mlx_destroy_image(params->ray->mlx, params->sp->mlx_sprite);
-
 	if(params->mlx_txt_n)
 		mlx_destroy_image(params->ray->mlx, params->mlx_txt_n);
 	if(params->mlx_txt_s)
@@ -27,7 +25,7 @@ int		quit(t_params *params)
 	if(params->mlx_txt_e)
 		mlx_destroy_image(params->ray->mlx, params->mlx_txt_e);
 	mlx_destroy_window(params->ray->mlx, params->ray->window);
-	*/
+	
 	exit(0);
 }
 
@@ -79,7 +77,12 @@ int		main(int argc, char **argv)
 	int			fd;
 	t_params	*params;
 
+	
 	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		ft_error(NO_MAPFILE);
+	if (ft_strncmp(argv[1], ".cub", ft_strlen(argv[1])) == 0)
+		ft_error(NO_MAPFILE);
 	params = ft_malloc_params();
 	ft_init_game(params, fd);
 	parameters(params, argc, argv);

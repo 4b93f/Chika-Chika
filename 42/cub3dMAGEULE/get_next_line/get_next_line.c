@@ -24,6 +24,7 @@ char	*get_l(char *string)
 
 	i = 0;
 	j = 0;
+	ligne = NULL;
 	if (!string)
 		return (NULL);
 	while (string[i] && string[i] != '\n')
@@ -41,11 +42,12 @@ char	*get_l(char *string)
 
 char	*readline(int fd, char *string)
 {
-	char	buf[BUFFER_SIZE + 1];
+	char	*buf;
 	int		ret;
-	char	*temp;
 
-	temp = NULL;
+	ret = 0;
+	if (!(buf = malloc(sizeof(char) * BUFFER_SIZE + 1)))
+		return (NULL);
 	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
@@ -64,11 +66,12 @@ char	*rest(char *strings)
 
 	j = 0;
 	i = 0;
+	if (!(tmp = malloc(sizeof(char) * ft_strlen1(strings))))
+		return (NULL);
 	if (!strings)
 		return (NULL);
 	while (strings[i] && strings[i] != '\n')
 		i++;
-	tmp = malloc(sizeof(char*) * ft_strlen1(strings));
 	while (strings[i])
 	{
 		tmp[j] = strings[i + 1];
@@ -81,7 +84,7 @@ char	*rest(char *strings)
 
 int		get_next_line(int fd, char **line)
 {
-	static	char	*str;
+	static	char	*str = NULL;
 
 	*line = NULL;
 	if (check_error(fd, str) < 0 || BUFFER_SIZE < 1)

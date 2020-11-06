@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 11:24:12 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/02/23 23:38:54 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/06 17:58:42 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 int		check_error(int fd, char *str)
 {
 	int		i;
-	char	buf[BUFFER_SIZE + 1];
+	char	*buf;
 
 	i = 0;
+	if (!(buf = malloc(sizeof(char) * BUFFER_SIZE + 1)))
+		return (0);
 	if (fd < 0 || read(fd, buf, 0) < 0)
 		return (-1);
 	if (!str)
@@ -49,6 +51,7 @@ char	*ft_strdup1(char *src)
 	int		i;
 
 	i = 0;
+	dest = NULL;
 	if (!src)
 		return (0);
 	if (!((dest = (char *)malloc(sizeof(char) * ft_strlen1(src) + 1))))

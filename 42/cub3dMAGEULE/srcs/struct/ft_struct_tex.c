@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 17:45:32 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/06 16:00:17 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/06 19:01:00 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,6 @@ t_tex	ft_create_tex(void)
 	tex.bpp = 0;
 	tex.sizeline = 0;
 	tex.endian = 0;
-	//tex.mlx_txt_n = NULL;
-	//tex.mlx_txt_s = NULL;
-	//tex.mlx_txt_w = NULL;
-	//tex.mlx_txt_e = NULL;
-	//tex.mlx_txtdata_n = NULL;
-	//tex.mlx_txtdata_s = NULL;
-	//tex.mlx_txtdata_w = NULL;
-	//tex.mlx_txtdata_e = NULL;
 	tex.tex_width = 0;
 	tex.tex_height = 0;
 	tex.texnum = 0;
