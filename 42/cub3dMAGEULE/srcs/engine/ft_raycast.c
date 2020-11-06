@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/11/04 21:12:44 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/06 17:06:17 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,9 @@ void	ft_raycast(t_params *params, t_ray *ray, t_color *color)
 	int		x;
 	int		y;
 	double	wallx;
-	double	zbuffer[params->screenwidth];
+	double	*zbuffer;
+
+	zbuffer = malloc(sizeof(double) * params->screenwidth);
 
 	x = 0;
 	y = 0;

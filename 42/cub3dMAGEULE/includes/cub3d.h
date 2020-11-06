@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:49:25 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/04 21:08:11 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/06 16:48:50 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ typedef struct			s_bmp
 	unsigned int	headersize;
 	unsigned int	bpp;
 	unsigned int	planes;
-	unsigned int	img_size;
 	unsigned int	pixeldataoffset;
 	unsigned int	filesize;
 }						t_bmp;
@@ -87,12 +86,6 @@ typedef	struct			s_color
 	int				floor_b;
 	int				floor_index;
 }						t_color;
-
-typedef struct			s_ok
-{
-	void *mlx;
-	void *win;
-}						t_ok;
 
 typedef struct			s_event
 {
@@ -132,6 +125,8 @@ typedef struct			s_player
 
 typedef struct			s_ray
 {
+	void		*mlx;
+	void		*window;
 	int			width;
 	int			mapy;
 	int			mapx;
@@ -149,27 +144,8 @@ typedef struct			s_ray
 	double		deltadistx;
 	double		deltadisty;
 	double		perpwalldist;
-	void		*mlx;
-	void		*window;
 }						t_ray;
 
-typedef struct			s_tex
-{
-	void		*texture;
-	char		*texturedata;
-	int			bpp;
-	int			sizeline;
-	int			endian;
-	int			tex_width;
-	int			tex_height;
-	int			texnum;
-	double		texpos;
-	int			texx;
-	int			texy;
-	double		step;
-	char		**tex;
-
-}						t_tex;
 
 typedef struct			s_sprite
 {
@@ -181,6 +157,21 @@ typedef struct			s_sprites
 {
 	struct s_sprite		*next;
 }						t_sprites;
+
+typedef struct			s_tex
+{
+	int			bpp;
+	int			sizeline;
+	int			endian;
+	int			tex_width;
+	int			tex_height;
+	int			texnum;
+	double		texpos;
+	int			texx;
+	int			texy;
+	double		step;
+	char		**tex;
+}						t_tex;
 
 typedef struct			s_draw_sprite
 {
@@ -219,6 +210,12 @@ typedef struct			s_spvalues
 	t_sprite	tmp;
 }						t_spvalues;
 
+typedef struct	s_mlx_ptr
+{
+	void		*mlx_txt;
+	char		*mlx_txtdata;
+}				t_ptr;
+
 typedef struct			s_params
 {
 	int				map_find;
@@ -233,8 +230,8 @@ typedef struct			s_params
 	char			*textea;
 	char			*textsp;
 	char			*colorf;
-	char			**argbcolorf;
 	char			*colorc;
+	char			**argbcolorf;
 	char			**argbcolorc;
 	char			**map;
 	t_ray			*ray;
@@ -247,6 +244,7 @@ typedef struct			s_params
 	t_player		*player;
 	t_bmp			*bmp;
 	t_spvalues		*sv;
+	t_ptr			*ptr;
 }						t_params;
 
 int				ft_check_map(t_params *params, char **map);
@@ -276,6 +274,7 @@ void			reset_image(t_params *params);
 void			ft_getpose_sprite(char **map, t_draw_sprite *sp,
 		t_sprite *sprites);
 void			right(t_params *params);
+t_ptr	*ft_malloc_ptr(void);
 void			turn_right(t_params *params);
 void			turn_left(t_params *params);
 void			reset_image(t_params *params);

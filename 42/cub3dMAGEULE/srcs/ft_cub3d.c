@@ -14,13 +14,20 @@
 
 int		quit(t_params *params)
 {
+	/*
 	mlx_destroy_image(params->ray->mlx, params->image->img);
 	mlx_destroy_image(params->ray->mlx, params->sp->mlx_sprite);
-	printf("oui\n");
-	if(params->tex->texture)
-		mlx_destroy_image(params->ray->mlx, params->tex->texture);
+
+	if(params->mlx_txt_n)
+		mlx_destroy_image(params->ray->mlx, params->mlx_txt_n);
+	if(params->mlx_txt_s)
+		mlx_destroy_image(params->ray->mlx, params->mlx_txt_s);
+	if(params->mlx_txt_w)
+		mlx_destroy_image(params->ray->mlx, params->mlx_txt_w);
+	if(params->mlx_txt_e)
+		mlx_destroy_image(params->ray->mlx, params->mlx_txt_e);
 	mlx_destroy_window(params->ray->mlx, params->ray->window);
-	free(params->ray->mlx);
+	*/
 	exit(0);
 }
 

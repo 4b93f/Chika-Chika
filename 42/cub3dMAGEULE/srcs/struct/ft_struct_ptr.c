@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_struct_image.c                                  :+:      :+:    :+:   */
+/*   ft_struct_ptr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/15 20:40:28 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/03 18:13:58 by chly-huc         ###   ########.fr       */
+/*   Created: 2020/11/06 15:35:57 by chly-huc          #+#    #+#             */
+/*   Updated: 2020/11/06 16:49:17 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-t_image	ft_create_image(void)
+t_ptr	ft_create_ptr(void)
 {
-	t_image	image;
+	t_ptr ptr;
 
-	image.bpp = 0;
-	image.sizeline = 0;
-	image.endian = 0;
-	image.img_width = 0;
-	image.img_height = 0;
-	image.save = 0;
-	image.img = NULL;
-	image.imgdata = NULL;
-	image.imgsave = NULL;
-	return (image);
+	ptr.mlx_txt = NULL;
+	ptr.mlx_txtdata = NULL;
+
+	return (ptr);
 }
 
-t_image	*ft_malloc_image(void)
+t_ptr	*ft_malloc_ptr(void)
 {
-	t_image	*malloc_image;
+	t_ptr *malloc_ptr;
 
-	if (!(malloc_image = malloc(sizeof(t_image))))
+	if (!(malloc_ptr = malloc(sizeof(t_ptr))))
 		ft_error(MALLOC_ERROR);
-	*malloc_image = ft_create_image();
-	return (malloc_image);
+	*malloc_ptr = ft_create_ptr();
+	return (malloc_ptr);
 }

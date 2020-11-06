@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 16:19:44 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/04 20:35:29 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/06 16:22:17 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ void	ft_init(t_params *params)
 	t_color			*color;
 	t_draw_sprite	*sp;
 	t_spvalues		*sv;
-	t_player		*player;
+	t_ptr			*ptr;
 
+	ptr = ft_malloc_ptr();
+	params->ptr = ptr; 
 	color = ft_malloc_color();
 	sp = ft_malloc_sprite(params);
 	params->sp = sp;
 	sv = ft_malloc_spvalues();
 	params->sv = sv;
 	params->color = color;
-	player = ft_malloc_player();
-	params->player = player;
 }
 
 void	ft_init_2(t_params *params, t_draw_sprite *sp, int fd)
@@ -34,7 +34,10 @@ void	ft_init_2(t_params *params, t_draw_sprite *sp, int fd)
 	t_sprite	*sprites;
 	t_tex		*tex;
 	t_image		*image;
+	t_player		*player;
 
+	player = ft_malloc_player();
+	params->player = player;
 	image = ft_malloc_image();
 	params->image = image;
 	if (!(sprites = malloc(sizeof(*sp))))
