@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 23:03:43 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/06 19:00:54 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/07 17:08:47 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ t_player	ft_create_player(void)
 	return (player);
 }
 
-t_player	*ft_malloc_player(void)
+t_player	*ft_malloc_player(t_params *params)
 {
 	t_player *malloc_player;
 
 	if (!(malloc_player = malloc(sizeof(t_player))))
-		ft_error(MALLOC_ERROR);
+		ft_error(params, MALLOC_ERROR);
 	*malloc_player = ft_create_player();
 	return (malloc_player);
 }

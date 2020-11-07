@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 19:15:57 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/06 20:07:52 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/07 18:37:44 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,20 +253,21 @@ int				ft_check_map(t_params *params, char **map);
 int				ft_check_startend(char *str);
 int				ft_updownwall(char *map);
 int				ft_check_char(t_params *params, char *map);
-int				ft_check_space(char **map);
+int				ft_check_space(int j, int k, t_params *params, char **map);
 int				ft_isspace(int c);
 int				find_duplicate(char *str, int c);
 int				mlx_get_screen_size(void *mlx_ptr, int *sizex, int *sizey);
 int				ft_isdigit(int c);
 int				search_params(t_params *params, int fd);
-int		quit(t_params *params);
+int				ft_error(t_params *params, int error);
 int				numsprite(char **map);
 int				key_pressed(int key_pressed, t_params *params);
 int				key_released(int key_released, t_params *params);
 int				ft_printf(const char *str, ...);
 char			*ft_strdup(const char *s);
-char			**ft_realloc(char **str, char *line, char **free);
-char			**ft_map_parsing(int fd, char *firstline);
+char			**ft_realloc(t_params *params, char **str, char *line, char **strfree);
+char			**ft_map_parsing(t_params *params, int fd, char *firstline);
+void	atoi_info(t_params *params);
 void			key_event(t_params *params);
 void			ft_getposray(char **map, t_player *player);
 void			up(t_params *params);
@@ -282,19 +283,18 @@ void			reset_image(t_params *params);
 void			ft_free_struct(t_params *to_free);
 void			ft_free_tex(t_tex *to_free);
 void			save(t_params *params);
-void			cut(char *s);
-void			ft_error(int num);
+void			cut(char *s, t_params *params);
+void			quit(int num, t_params *params);
 void			ft_raycast(t_params *params, t_ray *ray, t_color *color);
 void			ft_get_tex(t_params *params);
 void			ft_pixel_to_image(int x, int y, t_params *params);
 void			ft_orientation(t_params *params, t_ray *ray);
 void			ft_get_sprite(t_params *params, char *path);
 void			parameters(t_params *params, int argc, char **argv);
-void			ft_void_algo(int *i, int *j, int *k, char **map);
-void			ft_zero_algo(int *i, int *j, int *k, char **map);
+int				ft_void_algo(int *i, int *j, int *k, char **map);
+int				ft_zero_algo(int *i, int *j, int *k, char **map);
 void			get_next_value_bis(t_params *params, int x,
 		double wallx, int *y);
-void			cut(char *s);
 void			ft_init_game(t_params *params, int fd);
 void			print_cell_floor(t_params *params, t_color *color, int x);
 void			print_wall(t_params *params, int x, int y);
@@ -308,14 +308,18 @@ void		ft_free_sprite(t_draw_sprite *to_free);
 void		ft_free_tex(t_tex *to_free);
 void			format_color(t_params *params);
 t_params		*ft_malloc_params(void);
-t_spvalues		*ft_malloc_spvalues();
+t_spvalues		*ft_malloc_spvalues(t_params *params);
 t_ray			*ft_malloc_ray(t_params *params);
-t_color			*ft_malloc_color(void);
-t_image			*ft_malloc_image(void);
-t_event			*ft_malloc_event(void);
+t_color			*ft_malloc_color(t_params *params);
+t_image			*ft_malloc_image(t_params *params);
+t_event			*ft_malloc_event(t_params *params);
 t_draw_sprite	*ft_malloc_sprite(t_params *params);
-t_player		*ft_malloc_player(void);
-t_tex			*ft_malloc_tex();
+t_player		*ft_malloc_player(t_params *params);
+t_tex			*ft_malloc_tex(t_params *params);
 t_bmp			*ft_malloc_bmp(t_params *params);
+
+
+void		ft_free_color(t_color *to_free);
+void	ft_free_bmp(t_bmp *to_free);
 
 #endif

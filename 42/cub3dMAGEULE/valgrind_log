@@ -1,0 +1,94 @@
+==68521== Memcheck, a memory error detector
+==68521== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==68521== Using Valgrind-3.16.0.GIT and LibVEX; rerun with -h for copyright info
+==68521== Command: ./Cub3D map/map.cub
+==68521== Parent PID: 64908
+==68521== 
+--68521-- run: /usr/bin/dsymutil "./Cub3D"
+==68521== Conditional jump or move depends on uninitialised value(s)
+==68521==    at 0x10003D330: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==68521==    by 0x100038502: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==68521==    by 0x100038035: _dyld_start (in /usr/lib/dyld)
+==68521==    by 0x1: ???
+==68521==    by 0x1049019B6: ???
+==68521==    by 0x1049019BE: ???
+==68521==  Uninitialised value was created by a stack allocation
+==68521==    at 0x100070A64: amfi_check_dyld_policy_self (in /usr/lib/dyld)
+==68521== 
+==68521== Conditional jump or move depends on uninitialised value(s)
+==68521==    at 0x10003F456: dyld::checkEnvironmentVariables(char const**) (in /usr/lib/dyld)
+==68521==    by 0x10003D339: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==68521==    by 0x100038502: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==68521==    by 0x100038035: _dyld_start (in /usr/lib/dyld)
+==68521==    by 0x1: ???
+==68521==    by 0x1049019B6: ???
+==68521==    by 0x1049019BE: ???
+==68521==  Uninitialised value was created by a stack allocation
+==68521==    at 0x100070A64: amfi_check_dyld_policy_self (in /usr/lib/dyld)
+==68521== 
+==68521== Conditional jump or move depends on uninitialised value(s)
+==68521==    at 0x100039BBC: dyld::processDyldEnvironmentVariable(char const*, char const*, char const*) (in /usr/lib/dyld)
+==68521==    by 0x10003F566: dyld::checkEnvironmentVariables(char const**) (in /usr/lib/dyld)
+==68521==    by 0x10003D339: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==68521==    by 0x100038502: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==68521==    by 0x100038035: _dyld_start (in /usr/lib/dyld)
+==68521==    by 0x1: ???
+==68521==    by 0x1049019B6: ???
+==68521==    by 0x1049019BE: ???
+==68521==  Uninitialised value was created by a stack allocation
+==68521==    at 0x100070A64: amfi_check_dyld_policy_self (in /usr/lib/dyld)
+==68521== 
+==68521== Conditional jump or move depends on uninitialised value(s)
+==68521==    at 0x10003D341: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==68521==    by 0x100038502: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==68521==    by 0x100038035: _dyld_start (in /usr/lib/dyld)
+==68521==    by 0x1: ???
+==68521==    by 0x1049019B6: ???
+==68521==    by 0x1049019BE: ???
+==68521==  Uninitialised value was created by a stack allocation
+==68521==    at 0x100070A64: amfi_check_dyld_policy_self (in /usr/lib/dyld)
+==68521== 
+==68521== Conditional jump or move depends on uninitialised value(s)
+==68521==    at 0x10004139D: dyld::loadPhase3(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==68521==    by 0x100040D17: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==68521==    by 0x10003AAC9: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==68521==    by 0x10003A61D: dyld::load(char const*, dyld::LoadContext const&, unsigned int&) (in /usr/lib/dyld)
+==68521==    by 0x10003E3A0: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==68521==    by 0x100038502: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==68521==    by 0x100038035: _dyld_start (in /usr/lib/dyld)
+==68521==    by 0x1: ???
+==68521==    by 0x1049019B6: ???
+==68521==    by 0x1049019BE: ???
+==68521==  Uninitialised value was created by a stack allocation
+==68521==    at 0x100070A64: amfi_check_dyld_policy_self (in /usr/lib/dyld)
+==68521== 
+==68521== Conditional jump or move depends on uninitialised value(s)
+==68521==    at 0x10004139D: dyld::loadPhase3(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==68521==    by 0x100040D17: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==68521==    by 0x10003AAC9: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==68521==    by 0x10003A658: dyld::load(char const*, dyld::LoadContext const&, unsigned int&) (in /usr/lib/dyld)
+==68521==    by 0x10003E3A0: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==68521==    by 0x100038502: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==68521==    by 0x100038035: _dyld_start (in /usr/lib/dyld)
+==68521==    by 0x1: ???
+==68521==    by 0x1049019B6: ???
+==68521==    by 0x1049019BE: ???
+==68521==  Uninitialised value was created by a stack allocation
+==68521==    at 0x100070A64: amfi_check_dyld_policy_self (in /usr/lib/dyld)
+==68521== 
+==68521== Conditional jump or move depends on uninitialised value(s)
+==68521==    at 0x10004E120: ImageLoaderMachO::getRPaths(ImageLoader::LinkContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >&) const (in /usr/lib/dyld)
+==68521==    by 0x10004A0AC: ImageLoader::recursiveLoadLibraries(ImageLoader::LinkContext const&, bool, ImageLoader::RPathChain const&, char const*) (in /usr/lib/dyld)
+==68521==    by 0x100049429: ImageLoader::link(ImageLoader::LinkContext const&, bool, bool, bool, ImageLoader::RPathChain const&, char const*) (in /usr/lib/dyld)
+==68521==    by 0x10003C823: dyld::link(ImageLoader*, bool, bool, ImageLoader::RPathChain const&, unsigned int) (in /usr/lib/dyld)
+==68521==    by 0x10003E3F7: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==68521==    by 0x100038502: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==68521==    by 0x100038035: _dyld_start (in /usr/lib/dyld)
+==68521==    by 0x1: ???
+==68521==    by 0x1049019B6: ???
+==68521==    by 0x1049019BE: ???
+==68521==  Uninitialised value was created by a stack allocation
+==68521==    at 0x100070A64: amfi_check_dyld_policy_self (in /usr/lib/dyld)
+==68521== 
+==68521== Warning: set address range perms: large range [0xffffffff000, 0x120000000000) (defined)
+==68521== Warning: set address range perms: large range [0x140000000000, 0x200000000000) (defined)

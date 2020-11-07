@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 17:10:57 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/06 18:59:58 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/07 16:03:31 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,9 @@ void	sprite(t_params *params, double *zbuffer)
 
 	i = -1;
 	if (!(sprite_order = malloc(sizeof(int) * params->sp->numsprite)))
-		ft_error(MALLOC_ERROR);
+		ft_error(params, MALLOC_ERROR);
 	if (!(sprite_distance = malloc(sizeof(double) * params->sp->numsprite)))
-		ft_error(MALLOC_ERROR);
+		ft_error(params, MALLOC_ERROR);
 	sortsprites(params);
 	while (++i < params->sp->numsprite)
 	{

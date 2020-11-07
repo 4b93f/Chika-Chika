@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 20:40:28 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/06 19:00:43 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/07 17:08:41 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ t_image	ft_create_image(void)
 	return (image);
 }
 
-t_image	*ft_malloc_image(void)
+t_image	*ft_malloc_image(t_params *params)
 {
 	t_image	*malloc_image;
 
 	if (!(malloc_image = malloc(sizeof(t_image))))
-		ft_error(MALLOC_ERROR);
+		ft_error(params, MALLOC_ERROR);
 	*malloc_image = ft_create_image();
 	return (malloc_image);
 }

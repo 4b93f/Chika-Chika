@@ -1,4 +1,4 @@
-SRCS   = 	srcs/engine/ft_bitmap.c srcs/handle_info/ft_check_map.c srcs/handle_info/ft_check_map2.c srcs/ft_cub3d.c srcs/engine/ft_error.c \
+SRCS   = 	srcs/engine/ft_bitmap.c srcs/handle_info/ft_check_map.c srcs/handle_info/ft_check_map2.c srcs/ft_cub3d.c srcs/engine/ft_quit.c \
 			srcs/handle_info/ft_find_info.c srcs/player/ft_input_key.c srcs/handle_info/ft_map_parsing.c srcs/player/ft_move_player.c \
 			srcs/handle_info/ft_parsing_params.c srcs/player/ft_player.c srcs/engine/ft_raycast.c srcs/engine/ft_sprite.c \
  			srcs/struct/ft_struct_bmp.c srcs/struct/ft_struct_color.c srcs/struct/ft_struct_event.c srcs/struct/ft_struct_image.c \

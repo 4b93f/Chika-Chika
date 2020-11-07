@@ -6,61 +6,61 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 14:49:00 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/06 18:59:50 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/07 17:11:05 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	ft_void_algo(int *i, int *j, int *k, char **map)
+int	ft_void_algo(int *i, int *j, int *k, char **map)
 {
 	*k = *j;
 	while (*k > 0 && map[*i][*k] == ' ')
 		*k = *k - 1;
 	if (map[*i][*k] != '1' && *k != 0)
-		ft_error(WRONG_MAP_FORMAT);
+		return (0);
 	*k = *j;
 	while (map[*i][*k] && map[*i][*k] == ' ')
 		*k = *k + 1;
 	if (map[*i][*k] != '1' && map[*i][*k])
-		ft_error(WRONG_MAP_FORMAT);
+		return (0);
 	*k = *i;
 	while (*k > 0 && map[*k][*j] == ' ')
 		*k = *k - 1;
 	if (map[*k][*j] != '1' && *k != 0 && (map[*k] <= (map[*k - 1])))
-		ft_error(WRONG_MAP_FORMAT);
+		return (0);
 	*k = *i;
 	while (map[*k] != NULL && map[*k][*j] == ' ')
 		*k = *k + 1;
 	if (map[*k] != NULL && map[*k][*j] != '1' && (map[*k] <= (map[*k + 1])))
-		ft_error(WRONG_MAP_FORMAT);
+		return (0);
+	return (1);
 }
 
-void	ft_zero_algo(int *i, int *j, int *k, char **map)
+int	ft_zero_algo(int *i, int *j, int *k, char **map)
 {
 	while (*k > 0 && map[*i][*k] != '1')
 		*k = *k - 1;
 	if (map[*i][*k] != '1' && *k != 0)
-		ft_error(WRONG_MAP_FORMAT);
+		return (0);
 	*k = *j;
 	while (map[*i][*k] && map[*i][*k] != '1')
 		*k = *k + 1;
 	if (map[*i][*k] != '1' && map[*i - 1][*k] && map[*i + 1][*k])
-		ft_error(WRONG_MAP_FORMAT);
+		return (0);
 	*k = *i;
 	while (*k > 0 && map[*k][*j] != '1')
 	{
 		if (map[*k][*j] == ' ')
-			ft_error(WRONG_MAP_FORMAT);
+			return (0);
 		*k = *k - 1;
 	}
 	*k = *i;
 	while (map[*k] && *k > 0 && map[*k][*j] != '1')
 	{
 		if (map[*k][*j] == ' ')
-			ft_error(WRONG_MAP_FORMAT);
+			return (0);
 		*k = *k + 1;
 	}
-	if (!map[*k])
-		ft_error(WRONG_MAP_FORMAT);
+	return (!map[*k] ? 0 : 1);
 }

@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_quit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 15:07:53 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/06 19:03:56 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/07 18:45:17 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	ft_error(int num)
+void	free_struct(t_params *params)
+{
+	if (params->color)
+		ft_free_color(params->color);
+	if (params->bmp)
+		ft_free_bmp(params->bmp);
+}
+
+void	quit(int num, t_params *params)
 {
 	static char *error[] = {
 		"Error\nMap file not include\n",
@@ -32,6 +40,9 @@ void	ft_error(int num)
 		"Error\nInvalid argument\n"
 	};
 
-	ft_printf("%s", error[num]);
-	exit(FALSE);
+
+	if (num > -1)
+		ft_printf("%s", error[num]);
+	free_struct(params);
+	exit(0);
 }

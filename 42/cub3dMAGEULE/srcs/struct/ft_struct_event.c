@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 23:00:36 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/06 19:00:51 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/07 18:30:51 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ t_event	ft_create_event(void)
 	return (event);
 }
 
-t_event	*ft_malloc_event(void)
+t_event	*ft_malloc_event(t_params *params)
 {
 	t_event	*malloc_event;
 
 	if (!(malloc_event = malloc(sizeof(t_event))))
-		ft_error(MALLOC_ERROR);
+		quit(MALLOC_ERROR, params);
 	*malloc_event = ft_create_event();
 	return (malloc_event);
 }

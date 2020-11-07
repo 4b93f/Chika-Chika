@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 16:19:44 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/06 21:17:12 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/07 18:52:09 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	ft_init(t_params *params)
 	t_draw_sprite	*sp;
 	t_spvalues		*sv;
 
-	color = ft_malloc_color();
+	color = ft_malloc_color(params);
+	params->color = color;
 	sp = ft_malloc_sprite(params);
 	params->sp = sp;
-	sv = ft_malloc_spvalues();
+	sv = ft_malloc_spvalues(params);
 	params->sv = sv;
-	params->color = color;
 }
 
 void	ft_init_2(t_params *params, t_draw_sprite *sp, int fd)
@@ -33,14 +33,14 @@ void	ft_init_2(t_params *params, t_draw_sprite *sp, int fd)
 	t_image		*image;
 	t_player	*player;
 
-	player = ft_malloc_player();
+	player = ft_malloc_player(params);
 	params->player = player;
-	image = ft_malloc_image();
+	image = ft_malloc_image(params);
 	params->image = image;
 	if (!(sprites = malloc(sizeof(*sp))))
-		ft_error(MALLOC_ERROR);
+		quit(MALLOC_ERROR, params);
 	params->sprites = sprites;
-	tex = ft_malloc_tex();
+	tex = ft_malloc_tex(params);
 	params->tex = tex;
 	search_params(params, fd);
 }
@@ -48,10 +48,10 @@ void	ft_init_2(t_params *params, t_draw_sprite *sp, int fd)
 void	ft_init_3(t_params *params)
 {
 	t_event		*event;
-	t_bmp		*bmp;
 	t_ray		*ray;
+	t_bmp		*bmp;
 
-	event = ft_malloc_event();
+	event = ft_malloc_event(params);
 	params->event = event;
 	ft_resolution(params);
 	ray = ft_malloc_ray(params);

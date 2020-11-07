@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 18:30:34 by becentrale        #+#    #+#             */
-/*   Updated: 2020/11/06 19:00:56 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/07 18:30:54 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_ray	*ft_malloc_ray(t_params *params)
 	t_ray *malloc_ray;
 
 	if (!(malloc_ray = malloc(sizeof(t_ray))))
-		ft_error(MALLOC_ERROR);
+		quit(MALLOC_ERROR, params);
 	*malloc_ray = ft_create_ray(params);
 	return (malloc_ray);
 }

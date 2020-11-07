@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 20:05:34 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/06 19:00:58 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/07 18:30:58 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_draw_sprite	ft_create_sprite(t_params *params)
 {
 	t_draw_sprite	sp;
+
 	sp.bpp = 0;
 	sp.sizeline = 0;
 	sp.endian = 0;
@@ -35,7 +36,8 @@ t_draw_sprite	*ft_malloc_sprite(t_params *params)
 	int						i;
 
 	i = 0;
-	malloc_sp = malloc(sizeof(t_draw_sprite));
+	if (!(malloc_sp = malloc(sizeof(t_draw_sprite))))
+		quit(MALLOC_ERROR, params);
 	*malloc_sp = ft_create_sprite(params);
 	return (malloc_sp);
 }

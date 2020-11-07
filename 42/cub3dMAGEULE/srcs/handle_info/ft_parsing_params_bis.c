@@ -6,19 +6,19 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 20:45:46 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/06 18:59:48 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/07 18:30:17 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	cut(char *s)
+void	cut(char *s, t_params *params)
 {
 	int i;
 
 	i = 0;
 	if (s == NULL)
-		return ;
+		quit(RGB_MISSING, params);
 	while (s[i])
 		i++;
 	i--;
@@ -55,7 +55,7 @@ void	ft_check_floor(t_params *params)
 		{
 			if (!ft_isspace(params->argbcolorf[i][j]) &&
 					ft_isascii(params->argbcolorf[i][j]))
-				ft_error(WRONG_CHAR_IN_RGB);
+				quit(WRONG_CHAR_IN_RGB, params);
 			j++;
 		}
 		j = 0;
@@ -80,7 +80,7 @@ void	ft_check_cell(t_params *params)
 		{
 			if (!ft_isspace(params->argbcolorc[i][j]) &&
 					ft_isascii(params->argbcolorc[i][j]))
-				ft_error(WRONG_CHAR_IN_RGB);
+				quit(WRONG_CHAR_IN_RGB, params);
 			j++;
 		}
 		j = 0;
@@ -89,12 +89,22 @@ void	ft_check_cell(t_params *params)
 
 void	format_color(t_params *params)
 {
-	if (params->color->cell_r > 255 && params->color->cell_g > 255 &&
-			params->color->cell_b > 255 && params->color->cell_r < 0 &&
-			params->color->cell_g < 0 && params->color->cell_b < 0)
-		ft_error(RGB_ERROR);
-	if (params->color->floor_r > 255 && params->color->floor_g > 255 &&
-			params->color->floor_g > 255 && params->color->floor_r < 0 &&
-			params->color->floor_g < 0 && params->color->floor_b < 0)
-		ft_error(RGB_ERROR);
+	if (params->color->cell_r > 255 || params->color->cell_g > 255 ||
+			params->color->cell_b > 255 || params->color->cell_r < 0 ||
+			params->color->cell_g < 0 || params->color->cell_b < 0)
+		quit(RGB_ERROR, params);
+	if (params->color->floor_r > 255 || params->color->floor_g > 255 ||
+			params->color->floor_g > 255 || params->color->floor_r < 0 ||
+			params->color->floor_g < 0 || params->color->floor_b < 0)
+		quit(RGB_ERROR, params);
+}
+
+void	atoi_info(t_params *params)
+{
+	params->color->cell_r = ft_atoi(params->argbcolorc[0]);
+	params->color->cell_g = ft_atoi(params->argbcolorc[1]);
+	params->color->cell_b = ft_atoi(params->argbcolorc[2]);
+	params->color->floor_r = ft_atoi(params->argbcolorf[0]);
+	params->color->floor_g = ft_atoi(params->argbcolorf[1]);
+	params->color->floor_b = ft_atoi(params->argbcolorf[2]);
 }

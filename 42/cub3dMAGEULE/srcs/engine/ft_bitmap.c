@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:28:12 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/06 21:16:36 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/07 18:04:56 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	parameters(t_params *params, int argc, char **argv)
 			if (ft_strncmp(argv[2], "--save", 6) == 0)
 				params->image->save = 1;
 			else
-				quit(params);
+				ft_error(params, ERROR_ARGUMENT);
 		}
 	}
 	else
@@ -42,9 +42,8 @@ void	save(t_params *params)
 	ft_memcpy(header + 28, &params->bmp->bpp, 2);
 	ft_memcpy(header + 34, &params->bmp->imgsize, 4);
 	params->bmp->fd = open("SS.bmp", O_WRONLY | O_CREAT, S_IRWXU);
-	ft_printf("{%s}\n", header);
 	write(params->bmp->fd, header, 54);
 	write(params->bmp->fd, params->image->imgdata, params->bmp->imgsize);
 	close(params->bmp->fd);
-	quit(params);
+	ft_error(params, -1);
 }

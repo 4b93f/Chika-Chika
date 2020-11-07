@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 17:16:21 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/06 18:59:50 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/07 18:29:06 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,29 @@ void	ft_resolution(t_params *params)
 
 	tmp = NULL;
 	if (!params->res)
-		ft_error(ANOMALY_RES);
+		ft_error(params, ANOMALY_RES);
 	if (!(tmp = ft_split(params->res, ' ')))
 		return ;
 	if (tmp[2] || tmp[0] == NULL || tmp[1] == NULL)
-		ft_error(ANOMALY_RES);
+		quit(ANOMALY_RES, params);
 	params->screenwidth = ft_atoi(tmp[0]);
 	params->screenheight = ft_atoi(tmp[1]);
 	if (params->screenwidth < 1 || params->screenheight < 1)
-		ft_error(ANOMALY_RES);
+		quit(ANOMALY_RES, params);
 	free(tmp[0]);
 	free(tmp[1]);
 	free(tmp);
-	//printf("%d\n", params->screenwidth);
 }
 
 int		ft_check_map(t_params *params, char **map)
 {
 	int i;
+	int j;
+	int k;
 
 	i = 1;
+	j = -1;
+	k = 0;
 	if (!map[2])
 		return (FALSE);
 	if (ft_updownwall(map[0]) == 0)
@@ -77,9 +80,9 @@ int		ft_check_map(t_params *params, char **map)
 	}
 	if (ft_updownwall(map[i]) == 0)
 		return (FALSE);
-	if (ft_check_space(map) == 0)
+	if (ft_check_space(j, k, params, map) == 0)
 		return (FALSE);
 	if (params->find_pos != 1)
-		ft_error(WRONG_PARAMS);
+		ft_error(params, WRONG_PARAMS);
 	return (TRUE);
 }

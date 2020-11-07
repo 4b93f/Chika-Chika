@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/11/06 18:59:56 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/07 16:03:49 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,10 @@ void	ft_raycast(t_params *params, t_ray *ray, t_color *color)
 	double	*zbuffer;
 
 	y = 0;
-	x = 0;
+	x = -1;
 	wallx = 0;
 	if (!(zbuffer = malloc(sizeof(double) * params->screenwidth)))
-		ft_error(MALLOC_ERROR);
+		ft_error(params, MALLOC_ERROR);
 	while (++x < params->screenwidth)
 	{
 		init_base_value(params, ray, x);
@@ -123,5 +123,4 @@ void	ft_raycast(t_params *params, t_ray *ray, t_color *color)
 		zbuffer[x] = params->ray->perpwalldist;
 	}
 	sprite(params, zbuffer);
-	//system("leaks Cub3D");
 }
