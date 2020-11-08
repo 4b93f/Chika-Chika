@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/07 18:28:43 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/08 19:24:40 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		ft_error(t_params *params, int error)
 	if (params->ray->window)
 		mlx_destroy_window(params->ray->mlx, params->ray->window);
 	quit(error, params);
+
 	return (1);
 }
 
@@ -57,8 +58,8 @@ void	game(t_params *params)
 		ft_error(params, NO_MAP);
 	if (ft_check_map(params, params->map) == 0)
 		ft_error(params, WRONG_MAP_FORMAT);
-	ft_orientation(params, params->ray);
-	ft_getpose_sprite(params->map, params->sp, params->sprites);
+	ft_orientation(params);
+	ft_getpose_sprite(params->map, params);
 	ft_getposray(params->map, params->player);
 
 	params->image->img = mlx_new_image(params->ray->mlx, params->screenwidth,
@@ -80,6 +81,7 @@ int		main(int argc, char **argv)
 	int			fd;
 	t_params	*params;
 
+	params = NULL;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		quit(NO_MAPFILE, params);

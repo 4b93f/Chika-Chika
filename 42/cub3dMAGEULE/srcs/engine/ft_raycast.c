@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/11/07 16:03:49 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/08 15:57:09 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	ft_raycast(t_params *params, t_ray *ray, t_color *color)
 		get_next_value(params, ray);
 		wall_hit(params, ray);
 		wall_dist(params, ray, &wallx);
-		get_next_value_bis(params, x, wallx, &y);
+		get_next_value_bis(params, wallx, &y);
 		print_cell_floor(params, color, x);
 		print_wall(params, x, y);
 		zbuffer[x] = params->ray->perpwalldist;

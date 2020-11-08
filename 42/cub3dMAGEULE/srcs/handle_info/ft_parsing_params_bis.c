@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 20:45:46 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/07 18:30:17 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/08 19:54:37 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	cut(char *s, t_params *params)
 
 	i = 0;
 	if (s == NULL)
-		quit(RGB_MISSING, params);
+		quit(SOMETHING_IS_MISSING, params);
 	while (s[i])
 		i++;
 	i--;

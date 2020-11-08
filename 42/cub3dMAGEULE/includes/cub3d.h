@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 19:15:57 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/07 18:37:44 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/08 20:51:09 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,8 @@ typedef struct			s_spvalues
 typedef struct			s_params
 {
 	int				map_find;
+	int				res_x;
+	int 			res_y;
 	int				find_pos;
 	int				player_orientation;
 	int				screenwidth;
@@ -274,8 +276,8 @@ void			up(t_params *params);
 void			down(t_params *params);
 void			left(t_params *params);
 void			reset_image(t_params *params);
-void			ft_getpose_sprite(char **map, t_draw_sprite *sp,
-		t_sprite *sprites);
+void			ft_getpose_sprite(char **map,
+		t_params *params);
 void			right(t_params *params);
 void			turn_right(t_params *params);
 void			turn_left(t_params *params);
@@ -288,12 +290,12 @@ void			quit(int num, t_params *params);
 void			ft_raycast(t_params *params, t_ray *ray, t_color *color);
 void			ft_get_tex(t_params *params);
 void			ft_pixel_to_image(int x, int y, t_params *params);
-void			ft_orientation(t_params *params, t_ray *ray);
+void			ft_orientation(t_params *params);
 void			ft_get_sprite(t_params *params, char *path);
 void			parameters(t_params *params, int argc, char **argv);
 int				ft_void_algo(int *i, int *j, int *k, char **map);
 int				ft_zero_algo(int *i, int *j, int *k, char **map);
-void			get_next_value_bis(t_params *params, int x,
+void			get_next_value_bis(t_params *params,
 		double wallx, int *y);
 void			ft_init_game(t_params *params, int fd);
 void			print_cell_floor(t_params *params, t_color *color, int x);
@@ -317,6 +319,8 @@ t_draw_sprite	*ft_malloc_sprite(t_params *params);
 t_player		*ft_malloc_player(t_params *params);
 t_tex			*ft_malloc_tex(t_params *params);
 t_bmp			*ft_malloc_bmp(t_params *params);
+char **create_tab(int n);
+t_sprite	*ft_malloc_sprites(t_params *params);
 
 
 void		ft_free_color(t_color *to_free);

@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 17:16:21 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/07 18:29:06 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/08 20:51:56 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	ft_getpose_sprite(char **map, t_draw_sprite *sp, t_sprite *sprites)
+void	ft_getpose_sprite(char **map, t_params *params)
 {
 	int i;
 	int j;
@@ -27,8 +27,8 @@ void	ft_getpose_sprite(char **map, t_draw_sprite *sp, t_sprite *sprites)
 		{
 			if (map[i][j] == '2')
 			{
-				sprites[k].x = i + 1;
-				sprites[k].y = j + 1;
+				params->sprites[k].x = i + 1;
+				params->sprites[k].y = j + 1;
 				k++;
 				map[i][j] = '0';
 			}
@@ -39,6 +39,25 @@ void	ft_getpose_sprite(char **map, t_draw_sprite *sp, t_sprite *sprites)
 	}
 }
 
+void param_r(t_params *params, char *str)
+{
+	int i;
+
+	i = 0;
+
+	while (!ft_isspace(str[i]))
+		i++;
+	params->res_x = ft_atoi(&str[i]);
+	while (ft_isdigit(str[i]))
+		i++;
+	params->res_y = ft_atoi(&str[i]);
+	while (!ft_isspace(str[i]))
+		i++;
+	if (str[i])
+		quit(ERROR_ARGUMENT, params);
+	return ;
+}
+
 void	ft_resolution(t_params *params)
 {
 	char	**tmp;
@@ -46,12 +65,9 @@ void	ft_resolution(t_params *params)
 	tmp = NULL;
 	if (!params->res)
 		ft_error(params, ANOMALY_RES);
-	if (!(tmp = ft_split(params->res, ' ')))
-		return ;
-	if (tmp[2] || tmp[0] == NULL || tmp[1] == NULL)
-		quit(ANOMALY_RES, params);
-	params->screenwidth = ft_atoi(tmp[0]);
-	params->screenheight = ft_atoi(tmp[1]);
+	param_r(params, params->res);
+	params->screenwidth = params->res_x;
+	params->screenheight = params->res_y;
 	if (params->screenwidth < 1 || params->screenheight < 1)
 		quit(ANOMALY_RES, params);
 	free(tmp[0]);

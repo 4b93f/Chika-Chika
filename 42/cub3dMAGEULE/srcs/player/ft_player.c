@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 17:36:46 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/06 18:59:40 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/08 15:55:08 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int		intcmp(int x, int y)
 		return (FALSE);
 }
 
-void	ft_orientation(t_params *params, t_ray *ray)
+void	ft_orientation(t_params *params)
 {
 	if (intcmp(params->player_orientation, 'N') == 1)
 	{

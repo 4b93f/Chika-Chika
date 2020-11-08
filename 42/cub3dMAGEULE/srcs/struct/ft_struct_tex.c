@@ -6,17 +6,16 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 17:45:32 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/07 18:31:01 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/08 19:25:01 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-t_tex	ft_create_tex(void)
+t_tex	ft_create_tex(t_params *params)
 {
 	t_tex tex;
 
-	tex.tex = malloc(sizeof(char *) * 4);
 	tex.bpp = 0;
 	tex.sizeline = 0;
 	tex.endian = 0;
@@ -27,6 +26,12 @@ t_tex	ft_create_tex(void)
 	tex.step = 0;
 	tex.texx = 0;
 	tex.texy = 0;
+	if (!(tex.tex = malloc(sizeof(char *) * 4)))
+		ft_error(params, MALLOC_ERROR);
+	tex.tex[0] = NULL;
+	tex.tex[1] = NULL;
+	tex.tex[2] = NULL;
+	tex.tex[3] = NULL;
 	return (tex);
 }
 
@@ -36,17 +41,12 @@ t_tex	*ft_malloc_tex(t_params *params)
 
 	if (!(malloc_tex = malloc(sizeof(t_tex))))
 		quit(MALLOC_ERROR, params);
-	*malloc_tex = ft_create_tex();
+	*malloc_tex = ft_create_tex(params);
 	return (malloc_tex);
 }
 
 void		ft_free_tex(t_tex *to_free)
 {
-	int			i;
-
-	i = -1;
-	while (to_free->tex[++i])
-		free(to_free->tex[i]);
 	free(to_free->tex);
 	free(to_free);
 }

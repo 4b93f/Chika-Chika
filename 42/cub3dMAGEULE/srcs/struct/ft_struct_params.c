@@ -6,11 +6,25 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 01:14:46 by root              #+#    #+#             */
-/*   Updated: 2020/11/07 17:14:48 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/08 20:01:54 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void		ft_create_params_bis(t_params *params)
+{
+	params->color = NULL;
+	params->sp = NULL;
+	params->sv = NULL;
+	params->tex = NULL;
+	params->image = NULL;
+	params->player = NULL;
+	params->event = NULL;
+	params->ray = NULL;
+	params->bmp = NULL;
+	params->sprites = NULL;
+}
 
 t_params	ft_create_params(void)
 {
@@ -28,8 +42,6 @@ t_params	ft_create_params(void)
 	params.textea = NULL;
 	params.textsp = NULL;
 	params.colorc = NULL;
-	params.mlx_txt_n = NULL;
-	params.mlx_txtdata_n = NULL;
 	params.argbcolorc = NULL;
 	params.colorf = NULL;
 	params.argbcolorf = NULL;
@@ -44,6 +56,7 @@ t_params	*ft_malloc_params(void)
 	if (!(malloc_params = malloc(sizeof(t_params))))
 		return (0);
 	*malloc_params = ft_create_params();
+	ft_create_params_bis(malloc_params);
 	return (malloc_params);
 }
 
@@ -52,8 +65,11 @@ void		ft_free_params(t_params *to_free)
 	int			i;
 
 	i = -1;
-	while (to_free->map[++i])
-		free(to_free->map[i]);
+	if (to_free->map != NULL)
+	{
+		while (to_free->map[++i])
+			free(to_free->map[i]);
+	}
 	free(to_free->map);
 	free(to_free);
 }

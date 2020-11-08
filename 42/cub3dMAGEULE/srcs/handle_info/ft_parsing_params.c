@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:35:00 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/07 18:32:44 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/08 20:33:16 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,18 @@ char	*taking_info(t_params *params, char *line, char *s)
 	i = 0;
 	if (s != NULL)
 		ft_error(params, DUPLICATE_PARAMETERS);
-	while (line[i] && line[i] != '\t' && line[i] != '\n'
-			&& line[i] != '\r' && line[i] != '\v'
-			&& line[i] != '\f' && line[i] != ' ' && ft_isalpha(line[i]))
+	while (ft_isalpha(line[i]))
+		i++;
+	if (!ft_isspace(line[i]))
+		quit(WRONG_PARAMS, params);
+	i++;
+	//printf("{%c}\n", line[i]);
+	while (line[i] && ft_isspace(line[i]) && ft_isalpha(line[i]))
 		i++;
 	while (ft_isspace(line[i]))
 		i++;
 	free(s);
+	//printf("{%s}\n", line + i);
 	return (line + i);
 }
 
@@ -88,21 +93,22 @@ void	ft_params_format(t_params *params)
 
 void	parse_info(t_params *params, int fd, char *line)
 {
-	if (!strncmp("S ", line, 2))
-		params->textsp = taking_info(params, line, params->textsp);
-	else if (!strncmp("NO ", line, 3))
-		params->textno = taking_info(params, line, params->textno);
-	else if (!strncmp("SO ", line, 3))
+	//printf("{%s}", line);
+	if (!strncmp("SO", line, 2))
 		params->textso = taking_info(params, line, params->textso);
-	else if (!strncmp("WE ", line, 3))
+	else if (!strncmp("NO", line, 2))
+		params->textno = taking_info(params, line, params->textno);
+	else if (!strncmp("S", line, 1))
+		params->textsp = taking_info(params, line, params->textsp);
+	else if (!strncmp("WE", line, 2))
 		params->textwe = taking_info(params, line, params->textwe);
-	else if (!strncmp("EA ", line, 3))
+	else if (!strncmp("EA", line, 2))
 		params->textea = taking_info(params, line, params->textea);
-	else if (!strncmp("F ", line, 2))
+	else if (!strncmp("F", line, 1))
 		params->colorf = taking_info(params, line, params->colorf);
-	else if (!strncmp("C ", line, 2))
+	else if (!strncmp("C", line, 1))
 		params->colorc = taking_info(params, line, params->colorc);
-	else if (!strncmp("R ", line, 2))
+	else if (!strncmp("R", line, 1))
 		params->res = taking_info(params, line, params->res);
 	else if (strchr(line, '1'))
 	{

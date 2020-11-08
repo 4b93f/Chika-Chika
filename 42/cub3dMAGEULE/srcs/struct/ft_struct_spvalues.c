@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 14:50:16 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/07 17:08:12 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/08 16:00:51 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,9 @@ t_spvalues	*ft_malloc_spvalues(t_params *params)
 		ft_error(params, MALLOC_ERROR);
 	*malloc_spvalues = ft_create_spvalues();
 	return (malloc_spvalues);
+}
+
+void		ft_free_spvalues(t_spvalues *to_free)
+{
+	free(to_free);
 }

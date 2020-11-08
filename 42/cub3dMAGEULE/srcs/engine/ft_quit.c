@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 15:07:53 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/07 18:45:17 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/08 20:25:18 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 void	free_struct(t_params *params)
 {
-	if (params->color)
-		ft_free_color(params->color);
-	if (params->bmp)
-		ft_free_bmp(params->bmp);
+	ft_free_sprite(params->sp);
+	ft_free_tex(params->tex);
+	free(params->color);
+	free(params->sv);
+	free(params->sprites);
+	free(params->image);
+	free(params->bmp);
+	free(params->player);
+	ft_free_params(params);
 }
 
 void	quit(int num, t_params *params)
@@ -39,7 +44,6 @@ void	quit(int num, t_params *params)
 		"Error\nWrong format in map\n",
 		"Error\nInvalid argument\n"
 	};
-
 
 	if (num > -1)
 		ft_printf("%s", error[num]);
