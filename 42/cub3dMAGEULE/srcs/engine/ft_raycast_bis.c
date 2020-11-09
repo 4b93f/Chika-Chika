@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 17:04:20 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/08 15:56:54 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/09 18:16:36 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	get_next_value_bis(t_params *params,double wallx, int *y)
+void	get_next_value_bis(t_params *params, double wallx, int *y)
 {
 	params->tex->texx = (int)(wallx * (double)TXTW);
 	if (params->ray->side == 0 && params->ray->raydirx > 0)

@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 17:16:21 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/08 20:51:56 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/09 20:20:29 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,20 @@ void	ft_getpose_sprite(char **map, t_params *params)
 	}
 }
 
-void param_r(t_params *params, char *str)
+void	param_r(t_params *params, char *str)
 {
 	int i;
 
 	i = 0;
-
-	while (!ft_isspace(str[i]))
+	while (ft_isspace(str[i]))
 		i++;
-	params->res_x = ft_atoi(&str[i]);
+	params->res_x = ft_atoi(str + i);
 	while (ft_isdigit(str[i]))
 		i++;
-	params->res_y = ft_atoi(&str[i]);
-	while (!ft_isspace(str[i]))
+	params->res_y = ft_atoi(str + i);
+	while (ft_isspace(str[i]))
+		i++;
+	while (ft_isdigit(str[i]))
 		i++;
 	if (str[i])
 		quit(ERROR_ARGUMENT, params);
@@ -61,18 +62,24 @@ void param_r(t_params *params, char *str)
 void	ft_resolution(t_params *params)
 {
 	char	**tmp;
+	void *mlx;
+
+	mlx = mlx_init();
+	int res_screen_x;
+	int res_screen_y;
 
 	tmp = NULL;
 	if (!params->res)
 		ft_error(params, ANOMALY_RES);
 	param_r(params, params->res);
-	params->screenwidth = params->res_x;
-	params->screenheight = params->res_y;
+	mlx_get_screen_size(mlx, &res_screen_x, &res_screen_y);
+
+	params->screenwidth = params->res_x > res_screen_x
+	? res_screen_x : params->res_x;
+	params->screenheight = params->res_y > res_screen_y
+	? res_screen_y : params->res_y;
 	if (params->screenwidth < 1 || params->screenheight < 1)
 		quit(ANOMALY_RES, params);
-	free(tmp[0]);
-	free(tmp[1]);
-	free(tmp);
 }
 
 int		ft_check_map(t_params *params, char **map)

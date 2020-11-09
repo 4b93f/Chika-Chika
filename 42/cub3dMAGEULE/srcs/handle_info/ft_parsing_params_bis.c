@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 20:45:46 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/08 19:54:37 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/09 18:12:39 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,11 @@ void	ft_check_floor(t_params *params)
 	j = 0;
 	while (params->argbcolorf[++i])
 	{
+		if (!ft_isspace(params->argbcolorf[i][j])
+		&& !ft_isdigit(params->argbcolorf[i][j]))
+			quit(WRONG_CHAR_IN_RGB, params);
 		while (params->argbcolorf[i][j] &&
-				!ft_isdigit(params->argbcolorf[i][j]))
+				ft_isspace(params->argbcolorf[i][j]))
 			j++;
 		while (ft_isdigit(params->argbcolorf[i][j]))
 			j++;

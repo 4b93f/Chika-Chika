@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:35:00 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/08 20:33:16 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/09 20:48:26 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,11 @@ char	*taking_info(t_params *params, char *line, char *s)
 	if (!ft_isspace(line[i]))
 		quit(WRONG_PARAMS, params);
 	i++;
-	//printf("{%c}\n", line[i]);
 	while (line[i] && ft_isspace(line[i]) && ft_isalpha(line[i]))
 		i++;
 	while (ft_isspace(line[i]))
 		i++;
 	free(s);
-	//printf("{%s}\n", line + i);
 	return (line + i);
 }
 
@@ -73,10 +71,10 @@ void	ft_params_format(t_params *params)
 		quit(WRONG_PARAMS, params);
 	if (params->argbcolorc[0] == NULL || params->argbcolorc[1] == NULL ||
 			params->argbcolorc[2] == NULL || params->argbcolorc[3])
-		quit(WRONG_PARAMS, params);
+		quit(RGB_MISSING, params);
 	if (params->argbcolorf[0] == NULL || params->argbcolorf[1] == NULL ||
 			params->argbcolorf[2] == NULL || params->argbcolorf[3])
-		quit(WRONG_PARAMS, params);
+		quit(RGB_MISSING, params);
 	atoi_info(params);
 	ft_check_cell(params);
 	ft_check_floor(params);
@@ -93,7 +91,6 @@ void	ft_params_format(t_params *params)
 
 void	parse_info(t_params *params, int fd, char *line)
 {
-	//printf("{%s}", line);
 	if (!strncmp("SO", line, 2))
 		params->textso = taking_info(params, line, params->textso);
 	else if (!strncmp("NO", line, 2))

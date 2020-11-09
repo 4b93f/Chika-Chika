@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 15:07:53 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/08 20:25:18 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/09 20:25:19 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	free_struct(t_params *params)
 	free(params->bmp);
 	free(params->player);
 	ft_free_params(params);
+	printf("\nFREE STRUCT PASS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 }
 
 void	quit(int num, t_params *params)
@@ -45,8 +46,8 @@ void	quit(int num, t_params *params)
 		"Error\nInvalid argument\n"
 	};
 
-	if (num > -1)
-		ft_printf("%s", error[num]);
-	free_struct(params);
+	if (num > 0)
+		free_struct(params);
+	ft_printf("%s", error[num]);
 	exit(0);
 }

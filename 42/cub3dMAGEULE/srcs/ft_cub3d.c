@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/08 19:24:40 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/09 20:45:05 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ int		ft_error(t_params *params, int error)
 	if (params->ray->window)
 		mlx_destroy_window(params->ray->mlx, params->ray->window);
 	quit(error, params);
-
 	return (1);
 }
 
 int		mouse_event(t_params *params)
 {
-	ft_error(params, -1);
+	free_struct(params);
+	exit(0);
 	return (1);
 }
 
@@ -61,7 +61,6 @@ void	game(t_params *params)
 	ft_orientation(params);
 	ft_getpose_sprite(params->map, params);
 	ft_getposray(params->map, params->player);
-
 	params->image->img = mlx_new_image(params->ray->mlx, params->screenwidth,
 			params->screenheight);
 	params->image->imgdata = mlx_get_data_addr(params->image->img,

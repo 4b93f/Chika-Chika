@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 18:30:34 by becentrale        #+#    #+#             */
-/*   Updated: 2020/11/08 15:27:13 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/09 20:40:17 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ t_ray	ft_create_ray(t_params *params)
 	ray.lineheight = 0;
 	ray.drawstart = 0;
 	ray.drawend = 0;
-	ray.mlx = mlx_init();
-	ray.window = mlx_new_window(ray.mlx, params->screenwidth,
-	params->screenheight, "TITLE");
+	if (!(ray.mlx = mlx_init()))
+		quit(MALLOC_ERROR, params);
+	if (!(ray.window = mlx_new_window(ray.mlx, params->screenwidth,
+	params->screenheight, "TITLE")))
+		quit(MALLOC_ERROR, params);
 	return (ray);
 }
 

@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 19:15:57 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/08 20:51:09 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/09 20:25:04 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -312,6 +312,7 @@ void			format_color(t_params *params);
 t_params		*ft_malloc_params(void);
 t_spvalues		*ft_malloc_spvalues(t_params *params);
 t_ray			*ft_malloc_ray(t_params *params);
+void	free_struct(t_params *params);
 t_color			*ft_malloc_color(t_params *params);
 t_image			*ft_malloc_image(t_params *params);
 t_event			*ft_malloc_event(t_params *params);

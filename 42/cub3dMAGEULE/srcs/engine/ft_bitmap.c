@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:28:12 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/07 18:04:56 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/09 20:24:50 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,12 @@ void	parameters(t_params *params, int argc, char **argv)
 
 void	save(t_params *params)
 {
-	static unsigned char header[54] = {0};
+	unsigned char	header[54];
+	int				i;
+
+	i = -1;
+	while (i < 54)
+		header[++i] = (unsigned char)0;
 
 	ft_memcpy(header, "BM", 2);
 	ft_memcpy(header + 2, &params->bmp->filesize, 4);
@@ -45,5 +50,6 @@ void	save(t_params *params)
 	write(params->bmp->fd, header, 54);
 	write(params->bmp->fd, params->image->imgdata, params->bmp->imgsize);
 	close(params->bmp->fd);
-	ft_error(params, -1);
+	free_struct(params);
+	exit(0);
 }
