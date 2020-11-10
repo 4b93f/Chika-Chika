@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/09 20:45:05 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/10 17:38:04 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ int		ft_error(t_params *params, int error)
 		mlx_destroy_image(params->ray->mlx, params->mlx_txt_e);
 	if (params->ray->window)
 		mlx_destroy_window(params->ray->mlx, params->ray->window);
-	quit(error, params);
+	if (error > 0)
+		quit(error, params);
 	return (1);
 }
 
 int		mouse_event(t_params *params)
 {
+	ft_error(params, -1);
 	free_struct(params);
 	exit(0);
 	return (1);
@@ -60,9 +62,10 @@ void	game(t_params *params)
 		ft_error(params, WRONG_MAP_FORMAT);
 	ft_orientation(params);
 	ft_getpose_sprite(params->map, params);
-	ft_getposray(params->map, params->player);
-	params->image->img = mlx_new_image(params->ray->mlx, params->screenwidth,
-			params->screenheight);
+	ft_getposplayer(params->map, params->player);
+	if (!(params->image->img = mlx_new_image(params->ray->mlx,
+		params->screenwidth, params->screenheight)))
+		ft_error(params, MALLOC_ERROR);
 	params->image->imgdata = mlx_get_data_addr(params->image->img,
 		&params->image->bpp, &params->image->sizeline, &params->image->endian);
 	params->image->imgsave = mlx_get_data_addr(params->image->img,

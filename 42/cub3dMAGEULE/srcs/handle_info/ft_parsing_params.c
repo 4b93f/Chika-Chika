@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:35:00 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/09 20:48:26 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/10 15:28:37 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ void	ft_params_format(t_params *params)
 	if (!(params->argbcolorc = ft_split(params->colorc, ',')))
 		quit(WRONG_PARAMS, params);
 	if (params->argbcolorc[0] == NULL || params->argbcolorc[1] == NULL ||
-			params->argbcolorc[2] == NULL || params->argbcolorc[3])
+			params->argbcolorc[2] == NULL)
 		quit(RGB_MISSING, params);
 	if (params->argbcolorf[0] == NULL || params->argbcolorf[1] == NULL ||
-			params->argbcolorf[2] == NULL || params->argbcolorf[3])
+			params->argbcolorf[2] == NULL)
 		quit(RGB_MISSING, params);
 	atoi_info(params);
 	ft_check_cell(params);
@@ -112,7 +112,7 @@ void	parse_info(t_params *params, int fd, char *line)
 		params->map = ft_map_parsing(params, fd, line);
 		params->map_find++;
 	}
-	else if ((strncmp(" ", line, 1)) && strncmp("", line, 1))
+	else if (!check_line(line))
 		quit(WRONG_PARAMS, params);
 	else
 		free(line);

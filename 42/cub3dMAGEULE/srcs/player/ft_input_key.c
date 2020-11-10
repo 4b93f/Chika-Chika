@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 15:20:06 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/09 20:28:50 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/10 16:46:53 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		key_pressed(int key_pressed, t_params *params)
 		params->event->turn_right = 1;
 	if (key_pressed == 53)
 	{
+		ft_error(params, -1);
 		free_struct(params);
 		exit(0);
 	}

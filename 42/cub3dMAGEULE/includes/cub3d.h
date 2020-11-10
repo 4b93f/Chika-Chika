@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 19:15:57 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/09 20:25:04 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/10 16:17:52 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,6 +258,7 @@ int				ft_check_char(t_params *params, char *map);
 int				ft_check_space(int j, int k, t_params *params, char **map);
 int				ft_isspace(int c);
 int				find_duplicate(char *str, int c);
+int check_line(char *line);
 int				mlx_get_screen_size(void *mlx_ptr, int *sizex, int *sizey);
 int				ft_isdigit(int c);
 int				search_params(t_params *params, int fd);
@@ -271,7 +272,7 @@ char			**ft_realloc(t_params *params, char **str, char *line, char **strfree);
 char			**ft_map_parsing(t_params *params, int fd, char *firstline);
 void	atoi_info(t_params *params);
 void			key_event(t_params *params);
-void			ft_getposray(char **map, t_player *player);
+void			ft_getposplayer(char **map, t_player *player);
 void			up(t_params *params);
 void			down(t_params *params);
 void			left(t_params *params);

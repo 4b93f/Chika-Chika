@@ -6,24 +6,34 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/11/08 15:57:09 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/10 16:54:40 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	init_base_value(t_params *params, t_ray *ray, int x)
+void	wall_dist(t_params *params, t_ray *ray, double *wallx)
 {
-	ray->hit = 0;
-	params->player->camx = 2 * x / (double)(params->screenwidth) - 1;
-	ray->raydirx = params->player->dirx + params->player->planex
-		* params->player->camx;
-	ray->raydiry = params->player->diry + params->player->planey
-		* params->player->camx;
-	ray->mapx = (int)params->player->posx;
-	ray->mapy = (int)params->player->posy;
-	ray->deltadistx = fabs(1 / ray->raydirx);
-	ray->deltadisty = fabs(1 / ray->raydiry);
+	if (ray->side == 0)
+		ray->perpwalldist = (ray->mapx - params->player->posx
+				+ (1 - ray->stepx) / 2) / ray->raydirx;
+	else
+		ray->perpwalldist = (ray->mapy - params->player->posy
+				+ (1 - ray->stepy) / 2) / ray->raydiry;
+	ray->lineheight = (params->screenheight / ray->perpwalldist);
+	ray->drawstart = (-ray->lineheight / 2 + (params->screenheight / 2));
+	if (ray->drawstart < 0)
+		ray->drawstart = 0;
+	ray->drawend = ray->lineheight / 2 + (int)params->screenheight / 2;
+	if (ray->drawend >= params->screenheight)
+		ray->drawend = params->screenheight - 1;
+	if (params->ray->side == 0)
+		*wallx = params->player->posy + params->ray->perpwalldist
+			* params->ray->raydiry;
+	else
+		*wallx = params->player->posx + params->ray->perpwalldist
+			* params->ray->raydirx;
+	*wallx -= floor((*wallx));
 }
 
 void	get_next_value(t_params *params, t_ray *ray)
@@ -75,28 +85,18 @@ void	wall_hit(t_params *params, t_ray *ray)
 	}
 }
 
-void	wall_dist(t_params *params, t_ray *ray, double *wallx)
+void	init_base_value(t_params *params, t_ray *ray, int x)
 {
-	if (ray->side == 0)
-		ray->perpwalldist = (ray->mapx - params->player->posx
-				+ (1 - ray->stepx) / 2) / ray->raydirx;
-	else
-		ray->perpwalldist = (ray->mapy - params->player->posy
-				+ (1 - ray->stepy) / 2) / ray->raydiry;
-	ray->lineheight = (params->screenheight / ray->perpwalldist);
-	ray->drawstart = (-ray->lineheight / 2 + (params->screenheight / 2));
-	if (ray->drawstart < 0)
-		ray->drawstart = 0;
-	ray->drawend = ray->lineheight / 2 + (int)params->screenheight / 2;
-	if (ray->drawend >= params->screenheight)
-		ray->drawend = params->screenheight - 1;
-	if (params->ray->side == 0)
-		*wallx = params->player->posy + params->ray->perpwalldist
-			* params->ray->raydiry;
-	else
-		*wallx = params->player->posx + params->ray->perpwalldist
-			* params->ray->raydirx;
-	*wallx -= floor((*wallx));
+	ray->hit = 0;
+	params->player->camx = 2 * x / (double)(params->screenwidth) - 1;
+	ray->raydirx = params->player->dirx + params->player->planex
+		* params->player->camx;
+	ray->raydiry = params->player->diry + params->player->planey
+		* params->player->camx;
+	ray->mapx = (int)params->player->posx;
+	ray->mapy = (int)params->player->posy;
+	ray->deltadistx = fabs(1 / ray->raydirx);
+	ray->deltadisty = fabs(1 / ray->raydiry);
 }
 
 void	ft_raycast(t_params *params, t_ray *ray, t_color *color)
@@ -108,7 +108,6 @@ void	ft_raycast(t_params *params, t_ray *ray, t_color *color)
 
 	y = 0;
 	x = -1;
-	wallx = 0;
 	if (!(zbuffer = malloc(sizeof(double) * params->screenwidth)))
 		ft_error(params, MALLOC_ERROR);
 	while (++x < params->screenwidth)
