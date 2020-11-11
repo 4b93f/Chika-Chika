@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 19:15:57 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/10 16:17:52 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/11 18:06:16 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,7 @@ typedef struct			s_params
 	int				player_orientation;
 	int				screenwidth;
 	int				screenheight;
+	int				temp;
 	char			*res;
 	char			*textno;
 	char			*textso;

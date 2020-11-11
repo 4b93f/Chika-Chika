@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 17:16:21 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/10 16:14:16 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/11 18:20:35 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ void	ft_resolution(t_params *params)
 		ft_error(params, ANOMALY_RES);
 	param_r(params, params->res);
 	mlx_get_screen_size(mlx, &res_screen_x, &res_screen_y);
-	params->screenwidth = params->res_x > res_screen_x
-	? res_screen_x : params->res_x;
-	params->screenheight = params->res_y > res_screen_y
+	params->screenwidth = params->res_y > res_screen_y
 	? res_screen_y : params->res_y;
+	params->screenheight = params->res_x > res_screen_x
+	? res_screen_x : params->res_x;
 	if (params->screenwidth < 1 || params->screenheight < 1)
 		quit(ANOMALY_RES, params);
 }

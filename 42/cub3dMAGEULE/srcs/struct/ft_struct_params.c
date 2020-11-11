@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 01:14:46 by root              #+#    #+#             */
-/*   Updated: 2020/11/08 20:01:54 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/11 18:05:36 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_params	ft_create_params(void)
 {
 	t_params	params;
 
+	params.temp = 0;
 	params.screenwidth = 0;
 	params.screenheight = 0;
 	params.map_find = 0;
