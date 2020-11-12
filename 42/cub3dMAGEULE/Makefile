@@ -10,7 +10,7 @@ SRCS   = 	srcs/engine/ft_bitmap.c srcs/handle_info/ft_check_map.c srcs/handle_in
 
 HEADERS =	cub3d.h
 NAME = 		Cub3D
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 OBJS = 		${SRCS:.c=.o}
 MLX = -lmlx -lm -framework OpenGL -framework AppKit
 LIB = ./lib/libft.a ./lib/libftprintf.a libmlx.dylib

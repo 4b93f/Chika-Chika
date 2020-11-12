@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 23:00:36 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/08 16:07:34 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:57:11 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-t_event	ft_create_event(void)
+static t_event	ft_create_event(void)
 {
 	t_event	event;
 
@@ -25,7 +25,7 @@ t_event	ft_create_event(void)
 	return (event);
 }
 
-t_event	*ft_malloc_event(t_params *params)
+t_event			*ft_malloc_event(t_params *params)
 {
 	t_event	*malloc_event;
 

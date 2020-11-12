@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 16:19:44 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/09 18:13:43 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:50:40 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	ft_init(t_params *params, int fd)
+static void	ft_init(t_params *params, int fd)
 {
 	params->color = ft_malloc_color(params);
 	params->sp = ft_malloc_sprite(params);
@@ -28,7 +28,7 @@ void	ft_init(t_params *params, int fd)
 	params->bmp = ft_malloc_bmp(params);
 }
 
-void	ft_init_game(t_params *params, int fd)
+void		ft_init_game(t_params *params, int fd)
 {
 	ft_init(params, fd);
 }

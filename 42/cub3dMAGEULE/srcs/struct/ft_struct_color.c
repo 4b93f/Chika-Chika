@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 16:07:25 by becentrale        #+#    #+#             */
-/*   Updated: 2020/11/08 16:07:20 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:57:02 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-t_color	ft_create_color(void)
+static t_color	ft_create_color(void)
 {
 	t_color color;
 
@@ -31,7 +31,7 @@ t_color	ft_create_color(void)
 	return (color);
 }
 
-t_color	*ft_malloc_color(t_params *params)
+t_color			*ft_malloc_color(t_params *params)
 {
 	t_color *malloc_color;
 

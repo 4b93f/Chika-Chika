@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 17:16:21 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/11 18:20:35 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 16:34:58 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	ft_getpose_sprite(char **map, t_params *params)
+void		ft_getpose_sprite(char **map, t_params *params)
 {
 	int i;
 	int j;
@@ -39,7 +39,7 @@ void	ft_getpose_sprite(char **map, t_params *params)
 	}
 }
 
-void	param_r(t_params *params, char *str)
+static void	param_r(t_params *params, char *str)
 {
 	int i;
 
@@ -59,7 +59,7 @@ void	param_r(t_params *params, char *str)
 	return ;
 }
 
-void	ft_resolution(t_params *params)
+void		ft_resolution(t_params *params)
 {
 	char	**tmp;
 	int		res_screen_x;
@@ -80,7 +80,7 @@ void	ft_resolution(t_params *params)
 		quit(ANOMALY_RES, params);
 }
 
-int		ft_check_map(t_params *params, char **map)
+int			ft_check_map(t_params *params, char **map)
 {
 	int i;
 	int j;

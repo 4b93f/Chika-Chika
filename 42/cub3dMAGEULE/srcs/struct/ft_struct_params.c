@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 01:14:46 by root              #+#    #+#             */
-/*   Updated: 2020/11/11 18:05:36 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 15:07:42 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void		ft_create_params_bis(t_params *params)
+static void		ft_create_params_bis(t_params *params)
 {
 	params->color = NULL;
 	params->sp = NULL;
@@ -26,7 +26,7 @@ void		ft_create_params_bis(t_params *params)
 	params->sprites = NULL;
 }
 
-t_params	ft_create_params(void)
+static t_params	ft_create_params(void)
 {
 	t_params	params;
 
@@ -50,7 +50,7 @@ t_params	ft_create_params(void)
 	return (params);
 }
 
-t_params	*ft_malloc_params(void)
+t_params		*ft_malloc_params(void)
 {
 	t_params	*malloc_params;
 
@@ -61,7 +61,7 @@ t_params	*ft_malloc_params(void)
 	return (malloc_params);
 }
 
-void		ft_free_params(t_params *to_free)
+void			ft_free_params(t_params *to_free)
 {
 	int			i;
 

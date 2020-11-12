@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 17:45:32 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/09 18:17:35 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:59:35 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-t_tex	ft_create_tex(t_params *params)
+static t_tex	ft_create_tex(t_params *params)
 {
 	t_tex tex;
 
@@ -35,7 +35,7 @@ t_tex	ft_create_tex(t_params *params)
 	return (tex);
 }
 
-t_tex	*ft_malloc_tex(t_params *params)
+t_tex			*ft_malloc_tex(t_params *params)
 {
 	t_tex *malloc_tex;
 
@@ -45,7 +45,7 @@ t_tex	*ft_malloc_tex(t_params *params)
 	return (malloc_tex);
 }
 
-void	ft_free_tex(t_tex *to_free)
+void			ft_free_tex(t_tex *to_free)
 {
 	free(to_free->tex);
 	free(to_free);

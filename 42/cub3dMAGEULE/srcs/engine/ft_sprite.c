@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 17:49:20 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/07 16:02:33 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:53:36 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-char	*ft_new_sprite(t_params *params, char *path)
+static char	*ft_new_sprite(t_params *params, char *path)
 {
 	if (!(params->sp->mlx_sprite = mlx_xpm_file_to_image(params->ray->mlx, path,
 	&params->sp->sp_width, &params->sp->sp_height)))
@@ -23,7 +23,7 @@ char	*ft_new_sprite(t_params *params, char *path)
 	return (params->sp->spdata);
 }
 
-void	ft_get_sprite(t_params *params, char *path)
+void		ft_get_sprite(t_params *params, char *path)
 {
 	params->sp->sp[0] = ft_new_sprite(params, path);
 }

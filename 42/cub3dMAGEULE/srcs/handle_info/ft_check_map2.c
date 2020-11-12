@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 14:49:00 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/07 17:11:05 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 15:32:10 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ int	ft_void_algo(int *i, int *j, int *k, char **map)
 	*k = *i;
 	while (*k > 0 && map[*k][*j] == ' ')
 		*k = *k - 1;
-	if (map[*k][*j] != '1' && *k != 0 && (map[*k] <= (map[*k - 1])))
+	if (map[*k][*j] && map[*k][*j] != '1' && *k != 0 && (map[*k]
+	<= (map[*k - 1])))
 		return (0);
 	*k = *i;
 	while (map[*k] != NULL && map[*k][*j] == ' ')
 		*k = *k + 1;
-	if (map[*k] != NULL && map[*k][*j] != '1' && (map[*k] <= (map[*k + 1])))
+	if (map[*k][*j] && map[*k] != NULL && map[*k][*j] != '1' && (map[*k]
+	<= (map[*k + 1])))
 		return (0);
 	return (1);
 }

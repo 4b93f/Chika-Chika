@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 17:10:57 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/08 17:51:00 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:52:29 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	sortsprites(t_params *params)
+static void	sortsprites(t_params *params)
 {
 	double	first;
 	double	second;
@@ -41,7 +41,7 @@ void	sortsprites(t_params *params)
 	}
 }
 
-void	algo(t_params *params, int i)
+static void	algo(t_params *params, int i)
 {
 	double spritex;
 	double spritey;
@@ -62,7 +62,7 @@ void	algo(t_params *params, int i)
 		params->screenheight / 2;
 }
 
-void	calc_values(t_params *params)
+static void	calc_values(t_params *params)
 {
 	if (params->sv->drawstarty < 0)
 		params->sv->drawstarty = 0;
@@ -82,7 +82,7 @@ void	calc_values(t_params *params)
 		params->sv->drawendx = params->screenwidth - 1;
 }
 
-void	print_sprite(t_params *params, double *zbuffer, int *i)
+static void	print_sprite(t_params *params, double *zbuffer, int *i)
 {
 	params->sv->x = params->sv->drawstartx;
 	while (params->sv->x < params->sv->drawendx)
@@ -110,7 +110,7 @@ void	print_sprite(t_params *params, double *zbuffer, int *i)
 	*i = *i + 1;
 }
 
-void	sprite(t_params *params, double *zbuffer)
+void		sprite(t_params *params, double *zbuffer)
 {
 	int		i;
 	int		*sprite_order;

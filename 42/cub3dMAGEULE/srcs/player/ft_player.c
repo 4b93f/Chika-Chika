@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 17:36:46 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/10 16:17:29 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:56:34 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	ft_getposplayer(char **map, t_player *player)
+void		ft_getposplayer(char **map, t_player *player)
 {
 	int i;
 	int j;
@@ -37,7 +37,7 @@ void	ft_getposplayer(char **map, t_player *player)
 	}
 }
 
-void	turn_left(t_params *params)
+void		turn_left(t_params *params)
 {
 	double olddirx;
 	double oldplanex;
@@ -56,7 +56,7 @@ void	turn_left(t_params *params)
 	reset_image(params);
 }
 
-void	turn_right(t_params *params)
+void		turn_right(t_params *params)
 {
 	double olddirx;
 	double oldplanex;
@@ -76,7 +76,7 @@ void	turn_right(t_params *params)
 	reset_image(params);
 }
 
-int		intcmp(int x, int y)
+static int	intcmp(int x, int y)
 {
 	int total;
 
@@ -87,7 +87,7 @@ int		intcmp(int x, int y)
 		return (FALSE);
 }
 
-void	ft_orientation(t_params *params)
+void		ft_orientation(t_params *params)
 {
 	if (intcmp(params->player_orientation, 'N') == 1)
 	{

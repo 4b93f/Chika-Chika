@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 20:42:38 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/10 15:26:48 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:50:05 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ int		ft_isspace(int c)
 	return (0);
 }
 
-int check_line(char *line)
+int		check_line(char *line)
 {
 	int i;
 
 	i = 0;
-	while(line[i])
+	while (line[i])
 	{
 		if (!ft_isspace(line[i]))
 			return (0);

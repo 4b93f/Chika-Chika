@@ -6,13 +6,14 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 16:26:08 by root              #+#    #+#             */
-/*   Updated: 2020/11/08 18:57:50 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:55:15 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-char	**ft_realloc(t_params *params, char **str, char *line, char **strfree)
+static char	**ft_realloc(t_params *params, char **str, char *line,
+char **strfree)
 {
 	char	**cpy;
 	int		i;
@@ -35,7 +36,7 @@ char	**ft_realloc(t_params *params, char **str, char *line, char **strfree)
 	return (cpy);
 }
 
-char	**ft_map_parsing(t_params *params, int fd, char *firstline)
+char		**ft_map_parsing(t_params *params, int fd, char *firstline)
 {
 	char	**str;
 	int		cmpt;

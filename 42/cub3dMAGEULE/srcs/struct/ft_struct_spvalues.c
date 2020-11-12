@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 14:50:16 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/08 16:00:51 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:59:22 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-t_spvalues	ft_create_spvalues(void)
+static t_spvalues	ft_create_spvalues(void)
 {
 	t_spvalues	sv;
 
@@ -34,7 +34,7 @@ t_spvalues	ft_create_spvalues(void)
 	return (sv);
 }
 
-t_spvalues	*ft_malloc_spvalues(t_params *params)
+t_spvalues			*ft_malloc_spvalues(t_params *params)
 {
 	t_spvalues	*malloc_spvalues;
 
@@ -44,7 +44,7 @@ t_spvalues	*ft_malloc_spvalues(t_params *params)
 	return (malloc_spvalues);
 }
 
-void		ft_free_spvalues(t_spvalues *to_free)
+void				ft_free_spvalues(t_spvalues *to_free)
 {
 	free(to_free);
 }

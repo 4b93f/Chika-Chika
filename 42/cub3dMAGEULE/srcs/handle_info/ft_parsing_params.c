@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:35:00 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/10 15:28:37 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:55:58 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-char	*taking_info(t_params *params, char *line, char *s)
+static char	*taking_info(t_params *params, char *line, char *s)
 {
 	int i;
 
@@ -32,7 +32,7 @@ char	*taking_info(t_params *params, char *line, char *s)
 	return (line + i);
 }
 
-void	trim_info(t_params *params)
+static void	trim_info(t_params *params)
 {
 	int i;
 	int j;
@@ -60,7 +60,7 @@ void	trim_info(t_params *params)
 		quit(WRONG_CHAR_IN_RGB, params);
 }
 
-void	ft_params_format(t_params *params)
+static void	ft_params_format(t_params *params)
 {
 	int i;
 
@@ -89,7 +89,7 @@ void	ft_params_format(t_params *params)
 	free(params->argbcolorc);
 }
 
-void	parse_info(t_params *params, int fd, char *line)
+static void	parse_info(t_params *params, int fd, char *line)
 {
 	if (!strncmp("SO", line, 2))
 		params->textso = taking_info(params, line, params->textso);
@@ -118,7 +118,7 @@ void	parse_info(t_params *params, int fd, char *line)
 		free(line);
 }
 
-int		search_params(t_params *params, int fd)
+int			search_params(t_params *params, int fd)
 {
 	char *line;
 

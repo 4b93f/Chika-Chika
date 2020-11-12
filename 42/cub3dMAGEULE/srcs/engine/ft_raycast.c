@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/11/10 16:54:40 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:53:24 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	wall_dist(t_params *params, t_ray *ray, double *wallx)
+static void	wall_dist(t_params *params, t_ray *ray, double *wallx)
 {
 	if (ray->side == 0)
 		ray->perpwalldist = (ray->mapx - params->player->posx
@@ -36,7 +36,7 @@ void	wall_dist(t_params *params, t_ray *ray, double *wallx)
 	*wallx -= floor((*wallx));
 }
 
-void	get_next_value(t_params *params, t_ray *ray)
+static void	get_next_value(t_params *params, t_ray *ray)
 {
 	if (ray->raydirx < 0)
 	{
@@ -62,7 +62,7 @@ void	get_next_value(t_params *params, t_ray *ray)
 	}
 }
 
-void	wall_hit(t_params *params, t_ray *ray)
+static void	wall_hit(t_params *params, t_ray *ray)
 {
 	while (ray->hit == 0)
 	{
@@ -85,7 +85,7 @@ void	wall_hit(t_params *params, t_ray *ray)
 	}
 }
 
-void	init_base_value(t_params *params, t_ray *ray, int x)
+static void	init_base_value(t_params *params, t_ray *ray, int x)
 {
 	ray->hit = 0;
 	params->player->camx = 2 * x / (double)(params->screenwidth) - 1;
@@ -99,7 +99,7 @@ void	init_base_value(t_params *params, t_ray *ray, int x)
 	ray->deltadisty = fabs(1 / ray->raydiry);
 }
 
-void	ft_raycast(t_params *params, t_ray *ray, t_color *color)
+void		ft_raycast(t_params *params, t_ray *ray, t_color *color)
 {
 	int		x;
 	int		y;

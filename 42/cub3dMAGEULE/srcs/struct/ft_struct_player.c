@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 23:03:43 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/08 16:05:09 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:58:36 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-t_player	ft_create_player(void)
+static t_player	ft_create_player(void)
 {
 	t_player player;
 
@@ -28,7 +28,7 @@ t_player	ft_create_player(void)
 	return (player);
 }
 
-t_player	*ft_malloc_player(t_params *params)
+t_player		*ft_malloc_player(t_params *params)
 {
 	t_player *malloc_player;
 
@@ -38,7 +38,7 @@ t_player	*ft_malloc_player(t_params *params)
 	return (malloc_player);
 }
 
-void		ft_free_player(t_player *to_free)
+void			ft_free_player(t_player *to_free)
 {
 	free(to_free);
 }

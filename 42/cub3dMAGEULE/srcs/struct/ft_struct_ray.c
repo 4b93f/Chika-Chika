@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 18:30:34 by becentrale        #+#    #+#             */
-/*   Updated: 2020/11/10 15:55:02 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:58:48 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-t_ray	ft_create_ray(t_params *params)
+static t_ray	ft_create_ray(t_params *params)
 {
 	t_ray ray;
 
@@ -41,7 +41,7 @@ t_ray	ft_create_ray(t_params *params)
 	return (ray);
 }
 
-t_ray	*ft_malloc_ray(t_params *params)
+t_ray			*ft_malloc_ray(t_params *params)
 {
 	t_ray *malloc_ray;
 

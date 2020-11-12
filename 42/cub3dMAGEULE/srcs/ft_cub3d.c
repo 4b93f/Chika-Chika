@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 13:14:13 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/10 17:38:04 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 15:19:12 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int		ft_error(t_params *params, int error)
+int			ft_error(t_params *params, int error)
 {
 	if (params->image->img)
 		mlx_destroy_image(params->ray->mlx, params->image->img);
@@ -33,7 +33,7 @@ int		ft_error(t_params *params, int error)
 	return (1);
 }
 
-int		mouse_event(t_params *params)
+static int	mouse_event(t_params *params)
 {
 	ft_error(params, -1);
 	free_struct(params);
@@ -41,7 +41,7 @@ int		mouse_event(t_params *params)
 	return (1);
 }
 
-int		start(t_params *params)
+static int	start(t_params *params)
 {
 	ft_raycast(params, params->ray, params->color);
 	if (params->image->save == 1)
@@ -52,7 +52,7 @@ int		start(t_params *params)
 	return (TRUE);
 }
 
-void	game(t_params *params)
+static void	game(t_params *params)
 {
 	ft_get_tex(params);
 	ft_get_sprite(params, params->textsp);
@@ -78,7 +78,7 @@ void	game(t_params *params)
 		ft_error(params, -1);
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	int			fd;
 	t_params	*params;

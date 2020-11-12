@@ -6,13 +6,13 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 20:40:28 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/08 16:10:57 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:57:16 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-t_image	ft_create_image(void)
+static t_image	ft_create_image(void)
 {
 	t_image	image;
 
@@ -28,7 +28,7 @@ t_image	ft_create_image(void)
 	return (image);
 }
 
-t_image	*ft_malloc_image(t_params *params)
+t_image			*ft_malloc_image(t_params *params)
 {
 	t_image	*malloc_image;
 
