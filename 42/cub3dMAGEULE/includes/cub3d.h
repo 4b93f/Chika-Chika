@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 19:15:57 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/12 16:34:12 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 16:40:15 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,8 @@
 # include "../libft/libft.h"
 # include "../ft_printf/ft_printf.h"
 
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
-# include <stdio.h>
-# include <errno.h>
-# include <string.h>
 
 enum					e_bool
 {

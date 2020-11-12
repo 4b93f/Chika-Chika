@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:28:12 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/11 18:29:00 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/12 16:45:44 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	reverse_bis(t_params *params, int max, int x, int i)
 			max += params->screenwidth;
 		}
 		x = 0 + i;
-		max = params->screenwidth - 1 - i;
+		max = params->screenwidth - i - 1;
 		i++;
 	}
 }
@@ -79,7 +79,7 @@ static void	reverse(t_params *params, int x, int y)
 		x++;
 		max--;
 	}
-	reverse_bis(params, params->screenwidth - 1, 0, 0);
+	reverse_bis(params, params->screenwidth, 0, 0);
 }
 
 void		save(t_params *params)
