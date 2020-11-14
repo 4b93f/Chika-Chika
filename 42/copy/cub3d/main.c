@@ -6,11 +6,11 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 17:18:15 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/13 19:23:20 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/14 18:06:28 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "includes/cub3d.h"
 
 void		parameters(t_params *params, int argc, char **argv)
 {
@@ -42,7 +42,6 @@ void		ft_resolution(t_params *params)
 
 static int	start(t_params *params)
 {
-	ft_raycast(params, params->ray, params->color);
 	if (params->image->save == 1)
 		save(params);
 	mlx_put_image_to_window(params->ray->mlx, params->ray->window,
@@ -69,6 +68,7 @@ static void game(t_params *params)
 		&params->image->bpp, &params->image->sizeline, &params->image->endian);
 	params->image->imgsave = mlx_get_data_addr(params->image->img,
 		&params->image->bpp, &params->image->sizeline, &params->image->endian);
+	ft_raycast(params, params->ray, params->color);
 	mlx_hook(params->ray->window, 2, 1L << 0, key_pressed, params);
 	mlx_hook(params->ray->window, 3, 1L << 0, key_released, params);
 	mlx_hook(params->ray->window, 17, 1L << 17, mouse_event, params);
