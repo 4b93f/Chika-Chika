@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 18:30:34 by becentrale        #+#    #+#             */
-/*   Updated: 2020/11/14 18:04:58 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/15 18:49:40 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ static t_ray	ft_create_ray(t_params *params)
 	ray.drawstart = 0;
 	ray.drawend = 0;
 	if (!(ray.mlx = mlx_init()))
-		quit("MALLOC_ERROR");
+		quit(MALLOC_ERROR, params);
 	if (!(ray.window = mlx_new_window(ray.mlx, params->screenwidth,
 	params->screenheight, "TITLE")))
-		quit("MALLOC_ERROR");
+		quit(MALLOC_ERROR, params);
 	return (ray);
 }
 
@@ -46,7 +46,7 @@ t_ray			*ft_malloc_ray(t_params *params)
 	t_ray *malloc_ray;
 
 	if (!(malloc_ray = malloc(sizeof(t_ray))))
-		quit("MALLOC_ERROR");
+		quit(MALLOC_ERROR, params);
 	*malloc_ray = ft_create_ray(params);
 	return (malloc_ray);
 }

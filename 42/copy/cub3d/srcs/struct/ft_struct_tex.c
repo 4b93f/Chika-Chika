@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 17:45:32 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/14 18:05:04 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/15 18:50:34 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_tex	ft_create_tex(t_params *params)
 	tex.texx = 0;
 	tex.texy = 0;
 	if (!(tex.tex = malloc(sizeof(char *) * 4)))
-		quit("MALLOC_ERROR");
+		quit(MALLOC_ERROR, params);
 	tex.tex[0] = NULL;
 	tex.tex[1] = NULL;
 	tex.tex[2] = NULL;
@@ -40,7 +40,7 @@ t_tex			*ft_malloc_tex(t_params *params)
 	t_tex *malloc_tex;
 
 	if (!(malloc_tex = malloc(sizeof(t_tex))))
-		quit("MALLOC_ERROR");
+		quit(MALLOC_ERROR, params);
 	*malloc_tex = ft_create_tex(params);
 	return (malloc_tex);
 }

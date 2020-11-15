@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 17:49:20 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/14 18:38:53 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/15 18:53:47 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	*ft_new_sprite(t_params *params, char *path)
 {
 	if (!(params->sp->mlx_sprite = mlx_xpm_file_to_image(params->ray->mlx, path,
 	&params->sp->sp_width, &params->sp->sp_height)))
-		quit("ANOMALY_SPRITE");
+		quit(ANOMALY_SPRITE, params);
 	params->sp->spdata = mlx_get_data_addr(params->sp->mlx_sprite,
 	&params->sp->bpp,
 	&params->sp->sizeline, &params->sp->endian);

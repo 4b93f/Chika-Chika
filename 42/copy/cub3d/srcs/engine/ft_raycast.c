@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:50:31 by becentrale        #+#    #+#             */
-/*   Updated: 2020/11/14 18:48:31 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/15 18:54:42 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void		ft_raycast(t_params *params, t_ray *ray, t_color *color)
 	x = -1;
 	wallx = 0;
 	if (!(zbuffer = malloc(sizeof(double) * params->screenwidth)))
-		quit("MALLOC_ERROR");
+		quit(MALLOC_ERROR, params);
 	while (++x < params->screenwidth)
 	{
 		init_base_value(params, ray, x);

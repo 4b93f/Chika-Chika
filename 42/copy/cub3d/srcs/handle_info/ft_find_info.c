@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 17:16:21 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/14 18:38:46 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/15 18:54:06 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	param_r(t_params *params, char *str)
 	while (ft_isdigit(str[i]))
 		i++;
 	if (str[i])
-		quit("ERROR_ARGUMENT");
+		quit(ERROR_ARGUMENT, params);
 	return ;
 }
 
@@ -69,20 +69,20 @@ int			ft_check_map(t_params *params, char **map)
 	j = -1;
 	k = 0;
 	if (!map[2])
-		quit("WRONG_MAP_FORMAT");
+		quit(WRONG_MAP_FORMAT, params);
 	if (ft_updownwall(map[0]) == 0)
-		quit("WRONG_MAP_FORMAT");
+		quit(WRONG_MAP_FORMAT, params);
 	while (map[i + 1] != NULL)
 	{
 		if (ft_check_char(params, map[i]) == FALSE)
-			quit("WRONG_MAP_FORMAT");
+			quit(WRONG_MAP_FORMAT, params);
 		i++;
 	}
 	if (ft_updownwall(map[i]) == 0)
-		quit("WRONG_MAP_FORMAT");
+		quit(WRONG_MAP_FORMAT, params);
 	if (ft_check_space(j, k, params, map) == 0)
-		quit("WRONG_MAP_FORMAT");
+		quit(WRONG_MAP_FORMAT, params);
 	if (params->find_pos != 1)
-		quit("WRONG_MAP_FORMAT");
+		quit(WRONG_MAP_FORMAT, params);
 	return (TRUE);
 }

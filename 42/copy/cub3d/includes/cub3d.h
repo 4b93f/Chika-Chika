@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 19:15:57 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/14 18:07:02 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/15 18:43:14 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,7 +248,7 @@ typedef struct			s_params
 
 t_params				*ft_malloc_params(void);
 void					ft_free_params(t_params *to_free);
-void 					quit(char *str);
+void	quit(int num, t_params *params);
 void					ft_init_game(t_params *params, int fd);
 t_color					*ft_malloc_color(t_params *params);
 t_spvalues				*ft_malloc_spvalues(t_params *params);

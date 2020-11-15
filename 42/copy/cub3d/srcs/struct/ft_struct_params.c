@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 01:14:46 by root              #+#    #+#             */
-/*   Updated: 2020/11/14 18:05:19 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/15 18:51:47 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ t_params		*ft_malloc_params(void)
 	t_params	*malloc_params;
 
 	if (!(malloc_params = malloc(sizeof(t_params))))
-		quit("MALLOC_ERROR");
+		quit(MALLOC_ERROR, malloc_params);
 	*malloc_params = ft_create_params();
+	ft_create_params_bis(malloc_params);
 	return (malloc_params);
 }

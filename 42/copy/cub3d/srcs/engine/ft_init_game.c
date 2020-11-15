@@ -6,7 +6,7 @@
 /*   By: chly-huc <chly-huc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 16:19:44 by chly-huc          #+#    #+#             */
-/*   Updated: 2020/11/14 18:48:22 by chly-huc         ###   ########.fr       */
+/*   Updated: 2020/11/15 18:48:23 by chly-huc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void	ft_init(t_params *params, int fd)
 	params->sv = ft_malloc_spvalues(params);
 	params->player = ft_malloc_player(params);
 	params->image = ft_malloc_image(params);
-	params->sprites = malloc(sizeof(params->sp) * 50);
+	if (!(params->sprites = malloc(sizeof(params->sp) * 50)))
+		quit(MALLOC_ERROR, params);
 	params->tex = ft_malloc_tex(params);
 	search_params(params, fd);
 	params->event = ft_malloc_event(params);
